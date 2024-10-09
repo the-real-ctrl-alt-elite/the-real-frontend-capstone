@@ -9,7 +9,6 @@ const [activeReviews, setActiveReviews] = useState(reviews.slice(0,2));
 
   return (
     <div className='rating-container'>
-      rating
     </div>
   )
 };
