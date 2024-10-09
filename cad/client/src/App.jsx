@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const App = () => {
   return (
     <div className='app'>
-      <p>Cats and dogs</p>
+      <p>Nate the snack</p>
     </div>
   );
 };
