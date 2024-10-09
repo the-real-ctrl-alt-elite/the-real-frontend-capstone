@@ -1,0 +1,32 @@
+  "scripts": {
+    "start": "webpack serve --mode development" ====> Run Webpack Dev Server for React (frontend only)
+    "concurrently": "concurrently \"npm run client\" \"npm run server\"", =====> Ready for addition of server/express
+    "build": "webpack --mode production", ====> use it when you’re preparing to deploy or when you want to generate optimized,
+                                          ====> bundled files to serve with something like an Express server in production
+    "test": "jest"
+  },
+
+
+
+
+Error: ERROR in ./client/src/index.jsx 4:0-21
+Module not found: Error: Can't resolve 'css-loader'
+
+step 1: npm ls css-loader
+
+if you get this:
+fec_cad@1.0.0 /home/umonster/course/front-end-capstone/cad
+└── (empty)
+
+step 2: npm install --save-dev css-loader
+
+if you still get Error
+
+step 3:
+npm cache clean --force
+rm -rf node_modules package-lock.json
+npm install
+npm install --save-dev css-loader
+npm run start
+
+I had to do it 3 times to get it to work... idk why
