@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const Selector = () => {
+
+const Selector = (props) => {
   return (
-    <div>test</div>
-  );
+    <div className='selector-container'>
+      selector
+    </div>
+  )
 };
 
 export default Selector;

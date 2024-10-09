@@ -1,1 +1,8 @@
 @import './reset.css';
+@import './components/header/header.css';
+@import './components/qa/qa.css';
+@import './components/relatedComparison/related_comp.css';
+@import './components/reviewRating/review_rating.css';
+@import './components/styleSelect/styleselector.css';
+
+/* @import './components/'; */

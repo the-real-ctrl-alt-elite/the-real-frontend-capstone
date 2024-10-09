@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const Qa = () => {
+
+const Qa = (props) => {
   return (
-    <div />
-  );
+    <div className='qa-container'>
+      qa
+    </div>
+  )
 };
 
 export default Qa;
