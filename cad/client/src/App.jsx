@@ -22,7 +22,7 @@ const App = () => {
         <Rating />
       </div>
     </div>
-  )
+  );
 };
 
 export default App;
