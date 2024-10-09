@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const Related = () => {
+
+const Related = (props) => {
   return (
-    <div />
-  );
+    <div className='related-container'>
+      related
+    </div>
+  )
 };
 
 export default Related;

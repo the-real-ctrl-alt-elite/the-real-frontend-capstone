@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const Review = () => {
+
+const Review = (props) => {
   return (
-    <div />
-  );
+    <div className='review-container'>
+      review
+    </div>
+  )
 };
 
 export default Review;

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const Header = () => {
+
+const Header = (props) => {
   return (
-    <div />
-  );
+    <div className='header'>
+      header
+    </div>
+  )
 };
 
 export default Header;

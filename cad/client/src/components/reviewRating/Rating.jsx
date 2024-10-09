@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const Rating = () => {
+
+const Rating = (props) => {
   return (
-    <div />
-  );
+    <div className='rating-container'>
+      rating
+    </div>
+  )
 };
 
 export default Rating;
