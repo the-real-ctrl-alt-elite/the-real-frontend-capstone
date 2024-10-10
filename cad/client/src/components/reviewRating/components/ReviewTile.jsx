@@ -3,7 +3,19 @@ import React, { useState, useEffect } from "react";
 const ReviewTile = ({ review }) => {
   const [expanded, setExpanded] = useState(false)
 
-  return <div className="reviewTile"></div>;
+  return (
+  <div className="reviewTile">
+    <div className='reviewTileHeader'>
+      <div>stars component</div>
+      <div>username component</div>
+    </div>
+    <div className='reviewSummary'>
+      Summary of the review truncated to no more than 60 characters with a line break and the extra characters put on first line of the review body
+    </div>
+    <div className='reviewBody'> The body of the review. take review body, slice 0-250 and then, if greater than, have a show more button that toggles expanded state </div>
+    <div className='reviewFooter'>Helpful? Yes {'(val)'} | Report {'(as a link)'}</div>
+  </div>
+  );
 };
 
 export default ReviewTile;
