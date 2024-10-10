@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProductCard from './ProductCard';
+import RelatedCard from './RelatedCard';
 
 // {
 //   id: 1,
@@ -18,42 +18,42 @@ const DEFAULT_PRODUCTS = [{
   rating: 3,
 },
 {
-  id: 1,
+  id: 2,
   name: 'Camo Onesie',
   category: 'Jackets',
   defaultPrice: '140',
   rating: 3,
 },
 {
-  id: 1,
+  id: 3,
   name: 'Camo Onesie',
   category: 'Jackets',
   defaultPrice: '140',
   rating: 3,
 },
 {
-  id: 1,
+  id: 4,
   name: 'Camo Onesie',
   category: 'Jackets',
   defaultPrice: '140',
   rating: 3,
 },
 {
-  id: 1,
+  id: 5,
   name: 'Camo Onesie',
   category: 'Jackets',
   defaultPrice: '140',
   rating: 3,
 },
 {
-  id: 1,
+  id: 6,
   name: 'Camo Onesie',
   category: 'Jackets',
   defaultPrice: '140',
   rating: 3,
 },
 {
-  id: 1,
+  id: 7,
   name: 'Camo Onesie',
   category: 'Jackets',
   defaultPrice: '140',
@@ -64,11 +64,12 @@ const Related = (props) => {
   return (
     <div className='related-container'>
       <h3>RELATED PRODUCTS</h3>
-      <div className='card-container'>
+      <div className='cards-container'>
         {DEFAULT_PRODUCTS.map(({
           id, name, category, defaultPrice, rating,
         }) => (
-          <ProductCard
+          <RelatedCard
+            key={id}
             id={id}
             name={name}
             category={category}

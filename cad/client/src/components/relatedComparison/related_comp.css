@@ -2,8 +2,30 @@
   margin: 1rem;
 }
 
+.related-container > button {
+  all: unset;
+}
+
+.comparison-container {
+  margin: 1rem;
+}
+
+.remove-item-btn {
+  all: unset;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.add-outfit-btn {
+  all: unset;
+  text-align: center;
+}
+
 /* Horizontal scroll container */
-.card-container {
+.cards-container {
   background-color: white;
   display: flex;
   flex-wrap: nowrap;
@@ -12,11 +34,14 @@
 }
 
 .product-card-container {
-  width: 15dvw;
+  all: unset;
+  width: 14dvw;
   display: flex;
   flex-direction: column;
   flex: 0 0 auto;
   background-color: lightgray;
+  position: relative;
+  padding-bottom: 0.5rem;
 }
 
 .product-card-details {
@@ -32,6 +57,11 @@
 
 .product-card-details > h4 {
   line-height: 75%;
+}
+
+.action-btn-container {
+  position: absolute;
+  top: 0;
 }
 
 
