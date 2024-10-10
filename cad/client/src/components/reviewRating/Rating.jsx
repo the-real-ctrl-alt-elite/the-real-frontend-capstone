@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import ReviewList from './components/ReviewList.jsx';
+import ReviewTile from './components/ReviewTile.jsx';
+import ProductBreakdown from './components/ProductBreakdown.jsx';
+import RatingBreakdown from './components/RatingBreakdown.jsx';
+import SortOptions from './components/SortOptions.jsx';
 
 
 const Rating = (props) => {
@@ -9,6 +14,10 @@ const [activeReviews, setActiveReviews] = useState(reviews.slice(0,2));
 
   return (
     <div className='rating-container'>
+      I'm in rating component!
+      <RatingBreakdown />
+      <ProductBreakdown />
+      <ReviewList />
     </div>
   )
 };
