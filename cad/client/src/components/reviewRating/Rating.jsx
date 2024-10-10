@@ -10,9 +10,11 @@ const Rating = (props) => {
 //
 
   return (
-    <div className='rating-container'>
-      I'm in rating component!
+    <div
+    style={{width: '66%', display: 'grid', gridTemplateColumns: '3fr 7fr'}}
+    className='rating-container'>
       <RatingBreakdown />
+      <SortOptions />
       <ProductBreakdown />
       <ReviewList />
     </div>
