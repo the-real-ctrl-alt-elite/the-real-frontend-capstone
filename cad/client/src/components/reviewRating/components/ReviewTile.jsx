@@ -6,6 +6,10 @@ import { faCheck, faStar } from "@fortawesome/free-solid-svg-icons";
 const ReviewTile = ({ review }) => {
   const [expanded, setExpanded] = useState(false);
 
+  //need to set up useEffect to do an axios call for each reviewer. If the reviewer's email has been
+  //associated with a purchase, then their username needs to have a 'Verified Purchaser' next to
+  //their username
+
   return (
     <div
       style={{
@@ -24,7 +28,7 @@ const ReviewTile = ({ review }) => {
         }}
         className="reviewTileHeader"
       >
-        <ReviewStars rating={review.rating} id={review.review_id} />
+        <ReviewStars rating={review.rating} />
         <div>
           <small>
             {" "}
@@ -55,7 +59,7 @@ const ReviewTile = ({ review }) => {
 
 export default ReviewTile;
 
-const ReviewStars = ({ id, rating }) => {
+const ReviewStars = ({ rating }) => {
   let stars = [];
 
   (function fillStarArray(rating) {
@@ -85,12 +89,12 @@ const Star = ({ percentage }) => {
   return (
     <div className="star-wrapper">
       <i
-      className="star-back fa-regular fa-star"> </i>
-      <FontAwesomeIcon
-        icon={faStar}
-        className="star-front"
+      className="star-back fa-solid fa-star-sharp"> </i>
+      <i
+        className="star-front fa-solid fa-star-sharp"
         style={{ clipPath: `inset(0 ${100 - (percentage *= 100)}% 0 0)` }}
-      />
+        ></i>
+      <i/>
     </div>
   );
 };
@@ -103,7 +107,7 @@ const Response = ({ response }) => {
       style={{
         margin: ".25rem",
         padding: ".5rem",
-        backgroundColor: "rgba(185,55,55,.33",
+        backgroundColor: "rgba(125,155,155,.33",
         borderRadius: "1em",
       }}
     >
@@ -119,7 +123,7 @@ const Recommend = () => {
     <div
     style={{padding: '.25rem'}}
     >
-      <i class="fa-solid fa-check"></i> I recommend this product
+      <i className="fa-solid fa-check"></i> I recommend this product
     </div>
   )
 }
