@@ -1,0 +1,40 @@
+.related-container {
+  margin: 1rem;
+}
+
+/* Horizontal scroll container */
+.card-container {
+  background-color: white;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0.35rem;
+}
+
+.product-card-container {
+  width: 15dvw;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  background-color: lightgray;
+}
+
+.product-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0.5rem;
+}
+
+.product-card-details > p {
+  font-size: x-small;
+}
+
+.product-card-details > h4 {
+  line-height: 75%;
+}
+
+
+
+
+
