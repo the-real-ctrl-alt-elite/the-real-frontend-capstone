@@ -1,6 +1,10 @@
 # fec-capstone
 An eCommerce platform designed for HR Front-End-Capstone
 
-here's something to add
+Overview Module: JeramyR
 
-and branch test
+Ratings & Review Module: rpotter741
+
+Questions & Answers Module: EmmaG2020
+
+Related Items & Comparison Module: skylayreiner
