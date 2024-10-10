@@ -8,9 +8,6 @@ import SortOptions from './components/SortOptions.jsx';
 
 const Rating = (props) => {
 //
-const [reviews, setReviews] = useState([]);
-//BRD display 2 tiles at a time
-const [activeReviews, setActiveReviews] = useState(reviews.slice(0,2));
 
   return (
     <div className='rating-container'>
