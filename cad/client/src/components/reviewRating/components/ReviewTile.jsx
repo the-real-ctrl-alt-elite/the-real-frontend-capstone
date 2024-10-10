@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faStar } from "@fortawesome/free-solid-svg-icons";
 
 const ReviewTile = ({ review }) => {
   const [expanded, setExpanded] = useState(false);
@@ -44,17 +46,9 @@ const ReviewTile = ({ review }) => {
           ))}
         </div>
       </div>
-      {review.recommend === true ? 'I recommend this product' : ''}
-      {review.response !== null ? < Response response={review.response} /> : ''}
-      <div
-        style={{ position: "relative", bottom: "0" }}
-        className="reviewFooter"
-      >
-        <small>
-          Helpful? <a href="#">Yes</a> {"(" + review.helpfulness + ")"} |{" "}
-          <a href="#">Report</a>
-        </small>
-      </div>
+      {review.recommend === true ? <Recommend />  : ""}
+      {review.response !== null ? <Response response={review.response} /> : ""}
+      <FeedbackFooter review={review} />
     </div>
   );
 };
@@ -65,11 +59,12 @@ const ReviewStars = ({ id, rating }) => {
   let stars = [];
 
   (function fillStarArray(rating) {
-    while (rating > 0) {
+    while (rating > 1) {
       rating -= 1;
       stars.push(1);
     }
-    stars.push((rating *= -1));
+    //function in push is for rounded to nearest quarter value
+    stars.push((Math.round(rating * 4) / 4).toFixed(2));
     while (stars.length < 5) {
       stars.push(0);
     }
@@ -78,32 +73,70 @@ const ReviewStars = ({ id, rating }) => {
   return (
     <div style={{ display: "flex" }}>
       {stars.map((star, index) => (
-        <div key={index + id}>
-          <i
-            className="fa-regular fa-star"
-            style={{
-              opacity: `${star}`,
-              color: "linear-gradient(to right, #fff 50%, green 100%",
-            }}
-          ></i>
-        </div>
+        <Star percentage={star} key={"a" + star + index} />
       ))}
     </div>
   );
 };
 
-const Response = ({response}) => {
-//
-return (
-  <div
-  style={{
-    margin: '.25rem',
-    padding: '.25rem',
-    backgroundColor: 'rgba(185,55,55,.33'}}
+const Star = ({ percentage }) => {
+  //this is used to double stars to the same absolute posiition, so that you can have these
+  // partial fills with the clipPath css property
+  return (
+    <div className="star-wrapper">
+      <i
+      className="star-back fa-regular fa-star"> </i>
+      <FontAwesomeIcon
+        icon={faStar}
+        className="star-front"
+        style={{ clipPath: `inset(0 ${100 - (percentage *= 100)}% 0 0)` }}
+      />
+    </div>
+  );
+};
+
+const Response = ({ response }) => {
+  //
+  return (
+    <div
+      className="sellerResponse"
+      style={{
+        margin: ".25rem",
+        padding: ".5rem",
+        backgroundColor: "rgba(185,55,55,.33",
+        borderRadius: "1em",
+      }}
+    >
+      <div style={{ fontWeight: "bold" }}>Response from seller </div>
+      {response}
+    </div>
+  );
+};
+
+const Recommend = () => {
+  //
+  return (
+    <div
+    style={{padding: '.25rem'}}
+    >
+      <i class="fa-solid fa-check"></i> I recommend this product
+    </div>
+  )
+}
+
+const FeedbackFooter = ({review}) => {
+  //
+  return (
+    <div
+    style={{ position: "relative", bottom: "0" }}
+    className="reviewFooter"
   >
-    {'Response from seller ' + response}
+    <small>
+      Helpful? <a href="#">Yes</a> {"(" + review.helpfulness + ")"} |{" "}
+      <a href="#">Report</a>
+    </small>
   </div>
-)
+  )
 }
 
 // star rating (total of 5 stars, filled in by quarters (rounded down ===> 3.8 = 3.75));
