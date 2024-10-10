@@ -8,7 +8,7 @@ const mockData = {
   results: [
     {
       review_id: 5,
-      rating: 3,
+      rating: 3.75,
       summary: "I'm enjoying wearing these shades",
       recommend: false,
       response: null,
@@ -30,11 +30,12 @@ const mockData = {
     },
     {
       review_id: 3,
-      rating: 4,
+      rating: 4.5,
       summary: "I am liking these glasses",
       recommend: true,
       response: "Glad you're enjoying the product!",
-      body: "They are very dark. But that's good because I'm in very sunny spots",
+      //adding length to test limited display functionality for ReviewTile
+      body: "They are very dark. But that's good because I'm in very sunny spots. They are very dark. But that's good because I'm in very sunny spots. They are very dark. But that's good because I'm in very sunny spots. They are very dark. But that's good because I'm in very sunny spots. They are very dark. But that's good because I'm in very sunny spots.",
       date: "2019-06-23T00:00:00.000Z",
       reviewer_name: "bigbrotherbenjamin",
       helpfulness: 12,
