@@ -20,7 +20,7 @@ i:before {
 }
 
 .star-front {
-  color: black;
+  color: darkgoldenrod;
   position: absolute;
   top: 0;
   left: 0;
@@ -29,10 +29,37 @@ i:before {
   white-space: nowrap;
 }
 
+.reviewFooter {
+  display: flex;
+  gap: 4px
+}
+
 .reviewFooter>small {
   font-size: 11px;
 }
 
+.reviewFunctionalityButton {
+  width: 8rem;
+  height: 4rem;
+  background-color: white;
+
+}
+
+.reviewButtonRow {
+  display: flex;
+  justify-content: space-around;
+  gap: 4rem;
+}
+
 a {
   color: steelblue
+}
+
+.collapsedReviewBody, .expandedReviewBody {
+  font-size: 14px;
+}
+
+.reviewSortOptionsHeader {
+  font-size: 18px;
+  font-weight: 700;
 }

@@ -6,6 +6,13 @@ import { faCheck, faStar } from "@fortawesome/free-solid-svg-icons";
 const ReviewTile = ({ review }) => {
   const [expanded, setExpanded] = useState(false);
 
+  //single object to pass multiple props with as needed
+  const fn = {
+    review,
+    expanded,
+    setExpanded,
+  };
+
   //need to set up useEffect to do an axios call for each reviewer. If the reviewer's email has been
   //associated with a purchase, then their username needs to have a 'Verified Purchaser' next to
   //their username
@@ -32,15 +39,19 @@ const ReviewTile = ({ review }) => {
         <div>
           <small>
             {" "}
-            {review.reviewer_name}, {format(review.date, "MMMM dd, y")}
+            {review.reviewer_name}, {"  "} {format(review.date, "MMMM dd, y")}
           </small>
         </div>
       </div>
       <div style={{ fontWeight: "bold" }} className="reviewSummary">
-        {review.summary}
+        {review.summary.substring(0, 60)}
       </div>
       <div style={{ height: "55%" }} className="reviewBody">
-        {review.body}
+        {expanded === true ? (
+          <ExpandedBody fn={fn} />
+        ) : (
+          <CollapsedBody fn={fn} />
+        )}
         <div
           stlye={{ display: "flex", gap: "4px" }}
           className="picturesContainer"
@@ -50,14 +61,12 @@ const ReviewTile = ({ review }) => {
           ))}
         </div>
       </div>
-      {review.recommend === true ? <Recommend />  : ""}
+      {review.recommend === true ? <Recommend /> : ""}
       {review.response !== null ? <Response response={review.response} /> : ""}
       <FeedbackFooter review={review} />
     </div>
   );
 };
-
-export default ReviewTile;
 
 const ReviewStars = ({ rating }) => {
   let stars = [];
@@ -88,13 +97,76 @@ const Star = ({ percentage }) => {
   // partial fills with the clipPath css property
   return (
     <div className="star-wrapper">
-      <i
-      className="star-back fa-solid fa-star-sharp"> </i>
+      <i className="star-back fa-solid fa-star-sharp"> </i>
       <i
         className="star-front fa-solid fa-star-sharp"
         style={{ clipPath: `inset(0 ${100 - (percentage *= 100)}% 0 0)` }}
-        ></i>
-      <i/>
+      ></i>
+      <i />
+    </div>
+  );
+};
+
+const CollapsedBody = ({ fn }) => {
+  //
+  return (
+    <div className="collapsedReviewBody">
+      <div
+        style={{fontWeight: 'bold'}}
+      >
+        {fn.review.summary.length > 60
+          ? "..." + fn.review.summary.substring(60)
+          : ""}
+      </div>
+      {fn.review.body.slice(0, 250)}
+      {fn.review.body.length > 250 ? (
+        <small>
+          ...
+          <a
+            onClick={() => {
+              fn.setExpanded(!fn.expanded);
+            }}
+            href="#"
+          >
+            Show More
+          </a>
+        </small>
+      ) : (
+        ""
+      )}
+    </div>
+  );
+};
+
+const ExpandedBody = ({ fn }) => {
+  //
+  return (
+    <div
+    className='expandedReviewBody'
+    >
+      <div
+      style={{fontWeight: 'bold'}}
+      >
+        {fn.review.summary.length > 60
+          ? "..." + fn.review.summary.substring(60)
+          : ""}
+      </div>
+      {fn.review.body}
+      {fn.review.body.length > 250 ? (
+        <small>
+          {" "}
+          <a
+            onClick={() => {
+              fn.setExpanded(!fn.expanded);
+            }}
+            href="#"
+          >
+            Show Less
+          </a>
+        </small>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
@@ -109,6 +181,7 @@ const Response = ({ response }) => {
         padding: ".5rem",
         backgroundColor: "rgba(125,155,155,.33",
         borderRadius: "1em",
+        fontSize: '14px'
       }}
     >
       <div style={{ fontWeight: "bold" }}>Response from seller </div>
@@ -120,28 +193,43 @@ const Response = ({ response }) => {
 const Recommend = () => {
   //
   return (
-    <div
-    style={{padding: '.25rem'}}
-    >
+    <div style={{ padding: ".25rem", fontSize: '14px' }}>
       <i className="fa-solid fa-check"></i> I recommend this product
     </div>
-  )
-}
+  );
+};
 
-const FeedbackFooter = ({review}) => {
-  //
+const FeedbackFooter = ({ review }) => {
+  const [helpfulness, setHelpfulness] = useState(review.helpfulness);
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    if (clicked === false) {
+      setHelpfulness(helpfulness + 1);
+      setClicked(true);
+    }
+  };
+
   return (
-    <div
-    style={{ position: "relative", bottom: "0" }}
-    className="reviewFooter"
-  >
-    <small>
-      Helpful? <a href="#">Yes</a> {"(" + review.helpfulness + ")"} |{" "}
-      <a href="#">Report</a>
-    </small>
-  </div>
-  )
-}
+    <div style={{ position: "relative", bottom: "0" }} className="reviewFooter">
+      <small> Helpful? </small>
+      <small>
+        {" "}
+        <a onClick={() => handleClick()} href="#">
+          Yes
+        </a>{" "}
+        {"(" + helpfulness + ")"}{" "}
+      </small>
+      <small>|</small>
+      <small>
+        {" "}
+        <a href="#">Report</a>
+      </small>
+    </div>
+  );
+};
+
+export { FeedbackFooter, ReviewTile };
 
 // star rating (total of 5 stars, filled in by quarters (rounded down ===> 3.8 = 3.75));
 // date of review format Month, DD, YYYY;
