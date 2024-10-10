@@ -1,4 +1,5 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -27,9 +28,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './client/src/index.html', // Use this HTML file as the template to copy and place in to the dist folder with the bundle
     }), // The plugin will automatically inject a <script> tag into the dist/index.html file that links to the bundled bundle.js
+    new Dotenv(),
   ],
   devServer: { // watches for changes in your files, and automatically refreshes the browser
-    static: path.join(__dirname, 'dist'), // serve content from dist - bundled folder
+    static: path.join(__dirname, 'client', 'dist'), // serve content from dist - bundled folder
     port: 8080, // By default its 8080 but you can change this if needed ie --> Express server runs on port 3000 later
     open: true, // Webpack automatically open the browser to http://localhost:8080
     hot: true, // enables live reloading

@@ -6,6 +6,7 @@ import Comparison from './components/relatedComparison/Comparison';
 import Rating from './components/reviewRating/Rating';
 import Selector from './components/styleSelect/Selector';
 
+
 const App = () => {
   return (
     <div className='app'>
@@ -22,7 +23,7 @@ const App = () => {
         <Rating />
       </div>
     </div>
-  )
+  );
 };
 
 export default App;
