@@ -51,8 +51,8 @@ const ReviewList = () => {
 
   return (
     <div className="reviewList">
-      {mockData.map((review) => (
-        <ReviewTile />
+      {mockData.results.map((review) => (
+        <ReviewTile review={review}/>
       ))}
     </div>
   );

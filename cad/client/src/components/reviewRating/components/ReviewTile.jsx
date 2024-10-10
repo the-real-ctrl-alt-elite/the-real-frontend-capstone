@@ -6,14 +6,21 @@ const ReviewTile = ({ review }) => {
   return (
   <div className="reviewTile">
     <div className='reviewTileHeader'>
-      <div>stars component</div>
-      <div>username component</div>
+      <div>{review.rating}</div>
+      <div>{review.reviewer_name}, {review.date}</div>
     </div>
     <div className='reviewSummary'>
-      Summary of the review truncated to no more than 60 characters with a line break and the extra characters put on first line of the review body
+      {review.summary}
     </div>
-    <div className='reviewBody'> The body of the review. take review body, slice 0-250 and then, if greater than, have a show more button that toggles expanded state </div>
-    <div className='reviewFooter'>Helpful? Yes {'(val)'} | Report {'(as a link)'}</div>
+    <div className='reviewBody'>
+      {review.body}
+      <div className='picturesContainer'>
+        {review.photos.map(img => (
+          <img src={img.url}></img>
+        ))}
+      </div>
+      </div>
+    <div className='reviewFooter'>Helpful? Yes {review.helpfulness} | Report {'(as a link)'}</div>
   </div>
   );
 };
