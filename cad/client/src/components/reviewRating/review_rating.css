@@ -10,8 +10,8 @@ i:before {
 .star-wrapper {
   position: relative;
   display: inline-block;
-  width: 1em;
-  height: 1em;
+  width: 1rem;
+  height: 1rem;
   margin: 0 .125rem
 }
 
@@ -36,11 +36,11 @@ i:before {
 
 .reviewFooter {
   display: flex;
-  gap: 4px
+  gap: .25rem;
 }
 
 .reviewFooter>small {
-  font-size: 11px;
+  font-size: .6875rem;
 }
 
 .reviewFunctionalityButton {
@@ -62,11 +62,11 @@ a {
 }
 
 .collapsedReviewBody, .expandedReviewBody {
-  font-size: 14px;
+  font-size: .875rem;
 }
 
 .reviewSortOptionsHeader {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -90,7 +90,7 @@ a {
 }
 
 .ratingBreakdownSummary>h1 {
-  font-size: 48px;
+  font-size: 3rem;
   letter-spacing: 2px;
 }
 
@@ -122,9 +122,12 @@ a {
 }
 
 .reviewsRight {
-  max-height: 100vh;
-  overflow-y: scroll;
   width: 75%
+}
+
+.reviewList {
+  max-height: 95vh;
+  overflow-y: scroll;
 }
 
 .reviewsLeft, .reviewsRight {
@@ -133,7 +136,7 @@ a {
 }
 
 .rating-review-wrapper {
-  min-width: 40vw;
+  min-width: 72.25rem;
 }
 
 .button-link {
@@ -145,5 +148,10 @@ a {
   margin: 0 .25rem;
 }
 .button-link.small {
-  font-size: 10px
+  font-size: 0.625rem;
+}
+
+.reviewImageThumbail {
+  height: 3rem;
+  width: 3rem;
 }
