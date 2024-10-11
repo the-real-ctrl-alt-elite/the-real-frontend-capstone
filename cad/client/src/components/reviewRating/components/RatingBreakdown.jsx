@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ReviewStars, Star } from './ReviewTile.jsx';
+import { ReviewStars } from './ReviewTile';
 
 const ReviewBreakdown = ({ fn }) => {
   const [ratingAverage, setRatingAverage] = useState(0);
@@ -32,7 +32,10 @@ const ReviewBreakdown = ({ fn }) => {
       if (review.rating === 5) {
         five += 1;
       }
-      return (acc += review.rating);
+      // eslint-disable-next-line no-param-reassign
+      acc += review.rating;
+
+      return acc;
     }, 0);
 
     const average = (Math.round((total / fn.reviews.length) * 4) / 4).toFixed(1);
@@ -44,9 +47,7 @@ const ReviewBreakdown = ({ fn }) => {
     setThreeStar((three / fn.reviews.length) * 100);
     setTwoStar((two / fn.reviews.length) * 100);
     setOneStar((one / fn.reviews.length) * 100);
-  }, []);
-
-  console.log(fiveStar, fourStar, threeStar, twoStar, oneStar);
+  }, [fn.reviews]);
 
   return (
     <div className='ratingBreakdown'>

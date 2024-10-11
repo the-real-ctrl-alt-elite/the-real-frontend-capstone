@@ -1,3 +1,5 @@
+/* eslint-disable prefer-destructuring */
+// necessary becasue of dotenv-webpack's compiler
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReviewList from './components/ReviewList';
@@ -94,24 +96,56 @@ const mockData = {
   ],
 };
 
-const Rating = () => {
-  useEffect(() => {
-    const params = {
-      page: 1,
-      count: 10,
-      sort: 'relevant',
-      product_id: 1,
-    };
-  }, []);
-
+const Rating = ({ id }) => {
   const [reviews, setReviews] = useState(mockData.results);
   // BRD display 2 tiles at a time
   const [activeReviews, setActiveReviews] = useState(reviews.slice(0, 2));
+  const [metaData, setMetaData] = useState([]);
+  useEffect(() => {
+    const GIT_TOKEN = process.env.GIT_TOKEN;
+    const API_BASE_URL = process.env.API_BASE_URL;
+    const CAMPUS_CODE = process.env.CAMPUS_CODE;
+    const productID = id || 40345;
+    const page = 1;
+    const count = 5000;
+    const sort = 'relevant';
+
+    const PRODUCT_URL = `${API_BASE_URL}${CAMPUS_CODE}/reviews?page=${page}&count=${count}&sort=${sort}&product_id=${productID}`;
+
+    const META_URL = `${API_BASE_URL}${CAMPUS_CODE}/reviews/meta/?product_id=${id}`;
+    axios
+      .get(PRODUCT_URL, {
+        headers: {
+          Authorization: GIT_TOKEN,
+        },
+      })
+      .then((response) => {
+        setReviews(response.data.results);
+        setActiveReviews(response.data.results.slice(0, 2));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    axios
+      .get(META_URL, {
+        headers: {
+          Authorization: GIT_TOKEN,
+        },
+      })
+      .then((response) => {
+        setMetaData(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [id]);
 
   const fn = {
+    id,
     activeReviews,
     setActiveReviews,
     reviews,
+    metaData,
   };
 
   return (

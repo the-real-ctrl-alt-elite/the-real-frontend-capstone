@@ -3,10 +3,21 @@ import React, { useEffect, useState } from 'react';
 const SortOptions = ({ fn }) => {
   const options = ['relevance', 'most useful', 'newest'];
 
-  const ReviewSorter = () => {
-    const [selectValue, setSelectValue] = useState(options[0]);
+  return (
+    <div style={{ marginLeft: '1.5rem' }} className='reviewSortOptionsHeader'>
+      <span>{`${fn.reviews.length} reviews, `}</span>
+      {' '}
+      <ReviewSorter options={options} />
+    </div>
+  );
+};
 
-    return (
+const ReviewSorter = ({ options }) => {
+  const [selectValue, setSelectValue] = useState(options[0]);
+
+  return (
+    <label style={{ fontSize: '1.125rem' }}>
+      &nbsp; sorted by
       <select
         style={{
           fontSize: '17px',
@@ -28,15 +39,7 @@ const SortOptions = ({ fn }) => {
           </option>
         ))}
       </select>
-    );
-  };
-
-  return (
-    <div style={{ marginLeft: '1.5rem' }} className='reviewSortOptionsHeader'>
-      <span>{`${fn.reviews.length} reviews, ` + ' ' + ' sorted by '}</span>
-      {' '}
-      <ReviewSorter />
-    </div>
+    </label>
   );
 };
 

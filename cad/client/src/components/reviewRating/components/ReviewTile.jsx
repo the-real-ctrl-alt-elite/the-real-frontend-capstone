@@ -20,7 +20,7 @@ const ReviewTile = ({ review }) => {
       style={{
         padding: '1rem',
         borderBottom: '1px solid black',
-        margin: '1.25rem .5rem .5rem .5rem',
+        margin: '.5rem .5rem .5rem .5rem',
       }}
       className='reviewTile'
     >
@@ -59,7 +59,7 @@ const ReviewTile = ({ review }) => {
           className='picturesContainer'
         >
           {review.photos.map((img) => (
-            <img key={img.url} src={img.url} alt='' />
+            <ReviewImageThumbnail img={img} key={img.url} />
           ))}
         </div>
       </div>
@@ -173,6 +173,25 @@ const ExpandedBody = ({ fn }) => {
       ) : (
         ''
       )}
+    </div>
+  );
+};
+
+const ReviewImageThumbnail = ({ img }) => {
+  //
+  return (
+    <div
+      style={{
+        background: `url(${img.url})`, backgroundSize: '4rem 4rem', width: '4rem', height: '4rem', margin: '.5rem',
+      }}
+    >
+      <img
+        className='reviewImageThumbnail'
+        alt=''
+        src={img.url}
+        width='3rem'
+        height='3rem'
+      />
     </div>
   );
 };
