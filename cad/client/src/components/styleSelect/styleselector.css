@@ -1,19 +1,21 @@
-.selector-container {
-  border: inset chartreuse 2px;
-  padding: 20px;
-  /* height: 1500px;
-  position: relative; */
+.selector-container-overlay {
+
 }
 
 .selector-advertisement {
   color: white;
   text-align: center;
-  padding: 0 0 20px 0;
+  padding: 20px 0;
+  background-color: orange;
+  width: 100%;
+  margin: 0;
+  position: sticky;
+  top:0;
+  z-index: 1000;
 }
 
 .selector-components {
-  /* sticky attempt */
-  /* position: relative; */
+  padding: 20px;
   width: 100%;
   display: flex;
 }
@@ -21,4 +23,14 @@
 .selector-functional-components {
   border: solid green 2px;
   width: 50%;
+  display: flex;
+}
+
+.info-choices-container {
+  width: 50%;
+  border: red solid 2px;
+}
+.purchase-div {
+  width: 50%;
+  border: orange 2px solid;
 }
