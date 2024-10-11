@@ -81,7 +81,7 @@ const Selector = (props) => {
         }
       </article>
       <div className='selector-components'>
-        <Imagegallery id={product.id} />
+        <Imagegallery  id={product.id} />
         <aside className='selector-functional-components'>
 
         </aside>
