@@ -1,100 +1,176 @@
-import React, { useState, useEffect } from "react";
-import { format } from "date-fns";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faStar } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useEffect } from 'react';
+import { format } from 'date-fns';
 
 const ReviewTile = ({ review }) => {
   const [expanded, setExpanded] = useState(false);
 
-  //need to set up useEffect to do an axios call for each reviewer. If the reviewer's email has been
-  //associated with a purchase, then their username needs to have a 'Verified Purchaser' next to
-  //their username
+  // single object to pass multiple props with as needed
+  const fn = {
+    review,
+    expanded,
+    setExpanded,
+  };
+
+  // need to set up useEffect to do an axios call for each reviewer. If the reviewer's email has been
+  // associated with a purchase, then their username needs to have a 'Verified Purchaser' next to
+  // their username
 
   return (
     <div
       style={{
-        padding: "1rem",
-        borderBottom: "1px solid black",
-        margin: "1.25rem .5rem .5rem .5rem",
+        padding: '1rem',
+        borderBottom: '1px solid black',
+        margin: '1.25rem .5rem .5rem .5rem',
       }}
-      className="reviewTile"
+      className='reviewTile'
     >
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          margin: "0 .25rem",
-          height: "15%",
+          display: 'flex',
+          justifyContent: 'space-between',
+          margin: '0 .25rem',
+          height: '15%',
         }}
-        className="reviewTileHeader"
+        className='reviewTileHeader'
       >
         <ReviewStars rating={review.rating} />
         <div>
           <small>
-            {" "}
-            {review.reviewer_name}, {format(review.date, "MMMM dd, y")}
+            {' '}
+            {review.reviewer_name}
+            ,
+            {'  '}
+            {' '}
+            {format(review.date, 'MMMM dd, y')}
           </small>
         </div>
       </div>
-      <div style={{ fontWeight: "bold" }} className="reviewSummary">
-        {review.summary}
+      <div style={{ fontWeight: 'bold' }} className='reviewSummary'>
+        {review.summary.substring(0, 60)}
       </div>
-      <div style={{ height: "55%" }} className="reviewBody">
-        {review.body}
+      <div style={{ height: '55%' }} className='reviewBody'>
+        {expanded === true ? (
+          <ExpandedBody fn={fn} />
+        ) : (
+          <CollapsedBody fn={fn} />
+        )}
         <div
-          stlye={{ display: "flex", gap: "4px" }}
-          className="picturesContainer"
+          style={{ display: 'flex', gap: '4px' }}
+          className='picturesContainer'
         >
           {review.photos.map((img) => (
-            <img key={img.url} src={img.url}></img>
+            <img key={img.url} src={img.url} alt='' />
           ))}
         </div>
       </div>
-      {review.recommend === true ? <Recommend />  : ""}
-      {review.response !== null ? <Response response={review.response} /> : ""}
+      {review.recommend === true && <Recommend /> }
+      {review.response !== null && <Response response={review.response} /> }
       <FeedbackFooter review={review} />
     </div>
   );
 };
 
-export default ReviewTile;
-
 export const ReviewStars = ({ rating }) => {
   let stars = [];
 
-  (function fillStarArray(rating) {
+  (function fillStarArray(value) {
+    let rating = value;
     while (rating > 1) {
       rating -= 1;
       stars.push(1);
     }
-    //function in push is for rounded to nearest quarter value
+    // function in push is for rounded to nearest quarter value
     stars.push((Math.round(rating * 4) / 4).toFixed(2));
     while (stars.length < 5) {
       stars.push(0);
     }
-  })(rating);
+  }(rating));
 
   return (
-    <div style={{ display: "flex" }}>
-      {stars.map((star, index) => (
-        <Star percentage={star} key={"a" + star + index} />
+    <div style={{ display: 'flex' }}>
+      {stars.map((star) => (
+        <Star percentage={star} key={`a${star}`} />
       ))}
     </div>
   );
 };
 
 const Star = ({ percentage }) => {
-  //this is used to double stars to the same absolute posiition, so that you can have these
+  // this is used to double stars to the same absolute posiition, so that you can have these
   // partial fills with the clipPath css property
+  const thisPercentage = percentage * 100;
   return (
-    <div className="star-wrapper">
+    <div className='star-wrapper'>
+      <i className='star-back fa-solid fa-star-sharp'> </i>
       <i
-      className="star-back fa-solid fa-star-sharp"> </i>
-      <i
-        className="star-front fa-solid fa-star-sharp"
-        style={{ clipPath: `inset(0 ${100 - (percentage *= 100)}% 0 0)` }}
-        ></i>
-      <i/>
+        className='star-front fa-solid fa-star-sharp'
+        style={{ clipPath: `inset(0 ${100 - (thisPercentage)}% 0 0)` }}
+      />
+      <i />
+    </div>
+  );
+};
+
+const CollapsedBody = ({ fn }) => {
+  //
+  return (
+    <div className='collapsedReviewBody'>
+      <div
+        style={{ fontWeight: 'bold' }}
+      >
+        {fn.review.summary.length > 60
+          ? `...${fn.review.summary.substring(60)}`
+          : ''}
+      </div>
+      {fn.review.body.slice(0, 250)}
+      {fn.review.body.length > 250 ? (
+        <small>
+          ...
+          <a
+            onClick={() => {
+              fn.setExpanded(!fn.expanded);
+            }}
+            href='#'
+          >
+            Show More
+          </a>
+        </small>
+      ) : (
+        ''
+      )}
+    </div>
+  );
+};
+
+const ExpandedBody = ({ fn }) => {
+  //
+  return (
+    <div
+      className='expandedReviewBody'
+    >
+      <div
+        style={{ fontWeight: 'bold' }}
+      >
+        {fn.review.summary.length > 60
+          ? `...${fn.review.summary.substring(60)}`
+          : ''}
+      </div>
+      {fn.review.body}
+      {fn.review.body.length > 250 ? (
+        <small>
+          {' '}
+          <a
+            onClick={() => {
+              fn.setExpanded(!fn.expanded);
+            }}
+            href='#'
+          >
+            Show Less
+          </a>
+        </small>
+      ) : (
+        ''
+      )}
     </div>
   );
 };
@@ -103,15 +179,16 @@ const Response = ({ response }) => {
   //
   return (
     <div
-      className="sellerResponse"
+      className='sellerResponse'
       style={{
-        margin: ".25rem",
-        padding: ".5rem",
-        backgroundColor: "rgba(125,155,155,.33",
-        borderRadius: "1em",
+        margin: '.25rem',
+        padding: '.5rem',
+        backgroundColor: 'rgba(125,155,155,.33',
+        borderRadius: '1em',
+        fontSize: '14px',
       }}
     >
-      <div style={{ fontWeight: "bold" }}>Response from seller </div>
+      <div style={{ fontWeight: '1000', fontSize: '12px' }}>RESPONSE FROM SELLER </div>
       {response}
     </div>
   );
@@ -120,28 +197,49 @@ const Response = ({ response }) => {
 const Recommend = () => {
   //
   return (
-    <div
-    style={{padding: '.25rem'}}
-    >
-      <i className="fa-solid fa-check"></i> I recommend this product
+    <div style={{ padding: '.25rem', fontSize: '14px' }}>
+      <i className='fa-solid fa-check' />
+      {' '}
+      I recommend this product
     </div>
-  )
-}
+  );
+};
 
-const FeedbackFooter = ({review}) => {
-  //
+const FeedbackFooter = ({ review }) => {
+  const [helpfulness, setHelpfulness] = useState(review.helpfulness);
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    if (clicked === false) {
+      setHelpfulness(helpfulness + 1);
+      setClicked(true);
+    }
+  };
+
   return (
-    <div
-    style={{ position: "relative", bottom: "0" }}
-    className="reviewFooter"
-  >
-    <small>
-      Helpful? <a href="#">Yes</a> {"(" + review.helpfulness + ")"} |{" "}
-      <a href="#">Report</a>
-    </small>
-  </div>
-  )
-}
+    <div style={{ position: 'relative', bottom: '0' }} className='reviewFooter'>
+      <small> Helpful? </small>
+      <small>
+        {' '}
+        <a onClick={() => handleClick()} href='#'>
+          Yes
+        </a>
+        {' '}
+        {`(${helpfulness})`}
+        {' '}
+      </small>
+      <small>|</small>
+      <small>
+        {' '}
+        <a href='#'>Report</a>
+      </small>
+    </div>
+  );
+};
+
+export {
+  FeedbackFooter, ReviewTile, ReviewStars, Star,
+};
 
 // star rating (total of 5 stars, filled in by quarters (rounded down ===> 3.8 = 3.75));
 // date of review format Month, DD, YYYY;
@@ -156,4 +254,4 @@ const FeedbackFooter = ({review}) => {
 // repsonse to review - if a response exists, it should appear below reviewer name and be preceded by the text 'Response from seller' and be visually distinct from the rest of the review;
 // rating helpfulness - "Was this review helpful?" followed by two links "Yes" and "No". Following Yes and No will be the count of users who selected that information;
 // a user does NOT have to be logged in to provide feedback on review;
-//a user can provide feedback on any review, however they can only do so once - if the user selects yes or no, they should not be able to select another option for the review;
+// a user can provide feedback on any review, however they can only do so once - if the user selects yes or no, they should not be able to select another option for the review;
