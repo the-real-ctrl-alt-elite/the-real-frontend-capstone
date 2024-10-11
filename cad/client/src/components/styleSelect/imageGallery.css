@@ -6,51 +6,41 @@
   box-shadow:
     #000000 0px 20px 30px -10px,
     #80ff0086 0px 5px 15px -5px;
-
-
-
 }
 
 .image-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   width: 50%;
-  /* height: 1000px; */
 }
 
 .thumbnails-gallery {
+  margin: 30px 6px 0 0;
+  cursor: pointer;
+}
+
+.thumbnail-col {
   display: flex;
   flex-direction: column;
-  margin: 30px 60px 0 0;
-  cursor: pointer;
+}
 
-  /* position: sticky;
-  top: 20px;
-  max-height: calc(100vh - 40px); */
+.thumbnail-row {
+  display: flex;
 }
 
 .thumbnails {
   height: 80px;
-  max-width: 70px;
+  width: 60px;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
-  margin-bottom: 8px;
+  margin: 8px 8px;
   border: black solid 1px;
   box-shadow:
     #070707 0px 20px 30px -10px,
     #80ff00b0 0px 5px 10px -5px;
-
-
-
 }
 
 .thumbnails:hover {
   outline: double 5px rgba(128, 255, 0);
 }
-
-
-/* .thumbnails-gallery, .main-image-container {
-  position: sticky;
-  top: 10px;
-} */
