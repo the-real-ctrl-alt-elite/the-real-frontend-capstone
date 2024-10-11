@@ -68,10 +68,10 @@ const Selector = (props) => {
       })
   };
 
-  useEffect(() => {
-    getProduct();
-    fetchSaleItem();
-  }, []);
+  // useEffect(() => {
+  //   getProduct();
+  //   fetchSaleItem();
+  // }, []);
 
   return (
     <div className='selector-container'>

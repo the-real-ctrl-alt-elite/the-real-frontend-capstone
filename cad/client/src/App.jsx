@@ -10,7 +10,7 @@ const App = () => {
   return (
     <div className='app'>
       <Header />
-      <Selector />
+      {/* <Selector /> */}
       <div className='related-comp-wrapper'>
         <Related />
         <Comparison />

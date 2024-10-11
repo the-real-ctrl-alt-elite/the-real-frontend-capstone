@@ -13,7 +13,7 @@ const Answers = ({ answers }) => {
         return (
           <div>
             <p>{`A: ${answer.body}`}</p>
-            <div>{answer.photos.length > 0 ? <Photoes photos={answer.photos} /> : <p></p> }</div>
+            <div>{answer.photos.length > 0 && <Photoes photos={answer.photos} /> }</div>
             <Footer userName={answer.answerer_name} dateData={answer.date} helpfulness={answer.helpfulness} />
           </div>
         );
