@@ -60,7 +60,7 @@ const DEFAULT_PRODUCTS = [{
   rating: 3,
 }];
 
-const Related = (props) => {
+const Related = ({ handleProductClick }) => {
   return (
     <div className='related-container'>
       <h3>RELATED PRODUCTS</h3>
@@ -69,6 +69,7 @@ const Related = (props) => {
           id, name, category, defaultPrice, rating,
         }) => (
           <RelatedCard
+            handleClick={handleProductClick}
             key={id}
             id={id}
             name={name}

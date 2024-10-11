@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import OutfitCard from './OutfitCard';
 
-
 const DEFAULT_PRODUCTS = [{
   id: 1,
   name: 'Camo Onesie',
@@ -52,22 +51,32 @@ const DEFAULT_PRODUCTS = [{
   rating: 3,
 }];
 
-const Comparison = (props) => {
-  // TODO: UseEffect to load data related currently selected product
+const Comparison = () => {
+  const [items, setItems] = useState(DEFAULT_PRODUCTS);
+
+  const handleAddClick = () => {
+    // update items in outfit here w/ cur item
+  };
+
+  const handleRemoveClick = (itemId) => {
+    console.log(itemId);
+    setItems(items.filter((item) => item.id !== itemId));
+  };
 
   return (
     <div className='comparison-container'>
       <h3>YOUR OUTFIT</h3>
       <div className='cards-container'>
-        <button className='add-outfit-btn' type='button' label='add-outfit-item'>
+        <button className='add-outfit-btn' type='button' label='add-outfit-item' onClick={handleAddClick}>
           <div className='product-card-container'>
             +
           </div>
         </button>
-        {DEFAULT_PRODUCTS.map(({
+        {items.map(({
           id, name, category, defaultPrice, rating,
         }) => (
           <OutfitCard
+            handleRemoveClick={handleRemoveClick}
             key={id}
             id={id}
             name={name}

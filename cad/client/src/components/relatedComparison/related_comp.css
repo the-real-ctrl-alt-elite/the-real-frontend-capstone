@@ -1,3 +1,5 @@
+
+
 .related-container {
   margin: 1rem;
 }
@@ -35,13 +37,16 @@
 
 .product-card-container {
   all: unset;
-  width: 14dvw;
+  width: 11rem;
+  height: 15rem;
   display: flex;
   flex-direction: column;
   flex: 0 0 auto;
   background-color: lightgray;
   position: relative;
   padding-bottom: 0.5rem;
+
+
 }
 
 .product-card-details {
@@ -59,12 +64,24 @@
   line-height: 75%;
 }
 
-.action-btn-container {
+.compare-item-btn {
+  all: unset;
   position: absolute;
-  top: 0;
+  right: 2px;
+  top: 2px;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
-
+.overlay {
+  position: fixed;
+  top: 0;
+  left:0;
+  bottom: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: rgba(105, 105, 105, 0.565);
+}
 
 
 
