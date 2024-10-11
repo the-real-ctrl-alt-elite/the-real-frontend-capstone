@@ -35,8 +35,8 @@ const Imagegallery = (props) => {
     }
   }, [props.id]);
 
-  console.log('detailsState:', details);
-  console.log('itemState:', item);
+  // console.log('detailsState:', details);
+  // console.log('itemState:', item);
   if (details.length > 0) {
     return (
       <div className='image-container'>

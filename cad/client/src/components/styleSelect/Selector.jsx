@@ -72,8 +72,8 @@ const Selector = (props) => {
     getProduct();
     fetchSaleItem();
   }, []);
-  console.log('products', products)
-  console.log('product', product)
+  // console.log('products', products)
+  // console.log('product', product)
   return (
     <div className='selector-container'>
       <article className='selector-advertisement'>
