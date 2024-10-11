@@ -70,17 +70,17 @@ const ReviewTile = ({ review }) => {
   );
 };
 
-export const ReviewStars = ({ rating }) => {
-  let stars = [];
+const ReviewStars = ({ rating }) => {
+  const stars = [];
 
   (function fillStarArray(value) {
-    let rating = value;
-    while (rating > 1) {
-      rating -= 1;
+    let subValue = value;
+    while (subValue > 1) {
+      subValue -= 1;
       stars.push(1);
     }
     // function in push is for rounded to nearest quarter value
-    stars.push((Math.round(rating * 4) / 4).toFixed(2));
+    stars.push((Math.round(subValue * 4) / 4).toFixed(2));
     while (stars.length < 5) {
       stars.push(0);
     }
@@ -89,7 +89,7 @@ export const ReviewStars = ({ rating }) => {
   return (
     <div style={{ display: 'flex' }}>
       {stars.map((star) => (
-        <Star percentage={star} key={`a${star}`} />
+        <Star percentage={star} key={Math.random()} />
       ))}
     </div>
   );
@@ -126,14 +126,15 @@ const CollapsedBody = ({ fn }) => {
       {fn.review.body.length > 250 ? (
         <small>
           ...
-          <a
+          <button
+            type='button'
+            className='button-link small'
             onClick={() => {
               fn.setExpanded(!fn.expanded);
             }}
-            href='#'
           >
             Show More
-          </a>
+          </button>
         </small>
       ) : (
         ''
@@ -159,14 +160,15 @@ const ExpandedBody = ({ fn }) => {
       {fn.review.body.length > 250 ? (
         <small>
           {' '}
-          <a
+          <button
+            type='button'
+            className='button-link small'
             onClick={() => {
               fn.setExpanded(!fn.expanded);
             }}
-            href='#'
           >
             Show Less
-          </a>
+          </button>
         </small>
       ) : (
         ''
@@ -208,11 +210,22 @@ const Recommend = () => {
 const FeedbackFooter = ({ review }) => {
   const [helpfulness, setHelpfulness] = useState(review.helpfulness);
   const [clicked, setClicked] = useState(false);
+  const [notHelpful, setNotHelpful] = useState(0);
+  const [clickedNo, setClickedNo] = useState(false);
 
   const handleClick = () => {
-    if (clicked === false) {
+    if (clicked === false && clickedNo === false) {
       setHelpfulness(helpfulness + 1);
       setClicked(true);
+      setClickedNo(true);
+    }
+  };
+
+  const handleNoClick = () => {
+    if (clicked === false && clickedNo === false) {
+      setNotHelpful(notHelpful + 1);
+      setClicked(true);
+      setClickedNo(true);
     }
   };
 
@@ -221,9 +234,13 @@ const FeedbackFooter = ({ review }) => {
       <small> Helpful? </small>
       <small>
         {' '}
-        <a onClick={() => handleClick()} href='#'>
+        <button
+          className='button-link small'
+          onClick={() => handleClick()}
+          type='button'
+        >
           Yes
-        </a>
+        </button>
         {' '}
         {`(${helpfulness})`}
         {' '}
@@ -231,7 +248,16 @@ const FeedbackFooter = ({ review }) => {
       <small>|</small>
       <small>
         {' '}
-        <a href='#'>Report</a>
+        <button
+          className='button-link small'
+          onClick={() => handleNoClick()}
+          type='button'
+        >
+          No
+        </button>
+        {' '}
+        {`(${notHelpful})`}
+        {' '}
       </small>
     </div>
   );

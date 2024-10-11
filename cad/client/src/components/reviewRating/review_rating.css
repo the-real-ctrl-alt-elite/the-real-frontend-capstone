@@ -47,6 +47,7 @@ i:before {
   width: 8rem;
   height: 4rem;
   background-color: transparent;
+  cursor: pointer;
 
 }
 
@@ -135,3 +136,14 @@ a {
   min-width: 40vw;
 }
 
+.button-link {
+  border: none;
+  background: none;
+  border-bottom: 1px solid black;
+  width: auto;
+  cursor: pointer;
+  margin: 0 .25rem;
+}
+.button-link.small {
+  font-size: 10px
+}

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { ReviewStars, Star } from "./ReviewTile.jsx";
+import React, { useEffect, useState } from 'react';
+import { ReviewStars, Star } from './ReviewTile.jsx';
 
 const ReviewBreakdown = ({ fn }) => {
   const [ratingAverage, setRatingAverage] = useState(0);
@@ -10,13 +10,13 @@ const ReviewBreakdown = ({ fn }) => {
   const [oneStar, setOneStar] = useState(0);
 
   useEffect(() => {
-    //first get the big number
+    // first get the big number
     let one = 0;
     let two = 0;
     let three = 0;
     let four = 0;
     let five = 0;
-    let total = fn.reviews.reduce((acc, review) => {
+    const total = fn.reviews.reduce((acc, review) => {
       if (review.rating < 2) {
         one += 1;
       }
@@ -35,10 +35,10 @@ const ReviewBreakdown = ({ fn }) => {
       return (acc += review.rating);
     }, 0);
 
-    let average = (Math.round((total / fn.reviews.length) * 4) / 4).toFixed(1);
+    const average = (Math.round((total / fn.reviews.length) * 4) / 4).toFixed(1);
     setRatingAverage(average);
 
-    //get them percentages for the bars, my guy
+    // get them percentages for the bars, my guy
     setFiveStar((five / fn.reviews.length) * 100);
     setFourStar((four / fn.reviews.length) * 100);
     setThreeStar((three / fn.reviews.length) * 100);
@@ -49,66 +49,62 @@ const ReviewBreakdown = ({ fn }) => {
   console.log(fiveStar, fourStar, threeStar, twoStar, oneStar);
 
   return (
-    <div className="ratingBreakdown">
-      <div className="ratingBreakdownSummary">
+    <div className='ratingBreakdown'>
+      <div className='ratingBreakdownSummary'>
         <h1>{ratingAverage}</h1>
         <ReviewStars rating={ratingAverage} />
       </div>
-      <div className="ratingBreakdownList">
-        <div className="ratingRow">
-          <a href="#">5 stars</a>
+      <div className='ratingBreakdownList'>
+        <div className='ratingRow'>
+          <button className='button-link' type='button'>5 stars</button>
           <div
-            className="ratingsBar"
-            style={{
-              background: `linear-gradient(to right, darkgreen, darkgreen ${fiveStar}%, grey ${
-                fiveStar + 0.1
-              }%, grey 100%)`,
-            }}
-          ></div>
+            className='ratingsBar'
+            style={{ background: `linear-gradient(to right, darkgreen, darkgreen ${fiveStar}%, grey ${fiveStar + 0.1}%, grey 100%)` }}
+          />
         </div>
-        <div className="ratingRow">
-          <a href="#">4 stars</a>
+        <div className='ratingRow'>
+          <button className='button-link' type='button'>4 stars</button>
           <div
-            className="ratingsBar"
+            className='ratingsBar'
             style={{
               background: `linear-gradient(to right, darkgreen, darkgreen ${fourStar}%, grey ${
                 fourStar + 0.1
               }%, grey 100%)`,
             }}
-          ></div>
+          />
         </div>
-        <div className="ratingRow">
-          <a href="#">3 stars</a>
+        <div className='ratingRow'>
+          <button className='button-link' type='button'>3 stars</button>
           <div
-            className="ratingsBar"
+            className='ratingsBar'
             style={{
               background: `linear-gradient(to right, darkgreen, darkgreen ${threeStar}%, grey ${
                 threeStar + 0.1
               }%, grey 100%)`,
             }}
-          ></div>
+          />
         </div>
-        <div className="ratingRow">
-          <a href="#">2 stars</a>
+        <div className='ratingRow'>
+          <button className='button-link' type='button'>2 stars</button>
           <div
-            className="ratingsBar"
+            className='ratingsBar'
             style={{
               background: `linear-gradient(to right, darkgreen, darkgreen ${twoStar}%, grey ${
                 twoStar + 0.1
               }%, grey 100%)`,
             }}
-          ></div>
+          />
         </div>
-        <div className="ratingRow">
-          <a href="#">1 star</a>
+        <div className='ratingRow'>
+          <button className='button-link' type='button'>1 stars</button>
           <div
-            className="ratingsBar"
+            className='ratingsBar'
             style={{
               background: `linear-gradient(to right, darkgreen, darkgreen ${oneStar}%, grey ${
                 oneStar + 0.1
               }%, grey 100%)`,
             }}
-          ></div>
+          />
         </div>
       </div>
     </div>
