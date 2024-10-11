@@ -6,11 +6,9 @@ import Purchaseoption from './Purchaseoption';
 import Sizeoptions from './Sizeoptions';
 import Styleoptions from './Styleoptions';
 
-
 const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
 const CAMPUS_CODE = process.env.CAMPUS_CODE;
-
 
 const Selector = (props) => {
   const { productId } = useContext(ProductContext);
@@ -78,7 +76,10 @@ const Selector = (props) => {
         {
           sale &&
           <span>
-            <strong style={{ fontSize: 'large' }}>EVENT ENDS IN:</strong> {saleName} originally priced at ${sale.original_price} NOW ONLY {sale.sale_price}!
+            <strong style={{ fontSize: 'large' }}>{'EVENT ENDS SOON: '}</strong>
+            {saleName} originally priced at ${sale.original_price}
+            <span className='sale-now'> NOW ONLY </span>
+            <strong><em style={{textDecoration: 'underline'}}>{sale.sale_price}!</em></strong>
           </span>
         }
       </article>

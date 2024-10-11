@@ -1,4 +1,4 @@
-import React, { useState, useEffect,  } from 'react';
+import React, { useState, useEffect, } from 'react';
 import axios from 'axios';
 
 const TOKEN = process.env.GIT_TOKEN;
@@ -32,7 +32,7 @@ const Imagegallery = (props) => {
     setPhoto(url);
   }
   useEffect(() => {
-      showSelectedItem();
+    showSelectedItem();
   }, [props.id]);
 
   if (details.length > 0) {
@@ -41,10 +41,11 @@ const Imagegallery = (props) => {
         <div className='thumbnails-gallery'>
           {
             item && item.photos.map((photo, i) => {
-              return <React.Fragment key={photo.url}>
+              const length = item.photos.length;
+              return <div className={length < 3 ? 'thumbnail-col' : 'thumbnail-row'} key={photo.url}>
                 <img className='thumbnails' src={photo.url} onClick={() => photoSwap(photo.url)} />
                 <img className='thumbnails' src={photo.thumbnail_url} onClick={() => photoSwap(photo.thumbnail_url)} />
-              </React.Fragment>
+              </div>
             })
           }
         </div>
