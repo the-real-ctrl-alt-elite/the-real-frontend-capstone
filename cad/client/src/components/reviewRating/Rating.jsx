@@ -4,9 +4,10 @@ import ReviewTile from "./components/ReviewTile.jsx";
 import ProductBreakdown from "./components/ProductBreakdown.jsx";
 import RatingBreakdown from "./components/RatingBreakdown.jsx";
 import SortOptions from "./components/SortOptions.jsx";
+import axios from 'axios';
+require('dotenv').config();
 
-const Rating = (props) => {
-  const mockData = {
+const mockData = {
   product: "2",
   page: 0,
   count: 5,
@@ -95,31 +96,51 @@ const Rating = (props) => {
   ],
 };
 
-const [reviews, setReviews] = useState(mockData.results);
-//BRD display 2 tiles at a time
-const [activeReviews, setActiveReviews] = useState(reviews.slice(0, 2));
+const Rating = (props) => {
 
-const fn = {
-  activeReviews,
-  setActiveReviews,
-  reviews,
-};
+  useEffect(() => {
+
+    const params = {
+      page: 1,
+      count: 10,
+      sort: 'relevant',
+      product_id: 1
+    }
+    axios.get(`${process.env.API_URL}/reviews/1/10/'relevant'/1`, {
+      params: params,
+      headers: {
+        "Authorization": `${process.env.API_KEY}`
+      }
+    })
+    .then((response) => {
+      console.log(response)
+    })
+  })
+
+  const [reviews, setReviews] = useState(mockData.results);
+  //BRD display 2 tiles at a time
+  const [activeReviews, setActiveReviews] = useState(reviews.slice(0, 2));
+
+  const fn = {
+    activeReviews,
+    setActiveReviews,
+    reviews,
+  };
 
   return (
-    <div style={{ padding: "1rem" }}>
+    <div style={{ padding: "1rem", width: '66%'}}>
       <h3>RATINGS & REVIEWS</h3>
-      <div
-        style={{
-          width: "50%",
-          display: "grid",
-          gridTemplateColumns: "3fr 7fr",
-        }}
-        className="rating-container"
-      >
-        <RatingBreakdown />
-        <SortOptions fn={fn}/>
-        <ProductBreakdown />
-        <ReviewList fn={fn}/>
+      <div>
+        <div className="rating-container">
+          <div className="reviewsLeft">
+            <RatingBreakdown fn={fn} />
+            <ProductBreakdown />
+          </div>
+          <div className="reviewsRight">
+            <SortOptions fn={fn} />
+            <ReviewList fn={fn} />
+          </div>
+        </div>
       </div>
     </div>
   );

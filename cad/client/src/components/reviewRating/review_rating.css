@@ -2,6 +2,11 @@ i:before {
   display: inline
 }
 
+.rating-container {
+  display: flex;
+  /* gap: 1rem; */
+}
+
 .star-wrapper {
   position: relative;
   display: inline-block;
@@ -20,7 +25,7 @@ i:before {
 }
 
 .star-front {
-  color: darkgoldenrod;
+  color: black;
   position: absolute;
   top: 0;
   left: 0;
@@ -41,7 +46,7 @@ i:before {
 .reviewFunctionalityButton {
   width: 8rem;
   height: 4rem;
-  background-color: white;
+  background-color: transparent;
 
 }
 
@@ -62,4 +67,71 @@ a {
 .reviewSortOptionsHeader {
   font-size: 18px;
   font-weight: 700;
+  display: flex;
+  align-items: center;
 }
+
+.ratingBreakdown {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.ratingBreakdownSummary {
+  display: flex;
+  gap: 1rem;
+}
+
+.ratingBreakdownSummary>div {
+  margin-top: .25rem;
+  margin-left: .5rem
+}
+
+.ratingBreakdownSummary>h1 {
+  font-size: 48px;
+  letter-spacing: 2px;
+}
+
+.ratingBreakdownList {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  gap: .5rem;
+}
+
+.ratingRow {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.ratingRow>a {
+  width: 25%;
+  color: black
+}
+
+.ratingsBar {
+  height: .5rem;
+  width: 75%;
+}
+
+.reviewsLeft {
+  width: 25%
+}
+
+.reviewsRight {
+  max-height: 100vh;
+  overflow-y: scroll;
+  width: 75%
+}
+
+.reviewsLeft, .reviewsRight {
+  display: flex;
+  flex-direction: column;
+}
+
+.rating-review-wrapper {
+  min-width: 40vw;
+}
+

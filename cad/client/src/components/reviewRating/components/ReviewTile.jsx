@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faStar } from "@fortawesome/free-solid-svg-icons";
+
 
 const ReviewTile = ({ review }) => {
   const [expanded, setExpanded] = useState(false);
@@ -184,7 +183,7 @@ const Response = ({ response }) => {
         fontSize: '14px'
       }}
     >
-      <div style={{ fontWeight: "bold" }}>Response from seller </div>
+      <div style={{ fontWeight: "1000", fontSize: '12px' }}>RESPONSE FROM SELLER </div>
       {response}
     </div>
   );
@@ -229,7 +228,7 @@ const FeedbackFooter = ({ review }) => {
   );
 };
 
-export { FeedbackFooter, ReviewTile };
+export { FeedbackFooter, ReviewTile, ReviewStars, Star };
 
 // star rating (total of 5 stars, filled in by quarters (rounded down ===> 3.8 = 3.75));
 // date of review format Month, DD, YYYY;
