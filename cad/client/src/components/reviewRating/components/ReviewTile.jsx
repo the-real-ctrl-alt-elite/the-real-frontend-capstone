@@ -70,8 +70,8 @@ const ReviewTile = ({ review }) => {
   );
 };
 
-const ReviewStars = ({ rating }) => {
-  const stars = [];
+export const ReviewStars = ({ rating }) => {
+  let stars = [];
 
   (function fillStarArray(value) {
     let rating = value;
