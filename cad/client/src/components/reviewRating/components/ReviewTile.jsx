@@ -46,12 +46,12 @@ const ReviewTile = ({ review }) => {
           className="picturesContainer"
         >
           {review.photos.map((img) => (
-            <img key={img.url} src={img.url}></img>
+            <img key={img.url} ></img>
           ))}
         </div>
       </div>
-      {review.recommend === true ? <Recommend />  : ""}
-      {review.response !== null ? <Response response={review.response} /> : ""}
+      {review.recommend === true && <Recommend /> }
+      {review.response !== null && <Response response={review.response} /> }
       <FeedbackFooter review={review} />
     </div>
   );
@@ -86,13 +86,14 @@ const ReviewStars = ({ rating }) => {
 const Star = ({ percentage }) => {
   //this is used to double stars to the same absolute posiition, so that you can have these
   // partial fills with the clipPath css property
+  const styles = { clipPath: `inset(0 ${100 - (percentage *= 100)}% 0 0)` }
   return (
     <div className="star-wrapper">
       <i
       className="star-back fa-solid fa-star-sharp"> </i>
       <i
         className="star-front fa-solid fa-star-sharp"
-        style={{ clipPath: `inset(0 ${100 - (percentage *= 100)}% 0 0)` }}
+        style={styles}
         ></i>
       <i/>
     </div>

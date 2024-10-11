@@ -5,8 +5,6 @@ const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
 const CAMPUS_CODE = process.env.CAMPUS_CODE;
 
-
-
 const Imagegallery = (props) => {
   const [details, setDetails] = useState([]);
   const [item, setItem] = useState({});
@@ -28,7 +26,6 @@ const Imagegallery = (props) => {
       .catch((err) => console.error(err));
   };
 
-
   const photoSwap = (url) => {
     setPhoto(url);
   }
@@ -38,7 +35,7 @@ const Imagegallery = (props) => {
     }
   }, [props.id]);
 
-  // console.log('detailsState:', details);
+  console.log('detailsState:', details);
   console.log('itemState:', item);
   if (details.length > 0) {
     return (
@@ -46,7 +43,7 @@ const Imagegallery = (props) => {
         <div className='thumbnails-gallery'>
           {
             item && item.photos.map((photo) => {
-              return <img className='thumbnails' src={photo.url} onClick={() => photoSwap(photo.url)} />
+              return <img key={photo.thumbnail_url} className='thumbnails' src={photo.url} onClick={() => photoSwap(photo.url)} />
             })
           }
         </div>

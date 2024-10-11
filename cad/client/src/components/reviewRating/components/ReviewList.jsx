@@ -52,11 +52,13 @@ const ReviewList = () => {
 
   return (
     <div className="reviewList">
-      {mockData.results.map((review) => (
-        <ReviewTile
-        key={review.review_id}
-        review={review}/>
-      ))}
+      {
+        mockData.results.map((review) => (
+          <ReviewTile
+            key={review.review_id}
+            review={review} />
+        ))
+      }
     </div>
   );
 };
