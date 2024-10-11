@@ -63,6 +63,7 @@ a {
 
 .collapsedReviewBody, .expandedReviewBody {
   font-size: .875rem;
+  overflow-wrap: break-word;
 }
 
 .reviewSortOptionsHeader {
@@ -97,7 +98,7 @@ a {
 .ratingBreakdownList {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  /* width: 80%; */
   gap: .5rem;
 }
 
@@ -151,7 +152,11 @@ a {
   font-size: 0.625rem;
 }
 
-.reviewImageThumbail {
-  height: 3rem;
-  width: 3rem;
+.picturesContainer>div {
+  box-shadow: 0 0 5px 2px black;
+  box-sizing: border-box;
+}
+
+.closed {
+  display: none;
 }
