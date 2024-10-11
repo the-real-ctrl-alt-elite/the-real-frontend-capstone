@@ -1,10 +1,24 @@
 .selector-container {
   border: inset chartreuse 2px;
   padding: 20px;
+
+height: 1000px;
+  position: relative;
 }
 
 .selector-advertisement {
   color: white;
   text-align: center;
   padding: 0 0 20px 0;
+}
+
+.selector-components{
+  /* sticky attempt */
+  position: relative;
+}
+
+
+.gallery {
+  position: sticky;
+  top: 0;
 }
