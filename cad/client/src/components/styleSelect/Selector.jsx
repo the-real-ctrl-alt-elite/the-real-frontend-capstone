@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import ProductContext from '../../ProductContext';
 import Imagegallery from './Imagegallery';
 
 const TOKEN = process.env.GIT_TOKEN;
@@ -8,12 +9,12 @@ const CAMPUS_CODE = process.env.CAMPUS_CODE;
 
 
 const Selector = (props) => {
+  const { productId } = useContext(ProductContext);
   const url = `${BASE_URL}${CAMPUS_CODE}/products`;
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState({});
   const [sale, setSale] = useState(null);
   const [saleName, setSaleName] = useState('');
-
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
   };
@@ -55,11 +56,10 @@ const Selector = (props) => {
           Authorization: TOKEN,
         },
         params: {
-          count: 10,
+          count: 1,
         },
       })
       .then((response) => {
-        // console.log('api response:', response.data);
         setProducts(response.data);
         setProduct(response.data[0])
       })
@@ -68,11 +68,12 @@ const Selector = (props) => {
       })
   };
 
-  // useEffect(() => {
-  //   getProduct();
-  //   fetchSaleItem();
-  // }, []);
-
+  useEffect(() => {
+    getProduct();
+    fetchSaleItem();
+  }, []);
+  // console.log('products', products)
+  // console.log('product', product)
   return (
     <div className='selector-container'>
       <article className='selector-advertisement'>
@@ -81,9 +82,11 @@ const Selector = (props) => {
         }
       </article>
       <div className='selector-components'>
-        <Imagegallery  id={product.id} />
+        <Imagegallery id={product.id} />
         <aside className='selector-functional-components'>
-
+          <h1 className='product-name'>
+            {product.name}
+          </h1>
         </aside>
       </div>
     </div>

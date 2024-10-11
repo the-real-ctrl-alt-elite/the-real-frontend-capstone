@@ -59,7 +59,9 @@ const ReviewTile = ({ review }) => {
           className='picturesContainer'
         >
           {review.photos.map((img) => (
+ review-list
             <ReviewImageThumbnail img={img} key={img.url} />
+
           ))}
         </div>
       </div>

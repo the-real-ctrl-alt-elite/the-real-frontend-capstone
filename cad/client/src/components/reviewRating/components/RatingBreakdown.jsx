@@ -47,7 +47,9 @@ const ReviewBreakdown = ({ fn }) => {
     setThreeStar((three / fn.reviews.length) * 100);
     setTwoStar((two / fn.reviews.length) * 100);
     setOneStar((one / fn.reviews.length) * 100);
+ review-list
   }, [fn.reviews]);
+
 
   return (
     <div className='ratingBreakdown'>
