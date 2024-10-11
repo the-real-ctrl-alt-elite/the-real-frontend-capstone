@@ -1,3 +1,38 @@
 i:before {
   display: inline
 }
+
+.star-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin: 0 .125rem
+}
+
+.star-back {
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black;
+}
+
+.star-front {
+  color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.reviewFooter>small {
+  font-size: 11px;
+}
+
+a {
+  color: steelblue
+}

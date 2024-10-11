@@ -1,0 +1,10 @@
+.selector-container {
+  border: inset chartreuse 2px;
+  padding: 20px;
+}
+
+.selector-advertisement {
+  color: white;
+  text-align: center;
+  padding: 0 0 20px 0;
+}
