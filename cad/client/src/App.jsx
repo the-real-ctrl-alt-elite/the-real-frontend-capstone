@@ -7,10 +7,11 @@ import Rating from './components/reviewRating/Rating';
 import Selector from './components/styleSelect/Selector';
 
 const App = () => {
+
   return (
     <div className='app'>
       <Header />
-      {/* <Selector /> */}
+      <Selector />
       <div className='related-comp-wrapper'>
         <Related />
         <Comparison />

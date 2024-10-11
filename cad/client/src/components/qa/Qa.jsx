@@ -151,7 +151,9 @@ const Qa = () => {
   return (
     <div className='qa-container'>
       QUESTIONS & ANSWERS
-      <div><QuestionsList qnas={qnas} /></div>
+      <div>
+        <QuestionsList qnas={qnas} />
+      </div>
       <MoreQuestions />
     </div>
   );

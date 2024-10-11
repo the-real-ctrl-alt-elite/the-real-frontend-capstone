@@ -68,11 +68,12 @@ const Selector = (props) => {
       })
   };
 
-  // useEffect(() => {
-  //   getProduct();
-  //   fetchSaleItem();
-  // }, []);
-
+  useEffect(() => {
+    getProduct();
+    fetchSaleItem();
+  }, []);
+  // console.log('products', products)
+  // console.log('product', product)
   return (
     <div className='selector-container'>
       <article className='selector-advertisement'>
@@ -81,9 +82,11 @@ const Selector = (props) => {
         }
       </article>
       <div className='selector-components'>
-        <Imagegallery  id={product.id} />
+        <Imagegallery id={product.id} />
         <aside className='selector-functional-components'>
-
+          <div className='product-name'>
+            {product.name}
+          </div>
         </aside>
       </div>
     </div>
