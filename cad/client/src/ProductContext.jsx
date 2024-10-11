@@ -8,14 +8,14 @@ const CAMPUS_CODE = process.env.CAMPUS_CODE;
 
 export const ProductProvider = ({ children }) => {
   const [productId, setProductId] = useState(null);
-  const url = `${BASE_URL}${CAMPUS_CODE}/products`;
 
-  // use for later
-  // const generateRandomProductId = () => {
-  //   return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
-  // };
+  const generateRandomProductId = () => {
+    return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
+  };
 
   const fetchProductId = () => {
+    const randomId = generateRandomProductId();
+    const url = `${BASE_URL}${CAMPUS_CODE}/products/${randomId}`;
     axios
       .get(url, {
         headers: {
@@ -26,10 +26,11 @@ export const ProductProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        setProductId(response.data[0].id);
+        console.log('Context:', response.data.id)
+        setProductId(response.data.id);
       })
       .catch((err) => console.error('error in context', err))
-    };
+  };
 
   useEffect(() => {
     fetchProductId();

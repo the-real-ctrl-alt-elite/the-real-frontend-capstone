@@ -1,5 +1,5 @@
 .main-image-container {
-  width: 500px;
+  max-width: 600px;
   height: 700px;
   object-fit: cover;
   object-position: center;
@@ -30,8 +30,10 @@
 }
 
 .thumbnails {
-  height: 65px;
-  /* width: 40px; */
+  height: 80px;
+  max-width: 70px;
+  object-fit: cover;
+  object-position: center;
   border-radius: 10px;
   margin-bottom: 8px;
   border: black solid 1px;
