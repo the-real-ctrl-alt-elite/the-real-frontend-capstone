@@ -11,10 +11,14 @@ const BASE_URL = process.env.API_BASE_URL;
 const CAMPUS_CODE = process.env.CAMPUS_CODE;
 
 const Selector = (props) => {
-  const { productId } = useContext(ProductContext);
-  const [product, setProduct] = useState({});
+  const { productId, newProduct } = useContext(ProductContext);
+  const [productInformation, setProduct] = useState({});
+  const [productStyles, setProductStyles] = useState({});
+
   const [sale, setSale] = useState(null);
   const [saleName, setSaleName] = useState('');
+  const [saleId, setSaleId] = useState('');
+
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
   };
@@ -40,7 +44,10 @@ const Selector = (props) => {
                 Authorization: TOKEN,
               },
             })
-            .then((response) => setSaleName(response.data.name))
+            .then((response) => {
+              setSaleId(response.data.id);
+              setSaleName(response.data.name);
+            })
           setSale(saleItem);
         } else {
           fetchSaleItem();
@@ -58,11 +65,19 @@ const Selector = (props) => {
         },
       })
       .then((response) => {
+        axios
+          .get(`${url}/styles`, {
+            headers: {
+              Authorization: TOKEN,
+            },
+          })
+          .then((response) => {
+            setProductStyles(response.data.results);
+          })
+          .catch((err) => console.error('error on selector', err));
         setProduct(response.data);
       })
-      .catch((err) => {
-        console.error('Error origin: selector getProduct', err);
-      })
+      .catch((err) => console.error('Error origin: selector getProduct', err));
   };
 
   useEffect(() => {
@@ -70,18 +85,21 @@ const Selector = (props) => {
     fetchSaleItem();
   }, [productId]);
 
+  console.log('Selector:\n', 'Info:', productInformation, '\n', 'Style:', productStyles)
   return (
     <div className='selector-container-overlay'>
-      <article className='selector-advertisement'>
-        {
-          sale &&
-          <span>
-            <strong style={{ fontSize: 'large' }}>{'EVENT ENDS SOON: '}</strong>
-            {saleName} originally priced at ${sale.original_price}
-            <span className='sale-now'> NOW ONLY </span>
-            <strong><em style={{textDecoration: 'underline'}}>{sale.sale_price}!</em></strong>
-          </span>
-        }
+      <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
+        <a href="#" className='a-tag-ad'>
+          {
+            sale &&
+            <span>
+              <strong style={{ fontSize: 'large' }}>{'EVENT ENDS SOON: '}</strong>
+              {saleName} originally priced at ${sale.original_price}
+              <span className='sale-now'> NOW ONLY </span>
+              <strong><em style={{ textDecoration: 'underline' }}>{sale.sale_price}!</em></strong>
+            </span>
+          }
+        </a>
       </article>
 
       <div className='selector-components'>
@@ -89,7 +107,10 @@ const Selector = (props) => {
         <aside className='selector-functional-components'>
           <div className='info-choices-container'>
             <h1 className='product-name'>
-              {product.name}
+              Category: {productInformation.category}
+              Name:{productInformation.name}
+              {/* bring from styles for % change */}
+              Price:{productInformation.default_price}
             </h1>
             <Sizeoptions />
 
@@ -104,3 +125,87 @@ const Selector = (props) => {
 };
 
 export default Selector;
+
+
+/*
+Product Information
+{
+  "id": 11,
+  "name": "Air Minis 250",
+  "slogan": "Full court support",
+  "description": "This optimized air cushion pocket reduces impact but keeps a perfect balance underfoot.",
+  "category": "Basketball Shoes",
+  "default_price": "0",
+  "features": [
+    {
+      "feature": "Sole",
+      "value": "Rubber"
+    },
+    {
+      "feature": "Material",
+      "value": "FullControlSkin"
+    },
+    // ...
+  ],
+}
+
+Product Syles
+{
+  "product_id": "1",
+  "results": [
+    {
+      "style_id": 1,
+      "name": "Forest Green & Black",
+      "original_price": "140",
+      "sale_price": "0",
+      "default?": true,
+      "photos": [
+        {
+          "thumbnail_url": "urlplaceholder/style_1_photo_number_thumbnail.jpg",
+          "url": "urlplaceholder/style_1_photo_number.jpg"
+        },
+        {
+          "thumbnail_url": "urlplaceholder/style_1_photo_number_thumbnail.jpg",
+          "url": "urlplaceholder/style_1_photo_number.jpg"
+        }
+      ],
+    "skus": {
+        "37": {
+                "quantity": 8,
+                "size": "XS"
+        },
+        "38": {
+                "quantity": 16,
+                "size": "S"
+        },
+        "39": {
+                "quantity": 17,
+                "size": "M"
+        },
+  {
+    "style_id": 2,
+    "name": "Desert Brown & Tan",
+    "original_price": "140",
+    "sale_price": "0",
+    "default?": false,
+    "photos": [
+        {
+          "thumbnail_url": "urlplaceholder/style_2_photo_number_thumbnail.jpg",
+          "url": "urlplaceholder/style_2_photo_number.jpg"
+        }
+      ],
+    "skus": {
+        "37": {
+                "quantity": 8,
+                "size": "XS"
+        },
+        "38": {
+                "quantity": 16,
+                "size": "S"
+        },
+        "39": {
+                "quantity": 17,
+                "size": "M"
+        },
+}
+  */
