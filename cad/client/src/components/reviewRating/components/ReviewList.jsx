@@ -7,7 +7,11 @@ const ReviewList = ({ fn }) => {
   return (
     <div className='reviewList'>
       {fn.activeReviews.map((review) => (
-        <ReviewTile key={review.review_id} review={review} />
+        <ReviewTile
+          key={review.review_id}
+          review={review}
+          setPictureStatus={fn.setPictureModelStatus}
+        />
       ))}
       <div className='reviewsButtonContainer'>
         <div className='reviewButtonRow'>

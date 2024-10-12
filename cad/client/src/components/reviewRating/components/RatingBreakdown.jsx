@@ -14,8 +14,16 @@ const RatingBreakdown = ({ fn, metaData }) => {
 
   useEffect(() => {
     if (metaData && metaData.recommended) {
-      const total = Number(metaData.recommended.false) + Number(metaData.recommended.true);
-      let percentage = Number(metaData.recommended.true / total);
+      let falseVote = 0;
+      let trueVote = 0;
+      if (metaData.recommended.true) {
+        trueVote = Number(metaData.recommended.true);
+      }
+      if (metaData.recommended.false) {
+        falseVote = Number(metaData.recommended.false);
+      }
+      const total = falseVote + trueVote;
+      let percentage = Number(trueVote / total);
       percentage = (percentage * 100).toFixed(0);
       setRecommendRate(percentage);
       const five = (
@@ -36,8 +44,10 @@ const RatingBreakdown = ({ fn, metaData }) => {
       const starCounts = Object.values(metaData.ratings);
       let totalStars = 0;
       starCounts.forEach((val, index) => {
-        const workingTotal = val * (index + 1);
-        totalStars += Number(workingTotal);
+        if (val) {
+          const workingTotal = val * (index + 1);
+          totalStars += Number(workingTotal);
+        }
       });
       const average = (totalStars / total).toFixed(1);
       setRatingAverage(average);

@@ -5,7 +5,7 @@ import axios from 'axios';
 import ReviewList from './components/ReviewList';
 import ProductBreakdown from './components/ProductBreakdown';
 import RatingBreakdown from './components/RatingBreakdown';
-import ReviewModel from './components/ReviewModel';
+import ReviewPictureModel from './components/ReviewPictureModel';
 import SortOptions from './components/SortOptions';
 import ProductContext from '../../ProductContext';
 
@@ -18,7 +18,8 @@ const Rating = () => {
   // eslint-disable-next-line no-unused-vars
   const [reviewFilters, setReviewFilters] = useState([]);
   // eslint-disable-next-line no-unused-vars
-  const [modelStatus, setModelStatus] = useState('closed');
+  // closed or showPicture, imageUrl, scrollTop;
+  const [pictureModelStatus, setPictureModelStatus] = useState(['closed', '', 0]);
 
   const TOKEN = process.env.GIT_TOKEN;
   const BASE_URL = process.env.API_BASE_URL;
@@ -69,6 +70,7 @@ const Rating = () => {
   }, [BASE_URL, CAMPUS, TOKEN, productId]);
 
   const fn = {
+    setPictureModelStatus,
     productId,
     activeReviews,
     setActiveReviews,
@@ -76,7 +78,16 @@ const Rating = () => {
   };
 
   return (
-    <div style={{ padding: '1rem', width: '66%', margin: 'auto' }}>
+    <div style={{
+      padding: '1rem',
+      width: '66%',
+      margin: 'auto',
+    }}
+    >
+      <ReviewPictureModel
+        status={pictureModelStatus}
+        setStatus={setPictureModelStatus}
+      />
       <h3>RATINGS & REVIEWS</h3>
       <div>
         <div className='rating-container'>
@@ -90,7 +101,7 @@ const Rating = () => {
           </div>
         </div>
       </div>
-      <ReviewModel status={modelStatus} />
+
     </div>
   );
 };
