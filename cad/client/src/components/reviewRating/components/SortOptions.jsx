@@ -16,7 +16,7 @@ const ReviewSorter = ({ options }) => {
   const [selectValue, setSelectValue] = useState(options[0]);
 
   return (
-    <label style={{ fontSize: '1.125rem' }}>
+    <label htmlFor='ratingSelect' style={{ fontSize: '1.125rem' }}>
       &nbsp; sorted by
       <select
         style={{

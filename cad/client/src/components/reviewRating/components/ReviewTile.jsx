@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 
-const ReviewTile = ({ review }) => {
+const ReviewTile = ({ review, setPictureStatus }) => {
   const [expanded, setExpanded] = useState(false);
 
   // single object to pass multiple props with as needed
@@ -59,9 +59,7 @@ const ReviewTile = ({ review }) => {
           className='picturesContainer'
         >
           {review.photos.map((img) => (
- review-list
-            <ReviewImageThumbnail img={img} key={img.url} />
-
+            <ReviewImageThumbnail img={img} key={img.url} setPictureStatus={setPictureStatus} />
           ))}
         </div>
       </div>
@@ -179,22 +177,22 @@ const ExpandedBody = ({ fn }) => {
   );
 };
 
-const ReviewImageThumbnail = ({ img }) => {
-  //
+const ReviewImageThumbnail = ({ img, setPictureStatus }) => {
+  const handleClick = () => {
+    const top = document.body.scrollTop;
+    setPictureStatus(['showPicture', img.url, top]);
+  };
+
   return (
+
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
     <div
+      onClick={() => { handleClick(); }}
+      className='reviewImageThumbnail'
       style={{
         background: `url(${img.url})`, backgroundSize: '4rem 4rem', width: '4rem', height: '4rem', margin: '.5rem',
       }}
-    >
-      <img
-        className='reviewImageThumbnail'
-        alt=''
-        src={img.url}
-        width='3rem'
-        height='3rem'
-      />
-    </div>
+    />
   );
 };
 
@@ -231,23 +229,18 @@ const Recommend = () => {
 const FeedbackFooter = ({ review }) => {
   const [helpfulness, setHelpfulness] = useState(review.helpfulness);
   const [clicked, setClicked] = useState(false);
-  const [notHelpful, setNotHelpful] = useState(0);
-  const [clickedNo, setClickedNo] = useState(false);
+  const [reported, setReported] = useState('Report');
+
 
   const handleClick = () => {
-    if (clicked === false && clickedNo === false) {
+    if (clicked === false) {
       setHelpfulness(helpfulness + 1);
       setClicked(true);
-      setClickedNo(true);
     }
   };
 
   const handleNoClick = () => {
-    if (clicked === false && clickedNo === false) {
-      setNotHelpful(notHelpful + 1);
-      setClicked(true);
-      setClickedNo(true);
-    }
+    setReported('Reported');
   };
 
   return (
@@ -262,7 +255,6 @@ const FeedbackFooter = ({ review }) => {
         >
           Yes
         </button>
-        {' '}
         {`(${helpfulness})`}
         {' '}
       </small>
@@ -274,11 +266,8 @@ const FeedbackFooter = ({ review }) => {
           onClick={() => handleNoClick()}
           type='button'
         >
-          No
+          {reported}
         </button>
-        {' '}
-        {`(${notHelpful})`}
-        {' '}
       </small>
     </div>
   );
