@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-const ReviewPictureModel = ({ status, setStatus }) => {
+
+const ReviewPictureModel = ({ componentProps }) => {
+
   // status contains 3 variables in an array:
   // the first is whatever className you want to use for
   // conditional rendering. The second is for the imgURL
@@ -12,11 +14,13 @@ const ReviewPictureModel = ({ status, setStatus }) => {
   // in as the 3rd index in your status array
   // I can also pass along css things needed to really make
   // this thing work.
-
+  
+  const url = componentProps[0];
+  const top = componentProps[1];
   return (
     <div
-      style={{ top: `${status[2]}` }}
-      className={`${status[0]}`}
+      style={{ top: `${top}` }}
+
     >
       <div
         className='modelPictureContainer'
@@ -24,15 +28,8 @@ const ReviewPictureModel = ({ status, setStatus }) => {
         <img
           className='innerModelPicture'
           alt=''
-          src={status[1]}
+          src={url}
         />
-        <button
-          onClick={() => { setStatus(['closed', '', 0]); }}
-          className='reviewModelClose'
-          type='button'
-        >
-          X
-        </button>
       </div>
     </div>
   );
