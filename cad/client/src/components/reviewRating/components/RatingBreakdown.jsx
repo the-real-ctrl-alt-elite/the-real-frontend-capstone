@@ -41,7 +41,13 @@ const RatingBreakdown = ({ fn, metaData }) => {
       const one = (
         Math.round((Number(metaData.ratings['1']) / total) * 100 * 4) / 4
       ).toFixed(2);
-      const starCounts = Object.values(metaData.ratings);
+      const starCounts = [
+        metaData.ratings['1'],
+        metaData.ratings['2'],
+        metaData.ratings['3'],
+        metaData.ratings['4'],
+        metaData.ratings['5'],
+      ];
       let totalStars = 0;
       starCounts.forEach((val, index) => {
         if (val) {
