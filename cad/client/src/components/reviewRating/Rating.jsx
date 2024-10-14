@@ -103,7 +103,11 @@ const Rating = () => {
           closeModal={closeModal}
         />
         )}
-      <h3>RATINGS & REVIEWS</h3>
+      <h3
+        style={{ color: 'rgba(82,82,82)' }}
+      >
+        RATINGS & REVIEWS
+      </h3>
       <div>
         <div className='rating-container'>
           <div className='reviewsLeft'>

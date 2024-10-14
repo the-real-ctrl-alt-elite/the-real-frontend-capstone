@@ -29,10 +29,17 @@ const ModalBackground = ({
   const usedFontColor = fontColor || 'white';
   const usedInnerPadding = innerPadding || '2rem';
 
+  const handleClick = (e) => {
+    if (e.target === document.getElementById('modalBackground')) {
+      closeModal();
+    }
+  }
+
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
-      onClick={() => { closeModal(); }}
+      id='modalBackground'
+      onClick={(e) => { handleClick(e); }}
       style={{
         position: 'fixed',
         top: `${usedTop}`,

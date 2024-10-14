@@ -11,6 +11,10 @@ i:before {
   /* gap: 1rem; */
 }
 
+.rating-container>* {
+  color: rgba(82,82,82);
+}
+
 .star-wrapper {
   position: relative;
   display: inline-block;
@@ -25,7 +29,7 @@ i:before {
   top: 0;
   left: 0;
   z-index: 1;
-  text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black;
+  text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px rgba(82,82,82);
 }
 
 .star-front {
@@ -165,7 +169,7 @@ a {
 }
 
 .picturesContainer>div {
-  box-shadow: 0 0 5px 2px black;
+  /* box-shadow: 0 0 5px 2px black; */
   box-sizing: border-box;
   border-radius: 10px;
 }
