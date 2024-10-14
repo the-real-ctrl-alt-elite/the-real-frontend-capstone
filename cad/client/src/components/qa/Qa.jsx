@@ -1,8 +1,32 @@
 import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import axios from 'axios';
 import QuestionsList from './QuestionsList';
 import MoreQuestions from './MoreQuestions';
 
+
+
+const TOKEN = process.env.GIT_TOKEN;
+const BASE_URL = process.env.API_BASE_URL;
+const CAMPUS_CODE = process.env.CAMPUS_CODE;
+
+console.log('baseURL: ', BASE_URL, ' ', TOKEN, ' ', CAMPUS_CODE);
 const Qa = () => {
+  const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions';
+  const [qnaData, setQnaData] = useState({});
+  console.log('url is: ', url);
+  axios
+    .get(url, {
+      headers: {
+        Authorization: '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',
+      },
+      params: {
+        product_id: 40345,
+      },
+    })
+    .then((result) => console.log('result of axios get: ', result))
+    .catch((err) => console.log('error getting the full QNA: ', err));
+
   const qNaData = {
     product_id: '5',
     results: [{
@@ -19,6 +43,14 @@ const Qa = () => {
           date: '2018-08-18T00:00:00.000Z',
           answerer_name: 'Seller',
           helpfulness: 4,
+          photos: ['jpg', 'jpg', 'jpg'],
+        },
+        99: {
+          id: 99,
+          body: 'FakeSeller should be after seller even though FakeSeller is rated higher',
+          date: '2018-08-18T00:00:00.000Z',
+          answerer_name: 'FakeSeller',
+          helpfulness: 6,
           photos: ['jpg', 'jpg', 'jpg'],
         },
       },
@@ -145,14 +177,21 @@ const Qa = () => {
     }],
   };
 
-  const qnas = qNaData.results.slice(0, 4);
-  qnas.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
+  const fullList = qNaData.results;
+  fullList.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
+
+  const [qnas, setQnas] = useState(fullList.slice(0, 4));
+  const handleClickMoreQuestion = () => {
+    setQnas(fullList);
+  };
+
 
   return (
     <div className='qa-container'>
       QUESTIONS & ANSWERS
-      <div><QuestionsList qnas={qnas} /></div>
-      <MoreQuestions />
+      <div>{qnas.length !== 0 && <QuestionsList qnas={qnas} />}</div>
+      <button type='button' onClick={handleClickMoreQuestion}>{qnas.length !== 0 && <MoreQuestions />}</button>
+      <button type='button'>Add A Question</button>
     </div>
   );
 };

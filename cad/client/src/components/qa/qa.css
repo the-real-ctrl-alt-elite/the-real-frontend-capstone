@@ -1,0 +1,12 @@
+.answer-header {
+  font-weight: bold;
+}
+
+.question-body {
+  font-weight: bold;
+}
+
+.load-more-answers {
+  cursor: pointer;
+  color: rgba(48, 45, 45, 0.901)
+}
