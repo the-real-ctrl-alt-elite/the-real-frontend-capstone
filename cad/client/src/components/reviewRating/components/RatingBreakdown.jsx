@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { ReviewStars } from './ReviewTile';
 import ProductContext from '../../../ProductContext';
 
-const RatingBreakdown = ({ fn, metaData }) => {
+const RatingBreakdown = ({ metaData }) => {
   const { productId } = useContext(ProductContext);
   const [ratingAverage, setRatingAverage] = useState(0);
   const [fiveStar, setFiveStar] = useState(0);
@@ -26,6 +26,7 @@ const RatingBreakdown = ({ fn, metaData }) => {
       let percentage = Number(trueVote / total);
       percentage = (percentage * 100).toFixed(0);
       setRecommendRate(percentage);
+
       const five = (
         Math.round((Number(metaData.ratings['5']) / total) * 100 * 4) / 4
       ).toFixed(2);
@@ -48,6 +49,7 @@ const RatingBreakdown = ({ fn, metaData }) => {
         metaData.ratings['4'],
         metaData.ratings['5'],
       ];
+
       let totalStars = 0;
       starCounts.forEach((val, index) => {
         if (val) {
@@ -82,7 +84,10 @@ const RatingBreakdown = ({ fn, metaData }) => {
       </small>
       <div className='ratingBreakdownList'>
         <div className='ratingRow'>
-          <button className='button-link' type='button'>
+          <button
+            className='button-link'
+            type='button'
+          >
             5 stars
           </button>
           <div

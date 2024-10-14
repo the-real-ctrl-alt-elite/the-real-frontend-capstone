@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 
-const ReviewTile = ({ review, setPictureStatus }) => {
+const ReviewTile = ({ review, setPictureStatus, setModalStatus }) => {
   const [expanded, setExpanded] = useState(false);
 
   // single object to pass multiple props with as needed
@@ -59,7 +59,7 @@ const ReviewTile = ({ review, setPictureStatus }) => {
           className='picturesContainer'
         >
           {review.photos.map((img) => (
-            <ReviewImageThumbnail img={img} key={img.url} setPictureStatus={setPictureStatus} />
+            <ReviewImageThumbnail img={img} key={img.url} setPictureStatus={setPictureStatus} setModalStatus={setModalStatus} />
           ))}
         </div>
       </div>
@@ -177,10 +177,11 @@ const ExpandedBody = ({ fn }) => {
   );
 };
 
-const ReviewImageThumbnail = ({ img, setPictureStatus }) => {
+const ReviewImageThumbnail = ({ img, setPictureStatus, setModalStatus }) => {
   const handleClick = () => {
     const top = document.body.scrollTop;
-    setPictureStatus(['showPicture', img.url, top]);
+    setPictureStatus([img.url, top]);
+    setModalStatus(true);
   };
 
   return (
@@ -190,7 +191,7 @@ const ReviewImageThumbnail = ({ img, setPictureStatus }) => {
       onClick={() => { handleClick(); }}
       className='reviewImageThumbnail'
       style={{
-        background: `url(${img.url})`, backgroundSize: '4rem 4rem', width: '4rem', height: '4rem', margin: '.5rem',
+        background: `url(${img.url})`, backgroundSize: '4rem 4rem', width: '4rem', height: '4rem', margin: '.5rem', cursor: 'pointer', boxShadow: '2px 4px 2px black',
       }}
     />
   );
@@ -230,7 +231,6 @@ const FeedbackFooter = ({ review }) => {
   const [helpfulness, setHelpfulness] = useState(review.helpfulness);
   const [clicked, setClicked] = useState(false);
   const [reported, setReported] = useState('Report');
-
 
   const handleClick = () => {
     if (clicked === false) {

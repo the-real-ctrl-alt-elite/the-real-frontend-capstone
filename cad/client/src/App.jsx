@@ -23,10 +23,16 @@ const App = () => {
         <Related />
         <Comparison />
       </div>
-      <div className='qa-wrapper'>
+      <div
+        id='Qa'
+        className='qa-wrapper'
+      >
         <Qa />
       </div>
-      <div className='rating-review-wrapper'>
+      <div
+        id='ratings'
+        className='rating-review-wrapper'
+      >
         <Rating />
       </div>
     </div>
