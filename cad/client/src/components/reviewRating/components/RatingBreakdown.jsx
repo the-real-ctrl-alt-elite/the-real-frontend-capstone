@@ -26,37 +26,30 @@ const RatingBreakdown = ({ metaData }) => {
       let percentage = Number(trueVote / total);
       percentage = (percentage * 100).toFixed(0);
       setRecommendRate(percentage);
-      let five = 0;
-      let four = 0;
-      let three = 0;
-      let two = 0;
-      let one = 0;
-      if (metaData.ratings['5']) {
-        five = (
-          Math.round((Number(metaData.ratings['5']) / total) * 100 * 4) / 4
-        ).toFixed(2);
-      }
-      if (metaData.ratings['4']) {
-        four = (
-          Math.round((Number(metaData.ratings['4']) / total) * 100 * 4) / 4
-        ).toFixed(2);
-      }
-      if (metaData.ratings['3']) {
-        three = (
-          Math.round((Number(metaData.ratings['3']) / total) * 100 * 4) / 4
-        ).toFixed(2);
-      }
-      if (metaData.ratings['2']) {
-        two = (
-          Math.round((Number(metaData.ratings['2']) / total) * 100 * 4) / 4
-        ).toFixed(2);
-      }
-      if (metaData.ratings['1']) {
-        one = (
-          Math.round((Number(metaData.ratings['1']) / total) * 100 * 4) / 4
-        ).toFixed(2);
-      }
-      const starCounts = Object.values(metaData.ratings);
+
+      const five = (
+        Math.round((Number(metaData.ratings['5']) / total) * 100 * 4) / 4
+      ).toFixed(2);
+      const four = (
+        Math.round((Number(metaData.ratings['4']) / total) * 100 * 4) / 4
+      ).toFixed(2);
+      const three = (
+        Math.round((Number(metaData.ratings['3']) / total) * 100 * 4) / 4
+      ).toFixed(2);
+      const two = (
+        Math.round((Number(metaData.ratings['2']) / total) * 100 * 4) / 4
+      ).toFixed(2);
+      const one = (
+        Math.round((Number(metaData.ratings['1']) / total) * 100 * 4) / 4
+      ).toFixed(2);
+      const starCounts = [
+        metaData.ratings['1'],
+        metaData.ratings['2'],
+        metaData.ratings['3'],
+        metaData.ratings['4'],
+        metaData.ratings['5'],
+      ];
+
       let totalStars = 0;
       starCounts.forEach((val, index) => {
         if (val) {
