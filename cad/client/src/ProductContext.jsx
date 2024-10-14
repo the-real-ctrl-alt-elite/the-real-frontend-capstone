@@ -8,6 +8,7 @@ const CAMPUS_CODE = process.env.CAMPUS_CODE;
 
 export const ProductProvider = ({ children }) => {
   const [productId, setProductId] = useState(null);
+  const [rrCount, setrrCount] = useState({ ratingAvg: '', reviewCount: '' });
 
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
@@ -26,10 +27,20 @@ export const ProductProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        console.log('Context:', response.data.id)
         setProductId(response.data.id);
       })
-      .catch((err) => console.error('error in context', err))
+      .catch((err) => console.error('error in context', err));
+  };
+  const newProduct = (id) => {
+    setProductId(id);
+  }
+
+  const updateRRCount = (newRatingAvg, newReviewCount) => {
+    setrrCount(prevState => ({
+      ...prevState,
+      ratingAvg: newRatingAvg,
+      reviewCount: newReviewCount
+    }));
   };
 
   useEffect(() => {
@@ -37,7 +48,7 @@ export const ProductProvider = ({ children }) => {
   }, []);
 
   return (
-    <ProductContext.Provider value={{ productId, setProductId }}>
+    <ProductContext.Provider value={{ productId, setProductId, newProduct, updateRRCount }}>
       {children}
     </ProductContext.Provider>
   );
