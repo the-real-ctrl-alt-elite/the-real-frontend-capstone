@@ -25,7 +25,7 @@ const ModalFrame = ({
         zIndex: '3',
       }}
     >
-      {component(componentProps)}
+      {component({ componentProps })}
       <button
         type='button'
         onClick={() => closeModal()}
