@@ -45,7 +45,7 @@ const ReviewTile = ({ review, setPictureStatus, setModalStatus }) => {
           </small>
         </div>
       </div>
-      <div style={{ fontWeight: 'bold' }} className='reviewSummary'>
+      <div style={{ fontWeight: 'bold', color: 'rgba(82,82,82)' }} className='reviewSummary'>
         {review.summary.substring(0, 60)}
       </div>
       <div style={{ height: '55%' }} className='reviewBody'>
@@ -55,7 +55,7 @@ const ReviewTile = ({ review, setPictureStatus, setModalStatus }) => {
           <CollapsedBody fn={fn} />
         )}
         <div
-          style={{ display: 'flex', gap: '4px' }}
+          style={{ display: 'flex', gap: '1rem', margin: '.5rem 0' }}
           className='picturesContainer'
         >
           {review.photos.map((img) => (
@@ -114,9 +114,9 @@ const Star = ({ percentage }) => {
 const CollapsedBody = ({ fn }) => {
   //
   return (
-    <div className='collapsedReviewBody'>
+    <div className='collapsedReviewBody' style={{ color: 'rgba(82,82,82)' }}>
       <div
-        style={{ fontWeight: 'bold' }}
+        style={{ fontWeight: 'bold', color: 'rgba(82,82,82)' }}
       >
         {fn.review.summary.length > 60
           ? `...${fn.review.summary.substring(60)}`
@@ -127,6 +127,7 @@ const CollapsedBody = ({ fn }) => {
         <small>
           ...
           <button
+            style={{ color: 'rgba(82,82,82)' }}
             type='button'
             className='button-link small'
             onClick={() => {
@@ -148,9 +149,10 @@ const ExpandedBody = ({ fn }) => {
   return (
     <div
       className='expandedReviewBody'
+      style={{ color: 'rgba(82,82,82)' }}
     >
       <div
-        style={{ fontWeight: 'bold' }}
+        style={{ fontWeight: 'bold', color: 'rgba(82,82,82)' }}
       >
         {fn.review.summary.length > 60
           ? `...${fn.review.summary.substring(60)}`
@@ -189,11 +191,18 @@ const ReviewImageThumbnail = ({ img, setPictureStatus, setModalStatus }) => {
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
     <div
       onClick={() => { handleClick(); }}
-      className='reviewImageThumbnail'
       style={{
-        background: `url(${img.url})`, backgroundSize: '4rem 4rem', width: '4rem', height: '4rem', margin: '.5rem', cursor: 'pointer', boxShadow: '2px 4px 2px black',
+        maxHeight: '5rem', maxWidth: '5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
       }}
-    />
+    >
+      <img
+        alt=''
+        src={img.url}
+        style={{
+          maxHeight: '4rem', maxWidth: '4rem', objectFit: 'contain', boxShadow: '4px 2px 5px 2px black',
+        }}
+      />
+    </div>
   );
 };
 
@@ -208,9 +217,10 @@ const Response = ({ response }) => {
         backgroundColor: 'rgba(125,155,155,.33',
         borderRadius: '1em',
         fontSize: '14px',
+        color: 'rgba(82,82,82)',
       }}
     >
-      <div style={{ fontWeight: '1000', fontSize: '12px' }}>RESPONSE FROM SELLER </div>
+      <div style={{ fontWeight: '1000', fontSize: '12px', color: 'rgba(82,82,82)' }}>RESPONSE FROM SELLER </div>
       {response}
     </div>
   );
@@ -244,7 +254,7 @@ const FeedbackFooter = ({ review }) => {
   };
 
   return (
-    <div style={{ position: 'relative', bottom: '0' }} className='reviewFooter'>
+    <div style={{ position: 'relative', bottom: '0', padding: '0.5rem' }} className='reviewFooter'>
       <small> Helpful? </small>
       <small>
         {' '}
