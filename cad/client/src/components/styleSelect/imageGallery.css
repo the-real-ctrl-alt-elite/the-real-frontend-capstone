@@ -1,50 +1,46 @@
 .main-image-container {
-  width: 466.66px;
+  max-width: 550px;
   height: 700px;
   object-fit: cover;
   object-position: center;
   box-shadow:
     #000000 0px 20px 30px -10px,
     #80ff0086 0px 5px 15px -5px;
-
-
-
 }
 
 .image-container {
   display: flex;
-
+  justify-content: space-evenly;
+  width: 50%;
 }
 
 .thumbnails-gallery {
+  margin: 30px 6px 0 0;
+  cursor: pointer;
+}
+
+.thumbnail-col {
   display: flex;
   flex-direction: column;
-  margin: 30px 60px 0 0;
-  cursor: pointer;
+}
 
-
-
+.thumbnail-row {
+  display: flex;
 }
 
 .thumbnails {
-  height: 55px;
-  width: 40px;
+  height: 80px;
+  width: 60px;
+  object-fit: cover;
+  object-position: center;
   border-radius: 10px;
-  margin-bottom: 5px;
+  margin: 8px 8px;
   border: black solid 1px;
   box-shadow:
     #070707 0px 20px 30px -10px,
     #80ff00b0 0px 5px 10px -5px;
-
-
-
 }
 
 .thumbnails:hover {
   outline: double 5px rgba(128, 255, 0);
 }
-
-/* .thumbnails-gallery, .main-image-container {
-  position: sticky;
-  top: 0;
-} */

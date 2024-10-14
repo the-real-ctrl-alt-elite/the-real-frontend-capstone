@@ -1,24 +1,151 @@
-.selector-container {
-  border: inset chartreuse 2px;
-  padding: 20px;
-
-height: 1000px;
-  position: relative;
+.selector-container-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .selector-advertisement {
-  color: white;
   text-align: center;
-  padding: 0 0 20px 0;
-}
-
-.selector-components{
-  /* sticky attempt */
-  position: relative;
-}
-
-
-.gallery {
+  height: 60px;
+  background-color: orange;
+  width: 100%;
+  margin: 0;
   position: sticky;
   top: 0;
+  z-index: 1000;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.a-tag-ad {
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selector-components {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+}
+
+.hr-class {
+  height: 2px;
+  background-color: black;
+  border-radius: 20px;
+  text-align: center;
+  margin: 5px 0;
+}
+
+.selector-functional-components {
+  width: 50%;
+  display: flex;
+}
+
+.info-choices-container {
+  width: 50%;
+
+}
+
+.purchase-div {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-name {
+  font-size: 2.5em;
+}
+
+.category {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+  font-weight: 800;
+  margin-top: 5px;
+
+}
+
+.ratings-container {
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+
+}
+
+.sel-rating {}
+.stars-div  {
+  font-size: large;
+  display: inline-block;
+  color: goldenrod;
+}
+.sel-stars {
+  font-size: large;
+  display: inline-block;
+  background: linear-gradient(to right, goldenrod 60%, white 60%);
+  background-clip: text;
+  color: transparent;
+}
+
+.total-rat {
+  text-decoration: none;
+}
+
+.sel-reviews {
+  text-decoration: none;
+}
+
+.price-div {
+  font-weight: 600;
+}
+
+.price {
+  font-size: x-large;
+  margin-right: 2px;
+
+}
+
+.checkout-container {
+  width: 70%;
+  height: 90%;
+  padding: 8px;
+  border-radius: 10px;
+  border: rgba(127, 127, 127, 0.498) solid 0.5px;
+  box-shadow:
+    #070707 0px 20px 30px -10px,
+    #80ff00b0 0px 5px 10px -5px;
+}
+
+.sale-now {
+  animation: colorChange infinite .5s linear;
+}
+
+@keyframes colorChange {
+  0% {
+    color: #ff0000;
+  }
+
+  25% {
+    color: #ff00e6;
+  }
+
+  50% {
+    color: #0033ff;
+  }
+
+  75% {
+    color: #00ff15;
+  }
+
+  100% {
+    color: #fbff00;
+  }
 }

@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { ReviewTile } from "./ReviewTile.jsx";
+import React, { useEffect, useState } from 'react';
+import { ReviewTile } from './ReviewTile';
 
-
-
-const ReviewList = ({fn}) => {
-
-
-  //prop drill single object baby!
-
+const ReviewList = ({ fn }) => {
+  // prop drill single object baby!
 
   return (
-    <div className="reviewList">
+    <div className='reviewList'>
       {fn.activeReviews.map((review) => (
-        <ReviewTile key={review.review_id} review={review} />
+        <ReviewTile
+          key={review.review_id}
+          review={review}
+          setPictureStatus={fn.setPictureModelStatus}
+          setModalStatus={fn.setModalStatus}
+        />
       ))}
-      <div className="reviewsButtonContainer">
-        <div className="reviewButtonRow">
-          {fn.activeReviews.length < fn.reviews.length ? <MoreReviews fn={fn} /> : ""}
+      <div className='reviewsButtonContainer'>
+        <div className='reviewButtonRow'>
+          {fn.activeReviews.length < fn.reviews.length ? <MoreReviews fn={fn} /> : ''}
           <AddReview />
         </div>
       </div>
@@ -28,7 +28,7 @@ export default ReviewList;
 
 const MoreReviews = ({ fn }) => {
   const handleClick = () => {
-    let length = fn.activeReviews.length;
+    let { length } = fn.activeReviews;
     length += 2;
     fn.setActiveReviews(fn.reviews.slice(0, length));
   };
@@ -36,7 +36,8 @@ const MoreReviews = ({ fn }) => {
   return (
     <div>
       <button
-        className="reviewFunctionalityButton"
+        type='button'
+        className='reviewFunctionalityButton'
         onClick={() => {
           handleClick();
         }}
@@ -51,7 +52,7 @@ const AddReview = () => {
   //
   return (
     <div>
-      <button className="reviewFunctionalityButton">ADD REVIEW +</button>
+      <button className='reviewFunctionalityButton' type='button'>ADD REVIEW +</button>
     </div>
   );
 };

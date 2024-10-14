@@ -189,9 +189,16 @@ const Qa = () => {
   return (
     <div className='qa-container'>
       QUESTIONS & ANSWERS
+<<<<<<< HEAD
       <div>{qnas.length !== 0 && <QuestionsList qnas={qnas} />}</div>
       <button type='button' onClick={handleClickMoreQuestion}>{qnas.length !== 0 && <MoreQuestions />}</button>
       <button type='button'>Add A Question</button>
+=======
+      <div>
+        <QuestionsList qnas={qnas} />
+      </div>
+      <MoreQuestions />
+>>>>>>> 2c01d6dff079fdaf31c2495e02581a43fe110bc3
     </div>
   );
 };

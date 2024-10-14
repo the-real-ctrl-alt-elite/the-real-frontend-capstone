@@ -2,6 +2,10 @@ i:before {
   display: inline
 }
 
+.img {
+  object-fit: contain;
+}
+
 .rating-container {
   display: flex;
   /* gap: 1rem; */
@@ -10,8 +14,8 @@ i:before {
 .star-wrapper {
   position: relative;
   display: inline-block;
-  width: 1em;
-  height: 1em;
+  width: 1rem;
+  height: 1rem;
   margin: 0 .125rem
 }
 
@@ -25,7 +29,7 @@ i:before {
 }
 
 .star-front {
-  color: black;
+  color: #f77f00;
   position: absolute;
   top: 0;
   left: 0;
@@ -36,11 +40,11 @@ i:before {
 
 .reviewFooter {
   display: flex;
-  gap: 4px
+  gap: .25rem;
 }
 
 .reviewFooter>small {
-  font-size: 11px;
+  font-size: .6875rem;
 }
 
 .reviewFunctionalityButton {
@@ -62,11 +66,13 @@ a {
 }
 
 .collapsedReviewBody, .expandedReviewBody {
-  font-size: 14px;
+  font-size: .875rem;
+  overflow-wrap: break-word;
+  padding: .5rem 0;
 }
 
 .reviewSortOptionsHeader {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -90,31 +96,33 @@ a {
 }
 
 .ratingBreakdownSummary>h1 {
-  font-size: 48px;
+  font-size: 3rem;
   letter-spacing: 2px;
 }
 
 .ratingBreakdownList {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  /* width: 80%; */
   gap: .5rem;
 }
 
 .ratingRow {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
+  margin: .25rem 0;
 }
 
-.ratingRow>a {
+.ratingRow>button {
   width: 25%;
-  color: black
+  color: black;
+  cursor: pointer;
 }
 
 .ratingsBar {
   height: .5rem;
-  width: 75%;
+  width: 80%;
 }
 
 .reviewsLeft {
@@ -122,9 +130,12 @@ a {
 }
 
 .reviewsRight {
-  max-height: 100vh;
-  overflow-y: scroll;
   width: 75%
+}
+
+.reviewList {
+  max-height: 95vh;
+  overflow-y: scroll;
 }
 
 .reviewsLeft, .reviewsRight {
@@ -133,17 +144,109 @@ a {
 }
 
 .rating-review-wrapper {
-  min-width: 40vw;
+  min-width: 72.25rem;
 }
 
 .button-link {
   border: none;
   background: none;
   border-bottom: 1px solid black;
-  width: auto;
   cursor: pointer;
   margin: 0 .25rem;
+  z-index: 10;
 }
+
+.button-link:hover {
+  cursor: pointer;
+}
+
 .button-link.small {
-  font-size: 10px
+  font-size: 0.625rem;
+}
+
+.picturesContainer>div {
+  box-shadow: 0 0 5px 2px black;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.closed {
+  display: none;
+}
+
+.showPicture {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(22,22,22,0.5);
+
+}
+
+.modelPictureContainer {
+  background: rgba(22,22,22,1);
+  margin: auto;
+  width: auto;
+  z-index: 4;
+  padding: .55rem;
+  border: 1px solid rgba(255,255,255,.33);
+  box-shadow: 0 0 10px 10px rgba(0,0,0,.5);
+  border-radius: 1rem;
+  display: flex;
+  justify-content: end;
+
+}
+
+.innerModelPicture {
+  max-width: 50vw;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 1rem;
+}
+
+.reviewModelClose {
+  position: absolute;
+  padding: .25rem;
+  border-radius: 1rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: .25rem;
+  background: rgba(0, 0, 0, 0.33);
+  border: none;
+  color:white;
+  cursor: pointer;
+
+}
+
+.productBreakdownBlock {
+  width: 100%;
+  margin: .5rem 0;
+}
+
+.productBreakdownBlock>small {
+  font-size: 13px;
+}
+
+.productBreakdownRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.productBreakdownRow>small {
+  font-size: 11px;
+}
+
+.ratingTriangle {
+  font-size: .8675rem;
+}
+
+.productBreakdownThird {
+  width: 33%;
+  height: .5rem;
+  background: gray;
 }
