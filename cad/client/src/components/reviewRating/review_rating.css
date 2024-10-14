@@ -114,9 +114,10 @@ a {
   margin: .25rem 0;
 }
 
-.ratingRow>a {
+.ratingRow>button {
   width: 25%;
-  color: black
+  color: black;
+  cursor: pointer;
 }
 
 .ratingsBar {
@@ -150,10 +151,15 @@ a {
   border: none;
   background: none;
   border-bottom: 1px solid black;
-  width: auto;
   cursor: pointer;
   margin: 0 .25rem;
+  z-index: 10;
 }
+
+.button-link:hover {
+  cursor: pointer;
+}
+
 .button-link.small {
   font-size: 0.625rem;
 }
@@ -182,16 +188,17 @@ a {
 }
 
 .modelPictureContainer {
-  background: rgba(22,22,22,0.9);
+  background: rgba(22,22,22,1);
   margin: auto;
   width: auto;
   z-index: 4;
-  padding: 1rem;
+  padding: .55rem;
   border: 1px solid rgba(255,255,255,.33);
   box-shadow: 0 0 10px 10px rgba(0,0,0,.5);
   border-radius: 1rem;
   display: flex;
   justify-content: end;
+
 }
 
 .innerModelPicture {
@@ -208,7 +215,7 @@ a {
   width: 1.75rem;
   height: 1.75rem;
   margin: .25rem;
-  background: rgba(0,0,0,0.33);
+  background: rgba(0, 0, 0, 0.33);
   border: none;
   color:white;
   cursor: pointer;

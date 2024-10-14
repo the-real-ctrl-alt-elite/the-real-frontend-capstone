@@ -6,6 +6,7 @@ import ReviewList from './components/ReviewList';
 import ProductBreakdown from './components/ProductBreakdown';
 import RatingBreakdown from './components/RatingBreakdown';
 import ReviewPictureModel from './components/ReviewPictureModel';
+import ModalBackground from './components/ModalBackground';
 import SortOptions from './components/SortOptions';
 import ProductContext from '../../ProductContext';
 
@@ -19,7 +20,9 @@ const Rating = () => {
   const [reviewFilters, setReviewFilters] = useState([]);
   // eslint-disable-next-line no-unused-vars
   // closed or showPicture, imageUrl, scrollTop;
-  const [pictureModelStatus, setPictureModelStatus] = useState(['closed', '', 0]);
+  // pass URL to pictureModelStatus
+  const [pictureModelStatus, setPictureModelStatus] = useState(['', 0]);
+  const [modalStatus, setModalStatus] = useState(false);
 
   const TOKEN = process.env.GIT_TOKEN;
   const BASE_URL = process.env.API_BASE_URL;
@@ -70,11 +73,18 @@ const Rating = () => {
   }, [BASE_URL, CAMPUS, TOKEN, productId]);
 
   const fn = {
-    setPictureModelStatus,
-    productId,
     activeReviews,
     setActiveReviews,
+    modalStatus,
+    setModalStatus,
+    setPictureModelStatus,
+    productId,
     reviews,
+  };
+
+  const closeModal = () => {
+    setModalStatus(false);
+    setPictureModelStatus(['', 0]);
   };
 
   return (
@@ -84,16 +94,21 @@ const Rating = () => {
       margin: 'auto',
     }}
     >
-      <ReviewPictureModel
-        status={pictureModelStatus}
-        setStatus={setPictureModelStatus}
-      />
+      {modalStatus === true
+        && (
+        <ModalBackground
+          component={ReviewPictureModel}
+          componentProps={pictureModelStatus}
+          top={pictureModelStatus[1]}
+          closeModal={closeModal}
+        />
+        )}
       <h3>RATINGS & REVIEWS</h3>
       <div>
         <div className='rating-container'>
           <div className='reviewsLeft'>
-            <RatingBreakdown id={productId} metaData={metaData} />
-            <ProductBreakdown fn={fn} metaData={metaData} />
+            {reviews.length && <RatingBreakdown id={productId} metaData={metaData} />}
+            {reviews.length && <ProductBreakdown fn={fn} metaData={metaData} />}
           </div>
           <div className='reviewsRight'>
             <SortOptions fn={fn} />

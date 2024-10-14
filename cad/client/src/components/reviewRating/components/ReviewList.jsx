@@ -11,6 +11,7 @@ const ReviewList = ({ fn }) => {
           key={review.review_id}
           review={review}
           setPictureStatus={fn.setPictureModelStatus}
+          setModalStatus={fn.setModalStatus}
         />
       ))}
       <div className='reviewsButtonContainer'>
