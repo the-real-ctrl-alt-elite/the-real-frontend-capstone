@@ -10,7 +10,7 @@ const ModalFrame = ({
   padding,
 }) => {
   // provide inline css or use these defaults
-  const usedBorder = border || '1px solid white';
+  const usedBorder = border || 'none';
   const usedButtonText = buttonText || 'X';
   const usedPadding = padding || 'inherit';
   const usedFontColor = fontColor || 'white';
