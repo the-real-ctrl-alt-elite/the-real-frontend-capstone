@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import ModalFrame from './ModalFrame';
 
@@ -29,7 +30,9 @@ const ModalBackground = ({
   const usedInnerPadding = innerPadding || '2rem';
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
+      onClick={() => { closeModal(); }}
       style={{
         position: 'fixed',
         top: `${usedTop}`,
@@ -45,15 +48,19 @@ const ModalBackground = ({
 
       }}
     >
-      <ModalFrame
-        border={usedBorder}
-        buttonText={usedButtonText}
-        component={component}
-        componentProps={componentProps}
-        closeModal={closeModal}
-        fontColor={usedFontColor}
-        padding={usedInnerPadding}
-      />
+      <div
+        style={{ zIndex: '4' }}
+      >
+        <ModalFrame
+          border={usedBorder}
+          buttonText={usedButtonText}
+          component={component}
+          componentProps={componentProps}
+          closeModal={closeModal}
+          fontColor={usedFontColor}
+          padding={usedInnerPadding}
+        />
+      </div>
     </div>
   );
 };

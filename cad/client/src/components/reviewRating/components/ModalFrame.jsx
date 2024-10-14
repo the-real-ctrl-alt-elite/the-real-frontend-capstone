@@ -22,7 +22,7 @@ const ModalFrame = ({
         maxWidth: '75vw',
         padding: `${usedPadding}`,
         border: `${usedBorder}`,
-        zIndex: '3',
+        zIndex: '5',
       }}
     >
       {component({ componentProps })}
@@ -31,8 +31,8 @@ const ModalFrame = ({
         onClick={() => closeModal()}
         style={{
           position: 'absolute',
-          top: '1rem',
-          right: '1rem',
+          top: '3rem',
+          right: '3rem',
           borderRadius: '1rem',
           height: '2rem',
           width: '2rem',
