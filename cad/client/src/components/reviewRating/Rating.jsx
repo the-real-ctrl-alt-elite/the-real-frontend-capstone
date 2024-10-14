@@ -92,8 +92,8 @@ const Rating = () => {
       <div>
         <div className='rating-container'>
           <div className='reviewsLeft'>
-            <RatingBreakdown id={productId} metaData={metaData} />
-            <ProductBreakdown fn={fn} metaData={metaData} />
+            {reviews.length && <RatingBreakdown id={productId} metaData={metaData} />}
+            {reviews.length && <ProductBreakdown fn={fn} metaData={metaData} />}
           </div>
           <div className='reviewsRight'>
             <SortOptions fn={fn} />

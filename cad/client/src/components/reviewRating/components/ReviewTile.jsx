@@ -190,7 +190,7 @@ const ReviewImageThumbnail = ({ img, setPictureStatus }) => {
       onClick={() => { handleClick(); }}
       className='reviewImageThumbnail'
       style={{
-        background: `url(${img.url})`, backgroundSize: '4rem 4rem', width: '4rem', height: '4rem', margin: '.5rem',
+        background: `url(${img.url})`, backgroundSize: '4rem 4rem', width: '4rem', height: '4rem', margin: '.5rem', cursor: 'pointer', boxShadow: '2px 4px 2px black',
       }}
     />
   );
@@ -230,7 +230,6 @@ const FeedbackFooter = ({ review }) => {
   const [helpfulness, setHelpfulness] = useState(review.helpfulness);
   const [clicked, setClicked] = useState(false);
   const [reported, setReported] = useState('Report');
-
 
   const handleClick = () => {
     if (clicked === false) {
