@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 
-const ReviewTile = ({ review, setPictureStatus }) => {
+const ReviewTile = ({ review, setPictureStatus, setModalStatus }) => {
   const [expanded, setExpanded] = useState(false);
 
   // single object to pass multiple props with as needed
@@ -59,7 +59,7 @@ const ReviewTile = ({ review, setPictureStatus }) => {
           className='picturesContainer'
         >
           {review.photos.map((img) => (
-            <ReviewImageThumbnail img={img} key={img.url} setPictureStatus={setPictureStatus} />
+            <ReviewImageThumbnail img={img} key={img.url} setPictureStatus={setPictureStatus} setModalStatus={setModalStatus} />
           ))}
         </div>
       </div>
@@ -177,10 +177,11 @@ const ExpandedBody = ({ fn }) => {
   );
 };
 
-const ReviewImageThumbnail = ({ img, setPictureStatus }) => {
+const ReviewImageThumbnail = ({ img, setPictureStatus, setModalStatus }) => {
   const handleClick = () => {
     const top = document.body.scrollTop;
-    setPictureStatus(['showPicture', img.url, top]);
+    setPictureStatus([img.url, top]);
+    setModalStatus(true);
   };
 
   return (

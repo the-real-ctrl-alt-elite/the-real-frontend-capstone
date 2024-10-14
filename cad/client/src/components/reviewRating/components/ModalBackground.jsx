@@ -33,15 +33,16 @@ const ModalBackground = ({
         justifyContent: 'center',
         alignItems: 'center',
         padding: `${usedPadding}`,
+        zIndex: '3',
 
       }}
     >
       <ModalFrame
-        border='4px dotted green'
         component={component}
         componentProps={componentProps}
         closeModal={closeModal}
-        padding='10rem'
+        padding='0rem'
+        border='none'
       />
     </div>
   );
