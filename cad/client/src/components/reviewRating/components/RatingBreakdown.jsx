@@ -60,7 +60,6 @@ const RatingBreakdown = ({ metaData, reviewFilters, setReviewFilters }) => {
         ).toFixed(2);
       }
 
-
       const starCounts = [
         metaData.ratings['1'],
         metaData.ratings['2'],
