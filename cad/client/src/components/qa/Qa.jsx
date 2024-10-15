@@ -113,6 +113,46 @@ const Qa = () => {
           helpfulness: 10,
           photos: ['jpg'],
         },
+        5: {
+          id: 5,
+          body: 'Masala',
+          date: '2018-08-18T00:00:00.000Z',
+          answerer_name: 'theTruth',
+          helpfulness: 8,
+          photos: ['jpg'],
+        },
+        6: {
+          id: 6,
+          body: 'chicken',
+          date: '2018-08-18T00:00:00.000Z',
+          answerer_name: 'theTruth',
+          helpfulness: 7,
+          photos: ['jpg'],
+        },
+        7: {
+          id: 7,
+          body: 'chicken2',
+          date: '2018-08-18T00:00:00.000Z',
+          answerer_name: 'theTruth',
+          helpfulness: 6,
+          photos: ['jpg'],
+        },
+        8: {
+          id: 8,
+          body: 'chicken8',
+          date: '2018-08-18T00:00:00.000Z',
+          answerer_name: 'theTruth',
+          helpfulness: 4,
+          photos: ['jpg'],
+        },
+        9: {
+          id: 9,
+          body: 'chicken9',
+          date: '2018-08-18T00:00:00.000Z',
+          answerer_name: 'theTruth',
+          helpfulness: 2,
+          photos: ['jpg'],
+        },
       },
     },
     {
@@ -185,20 +225,13 @@ const Qa = () => {
     setQnas(fullList);
   };
 
-
   return (
     <div className='qa-container'>
-      QUESTIONS & ANSWERS
-<<<<<<< HEAD
+      <h3>QUESTIONS & ANSWERS</h3>
+      <input className='search-bar' placeholder='Have a questions? Search for answers...'></input>
       <div>{qnas.length !== 0 && <QuestionsList qnas={qnas} />}</div>
       <button type='button' onClick={handleClickMoreQuestion}>{qnas.length !== 0 && <MoreQuestions />}</button>
       <button type='button'>Add A Question</button>
-=======
-      <div>
-        <QuestionsList qnas={qnas} />
-      </div>
-      <MoreQuestions />
->>>>>>> 2c01d6dff079fdaf31c2495e02581a43fe110bc3
     </div>
   );
 };

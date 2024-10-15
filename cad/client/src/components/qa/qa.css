@@ -1,3 +1,10 @@
+.qna-section {
+  position: relative;
+  width: 800px;
+  height: auto;
+  border-style: none;
+}
+
 .answer-header {
   font-weight: bold;
 }
@@ -8,5 +15,18 @@
 
 .load-more-answers {
   cursor: pointer;
-  color: rgba(48, 45, 45, 0.901)
+  color: rgba(48, 45, 45, 0.901);
+  overflow-y: hidden;
+}
+
+.full-answers {
+  cursor: pointer;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.search-bar {
+  width: 500px;
+  height: 40px;
+  border: 1px solid rgba(14, 2, 2, 0.901);
 }
