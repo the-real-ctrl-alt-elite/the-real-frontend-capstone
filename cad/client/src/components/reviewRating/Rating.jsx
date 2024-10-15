@@ -17,9 +17,10 @@ const Rating = () => {
   const [metaData, setMetaData] = useState([]);
   // reviewFilters[0] = starClick, reviewFilters[1] = selectValue
   // eslint-disable-next-line no-unused-vars
-  const [reviewFilters, setReviewFilters] = useState([]);
-  // eslint-disable-next-line no-unused-vars
-  // closed or showPicture, imageUrl, scrollTop;
+  const [reviewFilters, setReviewFilters] = useState({
+    starFilter: [],
+    selectFilter: '',
+  });
   // pass URL to pictureModelStatus
   const [pictureModelStatus, setPictureModelStatus] = useState(['', 0]);
   const [modalStatus, setModalStatus] = useState(false);
@@ -80,6 +81,8 @@ const Rating = () => {
     setPictureModelStatus,
     productId,
     reviews,
+    reviewFilters,
+    setReviewFilters,
   };
 
   const closeModal = () => {
@@ -90,7 +93,7 @@ const Rating = () => {
   return (
     <div style={{
       padding: '1rem',
-      width: '66%',
+      // width: '66%',
       margin: 'auto',
     }}
     >
@@ -111,7 +114,7 @@ const Rating = () => {
       <div>
         <div className='rating-container'>
           <div className='reviewsLeft'>
-            {reviews.length && <RatingBreakdown id={productId} metaData={metaData} />}
+            {reviews.length && <RatingBreakdown reviewFilters={reviewFilters} setReviewFilters={setReviewFilters} metaData={metaData} />}
             {reviews.length && <ProductBreakdown fn={fn} metaData={metaData} />}
           </div>
           <div className='reviewsRight'>

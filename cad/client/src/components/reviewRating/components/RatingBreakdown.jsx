@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { ReviewStars } from './ReviewTile';
 import ProductContext from '../../../ProductContext';
 
-const RatingBreakdown = ({ metaData }) => {
+const RatingBreakdown = ({ metaData, reviewFilters, setReviewFilters }) => {
   const { productId } = useContext(ProductContext);
   const [ratingAverage, setRatingAverage] = useState(0);
   const [fiveStar, setFiveStar] = useState(0);
@@ -11,6 +11,7 @@ const RatingBreakdown = ({ metaData }) => {
   const [twoStar, setTwoStar] = useState(0);
   const [oneStar, setOneStar] = useState(0);
   const [recommendRate, setRecommendRate] = useState(0);
+  const [starRatings, setStarRatings] = useState([fiveStar, fourStar, threeStar, twoStar, oneStar]);
 
   useEffect(() => {
     if (metaData && metaData.recommended) {
@@ -67,6 +68,21 @@ const RatingBreakdown = ({ metaData }) => {
     }
   }, [metaData, metaData?.ratings, metaData?.recommended?.false, metaData?.recommended?.true, productId]);
 
+  useEffect(() => {
+    setStarRatings([fiveStar, fourStar, threeStar, twoStar, oneStar]);
+  }, [fiveStar, fourStar, threeStar, twoStar, oneStar]);
+
+  const clickStarRating = (rating) => {
+    const starIndex = reviewFilters.starFilter.indexOf(rating);
+    const newFilter = { ...reviewFilters };
+    if (starIndex !== -1) {
+      newFilter.starFilter.splice(starIndex, 1);
+      setReviewFilters(newFilter);
+    } else {
+      newFilter.starFilter.push(rating);
+    }
+  };
+
   return (
     <div className='ratingBreakdown'>
       <div className='ratingBreakdownSummary'>
@@ -83,74 +99,25 @@ const RatingBreakdown = ({ metaData }) => {
         {`${recommendRate}% of reviews recommend this product`}
       </small>
       <div className='ratingBreakdownList'>
-        <div className='ratingRow'>
-          <button
-            className='button-link'
-            type='button'
-          >
-            5 stars
-          </button>
-          <div
-            className='ratingsBar'
-            style={{
-              background: `linear-gradient(to right, darkgreen, darkgreen ${fiveStar}%, grey ${
-                fiveStar + 0.1
-              }%, grey 100%)`,
-            }}
-          />
-        </div>
-        <div className='ratingRow'>
-          <button className='button-link' type='button'>
-            4 stars
-          </button>
-          <div
-            className='ratingsBar'
-            style={{
-              background: `linear-gradient(to right, darkgreen, darkgreen ${fourStar}%, grey ${
-                fourStar + 0.1
-              }%, grey 100%)`,
-            }}
-          />
-        </div>
-        <div className='ratingRow'>
-          <button className='button-link' type='button'>
-            3 stars
-          </button>
-          <div
-            className='ratingsBar'
-            style={{
-              background: `linear-gradient(to right, darkgreen, darkgreen ${threeStar}%, grey ${
-                threeStar + 0.1
-              }%, grey 100%)`,
-            }}
-          />
-        </div>
-        <div className='ratingRow'>
-          <button className='button-link' type='button'>
-            2 stars
-          </button>
-          <div
-            className='ratingsBar'
-            style={{
-              background: `linear-gradient(to right, darkgreen, darkgreen ${twoStar}%, grey ${
-                twoStar + 0.1
-              }%, grey 100%)`,
-            }}
-          />
-        </div>
-        <div className='ratingRow'>
-          <button className='button-link' type='button'>
-            1 stars
-          </button>
-          <div
-            className='ratingsBar'
-            style={{
-              background: `linear-gradient(to right, darkgreen, darkgreen ${oneStar}%, grey ${
-                oneStar + 0.1
-              }%, grey 100%)`,
-            }}
-          />
-        </div>
+        {starRatings.map((star, index, array) => (
+          <div className='ratingRow'>
+            <button
+              onClick={() => { clickStarRating(array.length - index); }}
+              className='button-link'
+              type='button'
+            >
+              {index !== 4 ? `${array.length - index} Stars` : '1 Star'}
+            </button>
+            <div
+              className='ratingsBar'
+              style={{
+                background: `linear-gradient(to right, darkgreen, darkgreen ${star}%, grey ${
+                  star + 0.1
+                }%, grey 100%)`,
+              }}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

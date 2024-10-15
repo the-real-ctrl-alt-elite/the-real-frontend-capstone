@@ -55,7 +55,12 @@ const ReviewTile = ({ review, setPictureStatus, setModalStatus }) => {
           <CollapsedBody fn={fn} />
         )}
         <div
-          style={{ display: 'flex', gap: '1rem', margin: '.5rem 0' }}
+          style={{
+            display: 'flex',
+            gap: '1rem',
+            margin: '.25rem 0',
+            padding: '.25rem',
+          }}
           className='picturesContainer'
         >
           {review.photos.map((img) => (
@@ -212,7 +217,7 @@ const Response = ({ response }) => {
     <div
       className='sellerResponse'
       style={{
-        margin: '.25rem',
+        margin: '.25rem 0',
         padding: '.5rem',
         backgroundColor: 'rgba(125,155,155,.33',
         borderRadius: '1em',
@@ -229,7 +234,7 @@ const Response = ({ response }) => {
 const Recommend = () => {
   //
   return (
-    <div style={{ padding: '.25rem', fontSize: '14px' }}>
+    <div style={{ padding: '.25rem 0', fontSize: '14px' }}>
       <i className='fa-solid fa-check' />
       {' '}
       I recommend this product
@@ -254,7 +259,7 @@ const FeedbackFooter = ({ review }) => {
   };
 
   return (
-    <div style={{ position: 'relative', bottom: '0', padding: '0.5rem' }} className='reviewFooter'>
+    <div style={{ position: 'relative', bottom: '0', padding: '0.5rem 0' }} className='reviewFooter'>
       <small> Helpful? </small>
       <small>
         {' '}
