@@ -1,8 +1,9 @@
-.qna-section {
+.qa-container {
   position: relative;
   width: 800px;
-  height: auto;
+  height: 800px;
   border-style: none;
+  transform: translate(80%, 0%);
 }
 
 .answer-header {
@@ -21,7 +22,7 @@
 
 .full-answers {
   cursor: pointer;
-  max-height: 200px;
+  max-height: 250px;
   overflow-y: scroll;
 }
 
@@ -29,4 +30,9 @@
   width: 500px;
   height: 40px;
   border: 1px solid rgba(14, 2, 2, 0.901);
+}
+
+.questions-list {
+  max-height: 650px;
+  overflow-y: scroll;
 }

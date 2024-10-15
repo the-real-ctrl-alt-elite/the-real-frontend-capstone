@@ -214,43 +214,94 @@ const Qa = () => {
           photos: [],
         },
       },
+    },
+    {
+      question_id: 37,
+      question_body: 'Why is this product cheaper here than other sites?',
+      question_date: '2018-10-18T00:00:00.000Z',
+      asker_name: 'williamsmith',
+      question_helpfulness: 4,
+      reported: false,
+      answers: {
+        68: {
+          id: 68,
+          body: 'We are selling it here without any markup from the middleman!',
+          date: '2018-08-18T00:00:00.000Z',
+          answerer_name: 'Seller',
+          helpfulness: 4,
+          photos: ['jpg', 'jpg', 'jpg'],
+        },
+        99: {
+          id: 99,
+          body: 'FakeSeller should be after seller even though FakeSeller is rated higher',
+          date: '2018-08-18T00:00:00.000Z',
+          answerer_name: 'FakeSeller',
+          helpfulness: 6,
+          photos: ['jpg', 'jpg', 'jpg'],
+        },
+      },
+    },
+    {
+      question_id: 37,
+      question_body: 'Why is this product cheaper here than other sites?',
+      question_date: '2018-10-18T00:00:00.000Z',
+      asker_name: 'williamsmith',
+      question_helpfulness: 4,
+      reported: false,
+      answers: {
+        68: {
+          id: 68,
+          body: 'We are selling it here without any markup from the middleman!',
+          date: '2018-08-18T00:00:00.000Z',
+          answerer_name: 'Seller',
+          helpfulness: 4,
+          photos: ['jpg', 'jpg', 'jpg'],
+        },
+        99: {
+          id: 99,
+          body: 'FakeSeller should be after seller even though FakeSeller is rated higher',
+          date: '2018-08-18T00:00:00.000Z',
+          answerer_name: 'FakeSeller',
+          helpfulness: 6,
+          photos: ['jpg', 'jpg', 'jpg'],
+        },
+      },
     }],
   };
 
   const fullList = qNaData.results;
   fullList.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
 
-  const [qnas, setQnas] = useState(fullList.slice(0, 4));
-  const [moreQuestions, setMoreQuestions] = useState(false);
+  const [qnas, setQnas] = useState(fullList.slice(0, 2));
+  const [moreQuestions, setMoreQuestions] = useState(2);
+  let count = 0;
   const handleClickMoreQuestion = () => {
-    setQnas(fullList);
-    if (!moreQuestions) {
-      setMoreQuestions(true);
+    setQnas(fullList.slice(0, moreQuestions + 2));
+    if (moreQuestions < fullList.length + 2) {
+      setMoreQuestions(moreQuestions + 2);
     }
   };
 
   const [search, setSearch] = useState('');
   const handleOnChange = (e) => {
+    console.log('moreQuestions: ', moreQuestions);
     setSearch(e.target.value);
     if (e.target.value.length >= 3) {
       const searchList = qnas.filter((qna) => {
         return qna.question_body.includes(search);
       });
       setQnas(searchList);
-    } else if (!moreQuestions) {
-      setQnas(fullList.slice(0, 4));
     } else {
-      setQnas(fullList);
+      setQnas(fullList.slice(0, moreQuestions));
     }
-    console.log('search value: ', e.target.value);
   };
 
   return (
     <div className='qa-container'>
       <h3>QUESTIONS & ANSWERS</h3>
       <input className='search-bar' placeholder='Have a questions? Search for answers...' onChange={handleOnChange}></input>
-      <div>{qnas.length !== 0 && <QuestionsList qnas={qnas} />}</div>
-      <button type='button' onClick={handleClickMoreQuestion}>{qnas.length !== 0 && <MoreQuestions />}</button>
+      <div className='questions-list'>{qnas.length !== 0 && <QuestionsList qnas={qnas} />}</div>
+      <span onClick={handleClickMoreQuestion}>{fullList.length > 2 && fullList.length !== qnas.length && <MoreQuestions />}</span>
       <button type='button'>Add A Question</button>
     </div>
   );
