@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 const SortOptions = ({ fn }) => {
-  const options = ['relevance', 'most useful', 'newest'];
+  const options = ['relevance', 'most helpful', 'newest'];
   const [selectValue, setSelectValue] = useState(options[0]);
 
   const updateReviewFilters = (e) => {
     const newFilter = { ...fn.reviewFilters };
-    newFilter.selectFilter = e.target.value;
+    newFilter.selectFilter[0] = e.target.value;
     setSelectValue(e.target.value);
     fn.setReviewFilters(newFilter);
   };

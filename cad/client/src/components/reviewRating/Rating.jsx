@@ -13,14 +13,14 @@ import ProductContext from '../../ProductContext';
 const Rating = () => {
   const { productId } = useContext(ProductContext);
   const [reviews, setReviews] = useState([]);
-  const [filteredReviews, setFilteredReviews] = useState([]);
-  const [activeReviews, setActiveReviews] = useState(reviews.slice(0, 2));
+  const [filteredReviews, setFilteredReviews] = useState(reviews.slice());
+  const [activeReviews, setActiveReviews] = useState(filteredReviews.slice(0, 2));
   const [metaData, setMetaData] = useState([]);
   // reviewFilters[0] = starClick, reviewFilters[1] = selectValue
   // eslint-disable-next-line no-unused-vars
   const [reviewFilters, setReviewFilters] = useState({
     starFilter: [],
-    selectFilter: '',
+    selectFilter: [],
   });
   // pass URL to pictureModelStatus
   const [pictureModelStatus, setPictureModelStatus] = useState(['', 0]);
@@ -29,6 +29,44 @@ const Rating = () => {
   const TOKEN = process.env.GIT_TOKEN;
   const BASE_URL = process.env.API_BASE_URL;
   const CAMPUS = process.env.CAMPUS_CODE;
+
+  const sortByHelpfulness = (arr) => {
+    return arr.sort((a, b) => {
+      if (a.helpfulness > b.helpfulness) {
+        return -1;
+      }
+      if (a.helpfulness < b.helpfulness) {
+        return 1;
+      }
+      return 0;
+    });
+  };
+
+  const sortByRelevance = (arr) => {
+    return arr.sort((a, b) => {
+      const helpDif = a.helpfulness - b.helpfulness;
+
+      if ((helpDif > 10 && (a.date > b.date)) || helpDif > 20) {
+        return -1;
+      }
+      if ((helpDif < -10 && (a.date < b.date)) || helpDif < -20) {
+        return 1;
+      }
+      return 0;
+    });
+  };
+
+  const sortByNewest = (arr) => {
+    return arr.sort((a, b) => {
+      if (a.date > b.date) {
+        return -1;
+      }
+      if (a.date < b.date) {
+        return 1;
+      }
+      return 0;
+    });
+  };
 
   useEffect(() => {
     if (productId) {
@@ -73,6 +111,26 @@ const Rating = () => {
         });
     }
   }, [BASE_URL, CAMPUS, TOKEN, productId]);
+
+  useEffect(() => {
+    let temp = reviews;
+    if (reviewFilters.starFilter.length > 0) {
+      temp = reviews.filter((review) => reviewFilters.starFilter.includes(review.rating));
+    }
+    switch (reviewFilters.selectFilter[0]) {
+      case 'most helpful':
+        temp = sortByHelpfulness(temp);
+        break;
+      case 'newest':
+        temp = sortByNewest(temp);
+        break;
+      default:
+        temp = sortByRelevance(temp);
+        break;
+    }
+    setFilteredReviews(temp);
+    setActiveReviews(temp.slice(0, 2));
+  }, [reviews, reviewFilters]);
 
   const fn = {
     activeReviews,

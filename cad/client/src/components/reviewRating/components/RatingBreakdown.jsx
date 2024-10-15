@@ -12,6 +12,7 @@ const RatingBreakdown = ({ metaData, reviewFilters, setReviewFilters }) => {
   const [oneStar, setOneStar] = useState(0);
   const [recommendRate, setRecommendRate] = useState(0);
   const [starRatings, setStarRatings] = useState([fiveStar, fourStar, threeStar, twoStar, oneStar]);
+  const [filterMessage, setFilterMessage] = useState('Showing All Reviews');
 
   useEffect(() => {
     if (metaData && metaData.recommended) {
@@ -28,21 +29,38 @@ const RatingBreakdown = ({ metaData, reviewFilters, setReviewFilters }) => {
       percentage = (percentage * 100).toFixed(0);
       setRecommendRate(percentage);
 
-      const five = (
-        Math.round((Number(metaData.ratings['5']) / total) * 100 * 4) / 4
-      ).toFixed(2);
-      const four = (
-        Math.round((Number(metaData.ratings['4']) / total) * 100 * 4) / 4
-      ).toFixed(2);
-      const three = (
-        Math.round((Number(metaData.ratings['3']) / total) * 100 * 4) / 4
-      ).toFixed(2);
-      const two = (
-        Math.round((Number(metaData.ratings['2']) / total) * 100 * 4) / 4
-      ).toFixed(2);
-      const one = (
-        Math.round((Number(metaData.ratings['1']) / total) * 100 * 4) / 4
-      ).toFixed(2);
+      let five = 0;
+      let four = 0;
+      let three = 0;
+      let two = 0;
+      let one = 0;
+      if (metaData.ratings['5']) {
+        five = (
+          Math.round((Number(metaData.ratings['5']) / total) * 100 * 4) / 4
+        ).toFixed(2);
+      }
+      if (metaData.ratings['4']) {
+        four = (
+          Math.round((Number(metaData.ratings['4']) / total) * 100 * 4) / 4
+        ).toFixed(2);
+      }
+      if (metaData.ratings['3']) {
+        three = (
+          Math.round((Number(metaData.ratings['3']) / total) * 100 * 4) / 4
+        ).toFixed(2);
+      }
+      if (metaData.ratings['2']) {
+        two = (
+          Math.round((Number(metaData.ratings['2']) / total) * 100 * 4) / 4
+        ).toFixed(2);
+      }
+      if (metaData.ratings['1']) {
+        one = (
+          Math.round((Number(metaData.ratings['1']) / total) * 100 * 4) / 4
+        ).toFixed(2);
+      }
+
+
       const starCounts = [
         metaData.ratings['1'],
         metaData.ratings['2'],
@@ -72,14 +90,45 @@ const RatingBreakdown = ({ metaData, reviewFilters, setReviewFilters }) => {
     setStarRatings([fiveStar, fourStar, threeStar, twoStar, oneStar]);
   }, [fiveStar, fourStar, threeStar, twoStar, oneStar]);
 
+  const createFilterMessage = (arr) => {
+    if (arr.length === 0) {
+      setFilterMessage('Showing All Reviews');
+    }
+    arr.sort();
+    if (arr.length === 1) {
+      setFilterMessage(`Showing ${arr[0]} Star Reviews`);
+    }
+    if (arr.length === 2) {
+      setFilterMessage(`Showing ${arr[0]} and ${arr[1]} Star Reviews`);
+    }
+    if (arr.length >= 3) {
+      let msg = 'Showing ';
+      let count = arr.length - 1;
+      let i = 0;
+      while (count > 0) {
+        msg = msg.concat(`${arr[i]}, `);
+        i += 1;
+        count -= 1;
+      }
+      msg = msg.concat(`and ${arr[arr.length - 1]} Star Reviews`);
+      setFilterMessage(msg);
+    }
+    if (arr.length === 5) {
+      setFilterMessage('Showing All Reviews');
+    }
+  };
+
   const clickStarRating = (rating) => {
     const starIndex = reviewFilters.starFilter.indexOf(rating);
     const newFilter = { ...reviewFilters };
     if (starIndex !== -1) {
       newFilter.starFilter.splice(starIndex, 1);
       setReviewFilters(newFilter);
+      createFilterMessage(newFilter.starFilter);
     } else {
-      newFilter.starFilter.push(rating);
+      newFilter.starFilter.unshift(rating);
+      setReviewFilters(newFilter);
+      createFilterMessage(newFilter.starFilter);
     }
   };
 
@@ -98,9 +147,13 @@ const RatingBreakdown = ({ metaData, reviewFilters, setReviewFilters }) => {
       >
         {`${recommendRate}% of reviews recommend this product`}
       </small>
+      <small>{ filterMessage }</small>
       <div className='ratingBreakdownList'>
         {starRatings.map((star, index, array) => (
-          <div className='ratingRow'>
+          <div
+            key={Math.random()}
+            className='ratingRow'
+          >
             <button
               onClick={() => { clickStarRating(array.length - index); }}
               className='button-link'
