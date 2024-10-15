@@ -13,6 +13,7 @@ import ProductContext from '../../ProductContext';
 const Rating = () => {
   const { productId } = useContext(ProductContext);
   const [reviews, setReviews] = useState([]);
+  const [filteredReviews, setFilteredReviews] = useState([]);
   const [activeReviews, setActiveReviews] = useState(reviews.slice(0, 2));
   const [metaData, setMetaData] = useState([]);
   // reviewFilters[0] = starClick, reviewFilters[1] = selectValue
@@ -76,6 +77,8 @@ const Rating = () => {
   const fn = {
     activeReviews,
     setActiveReviews,
+    filteredReviews,
+    setFilteredReviews,
     modalStatus,
     setModalStatus,
     setPictureModelStatus,
