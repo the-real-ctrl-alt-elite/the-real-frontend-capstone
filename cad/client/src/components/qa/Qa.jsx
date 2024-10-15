@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import QuestionsList from './QuestionsList';
 import MoreQuestions from './MoreQuestions';
+import AddAQuestionModal from './AddAQuestionModal';
 
 
 
@@ -274,7 +275,6 @@ const Qa = () => {
 
   const [qnas, setQnas] = useState(fullList.slice(0, 2));
   const [moreQuestions, setMoreQuestions] = useState(2);
-  let count = 0;
   const handleClickMoreQuestion = () => {
     setQnas(fullList.slice(0, moreQuestions + 2));
     if (moreQuestions < fullList.length + 2) {
@@ -296,13 +296,19 @@ const Qa = () => {
     }
   };
 
+  const [openQuestionModal, setOpenQuestionModal] = useState(false);
+  const handleAddAQuestion = () => {
+    setOpenQuestionModal(true);
+  };
+
   return (
     <div className='qa-container'>
       <h3>QUESTIONS & ANSWERS</h3>
       <input className='search-bar' placeholder='Have a questions? Search for answers...' onChange={handleOnChange}></input>
       <div className='questions-list'>{qnas.length !== 0 && <QuestionsList qnas={qnas} />}</div>
       <span onClick={handleClickMoreQuestion}>{fullList.length > 2 && fullList.length !== qnas.length && <MoreQuestions />}</span>
-      <button type='button'>Add A Question</button>
+      <button type='button' onClick={handleAddAQuestion}>Add A Question</button>
+      {openQuestionModal && <AddAQuestionModal setOpenQuestionModal={setOpenQuestionModal} />}
     </div>
   );
 };

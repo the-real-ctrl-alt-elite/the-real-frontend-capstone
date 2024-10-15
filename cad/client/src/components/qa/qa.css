@@ -36,3 +36,69 @@
   max-height: 650px;
   overflow-y: scroll;
 }
+
+.modal-background {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(142, 24, 24, 0);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(0%, -50%);
+}
+
+.modal-container {
+  width: 600px;
+  height: 600px;
+  border-radius: 12px;
+  border-width: 2px;
+  background-color: rgb(238, 233, 233);
+  box-shadow: rgba(218, 161, 161, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-160%, -80%);
+  z-index: 1000;
+}
+
+.modal-close-button {
+  display: flex;
+  justify-content: flex-end;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.modal-title {
+  display: inline-block;
+  text-align: center;
+}
+
+.modal-body {
+  margin-top: 30px;
+  margin-bottom: 20px;
+
+}
+
+.question-input {
+  width: 400px;
+  height: 100px;
+  max-width: 450px;
+  max-height: 200px;
+}
+
+.nickname-input,
+.email-input {
+  width: 300px;
+  height: 25px;
+
+}
+
+.modal-footer {
+  margin-top: 20px;
+}
