@@ -4,7 +4,7 @@ import Question from './Question';
 
 const QuestionsList = ({ qnas }) => {
   return (
-    <div className='qna-section'>
+    <div>
       { qnas.map((qna, idx) => {
         // const keysForAnswers = Object.keys(qna.answers);
         // console.log('keys for answers: ', keysForAnswers);

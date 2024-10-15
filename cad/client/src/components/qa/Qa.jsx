@@ -221,14 +221,34 @@ const Qa = () => {
   fullList.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
 
   const [qnas, setQnas] = useState(fullList.slice(0, 4));
+  const [moreQuestions, setMoreQuestions] = useState(false);
   const handleClickMoreQuestion = () => {
     setQnas(fullList);
+    if (!moreQuestions) {
+      setMoreQuestions(true);
+    }
+  };
+
+  const [search, setSearch] = useState('');
+  const handleOnChange = (e) => {
+    setSearch(e.target.value);
+    if (e.target.value.length >= 3) {
+      const searchList = qnas.filter((qna) => {
+        return qna.question_body.includes(search);
+      });
+      setQnas(searchList);
+    } else if (!moreQuestions) {
+      setQnas(fullList.slice(0, 4));
+    } else {
+      setQnas(fullList);
+    }
+    console.log('search value: ', e.target.value);
   };
 
   return (
     <div className='qa-container'>
       <h3>QUESTIONS & ANSWERS</h3>
-      <input className='search-bar' placeholder='Have a questions? Search for answers...'></input>
+      <input className='search-bar' placeholder='Have a questions? Search for answers...' onChange={handleOnChange}></input>
       <div>{qnas.length !== 0 && <QuestionsList qnas={qnas} />}</div>
       <button type='button' onClick={handleClickMoreQuestion}>{qnas.length !== 0 && <MoreQuestions />}</button>
       <button type='button'>Add A Question</button>
