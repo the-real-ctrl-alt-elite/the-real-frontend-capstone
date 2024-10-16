@@ -30,7 +30,7 @@ const MoreReviews = ({ fn }) => {
   const handleClick = () => {
     let { length } = fn.activeReviews;
     length += 2;
-    fn.setActiveReviews(fn.reviews.slice(0, length));
+    fn.setActiveReviews(fn.filteredReviews.slice(0, length));
   };
 
   return (
