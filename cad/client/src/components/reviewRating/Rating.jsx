@@ -8,6 +8,7 @@ import RatingBreakdown from './components/RatingBreakdown';
 import ReviewPictureModel from './components/ReviewPictureModel';
 import ModalBackground from './components/ModalBackground';
 import SortOptions from './components/SortOptions';
+import AddReview from './components/AddReview';
 import ProductContext from '../../ProductContext';
 
 const Rating = () => {
@@ -23,6 +24,7 @@ const Rating = () => {
   // pass URL to pictureModelStatus
   const [pictureModelStatus, setPictureModelStatus] = useState(['', 0]);
   const [modalStatus, setModalStatus] = useState(false);
+  const [reviewStatus, setReviewStatus] = useState(false);
 
   const TOKEN = process.env.GIT_TOKEN;
   const BASE_URL = process.env.API_BASE_URL;
@@ -80,11 +82,16 @@ const Rating = () => {
     setPictureModelStatus,
     productId,
     reviews,
+    setReviewStatus,
   };
 
-  const closeModal = () => {
+  const closePictureModal = () => {
     setModalStatus(false);
     setPictureModelStatus(['', 0]);
+  };
+
+  const closeReviewModal = () => {
+    setReviewStatus(false);
   };
 
   return (
@@ -100,8 +107,17 @@ const Rating = () => {
           component={ReviewPictureModel}
           componentProps={pictureModelStatus}
           top={pictureModelStatus[1]}
-          closeModal={closeModal}
+          closeModal={closePictureModal}
         />
+        )}
+      {reviewStatus === true
+        && (
+          <ModalBackground
+            component={AddReview}
+            componentProps={{ metaData }}
+            backgroundClose={false}
+            closeModal={closeReviewModal}
+          />
         )}
       <h3
         style={{ color: 'rgba(82,82,82)' }}
