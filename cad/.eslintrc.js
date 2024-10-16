@@ -1,5 +1,6 @@
 module.exports = {
   extends: ['airbnb', 'airbnb/hooks'], // Use Airbnb rules + React Hooks rules
+  plugins: ['import'],
   env: {
     browser: true, // Enable browser globals like `window` and `document`
     es2021: true, // Enable modern JavaScript (ES6+)
