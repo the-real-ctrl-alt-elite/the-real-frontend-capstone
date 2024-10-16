@@ -20,6 +20,7 @@ const ReviewSorter = ({ options }) => {
       &nbsp; sorted by
       <select
         style={{
+          color: 'rgba(82,82,82)',
           fontSize: '17px',
           fontWeight: '700',
           border: 'none',

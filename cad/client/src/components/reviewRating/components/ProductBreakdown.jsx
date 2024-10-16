@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const ProductBreakdown = ({ fn, metaData }) => {
+const ProductBreakdown = ({ metaData }) => {
   const [characteristics, setCharacteristics] = useState([]);
 
   useEffect(() => {
@@ -87,6 +87,5 @@ const ProductBreakdown = ({ fn, metaData }) => {
     </div>
   );
 };
-
 
 export default ProductBreakdown;
