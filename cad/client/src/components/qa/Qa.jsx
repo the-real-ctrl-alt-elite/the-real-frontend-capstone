@@ -19,7 +19,7 @@ const Qa = () => {
   axios
     .get(url, {
       headers: {
-        Authorization: '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',
+        Authorization: TOKEN,
       },
       params: {
         product_id: 40345,
