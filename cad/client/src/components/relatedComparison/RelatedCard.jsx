@@ -24,7 +24,7 @@ const PLACEHOLDER_CURRENT_PRODUCT = {
     },
     {
       feature: 'UV Protection',
-      value: null,
+      value: 'true',
     },
     {
       feature: 'Frames',
@@ -130,9 +130,9 @@ function ComparsionModalContent({ onClose, currentProduct, selectedProduct }) {
             </tr>
             {formatComparedFeatures(currentProduct?.features, selectedProduct?.features).map((item) => (
               <tr key={uuidv4()}>
-                <td>{item.values?.curValue === 'true' ? '&check;' : item.values?.curValue}</td>
+                <td>{item.values?.curValue === 'true' ? '✅' : item.values?.curValue}</td>
                 <td>{item.feature}</td>
-                <td>{item.values?.selectedValue === 'true' ? '&check;' : item.values?.selectedValue}</td>
+                <td>{item.values?.selectedValue === 'true' ? '✅' : item.values?.selectedValue}</td>
               </tr>
             ))}
           </tbody>
