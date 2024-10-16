@@ -16,7 +16,7 @@ const ReviewList = ({ fn }) => {
       ))}
       <div className='reviewsButtonContainer'>
         <div className='reviewButtonRow'>
-          {fn.activeReviews.length < fn.reviews.length ? <MoreReviews fn={fn} /> : ''}
+          {fn.activeReviews.length < fn.filteredReviews.length ? <MoreReviews fn={fn} /> : ''}
           <AddReview />
         </div>
       </div>
@@ -30,7 +30,7 @@ const MoreReviews = ({ fn }) => {
   const handleClick = () => {
     let { length } = fn.activeReviews;
     length += 2;
-    fn.setActiveReviews(fn.reviews.slice(0, length));
+    fn.setActiveReviews(fn.filteredReviews.slice(0, length));
   };
 
   return (
