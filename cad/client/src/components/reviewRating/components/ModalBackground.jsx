@@ -4,6 +4,7 @@ import ModalFrame from './ModalFrame';
 
 const ModalBackground = ({
   background,
+  backgroundClose,
   border,
   buttonText,
   closeModal,
@@ -23,6 +24,7 @@ const ModalBackground = ({
 
   const usedTop = top || '0';
   const usedBackground = background || 'rgba(22,22,22,0.5)';
+  const usedBackgroundClose = backgroundClose !== undefined ? backgroundClose : true;
   const usedPadding = padding || '2rem';
   const usedBorder = border || 'none';
   const usedButtonText = buttonText || 'X';
@@ -30,8 +32,10 @@ const ModalBackground = ({
   const usedInnerPadding = innerPadding || '2rem';
 
   const handleClick = (e) => {
-    if (e.target === document.getElementById('modalBackground')) {
-      closeModal();
+    if (usedBackgroundClose) {
+      if (e.target === document.getElementById('modalBackground')) {
+        closeModal();
+      }
     }
   };
 

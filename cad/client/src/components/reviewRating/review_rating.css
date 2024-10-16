@@ -254,3 +254,22 @@ a {
   height: .5rem;
   background: gray;
 }
+
+.addReviewBox {
+  background: white;
+  width: 50vw;
+  height: 80vh;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.characteristicVoteBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+}
+
+.characteristicVoteBox>* {
+  font-size: .75rem;
+}

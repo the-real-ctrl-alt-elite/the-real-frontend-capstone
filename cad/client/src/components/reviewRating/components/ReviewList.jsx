@@ -16,8 +16,8 @@ const ReviewList = ({ fn }) => {
       ))}
       <div className='reviewsButtonContainer'>
         <div className='reviewButtonRow'>
-          {fn.activeReviews.length < fn.filteredReviews.length ? <MoreReviews fn={fn} /> : ''}
-          <AddReview />
+          {fn.activeReviews.length < fn.reviews.length ? <MoreReviews fn={fn} /> : ''}
+          <AddReview setReviewStatus={fn.setReviewStatus} />
         </div>
       </div>
     </div>
@@ -48,11 +48,17 @@ const MoreReviews = ({ fn }) => {
   );
 };
 
-const AddReview = () => {
+const AddReview = ({ setReviewStatus }) => {
   //
   return (
     <div>
-      <button className='reviewFunctionalityButton' type='button'>ADD REVIEW +</button>
+      <button
+        className='reviewFunctionalityButton'
+        type='button'
+        onClick={() => { setReviewStatus(true); }}
+      >
+        ADD REVIEW +
+      </button>
     </div>
   );
 };
