@@ -6,6 +6,7 @@ const OutfitCard = ({
 }) => {
   return (
     <div className='product-card-container'>
+
       <button onClick={() => handleRemoveClick(id)} type='button' label='remove-item' className='remove-item-btn'>x</button>
       <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png?20220519031949' alt='fake_img' />
       <div className='product-card-details'>
@@ -19,6 +20,7 @@ const OutfitCard = ({
           <ReviewStars rating={rating} />
         </span>
       </div>
+
     </div>
   );
 };

@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/header/Header';
 import Qa from './components/qa/Qa';
 import Related from './components/relatedComparison/Related';
-import Comparison from './components/relatedComparison/Comparison';
+import OutfitSection from './components/relatedComparison/OutfitSection';
 import Rating from './components/reviewRating/Rating';
 import Selector from './components/styleSelect/Selector';
 
 // example code do not uncomment in app
 // import React, { useContext } from 'react'; // Imports to use the context
 // import ProductContext from '../../ProductContext'; // this might need altering for your comp location
-
 
 const App = () => {
   // example code do not uncomment in app
@@ -21,7 +20,7 @@ const App = () => {
       <Selector />
       <div className='related-comp-wrapper'>
         <Related />
-        <Comparison />
+        <OutfitSection />
       </div>
       <div
         id='Qa'

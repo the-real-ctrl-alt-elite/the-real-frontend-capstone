@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import OutfitCard from './OutfitCard';
+import HorizontalScroller from './HorizontalScroller';
 
 const DEFAULT_PRODUCTS = [{
   id: 1,
@@ -49,9 +50,33 @@ const DEFAULT_PRODUCTS = [{
   category: 'Jackets',
   defaultPrice: '140',
   rating: 3,
+}, {
+  id: 7,
+  name: 'Camo Onesie',
+  category: 'Jackets',
+  defaultPrice: '140',
+  rating: 3,
+}, {
+  id: 7,
+  name: 'Camo Onesie',
+  category: 'Jackets',
+  defaultPrice: '140',
+  rating: 3,
+}, {
+  id: 7,
+  name: 'Camo Onesie',
+  category: 'Jackets',
+  defaultPrice: '140',
+  rating: 3,
+}, {
+  id: 7,
+  name: 'Camo Onesie',
+  category: 'Jackets',
+  defaultPrice: '140',
+  rating: 3,
 }];
 
-const Comparison = () => {
+const OutfitSection = () => {
   const [items, setItems] = useState(DEFAULT_PRODUCTS);
 
   const handleAddClick = () => {
@@ -64,9 +89,9 @@ const Comparison = () => {
   };
 
   return (
-    <div className='comparison-container'>
+    <div className='outfit-container'>
       <h3>YOUR OUTFIT</h3>
-      <div className='cards-container'>
+      <HorizontalScroller>
         <button className='add-outfit-btn' type='button' label='add-outfit-item' onClick={handleAddClick}>
           <div className='product-card-container'>
             +
@@ -85,9 +110,9 @@ const Comparison = () => {
             rating={rating}
           />
         ))}
-      </div>
+      </HorizontalScroller>
     </div>
   );
 };
 
-export default Comparison;
+export default OutfitSection;

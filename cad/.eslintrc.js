@@ -1,10 +1,11 @@
 module.exports = {
-  extends: ['airbnb', 'airbnb/hooks'], // Use Airbnb rules + React Hooks rules
-  plugins: ['import'],
+  extends: ['airbnb', 'airbnb/hooks', 'plugin:jest/recommended'], // Use Airbnb rules + React Hooks rules
+  plugins: ['jest'],
   env: {
     browser: true, // Enable browser globals like `window` and `document`
     es2021: true, // Enable modern JavaScript (ES6+)
     node: true, // Enable Node.js globals
+    'jest/globals': true,
   },
   parserOptions: {
     ecmaVersion: 12, // Support ECMAScript 2021 features
