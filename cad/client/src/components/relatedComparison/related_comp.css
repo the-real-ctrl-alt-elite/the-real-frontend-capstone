@@ -1,4 +1,7 @@
-
+.price-tag-container {
+  display: inline-flex;
+  gap: 0.75rem;
+}
 
 .related-container {
   margin: 1rem;
@@ -45,8 +48,17 @@
   background-color: lightgray;
   position: relative;
   padding-bottom: 0.5rem;
+}
 
-
+.overlay {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  left:0;
+  bottom: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: rgba(105, 105, 105, 0.565);
 }
 
 .product-card-details {
@@ -81,7 +93,71 @@
   right: 0;
   z-index: 9999;
   background-color: rgba(105, 105, 105, 0.565);
+  display: flex;
+  justify-items: center;
+  align-items: center;
 }
 
 
+.modal-content {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  height: 75dvh;
+  min-width: 60dvw;
+  position: relative;
+  overflow-y: auto;
+}
+
+.modal-content h1 {
+  text-align: left;
+  padding-bottom: 1rem;
+}
+
+.comparsion-table {
+  margin: 2rem auto;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.comparsion-table {
+  border-collapse: collapse;
+  border: 2px solid rgb(140 140 140);
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.comparsion-table > thead,
+tfoot {
+  background-color: rgb(148, 148, 148);
+}
+
+.rating-stars-row {
+  display: inline-flex;
+  justify-content: center;
+}
+
+.comparsion-table > th,
+td {
+  border: 1px solid rgb(160 160 160);
+  padding: 8px 10px;
+  text-align: center;
+  width: 15dvw;
+}
+
+.comparsion-table > td:last-of-type {
+  text-align: center;
+}
+
+.comparsion-table tr:nth-of-type(even) {
+  background-color: rgb(237 238 242);
+}
 
