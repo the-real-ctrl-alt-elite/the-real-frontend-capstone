@@ -11,13 +11,12 @@ const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
 const CAMPUS_CODE = process.env.CAMPUS_CODE;
 
-console.log('baseURL: ', BASE_URL, ' ', TOKEN, ' ', CAMPUS_CODE);
+
 const Qa = () => {
-  const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions';
   const [qnaData, setQnaData] = useState({});
-  console.log('url is: ', url);
+  console.log('url is: ', `${BASE_URL}${CAMPUS_CODE}`);
   axios
-    .get(url, {
+    .get(`${BASE_URL}${CAMPUS_CODE}`, {
       headers: {
         Authorization: TOKEN,
       },
@@ -303,12 +302,13 @@ const Qa = () => {
 
   return (
     <div className='qa-container'>
+      {openQuestionModal && <AddAQuestionModal setOpenQuestionModal={setOpenQuestionModal} />}
       <h3>QUESTIONS & ANSWERS</h3>
       <input className='search-bar' placeholder='Have a questions? Search for answers...' onChange={handleOnChange}></input>
-      <div className='questions-list'>{qnas.length !== 0 && <QuestionsList qnas={qnas} />}</div>
+      <div className='questions-list' data-testid='QuestionsList'>{qnas.length !== 0 && <QuestionsList qnas={qnas} />}</div>
       <span onClick={handleClickMoreQuestion}>{fullList.length > 2 && fullList.length !== qnas.length && <MoreQuestions />}</span>
       <button type='button' onClick={handleAddAQuestion}>Add A Question</button>
-      {openQuestionModal && <AddAQuestionModal setOpenQuestionModal={setOpenQuestionModal} />}
+
     </div>
   );
 };

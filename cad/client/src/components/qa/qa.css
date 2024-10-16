@@ -3,7 +3,8 @@
   width: 800px;
   height: 800px;
   border-style: none;
-  transform: translate(80%, 0%);
+  margin: 0 auto;
+  transform: translate(0%, 0%);
 }
 
 .answer-header {
@@ -40,16 +41,18 @@
 .modal-background {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(142, 24, 24, 0);
+  background-color: rgba(244, 241, 241, 0);
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translate(0%, -50%);
+  left: -60%;
+  top: 0;
+  /* transform: translate(0%, -50%); */
 }
 
 .modal-container {
-  width: 600px;
+  width: 650px;
   height: 600px;
   border-radius: 12px;
   border-width: 2px;
@@ -59,9 +62,9 @@
   flex-direction: column;
   padding: 25px;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-160%, -80%);
+  transform: translate(-25%, -10%);
+  /* top: 50%;
+  left: 50%; */
   z-index: 1000;
 }
 
@@ -88,7 +91,7 @@
 .question-input {
   width: 400px;
   height: 100px;
-  max-width: 450px;
+  max-width: 550px;
   max-height: 200px;
 }
 
