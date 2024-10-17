@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { ReviewStars } from '../reviewRating/components/ReviewTile';
 
+// TODO: Update to use PriceTag instead of default price
+// TODO: Star count is incorrect
+
 const OutfitCard = ({
-  name, id, category, defaultPrice, rating, handleRemoveClick, photo,
+  name, id, category, defaultPrice, rating, handleRemoveClick, photos,
 }) => {
   return (
-    <section className='product-card-container'>
-      <button onClick={() => handleRemoveClick(id)} type='button' label='remove-item' className='remove-item-btn'>
+    <div className='product-card-container'>
+      <button onClick={() => handleRemoveClick(id)} type='button' label='remove-item' className='action-item-btn'>
         <i className='fa-solid fa-xmark' style={{ color: '#ffffff', margin: 'auto' }} />
       </button>
-      <img className='product-card-img' src={photo?.url} alt='fake_img' />
+      <img className='product-card-img' src={photos?.url} alt='fake_img' />
       <div className='product-card-details'>
         <h6>{category?.toUpperCase()}</h6>
-        <h4>{name}</h4>
+        <h5>{name}</h5>
         <p>
           $
           {defaultPrice}
@@ -21,7 +24,7 @@ const OutfitCard = ({
           <ReviewStars rating={rating} />
         </span>
       </div>
-    </section>
+    </div>
   );
 };
 
