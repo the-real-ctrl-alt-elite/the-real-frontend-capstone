@@ -30,7 +30,7 @@ const OutfitSection = () => {
   };
 
   return (
-    <div className='outfit-container'>
+    <section className='outfit-container'>
       <h3>YOUR OUTFIT</h3>
       <HorizontalScroller>
         <button className='add-outfit-btn' type='button' label='add-outfit-item' onClick={() => addToOutfit(productData)}>
@@ -54,7 +54,7 @@ const OutfitSection = () => {
           />
         ))}
       </HorizontalScroller>
-    </div>
+    </section>
   );
 };
 
