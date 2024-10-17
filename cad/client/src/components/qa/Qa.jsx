@@ -1,31 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
 import QuestionsList from './QuestionsList';
 import MoreQuestions from './MoreQuestions';
 import AddAQuestionModal from './AddAQuestionModal';
 import AddAnAnswerModal from './AddAnAnswerModal';
+import ProductContext from '../../ProductContext';
 
 const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
-const { CAMPUS_CODE } = process.env;
+const CAMPUS = process.env.CAMPUS_CODE;
 
 const Qa = () => {
-  const [qnaData, setQnaData] = useState({});
-  console.log('url is: ', `${BASE_URL}${CAMPUS_CODE}`);
-  axios
-    .get(`${BASE_URL}${CAMPUS_CODE}`, {
-      headers: {
-        Authorization: TOKEN,
-      },
-      params: {
-        product_id: 40345,
-      },
-    })
-    .then((result) => console.log('result of axios get: ', result))
-    .catch((err) => console.log('error getting the full QNA: ', err));
+  const [qNaData, setQnaData] = useState({});
+  const [fullList, setFullList] = useState([]);
+  const [qnas, setQnas] = useState([]);
+  console.log('url is: ', `${BASE_URL}${CAMPUS}`);
+  const { productId } = useContext(ProductContext);
+  console.log('productID from context', productId);
+  useEffect(() => {
+    if (productId) {
+      axios
+        .get(`${BASE_URL}${CAMPUS}/qa/questions`, {
+          headers: {
+            Authorization: TOKEN,
+          },
+          params: {
+            product_id: productId,
+          },
+        })
+        .then((result) => {
+          if (result) {
+            console.log('setQnaData to be: :', result.data);
+            setQnaData(result.data);
+            setFullList(result.data.results.sort((a, b) => b.question_helpfulness - a.question_helpfulness));
+          }
+        })
+        .catch((err) => console.log('error getting the full QNA: ', err));
+      console.log('useEffect running');
+    } else {
+      console.log('waiting for productId to be set');
+    }
+  }, [productId]);
 
-  const qNaData = {
+  useEffect(() => {
+    if (fullList.length > 0) {
+      setQnas(fullList.slice(0, 2));
+    }
+  }, [fullList]);
+
+  console.log('in axios, qnaData: ', qNaData);
+  const OldqNaData = {
     product_id: '5',
     results: [{
       question_id: 37,
@@ -267,10 +292,6 @@ const Qa = () => {
     }],
   };
 
-  const fullList = qNaData.results;
-  fullList.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
-
-  const [qnas, setQnas] = useState(fullList.slice(0, 2));
   const [moreQuestions, setMoreQuestions] = useState(2);
   const handleClickMoreQuestion = () => {
     setQnas(fullList.slice(0, moreQuestions + 2));
@@ -306,7 +327,7 @@ const Qa = () => {
 
       <h3>QUESTIONS & ANSWERS</h3>
       <input className='search-bar' placeholder='Have a questions? Search for answers...' onChange={handleOnChange} />
-      <div className='questions-list' data-testid='QuestionsList'>{qnas.length !== 0 && <QuestionsList qnas={qnas} setOpenAnswerModal={setOpenAnswerModal} />}</div>
+      <div className='questions-list' data-testid='QuestionsList'>{qnas.length > 0 && <QuestionsList qnas={qnas} setOpenAnswerModal={setOpenAnswerModal} />}</div>
       <span onClick={handleClickMoreQuestion}>{fullList.length > 2 && fullList.length !== qnas.length && <MoreQuestions />}</span>
       <button type='button' onClick={handleAddAQuestion}>Add A Question</button>
       {openAnswerModal && <AddAnAnswerModal setOpenAnswerModal={setOpenAnswerModal} />}

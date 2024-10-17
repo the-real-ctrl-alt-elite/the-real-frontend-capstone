@@ -13,16 +13,14 @@ const Question = ({ qna, setOpenAnswerModal }) => {
     setOpenAnswerModal(true);
   };
   return (
-    <div>
+    <div className='test'>
       <span className='question-body'>
         Q:
         {qna.question_body}
       </span>
       <span>
-        {' '}
         Helpful?
         <a href='#/' onClick={handleClickYes}>Yes</a>
-        {' '}
         (
         {helpfulPoint}
         ) |

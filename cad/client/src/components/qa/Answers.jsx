@@ -30,7 +30,7 @@ const Answers = ({ answers }) => {
     <div className={`load-more-answers ${extend ? 'full-answers' : ''}`}>
       {answerList.map((answer, idx) => {
         return (
-          <div>
+          <div className='answer-section'>
             <span className='answer-header'>A: </span>
             <span>{answer.body}</span>
             <div>{answer.photos.length > 0 && <Photoes photos={answer.photos} />}</div>
