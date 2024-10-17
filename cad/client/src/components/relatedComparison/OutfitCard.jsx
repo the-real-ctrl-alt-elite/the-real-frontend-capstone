@@ -9,7 +9,7 @@ const OutfitCard = ({
       <button onClick={() => handleRemoveClick(id)} type='button' label='remove-item' className='remove-item-btn'>x</button>
       <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png?20220519031949' alt='fake_img' />
       <div className='product-card-details'>
-        <h6>{category.toUpperCase()}</h6>
+        <h6>{category?.toUpperCase()}</h6>
         <h4>{name}</h4>
         <p>
           $
