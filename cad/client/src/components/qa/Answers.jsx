@@ -54,7 +54,7 @@ const Answers = ({ questionId }) => {
       reminder.style.display = 'block';
       setTimeout(() => {
         reminder.style.display = 'none';
-      }, 1500);
+      }, 2000);
     } else {
       setAnswerList(topAnswers);
       setExtend(!extend);

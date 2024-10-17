@@ -8,7 +8,7 @@ const QuestionsList = ({ qnas, setOpenAnswerModal }) => {
       { qnas.map((qna, idx) => {
         return (
           <div key={idx}>
-            <div className='question-title'><Question qna={qna} setOpenAnswerModal={setOpenAnswerModal} /></div>
+            <div className='question-title'><Question qna={qna} setOpenAnswerModal={setOpenAnswerModal} questionId={qna.question_id} /></div>
             <div><Answers questionId={qna.question_id} /></div>
           </div>
         );
