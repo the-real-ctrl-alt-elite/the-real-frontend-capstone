@@ -4,13 +4,11 @@ import axios from 'axios';
 import QuestionsList from './QuestionsList';
 import MoreQuestions from './MoreQuestions';
 import AddAQuestionModal from './AddAQuestionModal';
-
-
+import AddAnAnswerModal from './AddAnAnswerModal';
 
 const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
-const CAMPUS_CODE = process.env.CAMPUS_CODE;
-
+const { CAMPUS_CODE } = process.env;
 
 const Qa = () => {
   const [qnaData, setQnaData] = useState({});
@@ -300,14 +298,18 @@ const Qa = () => {
     setOpenQuestionModal(true);
   };
 
+  const [openAnswerModal, setOpenAnswerModal] = useState(false);
+
   return (
     <div className='qa-container'>
       {openQuestionModal && <AddAQuestionModal setOpenQuestionModal={setOpenQuestionModal} />}
+
       <h3>QUESTIONS & ANSWERS</h3>
-      <input className='search-bar' placeholder='Have a questions? Search for answers...' onChange={handleOnChange}></input>
-      <div className='questions-list' data-testid='QuestionsList'>{qnas.length !== 0 && <QuestionsList qnas={qnas} />}</div>
+      <input className='search-bar' placeholder='Have a questions? Search for answers...' onChange={handleOnChange} />
+      <div className='questions-list' data-testid='QuestionsList'>{qnas.length !== 0 && <QuestionsList qnas={qnas} setOpenAnswerModal={setOpenAnswerModal} />}</div>
       <span onClick={handleClickMoreQuestion}>{fullList.length > 2 && fullList.length !== qnas.length && <MoreQuestions />}</span>
       <button type='button' onClick={handleAddAQuestion}>Add A Question</button>
+      {openAnswerModal && <AddAnAnswerModal setOpenAnswerModal={setOpenAnswerModal} />}
 
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Answers from './Answers';
 import Question from './Question';
 
-const QuestionsList = ({ qnas }) => {
+const QuestionsList = ({ qnas, setOpenAnswerModal }) => {
   return (
     <div>
       { qnas.map((qna, idx) => {
@@ -18,10 +18,9 @@ const QuestionsList = ({ qnas }) => {
         // const topAnswers = answerList.slice(0, 2);
         // const [displayAnswers, setDisplayAnswers] = useState(topAnswers);
 
-
         return (
           <div key={idx}>
-            <div><Question qna={qna} /></div>
+            <div><Question qna={qna} setOpenAnswerModal={setOpenAnswerModal} /></div>
             <div><Answers answers={qna.answers} /></div>
           </div>
         );

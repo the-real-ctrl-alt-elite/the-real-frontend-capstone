@@ -23,7 +23,7 @@ const AddAQuestionModal = ( { setOpenQuestionModal }) => {
           <small>For authentication reasons, you will not be emailed</small>
         </div>
         <div className='modal-footer'>
-          <button type='button'>Submit question</button>
+          <button type='button'>submit question</button>
         </div>
       </div>
     </div>
