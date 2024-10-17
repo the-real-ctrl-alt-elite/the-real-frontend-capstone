@@ -5,7 +5,7 @@ import HorizontalScroller from './HorizontalScroller';
 
 const OutfitSection = () => {
   const [outfitItems, setOutfitItems] = useState([]);
-  const { productData } = useContext(ProductContext);
+  const { productData, productStyles } = useContext(ProductContext);
 
   useEffect(() => {
     const outfitItemsData = JSON.parse(localStorage.getItem('outfitItems'));
@@ -33,19 +33,20 @@ const OutfitSection = () => {
     <section className='outfit-container'>
       <h3>YOUR OUTFIT</h3>
       <HorizontalScroller>
-        <button className='add-outfit-btn' type='button' label='add-outfit-item' onClick={() => addToOutfit(productData)}>
+        <button className='add-outfit-btn' type='button' label='add-outfit-item' onClick={() => addToOutfit({ ...productData, photo: productStyles?.results[0]?.photos[0] })}>
           <div className='product-card-container'>
             +
           </div>
         </button>
         {outfitItems.map(({
-        // eslint-disable-next-line camelcase
-          id, name, category, default_price, rating,
+          // eslint-disable-next-line camelcase
+          id, name, category, default_price, rating, photo,
         }) => (
           <OutfitCard
             handleRemoveClick={removeFromOutfit}
             key={id}
             id={id}
+            photo={photo}
             name={name}
             category={category}
           // eslint-disable-next-line camelcase
@@ -54,6 +55,7 @@ const OutfitSection = () => {
           />
         ))}
       </HorizontalScroller>
+
     </section>
   );
 };
