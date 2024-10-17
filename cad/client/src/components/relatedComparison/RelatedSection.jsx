@@ -188,9 +188,9 @@ const DEFAULT_PRODUCTS = [{
   ],
 }];
 
-const Related = ({ handleProductClick }) => {
+const RelatedSection = ({ handleProductClick }) => {
   return (
-    <div className='related-container'>
+    <section className='related-container'>
       <h3>RELATED PRODUCTS</h3>
       <HorizontalScroller>
         <>
@@ -212,8 +212,8 @@ const Related = ({ handleProductClick }) => {
         </>
       </HorizontalScroller>
 
-    </div>
+    </section>
   );
 };
 
-export default Related;
+export default RelatedSection;
