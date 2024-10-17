@@ -1,8 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Photoes from './Photoes';
 import Footer from './Footer';
 
-const Answers = ({ answers }) => {
+const TOKEN = process.env.GIT_TOKEN;
+const BASE_URL = process.env.API_BASE_URL;
+const CAMPUS = process.env.CAMPUS_CODE;
+
+const Answers = ({ questionId }) => {
+  const [answers, setAnswers] = useState({});
+  console.log('questions id is : ', questionId);
+
+  useEffect(() => {
+    axios
+      .get(`${BASE_URL}${CAMPUS}/qa/questions/${questionId}/answers`, {
+        headers: {
+          Authorization: TOKEN,
+        },
+        params: {
+          page: 1,
+          count: 5,
+        },
+      })
+      .then((result) => {
+        console.log('result for getting non-reported answer list: ', result.data.results);
+        setAnswers(result.data.results);
+      })
+      .catch((err) => console.log('failed to get non-reported answers: ', err));
+  }, [questionId]);
+
   const allAnswers = Object.values(answers);
   allAnswers.sort((a, b) => b.helpfulness - a.helpfulness);
   const sellerAnswer = allAnswers.find((answer) => answer.answerer_name === 'Seller');

@@ -13,7 +13,7 @@ const Question = ({ qna, setOpenAnswerModal }) => {
     setOpenAnswerModal(true);
   };
   return (
-    <div className='test'>
+    <div>
       <span className='question-body'>
         Q:
         {qna.question_body}

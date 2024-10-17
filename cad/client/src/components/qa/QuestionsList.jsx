@@ -9,7 +9,7 @@ const QuestionsList = ({ qnas, setOpenAnswerModal }) => {
         return (
           <div key={idx}>
             <div className='question-title'><Question qna={qna} setOpenAnswerModal={setOpenAnswerModal} /></div>
-            <div><Answers answers={qna.answers} /></div>
+            <div><Answers questionId={qna.question_id} /></div>
           </div>
         );
       })}
