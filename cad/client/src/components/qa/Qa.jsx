@@ -301,7 +301,7 @@ const Qa = () => {
     setSearch(e.target.value);
     if (e.target.value.length >= 3) {
       const searchList = qnas.filter((qna) => {
-        return qna.question_body.includes(search);
+        return qna.question_body.toLowerCase().includes(search.toLowerCase());
       });
       setQnas(searchList);
     } else {
