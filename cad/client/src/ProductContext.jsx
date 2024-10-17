@@ -4,10 +4,11 @@ import axios from 'axios';
 const ProductContext = createContext();
 const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
-const CAMPUS_CODE = process.env.CAMPUS_CODE;
+const { CAMPUS_CODE } = process.env;
 
 export const ProductProvider = ({ children }) => {
   const [productId, setProductId] = useState(null);
+  const [productData, setProductData] = useState();
   const [rrCount, setrrCount] = useState({ ratingAvg: '', reviewCount: '' });
 
   const generateRandomProductId = () => {
@@ -27,20 +28,21 @@ export const ProductProvider = ({ children }) => {
         },
       })
       .then((response) => {
-        console.log('context', response.data.id)
+        console.log('context', response.data.id);
         setProductId(response.data.id);
+        setProductData(response.data);
       })
       .catch((err) => console.error('error in context', err));
   };
   const newProduct = (id) => {
     setProductId(id);
-  }
+  };
 
   const updateRRCount = (newRatingAvg, newReviewCount) => {
-    setrrCount(prevState => ({
+    setrrCount((prevState) => ({
       ...prevState,
       ratingAvg: newRatingAvg,
-      reviewCount: newReviewCount
+      reviewCount: newReviewCount,
     }));
   };
 
@@ -49,7 +51,10 @@ export const ProductProvider = ({ children }) => {
   }, []);
 
   return (
-    <ProductContext.Provider value={{ productId, setProductId, newProduct, updateRRCount }}>
+    <ProductContext.Provider value={{
+      productId, productData, setProductId, newProduct, updateRRCount,
+    }}
+    >
       {children}
     </ProductContext.Provider>
   );

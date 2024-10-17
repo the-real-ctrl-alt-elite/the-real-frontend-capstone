@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/header/Header';
 import Qa from './components/qa/Qa';
-import Related from './components/relatedComparison/Related';
+import RelatedSection from './components/relatedComparison/RelatedSection';
 import OutfitSection from './components/relatedComparison/OutfitSection';
 import Rating from './components/reviewRating/Rating';
 import Selector from './components/styleSelect/Selector';
@@ -19,7 +19,7 @@ const App = () => {
       <Header />
       <Selector />
       <div className='related-comp-wrapper'>
-        <Related />
+        <RelatedSection />
         <OutfitSection />
       </div>
       <div

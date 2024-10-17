@@ -43,7 +43,7 @@
   flex: 0 0 auto;
   background-color: lightgray;
   position: relative;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 .overlay {
@@ -193,4 +193,8 @@ td {
 .cards-container {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.product-card-details > h4 {
+  line-height: 110%;
 }
