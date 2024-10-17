@@ -9,7 +9,6 @@ const CAMPUS = process.env.CAMPUS_CODE;
 
 const Answers = ({ questionId }) => {
   const [answers, setAnswers] = useState({});
-  console.log('questions id is : ', questionId);
 
   useEffect(() => {
     axios
@@ -23,7 +22,6 @@ const Answers = ({ questionId }) => {
         },
       })
       .then((result) => {
-        console.log('result for getting non-reported answer list: ', result.data.results);
         setAnswers(result.data.results);
       })
       .catch((err) => console.log('failed to get non-reported answers: ', err));
@@ -41,11 +39,22 @@ const Answers = ({ questionId }) => {
   }
   const topAnswers = newAllAnswers.slice(0, 2);
   const [answerList, setAnswerList] = React.useState(topAnswers);
+  useEffect(() => {
+    if (topAnswers.length === 2 && answerList.length === 0) {
+      setAnswerList(topAnswers);
+    }
+  }, [topAnswers, answerList]);
+
   const [extend, setExtend] = React.useState(false);
   const handleClickMoreAnswers = () => {
     if (!extend) {
       setAnswerList(newAllAnswers);
       setExtend(!extend);
+      const reminder = document.getElementById('scrollReminder');
+      reminder.style.display = 'block';
+      setTimeout(() => {
+        reminder.style.display = 'none';
+      }, 1500);
     } else {
       setAnswerList(topAnswers);
       setExtend(!extend);
@@ -64,6 +73,11 @@ const Answers = ({ questionId }) => {
           </div>
         );
       })}
+      {allAnswers.length > 2 && (
+      <div id='scrollReminder' className='popup'>
+        <p>scroll down to view all answers!</p>
+      </div>
+      )}
       <div>{allAnswers.length > 2 && <span onClick={handleClickMoreAnswers}>{extend ? 'COLLAPSE ANSWERS' : 'LOAD MORE ANSWERS'}</span>}</div>
     </div>
   );

@@ -12,7 +12,7 @@
 }
 
 .answer-section {
-  margin: 0 0 10px 0;
+  margin: 0 0 5px 0;
 }
 
 .question-title {
@@ -121,3 +121,16 @@
   margin: 10px 10px;
 }
 
+.popup {
+  position: fixed;
+  top: 40%;
+  left: 30%;
+  transform: translateX(-50%);
+  background-color: rgb(238, 233, 233);
+  color: rgb(19, 17, 17);
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: rgba(218, 161, 161, 0.35) 0px 5px 15px;
+  z-index: 1000;
+  display: none;
+}

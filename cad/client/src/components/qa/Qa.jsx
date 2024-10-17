@@ -15,7 +15,6 @@ const Qa = () => {
   const [qNaData, setQnaData] = useState({});
   const [fullList, setFullList] = useState([]);
   const [qnas, setQnas] = useState([]);
-  console.log('url is: ', `${BASE_URL}${CAMPUS}`);
   const { productId } = useContext(ProductContext);
   console.log('productID from context', productId);
   useEffect(() => {
@@ -31,13 +30,11 @@ const Qa = () => {
         })
         .then((result) => {
           if (result) {
-            console.log('setQnaData to be: :', result.data);
             setQnaData(result.data);
             setFullList(result.data.results.sort((a, b) => b.question_helpfulness - a.question_helpfulness));
           }
         })
         .catch((err) => console.log('error getting the full QNA: ', err));
-      console.log('useEffect running');
     } else {
       console.log('waiting for productId to be set');
     }
@@ -49,7 +46,6 @@ const Qa = () => {
     }
   }, [fullList]);
 
-  console.log('in axios, qnaData: ', qNaData);
   const OldqNaData = {
     product_id: '5',
     results: [{
@@ -302,7 +298,6 @@ const Qa = () => {
 
   const [search, setSearch] = useState('');
   const handleOnChange = (e) => {
-    console.log('moreQuestions: ', moreQuestions);
     setSearch(e.target.value);
     if (e.target.value.length >= 3) {
       const searchList = qnas.filter((qna) => {
