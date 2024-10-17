@@ -3,6 +3,7 @@
   gap: 0.75rem;
 }
 
+
 .related-container > button {
   all: unset;
 }
@@ -31,7 +32,6 @@
 
 /* Horizontal scroll container */
 .cards-container {
-  padding: 0 3rem;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -47,7 +47,6 @@
   flex: 0 0 auto;
   background-color: lightgray;
   position: relative;
-  padding-bottom: 0.75rem;
 }
 
 .overlay {
@@ -178,7 +177,7 @@ td {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 4rem;
+  width: 2rem;
   background: linear-gradient(90deg, rgba(245,245,245, 1) 10%, rgba(255,255,255,0) 100%);
   border:none;
   z-index: 5;
@@ -190,7 +189,7 @@ td {
   right: 0;
   top: 0;
   bottom: 0;
-  width: 4rem;
+  width: 2rem;
   z-index: 5;
   background: linear-gradient(270deg, rgba(245,245,245, 1) 10%, rgba(255,255,255,0) 100%);
   border: none;

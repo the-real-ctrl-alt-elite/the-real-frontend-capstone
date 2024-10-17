@@ -8,21 +8,26 @@ const HorizontalScroller = ({ children }) => {
   const handleScroll = () => {
     if (!scrollContainerRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+    console.log('scrollLeft', scrollLeft);
     setShowLeftButton(scrollLeft > 0);
     setShowRightButton(scrollLeft + 100 < scrollWidth - clientWidth);
   };
 
   const scrollToLeft = () => {
-    if (scrollContainerRef && scrollContainerRef) {
-      scrollContainerRef?.current?.scrollBy({ left: -150, behavior: 'smooth' });
-      handleScroll();
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -250, behavior: 'smooth' });
+      scrollContainerRef.current.addEventListener('scrollend', () => {
+        handleScroll();
+      });
     }
   };
 
   const scrollToRight = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef?.current?.scrollBy({ left: 150, behavior: 'smooth' });
-      handleScroll();
+      scrollContainerRef.current.scrollBy({ left: 250, behavior: 'smooth' });
+      scrollContainerRef.current.addEventListener('scrollend', () => {
+        handleScroll();
+      });
     }
   };
 
