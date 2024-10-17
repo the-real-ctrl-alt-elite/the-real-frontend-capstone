@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { v4 as uuidv4 } from 'uuid';
@@ -44,13 +44,11 @@ const RelatedCard = ({
   const { productData, setProductId } = useContext(ProductContext);
 
   const handleItemClick = () => {
-    console.log('replace this with page navigation!');
     setProductId(id);
   };
 
   const handleCompareClick = () => {
     setShowModal(true);
-    console.log('modal should open to compare details');
   };
 
   return (
@@ -73,7 +71,7 @@ const RelatedCard = ({
       </div>
       {showModal && createPortal(
         <ComparsionModalContent
-          currentProduct={productData}
+          currentProduct={{ ...productData, defaultPrice: productData.default_price }}
           selectedProduct={{
             name, category, defaultPrice, rating, description, features,
           }}

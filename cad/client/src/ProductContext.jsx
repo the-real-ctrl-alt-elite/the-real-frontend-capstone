@@ -65,7 +65,11 @@ export const ProductProvider = ({ children }) => {
 
   useEffect(() => {
     const randomId = generateRandomProductId();
-    const url = `${BASE_URL}${CAMPUS_CODE}/products/${randomId}`;
+    setProductId(randomId);
+  }, []);
+
+  useEffect(() => {
+    const url = `${BASE_URL}${CAMPUS_CODE}/products/${productId}`;
     const fetchProductId = () => {
       axios
         .get(url, {
@@ -96,7 +100,7 @@ export const ProductProvider = ({ children }) => {
     };
     fetchProductId();
     fetchProductStyles();
-  }, []);
+  }, [productId]);
 
   return (
     <ProductContext.Provider value={{
