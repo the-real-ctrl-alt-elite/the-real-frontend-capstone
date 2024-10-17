@@ -16,25 +16,6 @@ export const ProductProvider = ({ children }) => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
   };
 
-  // const fetchProductId = () => {
-  //   const randomId = generateRandomProductId();
-  //   const url = `${BASE_URL}${CAMPUS_CODE}/products/${randomId}`;
-  //   axios
-  //     .get(url, {
-  //       headers: {
-  //         Authorization: TOKEN,
-  //       },
-  //       params: {
-  //         count: 1,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       console.log('context', response.data.id);
-  //       setProductId(response.data.id);
-  //       setProductData(response.data);
-  //     })
-  //     .catch((err) => console.error('error in context', err));
-  // };
   const newProduct = (id) => {
     setProductId(id);
   };
@@ -47,25 +28,13 @@ export const ProductProvider = ({ children }) => {
     }));
   };
 
-  // const fetchProductStyles = () => {
-  //   if (productId) {
-  //     const url = `${BASE_URL}${CAMPUS_CODE}/products/${productId}/styles`;
-  //     axios
-  //       .get(url, {
-  //         headers: {
-  //           Authorization: TOKEN,
-  //         },
-  //       })
-  //       .then((response) => {
-  //         setProductStyles(response.data);
-  //       })
-  //       .catch((err) => console.error('error in context', err));
-  //   }
-  // };
+  useEffect(() => {
+    // const randomId = generateRandomProductId();
+    setProductId(40568);
+  }, []);
 
   useEffect(() => {
-    const randomId = generateRandomProductId();
-    const url = `${BASE_URL}${CAMPUS_CODE}/products/${randomId}`;
+    const url = `${BASE_URL}${CAMPUS_CODE}/products/${productId}`;
     const fetchProductId = () => {
       axios
         .get(url, {
@@ -96,7 +65,7 @@ export const ProductProvider = ({ children }) => {
     };
     fetchProductId();
     fetchProductStyles();
-  }, []);
+  }, [productId]);
 
   return (
     <ProductContext.Provider value={{
