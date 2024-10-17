@@ -8,23 +8,28 @@ const HorizontalScroller = ({ children }) => {
   const handleScroll = () => {
     if (!scrollContainerRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+    console.log(scrollLeft);
     setShowLeftButton(scrollLeft > 0);
     setShowRightButton(scrollLeft + 100 < scrollWidth - clientWidth - 100);
   };
 
   const scrollToLeft = () => {
     if (scrollContainerRef && scrollContainerRef) {
-      scrollContainerRef?.current?.scrollBy({ left: -500, behavior: 'smooth' });
+      scrollContainerRef?.current?.scrollBy({ left: -250, behavior: 'smooth' });
       handleScroll();
     }
   };
 
   const scrollToRight = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef?.current?.scrollBy({ left: 500, behavior: 'smooth' });
+      scrollContainerRef?.current?.scrollBy({ left: 250, behavior: 'smooth' });
       handleScroll();
     }
   };
+
+  useEffect(() => {
+    handleScroll();
+  }, []);
 
   return (
     <div className='cards-scroller'>
