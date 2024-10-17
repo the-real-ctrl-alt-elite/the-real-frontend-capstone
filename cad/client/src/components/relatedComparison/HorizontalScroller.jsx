@@ -8,7 +8,6 @@ const HorizontalScroller = ({ children }) => {
   const handleScroll = () => {
     if (!scrollContainerRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-    console.log('scrollLeft', scrollLeft);
     setShowLeftButton(scrollLeft > 0);
     setShowRightButton(scrollLeft + 100 < scrollWidth - clientWidth);
   };
@@ -32,11 +31,11 @@ const HorizontalScroller = ({ children }) => {
   };
 
   useEffect(() => {
-    if (!scrollContainerRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-    setShowLeftButton(scrollLeft > 0);
-    setShowRightButton(scrollLeft <= scrollWidth - clientWidth);
-  }, [scrollContainerRef]);
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setShowRightButton(scrollLeft <= scrollWidth - clientWidth);
+    }
+  }, []);
 
   return (
     <div className='cards-scroller'>

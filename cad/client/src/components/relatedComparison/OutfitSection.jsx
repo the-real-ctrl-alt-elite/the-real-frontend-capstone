@@ -5,7 +5,7 @@ import HorizontalScroller from './HorizontalScroller';
 
 const OutfitSection = () => {
   const [outfitItems, setOutfitItems] = useState([]);
-  const { productData, productStyles, productId } = useContext(ProductContext);
+  const { productData, productStyles } = useContext(ProductContext);
 
   useEffect(() => {
     const outfitItemsData = JSON.parse(localStorage.getItem('outfitItems'));
@@ -20,7 +20,6 @@ const OutfitSection = () => {
 
   const addToOutfit = (newItem) => {
     const hasItem = outfitItems.some((item) => item.id === newItem.id);
-    console.log('newItem', newItem);
     if (!hasItem) {
       setOutfitItems((prevItems) => [...prevItems, newItem]);
     }
@@ -29,8 +28,6 @@ const OutfitSection = () => {
   const removeFromOutfit = (id) => {
     setOutfitItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
-
-  console.log('styles/id', productStyles, productId);
 
   return (
     <section className='outfit-container'>
