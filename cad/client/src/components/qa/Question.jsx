@@ -19,10 +19,8 @@ const Question = ({ qna, setOpenAnswerModal }) => {
         {qna.question_body}
       </span>
       <span>
-        {' '}
         Helpful?
         <a href='#/' onClick={handleClickYes}>Yes</a>
-        {' '}
         (
         {helpfulPoint}
         ) |
