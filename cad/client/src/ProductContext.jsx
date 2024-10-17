@@ -90,7 +90,7 @@ export const ProductProvider = ({ children }) => {
           },
         })
         .then((response) => {
-          setProductStyles(response.data);
+          setProductStyles(response.data.results);
         })
         .catch((err) => console.error('error in context', err));
     };

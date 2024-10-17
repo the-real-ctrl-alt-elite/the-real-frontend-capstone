@@ -31,9 +31,12 @@ const HorizontalScroller = ({ children }) => {
   };
 
   useEffect(() => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setShowRightButton(scrollLeft <= scrollWidth - clientWidth);
+    if (scrollContainerRef.current && scrollContainerRef.current.scrollWidth && scrollContainerRef.current.clientWidth) {
+      if (scrollContainerRef.current.scrollWidth > scrollContainerRef.current.clientWidth) {
+        setShowRightButton(false);
+      } else {
+        setShowRightButton(true);
+      }
     }
   }, []);
 

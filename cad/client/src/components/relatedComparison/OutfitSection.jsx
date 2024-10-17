@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import ProductContext from '../../ProductContext';
 import OutfitCard from './OutfitCard';
 import HorizontalScroller from './HorizontalScroller';
+import { getDefaultStyle } from './helpers/styleHelpers';
 
 const OutfitSection = () => {
   const [outfitItems, setOutfitItems] = useState([]);
@@ -33,20 +34,32 @@ const OutfitSection = () => {
     <section className='outfit-container'>
       <h3>YOUR OUTFIT</h3>
       <HorizontalScroller>
-        <button className='add-outfit-btn' type='button' label='add-outfit-item' onClick={() => addToOutfit({ ...productData, photo: productStyles?.results[0]?.photos[0] })}>
+        <button
+          className='add-outfit-btn'
+          type='button'
+          label='add-outfit-item'
+          onClick={() => addToOutfit(
+            {
+              ...productData,
+              photos: getDefaultStyle(productStyles)?.photos[0],
+              sale_price: getDefaultStyle(productStyles)?.sale_price,
+            },
+          )}
+        >
           <div className='product-card-container'>
             +
           </div>
         </button>
         {outfitItems.map(({
           // eslint-disable-next-line camelcase
-          id, name, category, default_price, rating, photo,
+          id, name, category, default_price, sale_price, rating, photos,
         }) => (
           <OutfitCard
             handleRemoveClick={removeFromOutfit}
             key={id}
             id={id}
-            photo={photo}
+            salePrice={sale_price}
+            photos={photos}
             name={name}
             category={category}
           // eslint-disable-next-line camelcase
