@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ModalFrame = ({
+  background,
   border,
   buttonText,
   component,
@@ -14,6 +15,7 @@ const ModalFrame = ({
   const usedButtonText = buttonText || 'X';
   const usedPadding = padding || '.55rem';
   const usedFontColor = fontColor || 'white';
+  const usedBackground = background || 'rgba(22,22,22,1)';
   return (
     <div
       className='modelFrame'
