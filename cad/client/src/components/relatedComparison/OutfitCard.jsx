@@ -12,7 +12,7 @@ const OutfitCard = ({
       <button onClick={() => handleRemoveClick(id)} type='button' label='remove-item' className='action-item-btn'>
         <i className='fa-solid fa-xmark' style={{ color: '#ffffff', margin: 'auto' }} />
       </button>
-      <img className='product-card-img' src={photos?.url} alt='fake_img' />
+      <img className='product-card-img' src={photos?.url} alt='product-item-img' />
       <div className='product-card-details'>
         <h6>{category?.toUpperCase()}</h6>
         <h5>{name}</h5>
