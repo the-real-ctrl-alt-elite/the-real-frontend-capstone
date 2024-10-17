@@ -10,6 +10,7 @@ const Footer = ({
   userName, dateData, helpfulness, answerList, setAnswerList, idx, answerId,
 }) => {
   const helpfulURL = `${BASE_URL}${CAMPUS}/qa/answers/${answerId}/helpful`;
+  const reportURL = `${BASE_URL}${CAMPUS}/qa/answers/${answerId}/report`;
   const formatDate = format(dateData, 'MMMM d, yyyy');
   const isSeller = userName === 'Seller';
   /* increment count when clicking yes */
@@ -35,6 +36,14 @@ const Footer = ({
     setReportState('Reported');
     answerList.splice(idx, 1);
     setAnswerList(answerList);
+    axios
+      .put(reportURL, null, {
+        headers: {
+          Authorization: TOKEN,
+        },
+      })
+      .then(() => console.log('sucessfully reported answer'))
+      .catch((err) => console.log('failed to report answer: ', err));
   };
 
   return (
