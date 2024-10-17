@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductContext from '../../../ProductContext';
 
-const AddReview = ({ componentProps }) => {
+const AddReview = ({ metaData }) => {
   const { productId } = useContext(ProductContext);
   const [productInfo, setProductInfo] = useState({});
   const [userRating, setUserRating] = useState(0);
-  const [characteristics, setCharacteristics] = useState(Object.keys(componentProps.metaData.characteristics));
+  const [characteristics, setCharacteristics] = useState(Object.keys(metaData.characteristics));
   const [recommend, setRecommend] = useState(false);
   const [userSummary, setUserSummary] = useState('');
   const [bodyContent, setBodyContent] = useState('');
@@ -31,7 +31,7 @@ const AddReview = ({ componentProps }) => {
       'Slightly uncomfortable',
       'Okay',
       'Comfortable',
-      'Perfect',
+      'Perfect!',
     ],
     Quality: [
       'Poor',
@@ -55,7 +55,7 @@ const AddReview = ({ componentProps }) => {
       'Runs loose',
     ],
   };
-  console.log(componentProps.metaData)
+  console.log(metaData)
 
   useEffect(() => {
     const TOKEN = process.env.GIT_TOKEN;

@@ -2,6 +2,9 @@
 import React from 'react';
 import ModalFrame from './ModalFrame';
 
+// pass componentProps as object to access properties through normal destructuring
+// at top level of nested component
+
 const ModalBackground = ({
   background,
   backgroundClose,
@@ -29,7 +32,7 @@ const ModalBackground = ({
   const usedBorder = border || 'none';
   const usedButtonText = buttonText || 'X';
   const usedFontColor = fontColor || 'white';
-  const usedInnerPadding = innerPadding || '2rem';
+  const usedInnerPadding = innerPadding || '.55rem';
 
   const handleClick = (e) => {
     if (usedBackgroundClose) {

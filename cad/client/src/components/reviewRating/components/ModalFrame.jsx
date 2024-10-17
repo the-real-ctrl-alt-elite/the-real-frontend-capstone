@@ -12,27 +12,33 @@ const ModalFrame = ({
   // provide inline css or use these defaults
   const usedBorder = border || 'none';
   const usedButtonText = buttonText || 'X';
-  const usedPadding = padding || 'inherit';
+  const usedPadding = padding || '.55rem';
   const usedFontColor = fontColor || 'white';
   return (
     <div
+      className='modelFrame'
       style={{
+        background: 'rgba(22,22,22,1)',
         position: 'relative',
-        maxHeight: '75vh',
+        maxHeight: '100vh',
         maxWidth: '75vw',
         padding: `${usedPadding}`,
         border: `${usedBorder}`,
         zIndex: '5',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: '1rem',
       }}
     >
-      {component({ componentProps })}
+      {component({ ...componentProps })}
       <button
         type='button'
         onClick={() => closeModal()}
         style={{
           position: 'absolute',
-          top: '3rem',
-          right: '3rem',
+          top: `calc(${usedPadding} + 0.45rem)`,
+          right: `calc(${usedPadding} + 0.45rem)`,
           borderRadius: '1rem',
           height: '2rem',
           width: '2rem',
