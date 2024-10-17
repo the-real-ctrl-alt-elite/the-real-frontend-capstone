@@ -7,7 +7,7 @@ const OutfitCard = ({
   return (
     <section className='product-card-container'>
       <button onClick={() => handleRemoveClick(id)} type='button' label='remove-item' className='remove-item-btn'>x</button>
-      <img className='product-card-img' src={photo.url} alt='fake_img' />
+      <img className='product-card-img' src={photo?.url} alt='fake_img' />
       <div className='product-card-details'>
         <h6>{category?.toUpperCase()}</h6>
         <h4>{name}</h4>

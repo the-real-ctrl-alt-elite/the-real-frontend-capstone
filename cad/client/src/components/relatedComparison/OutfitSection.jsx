@@ -42,7 +42,7 @@ const OutfitSection = () => {
           </div>
         </button>
         {outfitItems.map(({
-        // eslint-disable-next-line camelcase
+          // eslint-disable-next-line camelcase
           id, name, category, default_price, rating, photo,
         }) => (
           <OutfitCard
@@ -58,6 +58,7 @@ const OutfitSection = () => {
           />
         ))}
       </HorizontalScroller>
+
     </section>
   );
 };

@@ -77,7 +77,6 @@ export const ProductProvider = ({ children }) => {
           },
         })
         .then((response) => {
-          console.log('context', response.data.id);
           setProductId(response.data.id);
           setProductData(response.data);
         })

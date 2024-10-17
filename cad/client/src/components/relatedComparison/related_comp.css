@@ -7,6 +7,10 @@
   all: unset;
 }
 
+.outfit-container > button {
+  all: unset;
+}
+
 .comparison-container {
   margin: 1rem;
 }
@@ -177,7 +181,7 @@ td {
   width: 4rem;
   background: linear-gradient(90deg, rgba(245,245,245, 1) 10%, rgba(255,255,255,0) 100%);
   border:none;
-  z-index: 1000;
+  z-index: 5;
 }
 
 .right-scroll-btn {
@@ -187,7 +191,7 @@ td {
   top: 0;
   bottom: 0;
   width: 4rem;
-  z-index: 1000;
+  z-index: 5;
   background: linear-gradient(270deg, rgba(245,245,245, 1) 10%, rgba(255,255,255,0) 100%);
   border: none;
 }
