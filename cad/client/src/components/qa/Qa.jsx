@@ -4,7 +4,6 @@ import axios from 'axios';
 import QuestionsList from './QuestionsList';
 import MoreQuestions from './MoreQuestions';
 import AddAQuestionModal from './AddAQuestionModal';
-import AddAnAnswerModal from './AddAnAnswerModal';
 import ProductContext from '../../ProductContext';
 
 const TOKEN = process.env.GIT_TOKEN;
@@ -332,10 +331,10 @@ const Qa = () => {
 
       <h3 className='section-title'>QUESTIONS & ANSWERS</h3>
       <input className='search-bar' placeholder='Have a questions? Search for answers...' onChange={handleOnChange} />
-      <div className='questions-list' data-testid='QuestionsList'>{qnas.length > 0 && <QuestionsList qnas={qnas} setOpenAnswerModal={setOpenAnswerModal} />}</div>
+      <div className='questions-list' data-testid='QuestionsList'>{qnas.length > 0 && <QuestionsList qnas={qnas} setOpenAnswerModal={setOpenAnswerModal} openAnswerModal={openAnswerModal} productName={productName} />}</div>
       <span onClick={handleClickMoreQuestion}>{fullList.length > 2 && fullList.length !== qnas.length && <MoreQuestions />}</span>
       <span><button type='button' onClick={handleAddAQuestion}>Add A Question</button></span>
-      {openAnswerModal && <AddAnAnswerModal setOpenAnswerModal={setOpenAnswerModal} />}
+      {/* {openAnswerModal && <AddAnAnswerModal setOpenAnswerModal={setOpenAnswerModal} />} */}
 
     </div>
   );

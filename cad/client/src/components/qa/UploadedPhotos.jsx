@@ -1,6 +1,7 @@
 import React from 'react';
 
 const UploadedPhotos = ({ urls }) => {
+  console.log('urls in uploadedPhotos', urls);
   return (
     <div>
       {urls.map((url) => {
