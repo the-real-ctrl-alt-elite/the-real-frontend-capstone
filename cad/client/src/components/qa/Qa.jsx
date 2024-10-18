@@ -15,8 +15,18 @@ const Qa = () => {
   const [qNaData, setQnaData] = useState({});
   const [fullList, setFullList] = useState([]);
   const [qnas, setQnas] = useState([]);
-  const { productId } = useContext(ProductContext);
+  const { productId, productData } = useContext(ProductContext);
   console.log('productID from context', productId);
+
+  const [productName, setProductName] = useState('');
+  // if (productId && ) {
+  //   setProductName(productData.name);
+  // }
+  useEffect(() => {
+    if (productData && productId) {
+      setProductName(productData.name);
+    }
+  }, [productData, productId]);
   useEffect(() => {
     if (productId) {
       axios
@@ -318,7 +328,7 @@ const Qa = () => {
 
   return (
     <div className='qa-container'>
-      {openQuestionModal && <AddAQuestionModal setOpenQuestionModal={setOpenQuestionModal} />}
+      {openQuestionModal && <AddAQuestionModal setOpenQuestionModal={setOpenQuestionModal} productName={productName} />}
 
       <h3>QUESTIONS & ANSWERS</h3>
       <input className='search-bar' placeholder='Have a questions? Search for answers...' onChange={handleOnChange} />
