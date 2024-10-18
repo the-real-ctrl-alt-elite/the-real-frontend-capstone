@@ -6,7 +6,7 @@ import { getDefaultStyle } from './helpers/styleHelpers';
 
 const OutfitSection = () => {
   const [outfitItems, setOutfitItems] = useState([]);
-  const { productData, productStyles } = useContext(ProductContext);
+  const { productData, productStyles, starCount } = useContext(ProductContext);
 
   useEffect(() => {
     const outfitItemsData = JSON.parse(localStorage.getItem('outfitItems'));
@@ -43,6 +43,7 @@ const OutfitSection = () => {
               ...productData,
               photos: getDefaultStyle(productStyles)?.photos[0],
               sale_price: getDefaultStyle(productStyles)?.sale_price,
+              rating: starCount,
             },
           )}
         >
@@ -52,7 +53,7 @@ const OutfitSection = () => {
         </button>
         {outfitItems.map(({
           // eslint-disable-next-line camelcase
-          id, name, category, default_price, sale_price, rating, photos,
+          id, name, category, default_price, sale_price, photos, rating,
         }) => (
           <OutfitCard
             handleRemoveClick={removeFromOutfit}
@@ -62,9 +63,9 @@ const OutfitSection = () => {
             photos={photos}
             name={name}
             category={category}
+            rating={rating}
           // eslint-disable-next-line camelcase
             defaultPrice={default_price}
-            rating={rating}
           />
         ))}
       </HorizontalScroller>

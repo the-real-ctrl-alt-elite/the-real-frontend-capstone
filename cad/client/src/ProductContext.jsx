@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import axiosInstance from './AxiosInstance';
 
 const ProductContext = createContext();
 const TOKEN = process.env.GIT_TOKEN;
@@ -64,13 +65,33 @@ export const ProductProvider = ({ children }) => {
         })
         .catch((err) => console.error('error in context', err));
     };
-    fetchProductId();
-    fetchProductStyles();
+    const getStarCount = () => {
+      axiosInstance.get('/reviews', {
+        params: {
+          page: 1,
+          count: 9999999,
+          product_id: productId,
+        },
+      }).then((response) => {
+        if (response.data?.results) {
+          const totalStars = response.data.results.reduce((acc, review) => (review?.rating ? acc + review.rating : acc), 0);
+          setStarCount(totalStars / (response.data.results.length));
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+    };
+
+    if (productId) {
+      fetchProductId();
+      fetchProductStyles();
+      getStarCount();
+    }
   }, [productId]);
 
   return (
     <ProductContext.Provider value={{
-      productId, productData, productStyles, setProductId, newProduct, updateRRCount,
+      productId, productData, productStyles, starCount, setProductId, newProduct, updateRRCount,
     }}
     >
       {children}

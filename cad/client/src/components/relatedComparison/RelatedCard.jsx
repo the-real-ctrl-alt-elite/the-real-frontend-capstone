@@ -12,10 +12,12 @@ import { getDefaultStyle } from './helpers/styleHelpers';
 // TODO: Star count is incorrect
 
 const RelatedCard = ({
-  name, id, category, defaultPrice, salePrice, rating, description, features, photos,
+  name, id, category, defaultPrice, salePrice, description, features, photos, rating,
 }) => {
   const [showModal, setShowModal] = useState(false);
-  const { productData, productStyles, setProductId } = useContext(ProductContext);
+  const {
+    productData, productStyles, setProductId, starCount,
+  } = useContext(ProductContext);
 
   const handleItemClick = () => {
     setProductId(id);
@@ -24,8 +26,6 @@ const RelatedCard = ({
   const handleCompareClick = () => {
     setShowModal(true);
   };
-
-  console.log(productStyles);
 
   return (
     <>
@@ -47,7 +47,9 @@ const RelatedCard = ({
       </div>
       {showModal && createPortal(
         <ComparsionModalContent
-          currentProduct={{ ...productData, defaultPrice: productData.default_price, salePrice: getDefaultStyle(productStyles)?.sale_price }}
+          currentProduct={{
+            ...productData, rating: starCount, defaultPrice: productData.default_price, salePrice: getDefaultStyle(productStyles)?.sale_price,
+          }}
           selectedProduct={{
             name, category, defaultPrice, salePrice, rating, description, features,
           }}
