@@ -69,7 +69,7 @@ export const ProductProvider = ({ children }) => {
       axiosInstance.get('/reviews', {
         params: {
           page: 1,
-          count: 9999999,
+          count: 5000,
           product_id: productId,
         },
       }).then((response) => {
