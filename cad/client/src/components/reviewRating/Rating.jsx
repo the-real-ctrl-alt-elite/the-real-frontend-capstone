@@ -145,6 +145,8 @@ const Rating = () => {
     productId,
     reviews,
     setReviewStatus,
+    reviewFilters,
+    setReviewFilters,
   };
 
   const closePictureModal = () => {

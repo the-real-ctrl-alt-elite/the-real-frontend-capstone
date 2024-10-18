@@ -16,8 +16,8 @@ const ReviewList = ({ fn }) => {
       ))}
       <div className='reviewsButtonContainer'>
         <div className='reviewButtonRow'>
-          {fn.activeReviews.length < fn.filteredReviews.length ? <MoreReviews fn={fn} /> : ''}
-          <AddReview />
+          {fn.activeReviews.length < fn.reviews.length ? <MoreReviews fn={fn} /> : ''}
+          <AddReview setReviewStatus={fn.setReviewStatus} />
         </div>
       </div>
     </div>

@@ -1,34 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
 import QuestionsList from './QuestionsList';
 import MoreQuestions from './MoreQuestions';
 import AddAQuestionModal from './AddAQuestionModal';
-
-
+import AddAnAnswerModal from './AddAnAnswerModal';
+import ProductContext from '../../ProductContext';
 
 const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
-const CAMPUS_CODE = process.env.CAMPUS_CODE;
+const CAMPUS = process.env.CAMPUS_CODE;
 
-console.log('baseURL: ', BASE_URL, ' ', TOKEN, ' ', CAMPUS_CODE);
 const Qa = () => {
-  const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions';
-  const [qnaData, setQnaData] = useState({});
-  console.log('url is: ', url);
-  axios
-    .get(url, {
-      headers: {
-        Authorization: TOKEN,
-      },
-      params: {
-        product_id: 40345,
-      },
-    })
-    .then((result) => console.log('result of axios get: ', result))
-    .catch((err) => console.log('error getting the full QNA: ', err));
+  const [qNaData, setQnaData] = useState({});
+  const [fullList, setFullList] = useState([]);
+  const [qnas, setQnas] = useState([]);
+  const { productId, productData } = useContext(ProductContext);
+  console.log('productID from context', productId);
 
-  const qNaData = {
+  const [productName, setProductName] = useState('');
+  // if (productId && ) {
+  //   setProductName(productData.name);
+  // }
+  useEffect(() => {
+    if (productData && productId) {
+      setProductName(productData.name);
+    }
+  }, [productData, productId]);
+  useEffect(() => {
+    if (productId) {
+      axios
+        .get(`${BASE_URL}${CAMPUS}/qa/questions`, {
+          headers: {
+            Authorization: TOKEN,
+          },
+          params: {
+            product_id: productId,
+          },
+        })
+        .then((result) => {
+          if (result) {
+            setQnaData(result.data);
+            setFullList(result.data.results.sort((a, b) => b.question_helpfulness - a.question_helpfulness));
+          }
+        })
+        .catch((err) => console.log('error getting the full QNA: ', err));
+    } else {
+      console.log('waiting for productId to be set');
+    }
+  }, [productId]);
+
+  useEffect(() => {
+    if (fullList.length > 0) {
+      setQnas(fullList.slice(0, 2));
+    }
+  }, [fullList]);
+
+  const OldqNaData = {
     product_id: '5',
     results: [{
       question_id: 37,
@@ -270,10 +298,6 @@ const Qa = () => {
     }],
   };
 
-  const fullList = qNaData.results;
-  fullList.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
-
-  const [qnas, setQnas] = useState(fullList.slice(0, 2));
   const [moreQuestions, setMoreQuestions] = useState(2);
   const handleClickMoreQuestion = () => {
     setQnas(fullList.slice(0, moreQuestions + 2));
@@ -284,11 +308,10 @@ const Qa = () => {
 
   const [search, setSearch] = useState('');
   const handleOnChange = (e) => {
-    console.log('moreQuestions: ', moreQuestions);
     setSearch(e.target.value);
     if (e.target.value.length >= 3) {
       const searchList = qnas.filter((qna) => {
-        return qna.question_body.includes(search);
+        return qna.question_body.toLowerCase().includes(search.toLowerCase());
       });
       setQnas(searchList);
     } else {
@@ -301,14 +324,19 @@ const Qa = () => {
     setOpenQuestionModal(true);
   };
 
+  const [openAnswerModal, setOpenAnswerModal] = useState(false);
+
   return (
     <div className='qa-container'>
+      {openQuestionModal && <AddAQuestionModal setOpenQuestionModal={setOpenQuestionModal} productName={productName} productId={productId} />}
+
       <h3>QUESTIONS & ANSWERS</h3>
-      <input className='search-bar' placeholder='Have a questions? Search for answers...' onChange={handleOnChange}></input>
-      <div className='questions-list'>{qnas.length !== 0 && <QuestionsList qnas={qnas} />}</div>
+      <input className='search-bar' placeholder='Have a questions? Search for answers...' onChange={handleOnChange} />
+      <div className='questions-list' data-testid='QuestionsList'>{qnas.length > 0 && <QuestionsList qnas={qnas} setOpenAnswerModal={setOpenAnswerModal} />}</div>
       <span onClick={handleClickMoreQuestion}>{fullList.length > 2 && fullList.length !== qnas.length && <MoreQuestions />}</span>
       <button type='button' onClick={handleAddAQuestion}>Add A Question</button>
-      {openQuestionModal && <AddAQuestionModal setOpenQuestionModal={setOpenQuestionModal} />}
+      {openAnswerModal && <AddAnAnswerModal setOpenAnswerModal={setOpenAnswerModal} />}
+
     </div>
   );
 };
