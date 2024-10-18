@@ -20,7 +20,7 @@ const ModalFrame = ({
     <div
       className='modelFrame'
       style={{
-        background: 'rgba(22,22,22,1)',
+        background: `${usedBackground}`,
         position: 'relative',
         maxHeight: '100vh',
         maxWidth: '75vw',
@@ -39,8 +39,8 @@ const ModalFrame = ({
         onClick={() => closeModal()}
         style={{
           position: 'absolute',
-          top: `calc(${usedPadding} + 0.45rem)`,
-          right: `calc(${usedPadding} + 0.45rem)`,
+          top: `calc(${usedPadding} + 0.65rem)`,
+          right: `calc(${usedPadding} + 0.65rem)`,
           borderRadius: '1rem',
           height: '2rem',
           width: '2rem',

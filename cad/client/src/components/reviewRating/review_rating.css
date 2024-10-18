@@ -258,7 +258,10 @@ a {
 .addReviewBox {
   background: white;
   width: 50vw;
+  max-width: 50vw;
   height: 80vh;
+  max-height: 80vh;
+  overflow-y: scroll;
   padding: 1rem;
   border-radius: 1rem;
 }
@@ -272,4 +275,12 @@ a {
 
 .characteristicVoteBox>* {
   font-size: .75rem;
+}
+
+input[type=text]:focus {
+  background-color: rgb(235, 235, 235);
+}
+
+textarea:focus {
+  background-color: rgb(235,235,235);
 }

@@ -25,7 +25,6 @@ const ModalBackground = ({
   // closeModal needs to be an event that swaps the model state from
   // active to inactive, for example setModalState(!modalState)
   // which gets passed all the way down to an x button in modelFrame
-
   const usedTop = top || '0';
   const usedBackground = background || 'rgba(22,22,22,0.5)';
   const usedInnerBackground = innerBackground || 'rgba(22,22,22,1)'
