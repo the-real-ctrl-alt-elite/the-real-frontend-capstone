@@ -282,26 +282,21 @@ a {
   font-size: .75rem;
 }
 
-.userReviewPictureBox {
+.drag-drop {
+  width: 40%;
+}
+
+.upload-info {
   display: flex;
-  flex-direction: column;
-  justify-content: start;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.dragAndDropReview {
-  border: 2px dashed #ccc;
-  padding: 1.25rem;
-  border-radius: .75rem;
-  background-color: white;
-  cursor: pointer;
-  /* width: 40%; */
-  margin: 1.25rem 0;
-  position: relative;
-}
-
-.dragAndDropReview p {
-  font-size: .75rem;
-  margin: 10px 0;
+.document-uploader {
+  border: 2px dotted gray;
+  background-color: rgb(205,205,215);
+  padding: 1rem;
 }
 
 .fa-check, .fa-x {
@@ -325,12 +320,35 @@ a {
   background-color: red;
 }
 
+.file-list-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.file-info {
+  position: relative;
+}
+
+.file-list-container>div>div>img {
+  box-shadow: 2px 3px 2px 2px rgba(0, 0, 0, 0.33);
+}
+
+.uploadImageRemoveBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: .5rem;
+  cursor: pointer;
+}
+
 
 
 input[type=text]:focus, input[type=email]:focus {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(205, 205, 215);
 }
 
 textarea:focus {
-  background-color: rgb(235,235,235);
+  background-color: rgb(205,205,215);
 }

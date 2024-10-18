@@ -234,7 +234,14 @@ const Response = ({ response }) => {
 const Recommend = () => {
   //
   return (
-    <div style={{ padding: '.25rem 0', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '.5rem' }}>
+    <div style={{
+      padding: '.25rem 0',
+      fontSize: '14px',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '.5rem',
+    }}
+    >
       <i className='fa-solid fa-check' />
       {' '}
       I recommend this product

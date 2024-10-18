@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductContext from '../../../ProductContext';
+import DragAndDrop from './DragAndDrop';
 
 const AddReview = ({ metaData }) => {
   const { productId } = useContext(ProductContext);
   const [reviewFrame, setReviewFrame] = useState([true, true, true]);
   const [productInfo, setProductInfo] = useState({});
-  const [characteristics, setCharacteristics] = useState(Object.keys(metaData.characteristics));
-
+  const characteristics = Object.keys(metaData.characteristics);
   const [userRating, setUserRating] = useState(0);
   const [ratingDescription, setRatingDescription] = useState('');
 
@@ -86,36 +86,6 @@ const AddReview = ({ metaData }) => {
     ],
   };
 
-  const validateRadios = () => {
-    const truthTest = [];
-    characteristics.forEach((item) => {
-      if (item === 'Size') {
-        truthTest.push(sizeState);
-      }
-      if (item === 'Width') {
-        truthTest.push(widthState);
-      }
-      if (item === 'Comfort') {
-        truthTest.push(comfortState);
-      }
-      if (item === 'Quality') {
-        truthTest.push(qualityState);
-      }
-      if (item === 'Length') {
-        truthTest.push(lengthState);
-      }
-      if (item === 'Fit') {
-        truthTest.push(fitState);
-      }
-    });
-    console.log(truthTest);
-    if (truthTest.every((item) => item !== null)) {
-      setVotingDone(true);
-    } else {
-      setVotingDone(false);
-    }
-  };
-
   const checkDefaultValue = (category, index) => {
     switch (category) {
       case 'Size':
@@ -123,40 +93,33 @@ const AddReview = ({ metaData }) => {
           return true;
         }
         return false;
-        break;
       case 'Width':
         if (widthState === index) {
           return true;
         }
         return false;
-        break;
       case 'Comfort':
         if (comfortState === index) {
           return true;
         }
         return false;
-        break;
       case 'Quality':
         if (qualityState === index) {
           return true;
         }
         return false;
-        break;
       case 'Length':
         if (lengthState === index) {
           return true;
         }
         return false;
-        break;
       case 'Fit':
         if (fitState === index) {
           return true;
         }
         return false;
-        break;
       default:
         return false;
-        break;
     }
   };
 
@@ -189,43 +152,6 @@ const AddReview = ({ metaData }) => {
     const temp = reviewFrame.slice();
     temp[index] = false;
     setReviewFrame(temp);
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    const dragBox = document.getElementById('dragbox');
-    dragBox.onDrop(handleDrop(e));
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-
-    const { files } = e.dataTransfer;
-    if (files.length === 0) {
-      alert('No files selected!');
-      return;
-    }
-
-    for (const file of files) {
-      if (!file.type.startsWith('image/')) {
-        alert('Only image files are allowed');
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const temp = userImages.slice();
-        if (temp.length >= 5) {
-          alert('Only up to 5 images allowed');
-          return;
-        }
-        temp.push(e.target.result);
-      };
-      reader.onerror = (err) => {
-        console.error('Error reading file: ', err);
-        alert('An error occured while reading the file');
-      };
-      reader.readAsDataURL(file);
-    }
   };
 
   const firstTest = () => {
@@ -291,8 +217,36 @@ const AddReview = ({ metaData }) => {
   }, [productId]);
 
   useEffect(() => {
+    const validateRadios = () => {
+      const truthTest = [];
+      characteristics.forEach((item) => {
+        if (item === 'Size') {
+          truthTest.push(sizeState);
+        }
+        if (item === 'Width') {
+          truthTest.push(widthState);
+        }
+        if (item === 'Comfort') {
+          truthTest.push(comfortState);
+        }
+        if (item === 'Quality') {
+          truthTest.push(qualityState);
+        }
+        if (item === 'Length') {
+          truthTest.push(lengthState);
+        }
+        if (item === 'Fit') {
+          truthTest.push(fitState);
+        }
+      });
+      if (truthTest.every((item) => item !== null)) {
+        setVotingDone(true);
+      } else {
+        setVotingDone(false);
+      }
+    };
     validateRadios();
-  }, [sizeState, widthState, comfortState, qualityState, lengthState, fitState]);
+  }, [sizeState, widthState, comfortState, qualityState, lengthState, fitState, characteristics]);
 
   useEffect(() => {
     setSummaryCharsLeft(60 - userSummary.length);
@@ -303,7 +257,7 @@ const AddReview = ({ metaData }) => {
   }, [bodyContent]);
 
   useEffect(() => {
-    const regex = new RegExp(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/);
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (regex.test(userEmail)) {
       setValidEmail(true);
       setEmailWarning('');
@@ -357,7 +311,6 @@ const AddReview = ({ metaData }) => {
               }}
               onChange={(e) => {
                 setRecommend(e.target.value);
-                console.log(e.target.value);
               }}
             />
             No
@@ -529,25 +482,7 @@ const AddReview = ({ metaData }) => {
                         width: '60%', resize: 'none', margin: '0 .5rem', padding: '.25rem',
                       }}
                     />
-                    <div
-                      className='userReviewPictureBox'
-                    >
-                      <div
-                        id='dragBox'
-                        className='dragAndDropReview'
-                        onDrop={(e) => { handleDragOver(e); }}
-                      >
-                        <p>Drag & Drop Up To 5 Images Here</p>
-                      </div>
-                      <div
-                        className='userReviewPictureOutput'
-                      >
-                        {userImages.length > 0
-                          && userImages.map((image) => (
-                            <img src={image} />
-                          ))}
-                      </div>
-                    </div>
+                    <DragAndDrop onFilesSelected={setUserImages} height='100%' width='40%' />
                   </div>
                   <small
                     style={{ margin: '0 .5rem' }}
@@ -564,6 +499,7 @@ const AddReview = ({ metaData }) => {
                     : userSummary.length > 0 && reviewFrame[1]
                     && (
                     <button
+                      type='button'
                       style={{ padding: '.25rem' }}
                       onClick={(e) => {
                         e.preventDefault();
