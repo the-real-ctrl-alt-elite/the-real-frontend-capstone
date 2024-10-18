@@ -234,7 +234,14 @@ const Response = ({ response }) => {
 const Recommend = () => {
   //
   return (
-    <div style={{ padding: '.25rem 0', fontSize: '14px' }}>
+    <div style={{
+      padding: '.25rem 0',
+      fontSize: '14px',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '.5rem',
+    }}
+    >
       <i className='fa-solid fa-check' />
       {' '}
       I recommend this product
@@ -289,7 +296,7 @@ const FeedbackFooter = ({ review }) => {
 };
 
 export {
-  FeedbackFooter, ReviewTile, ReviewStars, Star,
+  FeedbackFooter, ReviewImageThumbnail, ReviewTile, ReviewStars, Star,
 };
 
 // star rating (total of 5 stars, filled in by quarters (rounded down ===> 3.8 = 3.75));

@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ModalFrame = ({
+  background,
   border,
   buttonText,
   component,
@@ -12,27 +13,34 @@ const ModalFrame = ({
   // provide inline css or use these defaults
   const usedBorder = border || 'none';
   const usedButtonText = buttonText || 'X';
-  const usedPadding = padding || 'inherit';
+  const usedPadding = padding || '.55rem';
   const usedFontColor = fontColor || 'white';
+  const usedBackground = background || 'rgba(22,22,22,1)';
   return (
     <div
+      className='modelFrame'
       style={{
+        background: `${usedBackground}`,
         position: 'relative',
-        maxHeight: '75vh',
+        maxHeight: '100vh',
         maxWidth: '75vw',
         padding: `${usedPadding}`,
         border: `${usedBorder}`,
         zIndex: '5',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: '1rem',
       }}
     >
-      {component({ componentProps })}
+      {component({ ...componentProps })}
       <button
         type='button'
         onClick={() => closeModal()}
         style={{
           position: 'absolute',
-          top: '3rem',
-          right: '3rem',
+          top: `calc(${usedPadding} + 0.65rem)`,
+          right: `calc(${usedPadding} + 0.65rem)`,
           borderRadius: '1rem',
           height: '2rem',
           width: '2rem',

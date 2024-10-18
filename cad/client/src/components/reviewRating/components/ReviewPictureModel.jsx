@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-const ReviewPictureModel = ({ componentProps }) => {
+const ReviewPictureModel = ({ pictureModelStatus }) => {
 
   // status contains 3 variables in an array:
   // the first is whatever className you want to use for
@@ -14,9 +14,9 @@ const ReviewPictureModel = ({ componentProps }) => {
   // in as the 3rd index in your status array
   // I can also pass along css things needed to really make
   // this thing work.
-  
-  const url = componentProps[0];
-  const top = componentProps[1];
+
+  const url = pictureModelStatus[0];
+  const top = pictureModelStatus[1];
   return (
     <div
       style={{ top: `${top}` }}

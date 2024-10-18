@@ -168,8 +168,9 @@ const Rating = () => {
       {modalStatus === true
         && (
         <ModalBackground
+          innerBackground='none'
           component={ReviewPictureModel}
-          componentProps={pictureModelStatus}
+          componentProps={{ pictureModelStatus }}
           top={pictureModelStatus[1]}
           closeModal={closePictureModal}
         />
