@@ -11,8 +11,8 @@ export const ProductProvider = ({ children }) => {
   const [productId, setProductId] = useState(null);
   const [productData, setProductData] = useState();
   const [productStyles, setProductStyles] = useState();
-  const [rrCount, setrrCount] = useState({ ratingAvg: '', reviewCount: '' });
   const [starCount, setStarCount] = useState(0);
+  const [reviewCount, setReviewCount] = useState(0);
 
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
@@ -65,7 +65,7 @@ export const ProductProvider = ({ children }) => {
         })
         .catch((err) => console.error('error in context', err));
     };
-    const getStarCount = () => {
+    const getStarAndReviewCount = () => {
       axiosInstance.get('/reviews', {
         params: {
           page: 1,
@@ -76,6 +76,7 @@ export const ProductProvider = ({ children }) => {
         if (response.data?.results) {
           const totalStars = response.data.results.reduce((acc, review) => (review?.rating ? acc + review.rating : acc), 0);
           setStarCount(totalStars / (response.data.results.length));
+          setReviewCount(response.data.results.length);
         }
       }).catch((err) => {
         console.log(err);
@@ -85,13 +86,13 @@ export const ProductProvider = ({ children }) => {
     if (productId) {
       fetchProductId();
       fetchProductStyles();
-      getStarCount();
+      getStarAndReviewCount();
     }
   }, [productId]);
 
   return (
     <ProductContext.Provider value={{
-      productId, productData, productStyles, starCount, setProductId, newProduct, updateRRCount,
+      productId, productData, productStyles, starCount, reviewCount, setProductId, newProduct, updateRRCount,
     }}
     >
       {children}
