@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import axiosInstance from './AxiosInstance';
 
 const ProductContext = createContext();
 const TOKEN = process.env.GIT_TOKEN;
@@ -11,30 +12,12 @@ export const ProductProvider = ({ children }) => {
   const [productData, setProductData] = useState();
   const [productStyles, setProductStyles] = useState();
   const [rrCount, setrrCount] = useState({ ratingAvg: '', reviewCount: '' });
+  const [starCount, setStarCount] = useState(0);
 
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
   };
 
-  // const fetchProductId = () => {
-  //   const randomId = generateRandomProductId();
-  //   const url = `${BASE_URL}${CAMPUS_CODE}/products/${randomId}`;
-  //   axios
-  //     .get(url, {
-  //       headers: {
-  //         Authorization: TOKEN,
-  //       },
-  //       params: {
-  //         count: 1,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       console.log('context', response.data.id);
-  //       setProductId(response.data.id);
-  //       setProductData(response.data);
-  //     })
-  //     .catch((err) => console.error('error in context', err));
-  // };
   const newProduct = (id) => {
     setProductId(id);
   };
@@ -47,25 +30,13 @@ export const ProductProvider = ({ children }) => {
     }));
   };
 
-  // const fetchProductStyles = () => {
-  //   if (productId) {
-  //     const url = `${BASE_URL}${CAMPUS_CODE}/products/${productId}/styles`;
-  //     axios
-  //       .get(url, {
-  //         headers: {
-  //           Authorization: TOKEN,
-  //         },
-  //       })
-  //       .then((response) => {
-  //         setProductStyles(response.data);
-  //       })
-  //       .catch((err) => console.error('error in context', err));
-  //   }
-  // };
-
   useEffect(() => {
     const randomId = generateRandomProductId();
-    const url = `${BASE_URL}${CAMPUS_CODE}/products/${randomId}`;
+    setProductId(randomId);
+  }, []);
+
+  useEffect(() => {
+    const url = `${BASE_URL}${CAMPUS_CODE}/products/${productId}`;
     const fetchProductId = () => {
       axios
         .get(url, {
@@ -90,17 +61,37 @@ export const ProductProvider = ({ children }) => {
           },
         })
         .then((response) => {
-          setProductStyles(response.data);
+          setProductStyles(response.data.results);
         })
         .catch((err) => console.error('error in context', err));
     };
-    fetchProductId();
-    fetchProductStyles();
-  }, []);
+    const getStarCount = () => {
+      axiosInstance.get('/reviews', {
+        params: {
+          page: 1,
+          count: 5000,
+          product_id: productId,
+        },
+      }).then((response) => {
+        if (response.data?.results) {
+          const totalStars = response.data.results.reduce((acc, review) => (review?.rating ? acc + review.rating : acc), 0);
+          setStarCount(totalStars / (response.data.results.length));
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+    };
+
+    if (productId) {
+      fetchProductId();
+      fetchProductStyles();
+      getStarCount();
+    }
+  }, [productId]);
 
   return (
     <ProductContext.Provider value={{
-      productId, productData, productStyles, setProductId, newProduct, updateRRCount,
+      productId, productData, productStyles, starCount, setProductId, newProduct, updateRRCount,
     }}
     >
       {children}
