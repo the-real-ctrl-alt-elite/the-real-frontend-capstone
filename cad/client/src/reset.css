@@ -12,3 +12,6 @@ html, body {
 body {
   line-height: 1.5;
 }
+html {
+  scroll-behavior: smooth;
+}

@@ -6,9 +6,9 @@ const BASE_URL = process.env.API_BASE_URL;
 const CAMPUS = process.env.CAMPUS_CODE;
 
 const Question = ({ qna, setOpenAnswerModal, questionId }) => {
-  console.log('question id for changing helpfulness for question: ', questionId);
+  // console.log('question id for changing helpfulness for question: ', questionId);
   const URL = `${BASE_URL}${CAMPUS}/qa/questions/${questionId}/helpful`;
-  console.log('put request url: ', URL);
+  // console.log('put request url: ', URL);
   const [helpfulPoint, setHelpfulPoint] = React.useState(qna.question_helpfulness);
   const [clickStatus, setClickStatus] = React.useState(false);
   const handleClickYes = () => {
