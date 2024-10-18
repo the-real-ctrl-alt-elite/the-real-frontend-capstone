@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import ProductContext from '../../ProductContext';
 import Imagegallery from './Imagegallery';
-import Purchaseoption from './Purchaseoption';
 import Sizeoptions from './Sizeoptions';
 import Styleoptions from './Styleoptions';
 
@@ -14,7 +13,16 @@ const Selector = (props) => {
   const { productId, newProduct } = useContext(ProductContext);
   const [productInformation, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState({});
+
   const [money, setMoney] = useState({ dollar: '', cent: '' })
+
+  const [imageTracker, setImageTracker] = useState('');
+
+  const [selectedSize, setSelectedSize] = useState('');
+  const [sizeArray, setSizeArray] = useState([]);
+
+  const [isSale, setIsSale] = useState(null);
+
 
   const [sale, setSale] = useState(null);
   const [saleName, setSaleName] = useState('');
@@ -24,37 +32,37 @@ const Selector = (props) => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
   };
 
-  // const fetchSaleItem = () => {
-  //   const randomId = generateRandomProductId();
-  //   const url_price = `${BASE_URL}${CAMPUS_CODE}/products/${randomId}/styles`;
-  //   const url_name = `${BASE_URL}${CAMPUS_CODE}/products/${randomId}`;
-  //   axios
-  //     .get(url_price, {
-  //       headers: {
-  //         Authorization: TOKEN,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       const saleItem = response.data.results.find(
-  //         (item) => item.sale_price !== null);
-  //       if (saleItem) {
-  //         axios
-  //           .get(url_name, {
-  //             headers: {
-  //               Authorization: TOKEN,
-  //             },
-  //           })
-  //           .then((response) => {
-  //             setSaleId(response.data.id);
-  //             setSaleName(response.data.name);
-  //           })
-  //         setSale(saleItem);
-  //       } else {
-  //         fetchSaleItem();
-  //       }
-  //     })
-  //     .catch((err) => console.error('error', err));
-  // };
+  const fetchSaleItem = () => {
+    const randomId = generateRandomProductId();
+    const url_price = `${BASE_URL}${CAMPUS_CODE}/products/${randomId}/styles`;
+    const url_name = `${BASE_URL}${CAMPUS_CODE}/products/${randomId}`;
+    axios
+      .get(url_price, {
+        headers: {
+          Authorization: TOKEN,
+        },
+      })
+      .then((response) => {
+        const saleItem = response.data.results.find(
+          (item) => item.sale_price !== null);
+        if (saleItem) {
+          axios
+            .get(url_name, {
+              headers: {
+                Authorization: TOKEN,
+              },
+            })
+            .then((response) => {
+              setSaleId(response.data.id);
+              setSaleName(response.data.name);
+            })
+          setSale(saleItem);
+        } else {
+          fetchSaleItem();
+        }
+      })
+      .catch((err) => console.error('error', err));
+  };
 
   const getProduct = () => {
     const url = `${BASE_URL}${CAMPUS_CODE}/products/${productId}`;
@@ -72,10 +80,12 @@ const Selector = (props) => {
             },
           })
           .then((response) => {
+
+            setSelectedSize(Object.values(response.data.results[0].skus)[0].size)
             setProductStyles(response.data.results);
           })
           .catch((err) => console.error('error on selector', err));
-        const [dollar, cent] = response.data.default_price.split('.')
+        const [dollar, cent] = response.data.default_price.split('.');
         setMoney(prevState => ({
           ...prevState,
           dollar: dollar,
@@ -85,13 +95,15 @@ const Selector = (props) => {
       })
       .catch((err) => console.error('Error origin: selector getProduct', err));
   };
+  const handleImage = (image) => {
+    setImageTracker(image);
+  }
 
   useEffect(() => {
     productId && getProduct();
-    // fetchSaleItem();
+    fetchSaleItem();
   }, [productId]);
-  console.log(money)
-  console.log('Selector:\n', 'Info:', productInformation, '\n', 'Style:', productStyles)
+  // console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -109,7 +121,7 @@ const Selector = (props) => {
       </article>
 
       <div className='selector-components'>
-        <Imagegallery id={productId} />
+        <Imagegallery id={productId} handleImage={handleImage} />
         <aside className='selector-functional-components'>
           <div className='info-choices-container'>
             <div className='category'>
@@ -119,12 +131,16 @@ const Selector = (props) => {
             <h1 className='product-name'>{productInformation.name}</h1>
             <div className='ratings-container'>
               <div className='rate-star'>
-                <span className='sel-rating'>3.6</span>
-                <span className='stars-div'>&#9733;&#9733;&#9733;</span>
-                <span className='sel-stars'>&#9733;</span>
+                <div className='sel-rating'>3.6</div>
+                <div className='stars-div'>
+                  <div className='stars-hollow'>&#9734;&#9734;&#9734;&#9734;&#9734;</div>
+                  <div className='stars-solid'>&#9733;</div>
+                </div>
               </div>
-              <span className='total-rat'><a href='#' className='total-rat'>Ratings</a></span> |
-              <span className='sel-reviews'><a href='#' className='sel-reviews'>Customer reviews</a></span>
+              <div className='review-links'>
+                <div className='total-rat'><a href='#' className='total-rat'>Ratings</a></div> |
+                <div className='sel-reviews'><a href='#' className='sel-reviews'>Customer reviews</a></div>
+              </div>
             </div>
 
 
@@ -135,14 +151,38 @@ const Selector = (props) => {
               <span className='price'>{money.dollar}</span>
               <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>
             </div>
-            <Sizeoptions />
+            {
+              productStyles && <Sizeoptions
+              sizes={productStyles}
+              changeSize={setSelectedSize}
+              seeSize={selectedSize}
+              />
+            }
 
+            {
+              productStyles && <Styleoptions styles={productStyles} />
+            }
+            <div className='information-section'>
+              <h1 className='about-item'>About this item</h1>
+              <p className='description'>
+                {productInformation.description}
+              </p>
+              <div className='slogan'>
+                <h1 className='about-item'>Slogan:</h1>
+                {productInformation.slogan}
+              </div>
+            </div>
           </div>
           <div className='purchase-div'>
             <div className='checkout-container'>
-
+              <div className='price-div'>
+                <sup>$</sup>
+                <span className='price'>{money.dollar}</span>
+                <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>
+              </div>
             </div>
           </div>
+
         </aside>
       </div>
     </div>

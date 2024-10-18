@@ -30,6 +30,7 @@ const Imagegallery = (props) => {
 
   const photoSwap = (url) => {
     setPhoto(url);
+    
   }
   useEffect(() => {
     showSelectedItem();
