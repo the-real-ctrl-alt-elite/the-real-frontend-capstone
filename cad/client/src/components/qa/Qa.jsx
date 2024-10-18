@@ -330,11 +330,11 @@ const Qa = () => {
     <div className='qa-container'>
       {openQuestionModal && <AddAQuestionModal setOpenQuestionModal={setOpenQuestionModal} productName={productName} productId={productId} />}
 
-      <h3>QUESTIONS & ANSWERS</h3>
+      <h3 className='section-title'>QUESTIONS & ANSWERS</h3>
       <input className='search-bar' placeholder='Have a questions? Search for answers...' onChange={handleOnChange} />
       <div className='questions-list' data-testid='QuestionsList'>{qnas.length > 0 && <QuestionsList qnas={qnas} setOpenAnswerModal={setOpenAnswerModal} />}</div>
       <span onClick={handleClickMoreQuestion}>{fullList.length > 2 && fullList.length !== qnas.length && <MoreQuestions />}</span>
-      <button type='button' onClick={handleAddAQuestion}>Add A Question</button>
+      <span><button type='button' onClick={handleAddAQuestion}>Add A Question</button></span>
       {openAnswerModal && <AddAnAnswerModal setOpenAnswerModal={setOpenAnswerModal} />}
 
     </div>

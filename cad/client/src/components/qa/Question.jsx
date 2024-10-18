@@ -30,18 +30,18 @@ const Question = ({ qna, setOpenAnswerModal, questionId }) => {
   };
   return (
     <div>
-      <span className='question-body'>
+      <div className='question-body'>
         Q:
         {qna.question_body}
-      </span>
-      <span>
+      </div>
+      <div className='question-property'>
         Helpful?
         <a href='#/' onClick={handleClickYes}>Yes</a>
         (
         {helpfulPoint}
         ) |
         <a href='#/' onClick={handleAddAnAnswer}>Add Answer</a>
-      </span>
+      </div>
     </div>
   );
 };
