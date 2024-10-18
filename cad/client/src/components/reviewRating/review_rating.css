@@ -257,13 +257,18 @@ a {
 
 .addReviewBox {
   background: white;
-  width: 50vw;
+  width: 40vw;
   max-width: 50vw;
-  height: 80vh;
-  max-height: 80vh;
+  height: 85vh;
+  max-height: 85vh;
   overflow-y: scroll;
   padding: 1rem;
   border-radius: 1rem;
+}
+
+.userRating {
+  display: flex;
+  align-items: center;
 }
 
 .characteristicVoteBox {
@@ -277,7 +282,52 @@ a {
   font-size: .75rem;
 }
 
-input[type=text]:focus {
+.userReviewPictureBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.dragAndDropReview {
+  border: 2px dashed #ccc;
+  padding: 1.25rem;
+  border-radius: .75rem;
+  background-color: white;
+  cursor: pointer;
+  /* width: 40%; */
+  margin: 1.25rem 0;
+  position: relative;
+}
+
+.dragAndDropReview p {
+  font-size: .75rem;
+  margin: 10px 0;
+}
+
+.fa-check, .fa-x {
+  font-size: .5rem;
+  border-radius: 1rem;
+  padding: .33rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fa-check {
+  color: white;
+  background-color: green;
+}
+
+.fa-x {
+  color: white;
+  background-color: red;
+}
+
+
+
+input[type=text]:focus, input[type=email]:focus {
   background-color: rgb(235, 235, 235);
 }
 
