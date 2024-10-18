@@ -48,15 +48,17 @@ const Footer = ({
 
   return (
     <div>
-      <span>by </span>
-      <span style={{ fontWeight: isSeller ? 'bold' : 'normal' }}>{userName}</span>
-      <span>{`, ${formatDate} | Helpful?`}</span>
-      <span>
-        <a href='#/' onClick={handleClickYes}>Yes</a>
-        {' '}
-        {`(${helpful}) | `}
-        <a href='#/' onClick={handleClickReport}>{reportState}</a>
-      </span>
+      <span className='answer-footer' style={{ fontWeight: isSeller ? 'bold' : 'normal' }}>{`by ${userName},`}</span>
+      <span className='answer-footer'>{`${formatDate}`}</span>
+      <span className='answer-footer'>|</span>
+      <span className='answer-footer'>Helpful?</span>
+
+      <a href='#/' onClick={handleClickYes}>Yes</a>
+
+      <span className='answer-footer'>{`(${helpful})`}</span>
+      <span className='answer-footer'>|</span>
+      <a href='#/' onClick={handleClickReport}>{reportState}</a>
+
     </div>
   );
 };

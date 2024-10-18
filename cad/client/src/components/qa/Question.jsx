@@ -35,11 +35,12 @@ const Question = ({ qna, setOpenAnswerModal, questionId }) => {
         {qna.question_body}
       </div>
       <div className='question-property'>
-        Helpful?
+        <span className='question-note'>Helpful?</span>
         <a href='#/' onClick={handleClickYes}>Yes</a>
         (
         {helpfulPoint}
-        ) |
+        )
+        <span className='question-note'>|</span>
         <a href='#/' onClick={handleAddAnAnswer}>Add Answer</a>
       </div>
     </div>
