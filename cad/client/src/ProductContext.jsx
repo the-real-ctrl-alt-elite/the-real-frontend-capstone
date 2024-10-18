@@ -11,6 +11,7 @@ export const ProductProvider = ({ children }) => {
   const [productData, setProductData] = useState();
   const [productStyles, setProductStyles] = useState();
   const [rrCount, setrrCount] = useState({ ratingAvg: '', reviewCount: '' });
+  const [starCount, setStarCount] = useState(0);
 
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
@@ -29,8 +30,8 @@ export const ProductProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // const randomId = generateRandomProductId();
-    setProductId(40568);
+    const randomId = generateRandomProductId();
+    setProductId(randomId);
   }, []);
 
   useEffect(() => {
