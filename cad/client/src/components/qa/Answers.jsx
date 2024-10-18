@@ -65,7 +65,7 @@ const Answers = ({ questionId }) => {
     <div className={`load-more-answers ${extend ? 'full-answers' : ''}`}>
       {answerList.map((answer, idx) => {
         return (
-          <div className='answer-section'>
+          <div className='answer-section' key={idx + 'id'}>
             <span className='answer-header'>A: </span>
             <span>{answer.body}</span>
             <div>{answer.photos.length > 0 && <Photoes photos={answer.photos} />}</div>
@@ -74,9 +74,9 @@ const Answers = ({ questionId }) => {
         );
       })}
       {allAnswers.length > 2 && (
-      <div id='scrollReminder' className='popup'>
-        <p>scroll down to view all answers!</p>
-      </div>
+        <div id='scrollReminder' className='popup'>
+          <p>scroll down to view all answers!</p>
+        </div>
       )}
       <div>{allAnswers.length > 2 && <span onClick={handleClickMoreAnswers}>{extend ? 'COLLAPSE ANSWERS' : 'LOAD MORE ANSWERS'}</span>}</div>
     </div>
