@@ -8,9 +8,6 @@ import PriceTag from './PriceTag';
 import ProductContext from '../../ProductContext';
 import { getDefaultStyle } from './helpers/styleHelpers';
 
-// TODO: Update to use PriceTag instead of default price
-// TODO: Star count is incorrect
-
 const RelatedCard = ({
   name, id, category, defaultPrice, salePrice, description, features, photos, rating,
 }) => {
