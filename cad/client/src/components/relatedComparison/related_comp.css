@@ -52,6 +52,12 @@
   display: flex;
   overflow-x: auto;
   gap: 0.35rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.cards-container::-webkit-scrollbar {
+  display: none;
 }
 
 .product-card-container {
@@ -229,14 +235,7 @@ td {
   border: none;
 }
 
-.cards-container::-webkit-scrollbar {
-  display: none;
-}
 
-.cards-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
 
 .product-card-details > h4 {
   line-height: 110%;
