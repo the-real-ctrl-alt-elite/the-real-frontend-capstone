@@ -20,6 +20,10 @@ const OutfitSection = () => {
   }, [outfitItems]);
 
   const addToOutfit = (newItem) => {
+    if (!newItem.id) {
+      console.log('Error occurred adding product item to outfit -- No product Id');
+      return;
+    }
     const hasItem = outfitItems.some((item) => item.id === newItem.id);
     if (!hasItem) {
       setOutfitItems((prevItems) => [...prevItems, newItem]);

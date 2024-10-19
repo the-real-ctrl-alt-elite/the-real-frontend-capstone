@@ -31,14 +31,16 @@ const HorizontalScroller = ({ children }) => {
   };
 
   useEffect(() => {
-    if (scrollContainerRef.current && scrollContainerRef.current.scrollWidth && scrollContainerRef.current.clientWidth) {
-      if (scrollContainerRef.current.scrollWidth > scrollContainerRef.current.clientWidth) {
-        setShowRightButton(false);
-      } else {
+    if (scrollContainerRef.current) {
+      const { scrollWidth, clientWidth } = scrollContainerRef.current;
+      if (scrollWidth > clientWidth) {
         setShowRightButton(true);
+      } else {
+        setShowRightButton(false);
+        setShowLeftButton(false);
       }
     }
-  }, []);
+  }, [children]);
 
   return (
     <div className='cards-scroller'>
