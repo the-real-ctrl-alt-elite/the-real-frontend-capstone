@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ProductContext from '../../ProductContext';
 import Imagegallery from './Imagegallery';
@@ -10,27 +11,59 @@ const BASE_URL = process.env.API_BASE_URL;
 const CAMPUS_CODE = process.env.CAMPUS_CODE;
 
 const Selector = (props) => {
-  const { productId, newProduct } = useContext(ProductContext);
+  const { productId, newProduct, starCount, reviewCount } = useContext(ProductContext);
   const [productInformation, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState({});
 
+  // stores mutations for styles on current page
   const [money, setMoney] = useState({ dollar: '', cent: '' })
+  const [star, setStar] = useState({ full: [], part: '', hollow: [] });
 
-  const [imageTracker, setImageTracker] = useState('');
-
+  //used in size options
   const [selectedSize, setSelectedSize] = useState('');
   const [sizeArray, setSizeArray] = useState([]);
 
-  const [isSale, setIsSale] = useState(null);
-
-
+  // advertisement related
   const [sale, setSale] = useState(null);
   const [saleName, setSaleName] = useState('');
   const [saleId, setSaleId] = useState('');
 
+  // keep track of styles pics
+  const [imageTracker, setImageTracker] = useState({ original_url: '', style_url: '', style_photo: false });
+  const [details, setDetails] = useState([])
+  const [item, setItem] = useState({});
+  const [isSale, setIsSale] = useState(null);
+  const [currentStyle, setCurrentStyle] = useState(
+    {
+      original_price: 0,
+      sale_price: 0,
+      percent_change: '',
+      color: '',
+      photos: []
+    });
+
+
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
   };
+  const makeStarParts = () => {
+    if (starCount !== null) {
+      const starNumPercent = starCount.toFixed(2);
+      const splits = starNumPercent.split('.');
+      const num = splits[0];
+      const percent = splits[1];
+
+      let starArr = [], hollowArr = [];
+      for (let i = 0; i < num; i++) {
+        starArr.push('★')
+      }
+      setStar(prev => ({
+        ...prev,
+        full: starArr,
+        part: percent
+      }));
+    }
+  }
 
   const fetchSaleItem = () => {
     const randomId = generateRandomProductId();
@@ -80,9 +113,30 @@ const Selector = (props) => {
             },
           })
           .then((response) => {
-
-            setSelectedSize(Object.values(response.data.results[0].skus)[0].size)
-            setProductStyles(response.data.results);
+            const res = response.data.results;
+            Object.values(res[0].skus).forEach(item => setSizeArray(prevArray => prevArray.concat(item.size)));
+            setSelectedSize(Object.values(res[0].skus)[0].size);
+            setProductStyles(res);
+            setDetails(res);
+            res.map((item) => item['default?'] && setItem(item));
+            res.map((item) =>
+              (item['default?'] & item.sale_price !== null) && setIsSale(true));
+            setImageTracker(prev => ({
+              ...prev,
+              original_url: res[0].photos[0].url,
+              style_url: '',
+              style_photo: false
+            }));
+            const salePrice = res[0].sale_price !== null ?
+              res[0].sale_price : null;
+            const percentChange = salePrice !== null ?
+              (((+salePrice - +res[0].original_price) / +salePrice) * 100).toFixed(0) : null;
+            setCurrentStyle(prev => ({
+              ...prev,
+              original_price: res[0].original_price,
+              sale_price: salePrice,
+              percent_change: percentChange,
+            }));
           })
           .catch((err) => console.error('error on selector', err));
         const [dollar, cent] = response.data.default_price.split('.');
@@ -95,15 +149,15 @@ const Selector = (props) => {
       })
       .catch((err) => console.error('Error origin: selector getProduct', err));
   };
-  const handleImage = (image) => {
-    setImageTracker(image);
-  }
 
   useEffect(() => {
     productId && getProduct();
-    fetchSaleItem();
-  }, [productId]);
-  // console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+    // fetchSaleItem();
+    makeStarParts();
+  }, [productId, starCount]);
+  if (Object.keys(productStyles).length > 0) {
+    console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+  }
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -121,7 +175,13 @@ const Selector = (props) => {
       </article>
 
       <div className='selector-components'>
-        <Imagegallery id={productId} handleImage={handleImage} />
+        <Imagegallery
+          id={productId}
+          details={details}
+          item={item}
+          setImageTracker={setImageTracker}
+          imageTracker={imageTracker}
+        />
         <aside className='selector-functional-components'>
           <div className='info-choices-container'>
             <div className='category'>
@@ -131,15 +191,30 @@ const Selector = (props) => {
             <h1 className='product-name'>{productInformation.name}</h1>
             <div className='ratings-container'>
               <div className='rate-star'>
-                <div className='sel-rating'>3.6</div>
+                <div className='sel-rating'>{starCount && starCount.toFixed(1)}</div>
                 <div className='stars-div'>
                   <div className='stars-hollow'>&#9734;&#9734;&#9734;&#9734;&#9734;</div>
-                  <div className='stars-solid'>&#9733;</div>
+                  <div className='stars-solid-cont'>
+                    {
+                      star.full.map((solidStar, index) => {
+                        return <span className='stars-solid' key={index}>{solidStar}</span>
+                      })
+                    }
+                    {
+                      starCount < 5 && <span
+                        className='star-part'
+                        style={{
+                          background: `linear-gradient(to right, goldenrod ${star.part}%, transparent ${star.part}%)`
+                        }}
+                      >&#9733;</span>
+                    }
+
+                  </div>
                 </div>
               </div>
               <div className='review-links'>
-                <div className='total-rat'><a href='#' className='total-rat'>Ratings</a></div> |
-                <div className='sel-reviews'><a href='#' className='sel-reviews'>Customer reviews</a></div>
+                <div className='total-rat'><Link to='#rating' className='total-rat'>Ratings</Link></div> |
+                <div className='sel-reviews'><Link to='#review' className='sel-reviews'>{reviewCount} Customer reviews</Link></div>
               </div>
             </div>
 
@@ -153,14 +228,19 @@ const Selector = (props) => {
             </div>
             {
               productStyles && <Sizeoptions
-              sizes={productStyles}
-              changeSize={setSelectedSize}
-              seeSize={selectedSize}
+                productStyles={productStyles}
+                setSelectedSize={setSelectedSize}
+                sizeArray={sizeArray}
               />
             }
 
             {
-              productStyles && <Styleoptions styles={productStyles} />
+              productStyles && <Styleoptions
+                productStyles={productStyles}
+                setImageTracker={setImageTracker}
+                imageTracker={imageTracker}
+                setCurrentStyle={setCurrentStyle}
+              />
             }
             <div className='information-section'>
               <h1 className='about-item'>About this item</h1>
@@ -184,93 +264,9 @@ const Selector = (props) => {
           </div>
 
         </aside>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 
 export default Selector;
-
-
-/*
-Product Information
-{
-  "id": 11,
-  "name": "Air Minis 250",
-  "slogan": "Full court support",
-  "description": "This optimized air cushion pocket reduces impact but keeps a perfect balance underfoot.",
-  "category": "Basketball Shoes",
-  "default_price": "0",
-  "features": [
-    {
-      "feature": "Sole",
-      "value": "Rubber"
-    },
-    {
-      "feature": "Material",
-      "value": "FullControlSkin"
-    },
-    // ...
-  ],
-}
-
-Product Syles
-{
-  "product_id": "1",
-  "results": [
-    {
-      "style_id": 1,
-      "name": "Forest Green & Black",
-      "original_price": "140",
-      "sale_price": "0",
-      "default?": true,
-      "photos": [
-        {
-          "thumbnail_url": "urlplaceholder/style_1_photo_number_thumbnail.jpg",
-          "url": "urlplaceholder/style_1_photo_number.jpg"
-        },
-        {
-          "thumbnail_url": "urlplaceholder/style_1_photo_number_thumbnail.jpg",
-          "url": "urlplaceholder/style_1_photo_number.jpg"
-        }
-      ],
-    "skus": {
-        "37": {
-                "quantity": 8,
-                "size": "XS"
-        },
-        "38": {
-                "quantity": 16,
-                "size": "S"
-        },
-        "39": {
-                "quantity": 17,
-                "size": "M"
-        },
-  {
-    "style_id": 2,
-    "name": "Desert Brown & Tan",
-    "original_price": "140",
-    "sale_price": "0",
-    "default?": false,
-    "photos": [
-        {
-          "thumbnail_url": "urlplaceholder/style_2_photo_number_thumbnail.jpg",
-          "url": "urlplaceholder/style_2_photo_number.jpg"
-        }
-      ],
-    "skus": {
-        "37": {
-                "quantity": 8,
-                "size": "XS"
-        },
-        "38": {
-                "quantity": 16,
-                "size": "S"
-        },
-        "39": {
-                "quantity": 17,
-                "size": "M"
-        },
-}
-  */

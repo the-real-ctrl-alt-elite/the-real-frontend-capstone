@@ -1,0 +1,9 @@
+.size-select {
+  padding: 2px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.size-span {
+  margin-right: 3px;
+  font-size: larger;
+}

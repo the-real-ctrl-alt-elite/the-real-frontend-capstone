@@ -16,7 +16,7 @@ const Qa = () => {
   const [fullList, setFullList] = useState([]);
   const [qnas, setQnas] = useState([]);
   const { productId, productData } = useContext(ProductContext);
-  console.log('productID from context', productId);
+  // console.log('productID from context', productId);
 
   const [productName, setProductName] = useState('');
   // if (productId && ) {

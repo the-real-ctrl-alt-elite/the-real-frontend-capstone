@@ -58,7 +58,7 @@
   width: 50%;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 
 .product-name {
@@ -77,7 +77,7 @@
 .ratings-container {
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 100%;
   align-items: center;
 }
 
@@ -88,27 +88,41 @@
 }
 
 .stars-div {
-  font-size: large;
+  font-size: larger;
   display: inline-block;
-  color: goldenrod;
   position: relative;
   margin-left: 4px;
 }
-
+.stars-solid-cont {
+  display: flex;
+}
 .stars-solid {
   display: inline-block;
-
-  background:
-    linear-gradient(to right, goldenrod 60%, white 60%);
+  background: goldenrod;
   background-clip: text;
   color: transparent;
 }
 
+.star-part {
+  display: inline-block;
+  background-clip: text !important;
+  color: transparent !important;
+
+}
+
 .stars-hollow {
   background-clip: text;
+  color: transparent;
   position: absolute;
   top: 0;
   left: 0;
+  font-weight: 100;
+  /* text-shadow:
+    0.005px 0 0 goldenrod,
+    -0.005px 0 0 goldenrod,
+    0 0.005px 0 goldenrod,
+    0 -0.005px 0 goldenrod; */
+
 }
 
 .review-links {

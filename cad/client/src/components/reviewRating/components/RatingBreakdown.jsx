@@ -132,8 +132,8 @@ const RatingBreakdown = ({ metaData, reviewFilters, setReviewFilters }) => {
   };
 
   return (
-    <div className='ratingBreakdown'>
-      <div className='ratingBreakdownSummary'>
+    <div className='ratingBreakdown' >
+      <div className='ratingBreakdownSummary' >
         <h1>{ratingAverage}</h1>
         <ReviewStars rating={ratingAverage} />
       </div>

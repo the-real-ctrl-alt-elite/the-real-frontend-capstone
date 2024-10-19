@@ -17,3 +17,6 @@
   cursor: pointer;
   border: solid 2px rgba(128, 128, 128, 0.551);
 }
+.style-mini-pic:hover {
+  outline: double 4px rgb(118, 200, 227);
+}

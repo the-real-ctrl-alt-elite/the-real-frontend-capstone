@@ -11,8 +11,8 @@ export const ProductProvider = ({ children }) => {
   const [productId, setProductId] = useState(null);
   const [productData, setProductData] = useState();
   const [productStyles, setProductStyles] = useState();
-  const [starCount, setStarCount] = useState(0);
-  const [reviewCount, setReviewCount] = useState(0);
+  const [starCount, setStarCount] = useState(null);
+  const [reviewCount, setReviewCount] = useState(null);
 
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
@@ -87,9 +87,9 @@ export const ProductProvider = ({ children }) => {
       fetchProductId();
       fetchProductStyles();
       getStarAndReviewCount();
+
     }
   }, [productId]);
-
   return (
     <ProductContext.Provider value={{
       productId, productData, productStyles, starCount, reviewCount, setProductId, newProduct, updateRRCount,
