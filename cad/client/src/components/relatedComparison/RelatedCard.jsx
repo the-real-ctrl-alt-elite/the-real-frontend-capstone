@@ -29,7 +29,7 @@ const RelatedCard = ({
 
   return (
     <>
-      <div className='product-card-container' id={id}>
+      <div className='product-card-container related-product-card' id={id}>
         <button onClick={() => handleCompareClick()} type='button' label='compare-item' className='action-item-btn'>
           <i className='fa-solid fa-star-sharp fa-xs' style={{ color: '#ffffff', padding: '3px' }} />
         </button>
