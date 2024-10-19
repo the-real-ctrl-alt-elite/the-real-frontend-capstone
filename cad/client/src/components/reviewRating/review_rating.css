@@ -255,15 +255,94 @@ a {
   background: gray;
 }
 
-.addReviewBox {
-  background: white;
-  width: 40vw;
-  max-width: 50vw;
-  height: 85vh;
-  max-height: 85vh;
-  overflow-y: scroll;
-  padding: 1rem;
+.add-review-modal {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1;
+  grid-template-rows: 7;
+  padding: 1rem 0 .5rem 0;
+  background:rgb(205, 205, 215);
   border-radius: 1rem;
+  min-width: 70vw;
+}
+
+.neat-line {
+  position: absolute;
+  background: none;
+  height: 85%;
+  border-left: 3px solid gray;
+  left: 1.65rem;
+  top: 5rem
+}
+
+.zero-line {
+  height: 72%;
+}
+
+.three-line {
+  height: 85%;
+}
+
+
+.add-review-section {
+  background:rgb(225, 225, 235)
+}
+
+.add-review-section.active {
+  background: rgba(245,245,255);
+}
+
+.add-review-header-box {
+  border-bottom: 2px solid black;
+}
+
+.add-review-header {
+  padding: .5rem;
+}
+
+.add-review-section-row {
+  margin: .5rem .5rem .5rem 1rem;
+}
+
+.add-review-section-bubble {
+  z-index: 1;
+  border: 1px solid black;
+  border-radius: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
+  background: rgb(205, 205, 215)
+}
+
+.add-review-section-title {
+  margin-left: 2rem;
+}
+
+.add-review-section-header {
+  display: flex;
+  align-items: center;
+}
+
+.add-review-section-status {
+  position: absolute;
+  right: 2rem;
+}
+
+.add-review-section-content {
+  margin-left: 4.5rem;
+}
+
+.add-review-section-footer {
+  display: flex;
+  justify-content: start;
+  margin: 1rem;
+  gap: 12%;
+}
+
+.add-review-section-footer>button {
+  padding: .25rem;
+  border-radius: 4px;
+  border: .5px solid black;
 }
 
 .userRating {
@@ -272,14 +351,7 @@ a {
 }
 
 .characteristicVoteBox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 20%;
-}
-
-.characteristicVoteBox>* {
-  font-size: .75rem;
 }
 
 .drag-drop {
