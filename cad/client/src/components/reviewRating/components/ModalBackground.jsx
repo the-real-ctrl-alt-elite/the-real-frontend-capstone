@@ -2,8 +2,12 @@
 import React from 'react';
 import ModalFrame from './ModalFrame';
 
+// pass componentProps as object to access properties through normal destructuring
+// at top level of nested component
+
 const ModalBackground = ({
   background,
+  innerBackground,
   backgroundClose,
   border,
   buttonText,
@@ -21,15 +25,15 @@ const ModalBackground = ({
   // closeModal needs to be an event that swaps the model state from
   // active to inactive, for example setModalState(!modalState)
   // which gets passed all the way down to an x button in modelFrame
-
   const usedTop = top || '0';
   const usedBackground = background || 'rgba(22,22,22,0.5)';
+  const usedInnerBackground = innerBackground || 'rgba(22,22,22,1)'
   const usedBackgroundClose = backgroundClose !== undefined ? backgroundClose : true;
   const usedPadding = padding || '2rem';
   const usedBorder = border || 'none';
   const usedButtonText = buttonText || 'X';
   const usedFontColor = fontColor || 'white';
-  const usedInnerPadding = innerPadding || '2rem';
+  const usedInnerPadding = innerPadding || '.55rem';
 
   const handleClick = (e) => {
     if (usedBackgroundClose) {
@@ -63,6 +67,7 @@ const ModalBackground = ({
         style={{ zIndex: '4' }}
       >
         <ModalFrame
+          background={usedInnerBackground}
           border={usedBorder}
           buttonText={usedButtonText}
           component={component}
