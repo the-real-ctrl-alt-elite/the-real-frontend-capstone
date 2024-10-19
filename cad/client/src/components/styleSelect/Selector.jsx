@@ -28,12 +28,20 @@ const Selector = (props) => {
   const [saleName, setSaleName] = useState('');
   const [saleId, setSaleId] = useState('');
 
-  // attempt to keep track of styles pics - unused
+  // keep track of styles pics
   const [imageTracker, setImageTracker] = useState({ original_url: '', style_url: '', style_photo: false });
   const [details, setDetails] = useState([])
   const [item, setItem] = useState({});
-  // needed to compute sale price difference but unused still
-  const [isSale, setIsSale] = useState({ original_price: 0, sale_price: 0, percent_change: '' });
+  const [isSale, setIsSale] = useState(null);
+  const [currentStyle, setCurrentStyle] = useState(
+    {
+      original_price: 0,
+      sale_price: 0,
+      percent_change: '',
+      color: '',
+      photos: []
+    });
+
 
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
@@ -105,16 +113,29 @@ const Selector = (props) => {
             },
           })
           .then((response) => {
-            Object.values(response.data.results[0].skus).forEach(item => setSizeArray(prevArray => prevArray.concat(item.size)));
-            setSelectedSize(Object.values(response.data.results[0].skus)[0].size);
-            setProductStyles(response.data.results);
-            setDetails(response.data.results);
-            response.data.results.map((item) => item['default?'] && setItem(item));
+            const res = response.data.results;
+            Object.values(res[0].skus).forEach(item => setSizeArray(prevArray => prevArray.concat(item.size)));
+            setSelectedSize(Object.values(res[0].skus)[0].size);
+            setProductStyles(res);
+            setDetails(res);
+            res.map((item) => item['default?'] && setItem(item));
+            res.map((item) =>
+              (item['default?'] & item.sale_price !== null) && setIsSale(true));
             setImageTracker(prev => ({
               ...prev,
-              original_url: response.data.results[0].photos[0].url,
+              original_url: res[0].photos[0].url,
               style_url: '',
               style_photo: false
+            }));
+            const salePrice = res[0].sale_price !== null ?
+              res[0].sale_price : null;
+            const percentChange = salePrice !== null ?
+              (((+salePrice - +res[0].original_price) / +salePrice) * 100).toFixed(0) : null;
+            setCurrentStyle(prev => ({
+              ...prev,
+              original_price: res[0].original_price,
+              sale_price: salePrice,
+              percent_change: percentChange,
             }));
           })
           .catch((err) => console.error('error on selector', err));
@@ -131,10 +152,12 @@ const Selector = (props) => {
 
   useEffect(() => {
     productId && getProduct();
-    fetchSaleItem();
+    // fetchSaleItem();
     makeStarParts();
   }, [productId, starCount]);
-  // console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+  if (Object.keys(productStyles).length > 0) {
+    console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+  }
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -153,12 +176,12 @@ const Selector = (props) => {
 
       <div className='selector-components'>
         <Imagegallery
-         id={productId}
-         details={details}
-         item={item}
-         setImageTracker={setImageTracker}
-         imageTracker={imageTracker}
-         />
+          id={productId}
+          details={details}
+          item={item}
+          setImageTracker={setImageTracker}
+          imageTracker={imageTracker}
+        />
         <aside className='selector-functional-components'>
           <div className='info-choices-container'>
             <div className='category'>
@@ -212,7 +235,12 @@ const Selector = (props) => {
             }
 
             {
-              productStyles && <Styleoptions styles={productStyles} />
+              productStyles && <Styleoptions
+                productStyles={productStyles}
+                setImageTracker={setImageTracker}
+                imageTracker={imageTracker}
+                setCurrentStyle={setCurrentStyle}
+              />
             }
             <div className='information-section'>
               <h1 className='about-item'>About this item</h1>
