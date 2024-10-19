@@ -13,7 +13,7 @@ const QuestionsList = ({
           <div key={idx}>
             <div className='question-title'><Question qna={qna} setOpenAnswerModal={setOpenAnswerModal} questionId={qna.question_id} /></div>
             <div><Answers questionId={qna.question_id} /></div>
-            {openAnswerModal && <AddAnAnswerModal setOpenAnswerModal={setOpenAnswerModal} questionName={qna.question_body} productName={productName} />}
+            {openAnswerModal && <AddAnAnswerModal setOpenAnswerModal={setOpenAnswerModal} questionName={qna.question_body} productName={productName} questionId={qna.question_id} />}
           </div>
         );
       })}
