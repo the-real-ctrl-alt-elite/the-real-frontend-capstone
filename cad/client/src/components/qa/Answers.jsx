@@ -54,29 +54,29 @@ const Answers = ({ questionId }) => {
       reminder.style.display = 'block';
       setTimeout(() => {
         reminder.style.display = 'none';
-      }, 1500);
+      }, 2000);
     } else {
       setAnswerList(topAnswers);
       setExtend(!extend);
     }
   };
-
+  console.log('check answerList to look for answer id: ', answerList);
   return (
     <div className={`load-more-answers ${extend ? 'full-answers' : ''}`}>
       {answerList.map((answer, idx) => {
         return (
-          <div className='answer-section'>
+          <div className='answer-section' key={idx + 'id'}>
             <span className='answer-header'>A: </span>
             <span>{answer.body}</span>
             <div>{answer.photos.length > 0 && <Photoes photos={answer.photos} />}</div>
-            <Footer userName={answer.answerer_name} dateData={answer.date} helpfulness={answer.helpfulness} answerList={answerList} setAnswerList={setAnswerList} idx={idx} />
+            <Footer userName={answer.answerer_name} dateData={answer.date} helpfulness={answer.helpfulness} answerList={answerList} setAnswerList={setAnswerList} idx={idx} answerId={answer.answer_id} />
           </div>
         );
       })}
       {allAnswers.length > 2 && (
-      <div id='scrollReminder' className='popup'>
-        <p>scroll down to view all answers!</p>
-      </div>
+        <div id='scrollReminder' className='popup'>
+          <p>scroll down to view all answers!</p>
+        </div>
       )}
       <div>{allAnswers.length > 2 && <span onClick={handleClickMoreAnswers}>{extend ? 'COLLAPSE ANSWERS' : 'LOAD MORE ANSWERS'}</span>}</div>
     </div>
