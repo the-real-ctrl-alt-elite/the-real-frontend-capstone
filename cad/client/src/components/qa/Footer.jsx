@@ -26,7 +26,7 @@ const Footer = ({
             Authorization: TOKEN,
           },
         })
-        .then(() => console.log('successfully updated helpfulness for selected answer'))
+        .then((result) => console.log('successfully updated helpfulness for selected answer: ', result))
         .catch((err) => console.log('failed to update helpfulness for selected answer', err));
     }
   };
@@ -42,7 +42,7 @@ const Footer = ({
           Authorization: TOKEN,
         },
       })
-      .then(() => console.log('sucessfully reported answer'))
+      .then((result) => console.log('sucessfully reported answer: ', result))
       .catch((err) => console.log('failed to report answer: ', err));
   };
 

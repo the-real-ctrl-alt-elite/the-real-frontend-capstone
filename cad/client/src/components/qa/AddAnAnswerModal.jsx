@@ -20,8 +20,6 @@ const AddAnAnswerModal = ({
   const [showUpload, setShowUpload] = useState(true);
   const handleUploadFile = (e) => {
     if (e.target.files && e.target.files[0]) {
-      console.log('e.target.files: ', e.target.files);
-      console.log('e.target.files[0]', e.target.files[0]);
       setImage(URL.createObjectURL(e.target.files[0]));
     }
   };
@@ -59,7 +57,6 @@ const AddAnAnswerModal = ({
   };
   const handleFormSubmition = (e) => {
     e.preventDefault();
-    console.log('handle form submisiion worked?');
     axios
       .post(submitURL, {
         body: answerInput,

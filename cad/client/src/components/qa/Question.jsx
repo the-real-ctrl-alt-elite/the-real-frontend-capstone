@@ -6,9 +6,7 @@ const BASE_URL = process.env.API_BASE_URL;
 const CAMPUS = process.env.CAMPUS_CODE;
 
 const Question = ({ qna, setOpenAnswerModal, questionId }) => {
-  console.log('question id for changing helpfulness for question: ', questionId);
   const URL = `${BASE_URL}${CAMPUS}/qa/questions/${questionId}/helpful`;
-  console.log('put request url: ', URL);
   const [helpfulPoint, setHelpfulPoint] = React.useState(qna.question_helpfulness);
   const [clickStatus, setClickStatus] = React.useState(false);
   const handleClickYes = () => {
@@ -21,7 +19,7 @@ const Question = ({ qna, setOpenAnswerModal, questionId }) => {
             Authorization: TOKEN,
           },
         })
-        .then(() => console.log('sucessfully updated helpfulness for question'))
+        .then((result) => console.log('sucessfully updated helpfulness for question: ', result))
         .catch((err) => console.log('failed to update helpfulness for question', err));
     }
   };
