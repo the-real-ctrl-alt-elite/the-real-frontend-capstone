@@ -38,6 +38,7 @@ const AddAnAnswerModal = ({
   }, [photoList, photoLength]);
   // submit form
   const [answerInput, setAnswerInput] = useState('');
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const handleAnswerInput = ((e) => {
     if (e.target.value.length < 1001) {
       setAnswerInput(e.target.value);
@@ -57,6 +58,11 @@ const AddAnAnswerModal = ({
   };
   const handleFormSubmition = (e) => {
     e.preventDefault();
+    setShowConfirmation(true);
+    setTimeout(() => {
+      setShowConfirmation(false);
+      setOpenAnswerModal(false);
+    }, 1000);
     axios
       .post(submitURL, {
         body: answerInput,
@@ -71,6 +77,7 @@ const AddAnAnswerModal = ({
       .then((result) => console.log('successuflly submitted an answer:', result))
       .catch((err) => console.log('failed to submit the answer', err));
   };
+
   return (
     <div className='modal-background'>
       <div className='modal-container'>
@@ -112,6 +119,11 @@ const AddAnAnswerModal = ({
           <div className='modal-footer'>
             <button>submit answer</button>
           </div>
+          {showConfirmation && (
+          <div id='submitConfirmation' className='confirmation-popup'>
+            <p>Submitted!</p>
+          </div>
+          )}
         </form>
       </div>
     </div>
