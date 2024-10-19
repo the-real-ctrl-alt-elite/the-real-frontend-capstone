@@ -208,7 +208,6 @@ const Selector = (props) => {
                         }}
                       >&#9733;</span>
                     }
-
                   </div>
                 </div>
               </div>
@@ -243,12 +242,29 @@ const Selector = (props) => {
               />
             }
             <div className='information-section'>
-              <h1 className='about-item'>About this item</h1>
-              <p className='description'>
-                {productInformation.description}
-              </p>
+              <div className='details-container'>
+                <h3 className='datails-title'>Product Details</h3>
+                <ul className='details-ul'>
+                  {
+                    Object.keys(productInformation).length > 0 &&
+                    productInformation.features
+                      .filter((item) => item.value !== null)
+                      .map((item, key) => {
+                        return <li key={key + 99} className='details-li'>
+                          {item.feature} {item.value}
+                        </li>
+                      })
+                  }
+                </ul>
+              </div>
+              <div className='about-item-cont'>
+                <h3 className='about-item'>About this item</h3>
+                <p className='description'>
+                  {productInformation.description}
+                </p>
+              </div>
               <div className='slogan'>
-                <h1 className='about-item'>Slogan:</h1>
+                <h3 className='about-item'>Slogan</h3>
                 {productInformation.slogan}
               </div>
             </div>
