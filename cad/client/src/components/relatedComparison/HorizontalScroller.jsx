@@ -30,7 +30,7 @@ const HorizontalScroller = ({ children }) => {
     }
   };
 
-  useEffect(() => {
+  const handleDefaultArrows = () => {
     if (scrollContainerRef.current) {
       const { scrollWidth, clientWidth } = scrollContainerRef.current;
       if (scrollWidth > clientWidth) {
@@ -40,7 +40,18 @@ const HorizontalScroller = ({ children }) => {
         setShowLeftButton(false);
       }
     }
+  };
+
+  useEffect(() => {
+    handleDefaultArrows();
   }, [children]);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleDefaultArrows);
+    return () => {
+      window.removeEventListener('resize', handleDefaultArrows);
+    };
+  }, []);
 
   return (
     <div className='cards-scroller'>
