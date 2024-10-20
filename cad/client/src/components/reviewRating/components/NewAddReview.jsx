@@ -3,22 +3,18 @@ import axios from 'axios';
 import ProductContext from '../../../ProductContext';
 import DragAndDrop from './DragAndDrop';
 
-const AddReview = ({ metaData }) => {
+const AddReview = ({ metaData, setReviewStatus }) => {
   const { productId } = useContext(ProductContext);
   const [reviewStep, setReviewStep] = useState(0);
   const [productInfo, setProductInfo] = useState({});
   const characteristics = Object.keys(metaData.characteristics);
   const [characteristicStep, setCharacteristicStep] = useState(0);
+  const [characteristicVotes, setCharacteristicVotes] = useState(Array(characteristics.length).fill(null));
   const [userRating, setUserRating] = useState(0);
   const [ratingDescription, setRatingDescription] = useState('');
 
   const [votingDone, setVotingDone] = useState(false);
   const [recommend, setRecommend] = useState(null);
-  const [firstMsg, setFirstMsg] = useState([
-    'Please rate the product',
-    'Please select whether or not you would recommend this product to others',
-    'Please rate each of the product characteristics',
-  ]);
 
   const [userSummary, setUserSummary] = useState('');
   const [summaryCharsLeft, setSummaryCharsLeft] = useState(60);
@@ -33,8 +29,6 @@ const AddReview = ({ metaData }) => {
   const [emailWarning, setEmailWarning] = useState('Please enter a valid email address');
   const [username, setUsername] = useState('');
 
-  const [showCharacteristics, setShowCharacteristics] = useState(true);
-  const [showBody, setShowBody] = useState(false);
   const [sizeState, setSizeState] = useState(null);
   const [widthState, setWidthState] = useState(null);
   const [comfortState, setComfortState] = useState(null);
@@ -151,35 +145,71 @@ const AddReview = ({ metaData }) => {
     }
   };
 
-  const changeReviewFrame = (index) => {
-    const temp = reviewFrame.slice();
-    temp[index] = false;
-    setReviewFrame(temp);
+  const checkCharStatus = (item) => {
+    if (item === 'Size') {
+      return sizeState;
+    }
+    if (item === 'Width') {
+      return widthState;
+    }
+    if (item === 'Comfort') {
+      return comfortState;
+    }
+    if (item === 'Quality') {
+      return qualityState;
+    }
+    if (item === 'Length') {
+      return lengthState;
+    }
+    if (item === 'Fit') {
+      return fitState;
+    }
+    return null;
   };
 
-  const firstTest = () => {
-    return (votingDone && reviewFrame[0] && recommend !== null && userRating !== 0);
+  const moveCharStep = (str) => {
+    console.log(characteristicStep);
+    let newStep;
+    if (str === 'up') {
+      if (characteristicStep >= 1) {
+        newStep = characteristicStep - 1;
+        setCharacteristicStep(newStep);
+        return;
+      }
+    }
+    if (str === 'down') {
+      if (characteristicStep < (characteristics.length - 1)) {
+        newStep = characteristicStep + 1;
+        setCharacteristicStep(newStep);
+      }
+    }
+    setTimeout(() => {
+      console.log(characteristicStep);
+    }, 200);
+  };
+
+  const findNearestNull = (index) => {
+    const temp = characteristicVotes.slice();
+    temp[index] = true;
+    setCharacteristicVotes(temp);
+    const i = temp.indexOf(null);
+    console.log('arr', temp, 'index', i);
+    if (i === -1) {
+      return;
+    }
+    setCharacteristicStep(i);
   };
 
   const nextStep = () => {
     setReviewStep(reviewStep + 1);
+    if (reviewStep + 1 === 5) {
+      setReviewStatus(false);
+    }
   };
 
   const backStep = () => {
     setReviewStep(reviewStep - 1);
   };
-
-  useEffect(() => {
-    switch (reviewStep) {
-      case 2:
-        if (characteristics.length === 4) {
-          setLineClass('neat-line three-line');
-        }
-        break;
-      default:
-        setLineClass('neat-line zero-line');
-    }
-  }, [lineClass, reviewStep, characteristics.length]);
 
   useEffect(() => {
     switch (userRating) {
@@ -203,23 +233,6 @@ const AddReview = ({ metaData }) => {
         break;
     }
   }, [userRating]);
-
-  useEffect(() => {
-    const msg = [];
-    if (userRating === 0) {
-      msg.push('Please rate the product');
-    }
-    if (recommend === null) {
-      msg.push('Please select whether or not you would recommend this product to others');
-    }
-    if (!votingDone) {
-      msg.push('Please rate each of the product characteristics');
-    }
-    if (msg.length === 0) {
-      msg.push('Thank you!');
-    }
-    setFirstMsg(msg);
-  }, [votingDone, recommend, userRating]);
 
   useEffect(() => {
     const TOKEN = process.env.GIT_TOKEN;
@@ -292,13 +305,13 @@ const AddReview = ({ metaData }) => {
 
   return (
     <div className='add-review-modal'>
-      <div className={lineClass} />
       <div className='add-review-header-box'>
         <h3 className='add-review-header'>
           {`Writing A Review For: ${productInfo.name}`}
         </h3>
       </div>
       <div className={reviewStep === 0 ? 'add-review-section active' : 'add-review-section'}>
+        <div className='neat-line first-line' />
         <div className='add-review-section-row'>
           <div className='add-review-section-header'>
             <h4 className='add-review-section-bubble'>
@@ -308,7 +321,7 @@ const AddReview = ({ metaData }) => {
               Rating
             </h4>
             <div className='add-review-section-status'>
-              <i className={userRating ? 'fa-regular fa-check' : 'fa-regular fa-x'} />
+              <i className={userRating ? 'fa-regular fa-check reviewIcon' : 'fa-regular fa-x reviewIcon'} />
             </div>
           </div>
         </div>
@@ -330,6 +343,7 @@ const AddReview = ({ metaData }) => {
           )}
       </div>
       <div className={reviewStep === 1 ? 'add-review-section active' : 'add-review-section'}>
+        <div className='neat-line' />
         <div className='add-review-section-row'>
           <div className='add-review-section-header'>
             <h4 className='add-review-section-bubble'>
@@ -339,7 +353,7 @@ const AddReview = ({ metaData }) => {
               Recommendation
             </h4>
             <div className='add-review-section-status'>
-              <i className={recommend !== null ? 'fa-regular fa-check' : 'fa-regular fa-x'} />
+              <i className={recommend !== null ? 'fa-regular fa-check reviewIcon' : 'fa-regular fa-x reviewIcon'} />
             </div>
           </div>
         </div>
@@ -361,9 +375,10 @@ const AddReview = ({ metaData }) => {
                   style={{
                     margin: '0 .25rem',
                   }}
-                  onChange={(e) => {
-                    setRecommend(e.target.value);
+                  onChange={() => {
+                    setRecommend(true);
                   }}
+                  defaultChecked={recommend === true}
                 />
                 Yes!
               </label>
@@ -376,9 +391,10 @@ const AddReview = ({ metaData }) => {
                   style={{
                     margin: '0 .25rem',
                   }}
-                  onChange={(e) => {
-                    setRecommend(e.target.value);
+                  onChange={() => {
+                    setRecommend(false);
                   }}
+                  defaultChecked={recommend === false}
                 />
                 No
               </label>
@@ -395,6 +411,7 @@ const AddReview = ({ metaData }) => {
           )}
       </div>
       <div className={reviewStep === 2 ? 'add-review-section active' : 'add-review-section'}>
+        <div className='neat-line' />
         <div className='add-review-section-row'>
           <div className='add-review-section-header'>
             <h4 className='add-review-section-bubble'>
@@ -404,7 +421,7 @@ const AddReview = ({ metaData }) => {
               Characteristics
             </h4>
             <div className='add-review-section-status'>
-              <i className={votingDone ? 'fa-regular fa-check' : 'fa-regular fa-x'} />
+              <i className={votingDone ? 'fa-regular fa-check reviewIcon' : 'fa-regular fa-x reviewIcon'} />
             </div>
           </div>
         </div>
@@ -412,11 +429,29 @@ const AddReview = ({ metaData }) => {
           && (
           <div className='add-review-section-content'>
             <h4>How Would You Rate These Product Characteristics?</h4>
-            {characteristics && showCharacteristics && characteristics.map((category) => (
+            <div className='changeCharBtnBox'>
+              <button
+                type='button'
+                onClick={() => moveCharStep('up')}
+              >
+                &#8593;
+              </button>
+              <button
+                type='button'
+                onClick={() => moveCharStep('down')}
+              >
+                &#8595;
+              </button>
+            </div>
+            {reviewStep === 2 && characteristics.map((category, i) => (
               <div key={category}>
-                <h5>{category}</h5>
+                <div className='characteristicHeader'>
+                  <h5>{category}</h5>
+                  <i className={checkCharStatus(category) !== null ? 'fa-regular fa-check smallIcon' : 'fa-regular fa-x smallIcon'} />
+                </div>
                 <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                  {categoryVotes[category].map((choice, index) => (
+                  {characteristicStep === i
+                  && categoryVotes[category].map((choice, index) => (
                     <div className='characteristicVoteBox'>
                       <label
                         htmlFor={choice}
@@ -431,7 +466,10 @@ const AddReview = ({ metaData }) => {
                           name={category}
                           value={index}
                           checked={checkDefaultValue(category, index)}
-                          onChange={() => { handleRadioChange(category, index); }}
+                          onChange={() => {
+                            handleRadioChange(category, index);
+                            findNearestNull(characteristicStep);
+                          }}
                         />
                         <small>{choice}</small>
                       </label>
@@ -439,7 +477,6 @@ const AddReview = ({ metaData }) => {
                   ))}
                 </div>
               </div>
-
             ))}
             <ReviewSectionFooter
               backFlag
@@ -453,6 +490,7 @@ const AddReview = ({ metaData }) => {
           )}
       </div>
       <div className={reviewStep === 3 ? 'add-review-section active' : 'add-review-section'}>
+        <div className='neat-line' />
         <div className='add-review-section-row'>
           <div className='add-review-section-header'>
             <h4 className='add-review-section-bubble'>
@@ -462,56 +500,204 @@ const AddReview = ({ metaData }) => {
               Tell Us Why
             </h4>
             <div className='add-review-section-status'>
-              <i className={bodyContent.length >= 50 ? 'fa-regular fa-check' : 'fa-regular fa-x'} />
+              <i className={bodyContent.length >= 50 && userSummary.length ? 'fa-regular fa-check reviewIcon' : 'fa-regular fa-x reviewIcon'} />
             </div>
           </div>
         </div>
         {reviewStep === 3
           && (
           <div className='add-review-section-content'>
-            <i />
+            <div style={{ position: 'relative' }}>
+              <label htmlFor='reviewSummary'>
+                <div
+                  style={{ display: 'flex', alignItems: 'center', gap: '.25rem' }}
+                >
+                  <span>
+                    <i
+                      className={
+                          userSummary.length
+                            ? 'fa-solid fa-check'
+                            : 'fa-solid fa-x'
+                        }
+                    />
+                  </span>
+                  Review Summary
+                </div>
+                <input
+                  placeholder='Example: Best purchase ever!'
+                  name='reviewSummary'
+                  type='text'
+                  id='reviewSummary'
+                  style={{ width: '60%', margin: '0 .5rem', padding: '.125rem' }}
+                  maxLength='60'
+                  value={userSummary}
+                  onChange={(e) => {
+                    setUserSummary(e.target.value);
+                  }}
+                />
+              </label>
+              <div
+                style={{ margin: '0 .5rem' }}
+              >
+                <small>
+                  {summaryCharsLeft !== 1 ? `${summaryCharsLeft} characters remaining` : '1 character remaining'}
+                  {' '}
+                </small>
+              </div>
+              <label htmlFor='reviewBody'>
+                <div
+                  style={{ display: 'flex', alignItems: 'center', gap: '.25rem' }}
+                >
+                  <span>
+                    <i
+                      className={
+                          bodyContent.length >= 50
+                            ? 'fa-solid fa-check'
+                            : 'fa-solid fa-x'
+                        }
+                    />
+                  </span>
+                  Review Body
+                </div>
+                <div
+                  style={{ display: 'flex' }}
+                >
+                  <textarea
+                    placeholder='Why did you like the product or not?'
+                    name='reviewBody'
+                    id='reviewBody'
+                    maxLength='1000'
+                    value={bodyContent}
+                    onChange={(e) => { setBodyContent(e.target.value); }}
+                    rows={10}
+                    cols={50}
+                    overflow='scroll'
+                    style={{
+                      width: '60%', resize: 'none', margin: '0 .5rem', padding: '.25rem',
+                    }}
+                  />
+                  <DragAndDrop onFilesSelected={setUserImages} height='100%' width='40%' />
+                </div>
+                <small
+                  style={{ margin: '0 .5rem' }}
+                >
+                  {bodyCharsLeft !== 1 ? `${bodyCharsLeft} characters remaining` : '1 character remaining'}
+                </small>
+              </label>
+              <div style={{
+                width: '60%', margin: '.5rem', display: 'flex', justifyContent: 'center',
+              }}
+              >
+                {bodyContent.length < 50
+                  ? `${50 - bodyContent.length} more character(s) required to submit review`
+                  : null}
+              </div>
+            </div>
+            <ReviewSectionFooter
+              backFlag
+              backText='Previous Step'
+              backFn={backStep}
+              nextFlag={bodyContent.length >= 50 && userSummary.length}
+              nextText='Next Step'
+              nextFn={nextStep}
+            />
           </div>
           )}
       </div>
       <div className={reviewStep === 4 ? 'add-review-section active' : 'add-review-section'}>
+        <div className='neat-line last-line' />
         <div className='add-review-section-row'>
           <div className='add-review-section-header'>
             <h4 className='add-review-section-bubble'>
               5
             </h4>
             <h4 className='add-review-section-title'>
-              Contact Information
+              Submit
             </h4>
             <div className='add-review-section-status'>
-              <i className={validEmail ? 'fa-regular fa-check' : 'fa-regular fa-x'} />
+              <i className={validEmail ? 'fa-regular fa-chec reviewIcon' : 'fa-regular fa-x reviewIcon'} />
             </div>
           </div>
         </div>
         {reviewStep === 4
           && (
           <div className='add-review-section-content'>
-            <i />
-          </div>
-          )}
-      </div>
-      <div className={reviewStep === 5 ? 'add-review-section active' : 'add-review-section'}>
-        <div className='add-review-section-row'>
-          <div className='add-review-section-header'>
-            <h4 className='add-review-section-bubble'>
-              6
-            </h4>
-            <h4 className='add-review-section-title'>
-              Submit
-            </h4>
-            <div className='add-review-section-status'>
-              <i />
+            <div style={{ position: 'relative' }}>
+              <label htmlFor='username'>
+                <div
+                  style={{ display: 'flex', alignItems: 'center', gap: '.25rem' }}
+                >
+                  <span>
+                    <i
+                      className={
+                          username.length
+                            ? 'fa-solid fa-check'
+                            : 'fa-solid fa-x'
+                        }
+                    />
+                  </span>
+                  Nickname
+                </div>
+                <input
+                  placeholder='Example: jackson11!'
+                  name='nickname'
+                  type='text'
+                  id='nickname'
+                  style={{ width: '60%', margin: '0 .5rem', padding: '.125rem' }}
+                  maxLength='60'
+                  value={username}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                  }}
+                />
+              </label>
+              <label htmlFor='reviewSummary'>
+                <div
+                  style={{ display: 'flex', alignItems: 'center', gap: '.25rem' }}
+                >
+                  <span>
+                    <i
+                      className={
+                          validEmail
+                            ? 'fa-solid fa-check'
+                            : 'fa-solid fa-x'
+                        }
+                    />
+                  </span>
+                  Email
+                </div>
+                <input
+                  placeholder='Example: jackson11@email.com'
+                  name='email'
+                  type='email'
+                  id='email'
+                  style={{ width: '60%', margin: '0 .5rem', padding: '.125rem' }}
+                  maxLength='60'
+                  value={userEmail}
+                  onChange={(e) => {
+                    setUserEmail(e.target.value);
+                  }}
+                />
+                <div
+                  style={{ margin: '0 .5rem' }}
+                >
+                  <small>{emailWarning}</small>
+                </div>
+                <div
+                  style={{ margin: '0 .5rem' }}
+                >
+                  <small>For authentication reasons, you will not be emailed</small>
+                </div>
+              </label>
             </div>
-          </div>
-        </div>
-        {reviewStep === 5
-          && (
-          <div className='add-review-section-content'>
-            <i />
+            <ReviewSectionFooter
+              backFlag
+              backText='Previous Step'
+              backFn={backStep}
+              nextFlag={username.length && validEmail}
+              nextText='Submit'
+              nextFn={nextStep}
+            />
           </div>
           )}
       </div>
@@ -585,7 +771,7 @@ const ReviewSectionFooter = ({
 
   return (
     <div className='add-review-section-footer'>
-      {backFlag
+      {!!backFlag
       && (
         <button
           onClick={(e) => { backFn(e); }}
@@ -594,12 +780,15 @@ const ReviewSectionFooter = ({
           {backText}
         </button>
       )}
-      <button
-        onClick={(e) => { handleNext(e); }}
-        type='button'
-      >
-        {nextText}
-      </button>
+      {!!nextFlag
+      && (
+        <button
+          onClick={(e) => { handleNext(e); }}
+          type='button'
+        >
+          {nextText}
+        </button>
+      )}
     </div>
   );
 };
