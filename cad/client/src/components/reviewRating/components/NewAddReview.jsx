@@ -264,10 +264,6 @@ const AddReview = ({ metaData, setReviewStatus }) => {
   }, [sizeState, widthState, comfortState, qualityState, lengthState, fitState, characteristics]);
 
   useEffect(() => {
-    setSummaryCharsLeft(60 - userSummary.length);
-  }, [userSummary]);
-
-  useEffect(() => {
     setBodyCharsLeft(1000 - bodyContent.length);
   }, [bodyContent]);
 
