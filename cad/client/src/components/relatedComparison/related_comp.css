@@ -42,9 +42,14 @@
   z-index: 7;
 }
 
+.action-item-btn:hover {
+  cursor: pointer;
+}
+
 .add-outfit-btn {
   all: unset;
   text-align: center;
+  cursor: pointer;
 }
 
 /* Horizontal scroll container */
@@ -69,6 +74,10 @@
   flex: 0 0 auto;
   background-color: lightgray;
   position: relative;
+}
+
+.related-product-card {
+  cursor: pointer;
 }
 
 .product-card-content {
