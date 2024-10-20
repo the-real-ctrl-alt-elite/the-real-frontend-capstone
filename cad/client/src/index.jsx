@@ -3,10 +3,13 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import { ProductProvider } from './ProductContext';
 import './index.css';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-  <ProductProvider>
-    <App />
-  </ProductProvider>,
+  <BrowserRouter>
+    <ProductProvider>
+      <App />
+    </ProductProvider>
+  </BrowserRouter>
 );
