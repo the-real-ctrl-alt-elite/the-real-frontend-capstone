@@ -8,7 +8,7 @@ import RatingBreakdown from './components/RatingBreakdown';
 import ReviewPictureModel from './components/ReviewPictureModel';
 import ModalBackground from './components/ModalBackground';
 import SortOptions from './components/SortOptions';
-import AddReview from './components/NewAddReview';
+import AddReview from './components/AddReview';
 import ProductContext from '../../ProductContext';
 
 const Rating = () => {
