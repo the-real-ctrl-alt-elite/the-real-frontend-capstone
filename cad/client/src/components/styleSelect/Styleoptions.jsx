@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Styleoptions = (props) => {
-  // console.log('styles:', props)
+  console.log('stylesOptions:', props)
   const [currentStyle, setCurrentStyle] = useState({});
 
   const newImage = () => {

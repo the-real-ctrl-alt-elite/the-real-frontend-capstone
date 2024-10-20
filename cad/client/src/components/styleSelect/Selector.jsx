@@ -29,7 +29,9 @@ const Selector = (props) => {
   const [saleId, setSaleId] = useState('');
 
   // attempt to keep track of styles pics - unused
-  const [imageTracker, setImageTracker] = useState();
+  const [imageTracker, setImageTracker] = useState({ original_url: '', style_url: '', style_photo: false });
+  const [details, setDetails] = useState([])
+  const [item, setItem] = useState({});
   // needed to compute sale price difference but unused still
   const [isSale, setIsSale] = useState({ original_price: 0, sale_price: 0, percent_change: '' });
 
@@ -106,7 +108,14 @@ const Selector = (props) => {
             Object.values(response.data.results[0].skus).forEach(item => setSizeArray(prevArray => prevArray.concat(item.size)));
             setSelectedSize(Object.values(response.data.results[0].skus)[0].size);
             setProductStyles(response.data.results);
-            // console.log(Object.values(response.data.results[0].skus))
+            setDetails(response.data.results);
+            response.data.results.map((item) => item['default?'] && setItem(item));
+            setImageTracker(prev => ({
+              ...prev,
+              original_url: response.data.results[0].photos[0].url,
+              style_url: '',
+              style_photo: false
+            }));
           })
           .catch((err) => console.error('error on selector', err));
         const [dollar, cent] = response.data.default_price.split('.');
@@ -125,7 +134,7 @@ const Selector = (props) => {
     fetchSaleItem();
     makeStarParts();
   }, [productId, starCount]);
-  console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+  // console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -143,7 +152,13 @@ const Selector = (props) => {
       </article>
 
       <div className='selector-components'>
-        <Imagegallery id={productId} setImageTracker={setImageTracker} imageTracker={imageTracker} />
+        <Imagegallery
+         id={productId}
+         details={details}
+         item={item}
+         setImageTracker={setImageTracker}
+         imageTracker={imageTracker}
+         />
         <aside className='selector-functional-components'>
           <div className='info-choices-container'>
             <div className='category'>
