@@ -17,13 +17,11 @@ const AddReview = ({ metaData, setReviewStatus }) => {
   const [recommend, setRecommend] = useState(null);
 
   const [userSummary, setUserSummary] = useState('');
-  const [summaryCharsLeft, setSummaryCharsLeft] = useState(60);
 
   const [bodyContent, setBodyContent] = useState('');
   const [bodyCharsLeft, setBodyCharsLeft] = useState(100);
   const [userImages, setUserImages] = useState([]);
 
-  const [showContactInfo, setShowContactInfo] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [validEmail, setValidEmail] = useState(false);
   const [emailWarning, setEmailWarning] = useState('Please enter a valid email address');
@@ -35,8 +33,6 @@ const AddReview = ({ metaData, setReviewStatus }) => {
   const [qualityState, setQualityState] = useState(null);
   const [lengthState, setLengthState] = useState(null);
   const [fitState, setFitState] = useState(null);
-
-  const [lineClass, setLineClass] = useState('neat-line zero-line');
 
   const categoryVotes = {
     Size: [
@@ -167,25 +163,8 @@ const AddReview = ({ metaData, setReviewStatus }) => {
     return null;
   };
 
-  const moveCharStep = (str) => {
-    console.log(characteristicStep);
-    let newStep;
-    if (str === 'up') {
-      if (characteristicStep >= 1) {
-        newStep = characteristicStep - 1;
-        setCharacteristicStep(newStep);
-        return;
-      }
-    }
-    if (str === 'down') {
-      if (characteristicStep < (characteristics.length - 1)) {
-        newStep = characteristicStep + 1;
-        setCharacteristicStep(newStep);
-      }
-    }
-    setTimeout(() => {
-      console.log(characteristicStep);
-    }, 200);
+  const cancelReview = () => {
+    setReviewStatus(false);
   };
 
   const findNearestNull = (index) => {
@@ -334,7 +313,9 @@ const AddReview = ({ metaData, setReviewStatus }) => {
               <span>{ratingDescription}</span>
             </div>
             <ReviewSectionFooter
-              backFlag={false}
+              backFlag
+              backFn={cancelReview}
+              backText='Cancel'
               nextFlag={userRating}
               nextText='Next Step'
               nextFn={nextStep}
@@ -429,27 +410,21 @@ const AddReview = ({ metaData, setReviewStatus }) => {
           && (
           <div className='add-review-section-content'>
             <h4>How Would You Rate These Product Characteristics?</h4>
-            <div className='changeCharBtnBox'>
-              <button
-                type='button'
-                onClick={() => moveCharStep('up')}
-              >
-                &#8593;
-              </button>
-              <button
-                type='button'
-                onClick={() => moveCharStep('down')}
-              >
-                &#8595;
-              </button>
-            </div>
             {reviewStep === 2 && characteristics.map((category, i) => (
-              <div key={category}>
-                <div className='characteristicHeader'>
+              <div
+                key={category}
+                className={characteristicStep === i && 'charStepActive'}
+              >
+                <div
+                  className='characteristicHeader'
+                  onMouseEnter={() => { setCharacteristicStep(i); }}
+                >
+                  <i className={checkCharStatus(category) !== null ? 'fa-regular fa-check inputChecks' : 'fa-regular fa-x inputChecks'} />
                   <h5>{category}</h5>
-                  <i className={checkCharStatus(category) !== null ? 'fa-regular fa-check smallIcon' : 'fa-regular fa-x smallIcon'} />
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-around' }}
+                >
                   {characteristicStep === i
                   && categoryVotes[category].map((choice, index) => (
                     <div className='characteristicVoteBox'>
@@ -459,7 +434,7 @@ const AddReview = ({ metaData, setReviewStatus }) => {
                           display: 'flex', flexDirection: 'column', textAlign: 'center',
                         }}
                       >
-                        {index + 1}
+                        <small>{choice}</small>
                         <input
                           type='radio'
                           id={choice}
@@ -471,7 +446,6 @@ const AddReview = ({ metaData, setReviewStatus }) => {
                             findNearestNull(characteristicStep);
                           }}
                         />
-                        <small>{choice}</small>
                       </label>
                     </div>
                   ))}
@@ -516,12 +490,12 @@ const AddReview = ({ metaData, setReviewStatus }) => {
                     <i
                       className={
                           userSummary.length
-                            ? 'fa-solid fa-check'
-                            : 'fa-solid fa-x'
+                            ? 'fa-solid fa-check inputChecks'
+                            : 'fa-solid fa-x inputChecks'
                         }
                     />
                   </span>
-                  Review Summary
+                  <h4>Review Summary</h4>
                 </div>
                 <input
                   placeholder='Example: Best purchase ever!'
@@ -539,10 +513,11 @@ const AddReview = ({ metaData, setReviewStatus }) => {
               <div
                 style={{ margin: '0 .5rem' }}
               >
-                <small>
-                  {summaryCharsLeft !== 1 ? `${summaryCharsLeft} characters remaining` : '1 character remaining'}
-                  {' '}
-                </small>
+                <div>
+                  <small>
+                    For privacy reasons, do not use your full name or email address
+                  </small>
+                </div>
               </div>
               <label htmlFor='reviewBody'>
                 <div
@@ -552,12 +527,12 @@ const AddReview = ({ metaData, setReviewStatus }) => {
                     <i
                       className={
                           bodyContent.length >= 50
-                            ? 'fa-solid fa-check'
-                            : 'fa-solid fa-x'
+                            ? 'fa-solid fa-check inputChecks'
+                            : 'fa-solid fa-x inputChecks'
                         }
                     />
                   </span>
-                  Review Body
+                  <h4>Review Body</h4>
                 </div>
                 <div
                   style={{ display: 'flex' }}
@@ -612,10 +587,10 @@ const AddReview = ({ metaData, setReviewStatus }) => {
               5
             </h4>
             <h4 className='add-review-section-title'>
-              Submit
+              Contact Information
             </h4>
             <div className='add-review-section-status'>
-              <i className={validEmail ? 'fa-regular fa-chec reviewIcon' : 'fa-regular fa-x reviewIcon'} />
+              <i className={validEmail ? 'fa-regular fa-check reviewIcon' : 'fa-regular fa-x reviewIcon'} />
             </div>
           </div>
         </div>
