@@ -179,7 +179,7 @@ const Rating = () => {
         && (
           <ModalBackground
             component={AddReview}
-            componentProps={{ metaData }}
+            componentProps={{ metaData, setReviewStatus }}
             backgroundClose={false}
             closeModal={closeReviewModal}
           />
