@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ReviewStars } from '../reviewRating/components/ReviewTile';
-
-// TODO: Update to use PriceTag instead of default price
-// TODO: Star count is incorrect
+import PriceTag from './PriceTag';
 
 const OutfitCard = ({
-  name, id, category, defaultPrice, rating, handleRemoveClick, photos,
+  name, id, category, defaultPrice, salePrice, rating, handleRemoveClick, photos,
 }) => {
   return (
     <div className='product-card-container'>
@@ -16,10 +14,7 @@ const OutfitCard = ({
       <div className='product-card-details'>
         <h6>{category?.toUpperCase()}</h6>
         <h5>{name}</h5>
-        <p>
-          $
-          {defaultPrice}
-        </p>
+        <PriceTag defaultPrice={defaultPrice} salePrice={salePrice} />
         <span>
           <ReviewStars rating={rating} />
         </span>

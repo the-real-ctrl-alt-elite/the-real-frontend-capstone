@@ -60,6 +60,7 @@ const Answers = ({ questionId }) => {
       setExtend(!extend);
     }
   };
+
   return (
     <div className={`load-more-answers ${extend ? 'full-answers' : ''}`}>
       {answerList.map((answer, idx) => {
