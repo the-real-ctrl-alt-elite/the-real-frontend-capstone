@@ -8,7 +8,7 @@ import RatingBreakdown from './components/RatingBreakdown';
 import ReviewPictureModel from './components/ReviewPictureModel';
 import ModalBackground from './components/ModalBackground';
 import SortOptions from './components/SortOptions';
-import AddReview from './components/AddReview';
+import AddReview from './components/NewAddReview';
 import ProductContext from '../../ProductContext';
 
 const Rating = () => {
@@ -179,7 +179,7 @@ const Rating = () => {
         && (
           <ModalBackground
             component={AddReview}
-            componentProps={{ metaData }}
+            componentProps={{ metaData, setReviewStatus }}
             backgroundClose={false}
             closeModal={closeReviewModal}
           />
