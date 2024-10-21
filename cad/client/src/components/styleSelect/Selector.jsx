@@ -214,8 +214,8 @@ const Selector = (props) => {
                 </div>
               </div>
               <div className='review-links'>
-                <div className='total-rat'><Link to='#rating' className='total-rat'>Ratings</Link></div> |
-                <div className='sel-reviews'><Link to='#review' className='sel-reviews'>{reviewCount} Customer reviews</Link></div>
+                <div className='total-rat'><Link to='#rating' className='total-rat'>{reviewCount} Ratings</Link></div> |
+                <div className='sel-reviews'><Link to='#review' className='sel-reviews'>{reviewCount} Reviews</Link></div>
               </div>
             </div>
 
