@@ -1,22 +1,38 @@
 import React, { useState, useEffect } from 'react';
 
 const Styleoptions = (props) => {
-  // [imageTracker, setImageTracker] = { original_url: '', style_url: '', style_photo: false }
-  // [currentStyle, setCurrentStyle] = {original_price: 0, sale_price: 0, percent_change: ''}
-  // if (Object.keys(props.productStyles).length > 0) {
-  //   console.log('styles-Options:\n',
-  //     '\nimage-tracker:', props.imageTracker,
-  //     '\nproductStyles:', props.productStyles)
-  // }
+  if (Object.keys(props.productStyles).length > 0) {
+    console.log('styles-Options:\n',
+      '\nimage-tracker:', props.imageTracker,
+      '\nproductStyles:', props.productStyles[0].name)
+  }
   const newImage = () => {
 
   }
-  const mouseHover = (url) => {
+  const mouseHover = (url, salePrice, price, colorPeek) => {
     props.setImageTracker(prev => ({
       ...prev,
       style_url: url,
       style_photo: true
     }));
+    if (salePrice !== null) {
+      const percentChange = (((+salePrice - +price) / +salePrice) * 100).toFixed(0);
+      props.setCurrentStyle(prev => ({
+        ...prev,
+        original_price: price,
+        sale_price: salePrice,
+        percent_change: percentChange,
+        newColor: colorPeek,
+        colorCheck: true
+      }));
+    } else {
+      props.setCurrentStyle(prev => ({
+        ...prev,
+        original_price: price,
+        newColor: colorPeek,
+        colorCheck: true
+      }));
+    }
   }
   const mouseExit = () => {
     props.setImageTracker(prev => ({
@@ -24,6 +40,11 @@ const Styleoptions = (props) => {
       style_url: '',
       style_photo: false
     }));
+    props.setCurrentStyle(prev => ({
+      ...prev,
+      colorCheck: false,
+      newColor: '',
+    }))
   }
   useEffect(() => {
 
@@ -33,7 +54,15 @@ const Styleoptions = (props) => {
     <div className='style-options-container'>
       <div className='style-title-container'>
         <span className='style-title'>STYLE: </span>
-        <span className='style-name'></span>
+        <span className='style-name'>
+          {
+            (props.productStyles.length > 0) &&
+              props.currentStyle.colorCheck ?
+              props.currentStyle.newColor
+              :
+              props.currentStyle.color
+          }
+        </span>
       </div>
       <div className='style-thumbnails'>
         {
@@ -43,7 +72,13 @@ const Styleoptions = (props) => {
               key={image.style_id}
               src={image.photos[0].thumbnail_url}
               onClick={newImage}
-              onMouseEnter={() => mouseHover(image.photos[0].thumbnail_url)}
+              onMouseEnter={
+                () => mouseHover(
+                  image.photos[0].thumbnail_url,
+                  image.sale_price,
+                  image.original_price,
+                  image.name)
+              }
               onMouseLeave={mouseExit}
             />
           })

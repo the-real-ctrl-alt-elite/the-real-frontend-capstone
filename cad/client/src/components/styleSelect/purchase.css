@@ -1,0 +1,26 @@
+.purchase-div {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-container {
+  width: 70%;
+  height: 90%;
+  padding: 18px;
+  border-radius: 10px;
+  border: rgba(127, 127, 127, 0.498) solid 0.5px;
+  box-shadow:
+    #070707 0px 20px 30px -10px,
+    #80ff00b0 0px 5px 10px -5px;
+}
+.price-div {
+  font-weight: 600;
+}
+
+.price {
+  font-size: x-large;
+  margin-right: 2px;
+
+}

@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ProductContext from '../../ProductContext';
+import Advertisement from './Advertisement';
 import Imagegallery from './Imagegallery';
 import Sizeoptions from './Sizeoptions';
 import Styleoptions from './Styleoptions';
+import Purchase from './Purchase';
 
 const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
@@ -16,7 +18,7 @@ const Selector = (props) => {
   const [productStyles, setProductStyles] = useState({});
 
   // stores mutations for styles on current page
-  const [money, setMoney] = useState({ dollar: '', cent: '' })
+  const [money, setMoney] = useState({ dollar: '', cent: '' });
   const [star, setStar] = useState({ full: [], part: '', hollow: [] });
 
   //used in size options
@@ -30,7 +32,6 @@ const Selector = (props) => {
 
   // keep track of styles pics
   const [imageTracker, setImageTracker] = useState({ original_url: '', style_url: '', style_photo: false });
-  const [details, setDetails] = useState([])
   const [item, setItem] = useState({});
   const [isSale, setIsSale] = useState(null);
   const [currentStyle, setCurrentStyle] = useState(
@@ -39,7 +40,8 @@ const Selector = (props) => {
       sale_price: 0,
       percent_change: '',
       color: '',
-      photos: []
+      newColor: '',
+      colorCheck: false
     });
 
 
@@ -67,8 +69,8 @@ const Selector = (props) => {
 
   const fetchSaleItem = () => {
     const randomId = generateRandomProductId();
-    const url_price = `${BASE_URL}${CAMPUS_CODE}/products/${randomId}/styles`;
     const url_name = `${BASE_URL}${CAMPUS_CODE}/products/${randomId}`;
+    const url_price = `${url_name}/styles`;
     axios
       .get(url_price, {
         headers: {
@@ -117,7 +119,6 @@ const Selector = (props) => {
             Object.values(res[0].skus).forEach(item => setSizeArray(prevArray => prevArray.concat(item.size)));
             setSelectedSize(Object.values(res[0].skus)[0].size);
             setProductStyles(res);
-            setDetails(res);
             res.map((item) => item['default?'] && setItem(item));
             res.map((item) =>
               (item['default?'] & item.sale_price !== null) && setIsSale(true));
@@ -136,6 +137,7 @@ const Selector = (props) => {
               original_price: res[0].original_price,
               sale_price: salePrice,
               percent_change: percentChange,
+              color: res[0].name,
             }));
           })
           .catch((err) => console.error('error on selector', err));
@@ -177,7 +179,7 @@ const Selector = (props) => {
       <div className='selector-components'>
         <Imagegallery
           id={productId}
-          details={details}
+          details={productStyles}
           item={item}
           setImageTracker={setImageTracker}
           imageTracker={imageTracker}
@@ -239,6 +241,7 @@ const Selector = (props) => {
                 setImageTracker={setImageTracker}
                 imageTracker={imageTracker}
                 setCurrentStyle={setCurrentStyle}
+                currentStyle={currentStyle}
               />
             }
             <div className='information-section'>
@@ -249,14 +252,22 @@ const Selector = (props) => {
                     Object.keys(productInformation).length > 0 &&
                     productInformation.features
                       .filter((item) => item.value !== null)
+                      .reduce((uniqueFeatures, item) => {
+                        if (!uniqueFeatures.some(feature => feature.feature === item.feature)) {
+                          uniqueFeatures.push(item);
+                        }
+                        return uniqueFeatures;
+                      }, [])
                       .map((item, key) => {
                         return <li key={key + 99} className='details-li'>
-                          {item.feature} {item.value}
+                          <div className='li-div1'>{item.feature}</div>
+                          <div className='li-div2'>{item.value}</div>
                         </li>
                       })
                   }
                 </ul>
               </div>
+              <hr className='hr-class' />
               <div className='about-item-cont'>
                 <h3 className='about-item'>About this item</h3>
                 <p className='description'>
@@ -269,16 +280,7 @@ const Selector = (props) => {
               </div>
             </div>
           </div>
-          <div className='purchase-div'>
-            <div className='checkout-container'>
-              <div className='price-div'>
-                <sup>$</sup>
-                <span className='price'>{money.dollar}</span>
-                <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>
-              </div>
-            </div>
-          </div>
-
+          <Purchase money={money} />
         </aside>
       </div >
     </div >
