@@ -6,7 +6,7 @@ const BASE_URL = process.env.API_BASE_URL;
 const CAMPUS_CODE = process.env.CAMPUS_CODE;
 
 const Imagegallery = (props) => {
-  console.log('propsImage', props)
+  // console.log('propsImage', props.imageTracker)
   const photoSwap = (url, new_url, bool) => {
     props.setImageTracker(prev => ({
       ...prev,
@@ -32,7 +32,7 @@ const Imagegallery = (props) => {
         </div>
         <img
           className='main-image-container'
-          src={props.imageTracker.original_url}
+          src={props.imageTracker.style_photo ? props.imageTracker.style_url : props.imageTracker.original_url}
           alt={props.item.name}
         />
       </div>
