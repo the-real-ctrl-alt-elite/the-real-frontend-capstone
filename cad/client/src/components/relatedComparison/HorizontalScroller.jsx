@@ -30,14 +30,27 @@ const HorizontalScroller = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    if (scrollContainerRef.current && scrollContainerRef.current.scrollWidth && scrollContainerRef.current.clientWidth) {
-      if (scrollContainerRef.current.scrollWidth > scrollContainerRef.current.clientWidth) {
-        setShowRightButton(false);
-      } else {
+  const handleDefaultArrows = () => {
+    if (scrollContainerRef.current) {
+      const { scrollWidth, clientWidth } = scrollContainerRef.current;
+      if (scrollWidth > clientWidth) {
         setShowRightButton(true);
+      } else {
+        setShowRightButton(false);
+        setShowLeftButton(false);
       }
     }
+  };
+
+  useEffect(() => {
+    handleDefaultArrows();
+  }, [children]);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleDefaultArrows);
+    return () => {
+      window.removeEventListener('resize', handleDefaultArrows);
+    };
   }, []);
 
   return (

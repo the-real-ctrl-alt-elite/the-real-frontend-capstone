@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {
+  useState, useEffect, useContext,
+} from 'react';
 import RelatedCard from './RelatedCard';
 import HorizontalScroller from './HorizontalScroller';
 import ProductContext from '../../ProductContext';
@@ -54,28 +56,26 @@ const RelatedSection = ({ handleProductClick }) => {
     <section className='related-container'>
       <h3>RELATED PRODUCTS</h3>
       <HorizontalScroller>
-        <>
-          {relatedProducts.map(({
-            // eslint-disable-next-line camelcase
-            id, name, category, default_price, sale_price, photos, description, features, rating,
-          }) => (
-            <RelatedCard
-              handleClick={handleProductClick}
-              key={id}
-              id={id}
-              name={name}
-              category={category}
+        {relatedProducts.map(({
+          // eslint-disable-next-line camelcase
+          id, name, category, default_price, sale_price, photos, description, features, rating,
+        }) => (
+          <RelatedCard
+            handleClick={handleProductClick}
+            key={id}
+            id={id}
+            name={name}
+            category={category}
               // eslint-disable-next-line camelcase
-              defaultPrice={default_price}
+            defaultPrice={default_price}
               // eslint-disable-next-line camelcase
-              salePrice={sale_price}
-              description={description}
-              features={features}
-              photos={photos[0]}
-              rating={rating}
-            />
-          ))}
-        </>
+            salePrice={sale_price}
+            description={description}
+            features={features}
+            photos={photos[0]}
+            rating={rating}
+          />
+        ))}
       </HorizontalScroller>
 
     </section>
