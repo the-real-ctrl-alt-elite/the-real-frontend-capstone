@@ -26,7 +26,7 @@ const OutfitSection = () => {
     }
     const hasItem = outfitItems.some((item) => item.id === newItem.id);
     if (!hasItem) {
-      setOutfitItems((prevItems) => [...prevItems, newItem]);
+      setOutfitItems((prevItems) => [newItem, ...prevItems]);
     }
   };
 
