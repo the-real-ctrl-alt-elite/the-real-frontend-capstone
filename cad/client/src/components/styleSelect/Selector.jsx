@@ -278,6 +278,12 @@ const Selector = (props) => {
                 <h3 className='about-item'>Slogan</h3>
                 {productInformation.slogan}
               </div>
+              <hr className='hr-class' />
+              <div className='icon-div'>
+                <span><i className="fa-brands fa-facebook"></i></span>
+                <span><i className="fa-brands fa-pinterest"></i></span>
+                <span><i className="fa-brands fa-twitter"></i></span>
+              </div>
             </div>
           </div>
           <Purchase money={money} />

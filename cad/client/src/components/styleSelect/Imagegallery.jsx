@@ -16,11 +16,11 @@ const Imagegallery = (props) => {
       <div className='image-container'>
         <div className='thumbnails-gallery'>
           {
-            props.item && props.item.photos.map((photo, i) => {
+            props.item > 0 && props.item.photos.map((photo, i) => {
               const length = props.item.photos.length;
               return <div className={length < 3 ? 'thumbnail-col' : 'thumbnail-row'} key={photo.url}>
+                <img className='thumbnails' src={photo.thumbnail_url} onClick={() => photoSwap(photo.thumbnail_url)} />
                 <img className='thumbnails' src={photo.url} onClick={() => photoSwap(photo.url)} />
-                {/* <img className='thumbnails' src={photo.thumbnail_url} onClick={() => photoSwap(photo.thumbnail_url)} /> */}
               </div>
             })
           }
