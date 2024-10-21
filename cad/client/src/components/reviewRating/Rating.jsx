@@ -106,6 +106,7 @@ const Rating = () => {
         })
         .then((response) => {
           setMetaData(response.data);
+          console.log(response.data);
         })
         .catch((err) => {
           // eslint-disable-next-line no-console
@@ -179,7 +180,7 @@ const Rating = () => {
         && (
           <ModalBackground
             component={AddReview}
-            componentProps={{ metaData }}
+            componentProps={{ metaData, setReviewStatus }}
             backgroundClose={false}
             closeModal={closeReviewModal}
           />

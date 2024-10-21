@@ -17,22 +17,24 @@ const App = () => {
   return (
     <div className='app'>
       <Header />
-      <Selector />
-      <div className='related-comp-wrapper'>
-        <RelatedSection />
-        <OutfitSection />
-      </div>
-      <div
-        id='Qa'
-        className='qa-wrapper'
-      >
-        <Qa />
-      </div>
-      <div
-        id='ratings'
-        className='rating-review-wrapper'
-      >
-        <Rating />
+      <div className='innerApp'>
+        <Selector />
+        <div className='related-comp-wrapper'>
+          <RelatedSection />
+          <OutfitSection />
+        </div>
+        <div
+          id='Qa'
+          className='qa-wrapper'
+        >
+          <Qa />
+        </div>
+        <div
+          id='ratings'
+          className='rating-review-wrapper'
+        >
+          <Rating />
+        </div>
       </div>
     </div>
   );

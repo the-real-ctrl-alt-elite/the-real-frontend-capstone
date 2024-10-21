@@ -1,7 +1,9 @@
 import React, { useState, useEffect, } from 'react';
 
 const Imagegallery = (props) => {
+
   const [enlarge, setEnlarge] = useState(false);
+  // console.log('propsImage', props.imageTracker)
   const photoSwap = (url, new_url, bool) => {
     props.setImageTracker(prev => ({
       ...prev,

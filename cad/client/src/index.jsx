@@ -1,9 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { ProductProvider } from './ProductContext';
 import './index.css';
-import { BrowserRouter } from 'react-router-dom';
 
 const root = createRoot(document.getElementById('root'));
 root.render(
@@ -11,5 +11,5 @@ root.render(
     <ProductProvider>
       <App />
     </ProductProvider>
-  </BrowserRouter>
+  </BrowserRouter>,
 );
