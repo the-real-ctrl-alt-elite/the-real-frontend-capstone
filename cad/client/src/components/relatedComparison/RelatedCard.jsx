@@ -8,9 +8,6 @@ import PriceTag from './PriceTag';
 import ProductContext from '../../ProductContext';
 import { getDefaultStyle } from './helpers/styleHelpers';
 
-// TODO: Update to use PriceTag instead of default price
-// TODO: Star count is incorrect
-
 const RelatedCard = ({
   name, id, category, defaultPrice, salePrice, description, features, photos, rating,
 }) => {
@@ -29,7 +26,7 @@ const RelatedCard = ({
 
   return (
     <>
-      <div className='product-card-container' id={id}>
+      <div className='product-card-container related-product-card' id={id}>
         <button onClick={() => handleCompareClick()} type='button' label='compare-item' className='action-item-btn'>
           <i className='fa-solid fa-star-sharp fa-xs' style={{ color: '#ffffff', padding: '3px' }} />
         </button>

@@ -132,6 +132,7 @@ const RatingBreakdown = ({ metaData, reviewFilters, setReviewFilters }) => {
   };
 
   return (
+
     <div className='ratingBreakdown' id='rating'>
       <div className='ratingBreakdownSummary'>
         <h1>{ratingAverage}</h1>

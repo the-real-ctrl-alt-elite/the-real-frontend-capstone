@@ -32,7 +32,6 @@ const AddAQuestionModal = ({ setOpenQuestionModal, productName, productId }) => 
   };
   const handleQuestionSubmit = (e) => {
     e.preventDefault();
-
     axios
       .post(
         url,
@@ -45,7 +44,7 @@ const AddAQuestionModal = ({ setOpenQuestionModal, productName, productId }) => 
           },
         },
       )
-      .then((result) => console.log('successfully submitted answer? status code:', result))
+      .then((result) => console.log('successfully submitted questions? status code:', result))
       .catch((err) => console.log('failed to submit answer', err));
     setShowConfirmation(true);
     setTimeout(() => {
