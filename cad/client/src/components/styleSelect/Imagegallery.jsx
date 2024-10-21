@@ -1,11 +1,8 @@
 import React, { useState, useEffect, } from 'react';
-import axios from 'axios';
-
-const TOKEN = process.env.GIT_TOKEN;
-const BASE_URL = process.env.API_BASE_URL;
-const CAMPUS_CODE = process.env.CAMPUS_CODE;
 
 const Imagegallery = (props) => {
+
+  const [enlarge, setEnlarge] = useState(false);
   // console.log('propsImage', props.imageTracker)
   const photoSwap = (url, new_url, bool) => {
     props.setImageTracker(prev => ({
@@ -25,7 +22,7 @@ const Imagegallery = (props) => {
               const length = props.item.photos.length;
               return <div className={length < 3 ? 'thumbnail-col' : 'thumbnail-row'} key={photo.url}>
                 <img className='thumbnails' src={photo.url} onClick={() => photoSwap(photo.url)} />
-                <img className='thumbnails' src={photo.thumbnail_url} onClick={() => photoSwap(photo.thumbnail_url)} />
+                {/* <img className='thumbnails' src={photo.thumbnail_url} onClick={() => photoSwap(photo.thumbnail_url)} /> */}
               </div>
             })
           }
@@ -34,7 +31,21 @@ const Imagegallery = (props) => {
           className='main-image-container'
           src={props.imageTracker.style_photo ? props.imageTracker.style_url : props.imageTracker.original_url}
           alt={props.item.name}
+          onClick={() => setEnlarge(!enlarge)}
         />
+        {
+          enlarge && (
+            <div className="modal-overlay" onClick={() => setEnlarge(!enlarge)}>
+              <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <img
+                  className='enlarged-image'
+                  src={props.imageTracker.style_photo ? props.imageTracker.style_url : props.imageTracker.original_url}
+                  alt={props.item.name}
+                />
+              </div>
+            </div>
+          )
+        }
       </div>
     );
   }
