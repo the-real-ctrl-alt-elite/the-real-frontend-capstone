@@ -9,4 +9,3 @@ const MoreQuestions = () => {
 };
 
 export default MoreQuestions;
-

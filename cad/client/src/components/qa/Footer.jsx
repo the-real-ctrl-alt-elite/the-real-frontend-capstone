@@ -26,7 +26,7 @@ const Footer = ({
             Authorization: TOKEN,
           },
         })
-        .then(() => console.log('successfully updated helpfulness for selected answer'))
+        .then((result) => console.log('successfully updated helpfulness for selected answer: ', result))
         .catch((err) => console.log('failed to update helpfulness for selected answer', err));
     }
   };
@@ -42,21 +42,23 @@ const Footer = ({
           Authorization: TOKEN,
         },
       })
-      .then(() => console.log('sucessfully reported answer'))
+      .then((result) => console.log('sucessfully reported answer: ', result))
       .catch((err) => console.log('failed to report answer: ', err));
   };
 
   return (
     <div>
-      <span>by </span>
-      <span style={{ fontWeight: isSeller ? 'bold' : 'normal' }}>{userName}</span>
-      <span>{`, ${formatDate} | Helpful?`}</span>
-      <span>
-        <a href='#/' onClick={handleClickYes}>Yes</a>
-        {' '}
-        {`(${helpful}) | `}
-        <a href='#/' onClick={handleClickReport}>{reportState}</a>
-      </span>
+      <span className='answer-footer' style={{ fontWeight: isSeller ? 'bold' : 'normal' }}>{`by ${userName},`}</span>
+      <span className='answer-footer'>{`${formatDate}`}</span>
+      <span className='answer-footer'>|</span>
+      <span className='answer-footer'>Helpful?</span>
+
+      <a href='#/' onClick={handleClickYes}>Yes</a>
+
+      <span className='answer-footer'>{`(${helpful})`}</span>
+      <span className='answer-footer'>|</span>
+      <a href='#/' onClick={handleClickReport}>{reportState}</a>
+
     </div>
   );
 };
