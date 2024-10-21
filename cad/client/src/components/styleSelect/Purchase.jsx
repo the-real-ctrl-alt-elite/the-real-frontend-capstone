@@ -14,6 +14,9 @@ const Purchase = (props) => {
           <span className='price'>{props.money.dollar}</span>
           <sup style={{ textDecoration: 'underline' }}>{props.money.cent}</sup>
         </div>
+        <select>Select
+          <option></option>
+        </select>
       </div>
     </div>
   );
