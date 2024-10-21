@@ -12,7 +12,7 @@ const SortOptions = ({ fn }) => {
   };
 
   return (
-    <div style={{ marginLeft: '1.5rem' }} className='reviewSortOptionsHeader'>
+    <div style={{ marginLeft: '1.5rem' }} className='reviewSortOptionsHeader' id='review'>
       <span>{`${fn.reviews.length} reviews, `}</span>
       {' '}
       <label htmlFor='ratingSelect' style={{ fontSize: '1.125rem' }}>
