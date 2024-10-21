@@ -280,9 +280,9 @@ const Selector = (props) => {
               </div>
               <hr className='hr-class' />
               <div className='icon-div'>
-                <span><i className="fa-brands fa-facebook"></i></span>
-                <span><i className="fa-brands fa-pinterest"></i></span>
-                <span><i className="fa-brands fa-twitter"></i></span>
+                <div className='social-icons'><i className="fa-brands fa-facebook"></i></div>
+                <div className='social-icons red'><i className="fa-brands fa-pinterest"></i></div>
+                <div className='social-icons'><i className="fa-brands fa-twitter"></i></div>
               </div>
             </div>
           </div>

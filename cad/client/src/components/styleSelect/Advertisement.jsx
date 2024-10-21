@@ -5,6 +5,7 @@ import ProductContext from '../../ProductContext';
 const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
 const CAMPUS_CODE = process.env.CAMPUS_CODE;
+
 // not randomized
 const Advertisement = (props) => {
   const { productId, newProduct } = useContext(ProductContext);

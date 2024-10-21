@@ -6,7 +6,7 @@
 }
 
 .selector-components {
-  padding: 20px;
+  padding: 20px 0;
   width: 100%;
   display: flex;
 }
@@ -98,7 +98,7 @@
 .review-links {
   display: flex;
   width: 100%;
-  margin-left: 80px;
+  margin-left: 20px;
   justify-content: space-between;
 }
 
@@ -120,4 +120,21 @@
 
 .li-div2 {
   width: 60%;
+}
+
+.icon-div {
+  width: 100%;
+  color: blue;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: xx-large;
+  margin-top: 10px;
+}
+
+.social-icons {
+  cursor: pointer;
+}
+
+.red {
+  color: red;
 }
