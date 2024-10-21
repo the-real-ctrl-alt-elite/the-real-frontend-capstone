@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Photoes from './Photoes';
+import Photos from './Photoes';
 import Footer from './Footer';
 
 const TOKEN = process.env.GIT_TOKEN;
@@ -60,16 +60,17 @@ const Answers = ({ questionId }) => {
       setExtend(!extend);
     }
   };
-  // console.log('check answerList to look for answer id: ', answerList);
+
   return (
     <div className={`load-more-answers ${extend ? 'full-answers' : ''}`}>
       {answerList.map((answer, idx) => {
         return (
-          <div className='answer-section' key={idx + 'id'}>
+          <div className='answer-section' key={`${idx}id`}>
             <span className='answer-header'>A: </span>
             <span>{answer.body}</span>
-            <div>{answer.photos.length > 0 && <Photoes photos={answer.photos} />}</div>
+            <div>{answer.photos.length > 0 && <Photos photos={answer.photos} />}</div>
             <Footer userName={answer.answerer_name} dateData={answer.date} helpfulness={answer.helpfulness} answerList={answerList} setAnswerList={setAnswerList} idx={idx} answerId={answer.answer_id} />
+            <hr className='break' />
           </div>
         );
       })}
