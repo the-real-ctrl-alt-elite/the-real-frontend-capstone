@@ -15,7 +15,7 @@
   --bg: white;
   --text: black;
   --box-shadow:
-    #070707 0px 20px 30px -10px,
+    #070707 0px 0px 15px -1px,
     #80ff00b0 0px 5px 10px -5px;
   --accent-one: rgb(235,235,245);
   --accent-two: rgb(245,245,255);
@@ -33,7 +33,7 @@
   --bg: rgba(22,22,22);
   --text: white;
   --box-shadow:
-    #ffffff 0px 20px 30px -10px,
+    #ffffff 0px 0px 15px -1px,
     #80ff00b0 0px 5px 10px -5px;
   --accent-one: rgba(25,20,32);
   --accent-two: rgb(40,36,50);
