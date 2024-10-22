@@ -27,7 +27,7 @@ const ModalBackground = ({
   // which gets passed all the way down to an x button in modelFrame
   const usedTop = top || '0';
   const usedBackground = background || 'rgba(22,22,22,0.5)';
-  const usedInnerBackground = innerBackground || 'rgba(22,22,22,1)'
+  const usedInnerBackground = innerBackground || 'rgba(22,22,22,1)';
   const usedBackgroundClose = backgroundClose !== undefined ? backgroundClose : true;
   const usedPadding = padding || '2rem';
   const usedBorder = border || 'none';
@@ -64,7 +64,7 @@ const ModalBackground = ({
       }}
     >
       <div
-        style={{ zIndex: '4' }}
+        style={{ zIndex: '4', background: 'none' }}
       >
         <ModalFrame
           background={usedInnerBackground}

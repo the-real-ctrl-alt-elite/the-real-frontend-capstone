@@ -7,6 +7,7 @@ import Imagegallery from './Imagegallery';
 import Sizeoptions from './Sizeoptions';
 import Styleoptions from './Styleoptions';
 import Purchase from './Purchase';
+import { ReviewStars } from '../reviewRating/components/ReviewTile';
 
 const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
@@ -34,6 +35,13 @@ const Selector = (props) => {
 
   // keep track of styles pics
   const [imageTracker, setImageTracker] = useState({ original_url: '', style_url: '', style_photo: false });
+  const [detailsTracker, setDetailsTracker] = useState({
+    original_price: 0,
+    sale_price: 0,
+    percent_change: '',
+    color: '',
+    hasSale: false,
+  });
   const [item, setItem] = useState({});
   const [isSale, setIsSale] = useState(null);
   const [currentStyle, setCurrentStyle] = useState(
@@ -44,6 +52,7 @@ const Selector = (props) => {
       color: '',
       newColor: '',
       colorCheck: false,
+      index: null,
     },
   );
 
@@ -141,6 +150,7 @@ const Selector = (props) => {
               sale_price: salePrice,
               percent_change: percentChange,
               color: res[0].name,
+              index: 0,
             }));
           })
           .catch((err) => console.error('error on selector', err));
@@ -164,6 +174,7 @@ const Selector = (props) => {
   //   console.log(currentStyle)
   //   console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
   // }
+  console.log(currentStyle, 'current style');
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -174,6 +185,7 @@ const Selector = (props) => {
             <span>
               <strong style={{ fontSize: 'large' }}>{'EVENT ENDS SOON: '}</strong>
               {saleName}
+              {' '}
               originally priced at $
               {sale.original_price}
               <span className='sale-now'> NOW ONLY </span>
@@ -204,68 +216,53 @@ const Selector = (props) => {
               <p>{productInformation.category}</p>
             </div>
             <h1 className='product-name'>{productInformation.name}</h1>
-            <div className='ratings-container'>
-              <div className='rate-star'>
-                <div className='sel-rating'>{starCount && starCount.toFixed(1)}</div>
-                <div className='stars-div'>
-                  <div className='stars-hollow'>&#9734;&#9734;&#9734;&#9734;&#9734;</div>
-                  <div className='stars-solid-cont'>
-                    {
-                      star.full.map((solidStar, index) => {
-                        return <span className='stars-solid' key={index}>{solidStar}</span>;
-                      })
-                    }
-                    {
-                      starCount < 5 && (
-                      <span
-                        className='star-part'
-                        style={{
-                          background: `linear-gradient(to right, goldenrod ${star.part}%, transparent ${star.part}%)`,
-                        }}
-                      >
-                        &#9733;
-                      </span>
-                      )
-                    }
-                  </div>
-                </div>
-              </div>
-              <div className='review-links'>
-                <div className='total-rat'>
-                  <Link to='#rating' className='total-rat'>
-                    {reviewCount}
-                    Ratings
-                  </Link>
-                </div>
-                |
-                <div className='sel-reviews'>
-                  <Link to='#review' className='sel-reviews'>
-                    {reviewCount}
-                    Reviews
-                  </Link>
-                </div>
-              </div>
-            </div>
+            {reviewCount && starCount
+                        && (
+                        <div className='ratings-container'>
+                          <ReviewStars rating={starCount} />
+
+                          <div className='review-links'>
+                            <div className='total-rat'>
+                              <button
+                                type='button'
+                                className='button-link-top'
+                                onClick={() => document.querySelector('#ratings').scrollIntoView()}
+                              >
+                                {`Read All ${reviewCount} Reviews`}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        )}
             <hr className='hr-class' />
             <div className='price-div'>
               {
                 currentStyle.sale_price ? (
                   <div className='price-sale-div'>
-                    <div className="sale-price">
+                    <div className='sale-price'>
                       <sup>$</sup>
-                      <span className="price">{currentStyle.sale_price}</span>
+                      <span className='price'>{currentStyle.sale_price}</span>
                     </div>
-                    <div className="original-price">
-                      Originally: <span className="strikethrough"><sup>$</sup>{currentStyle.original_price}</span>
+                    <div className='original-price'>
+                      Originally:
+                      {' '}
+                      <span className='strikethrough'>
+                        <sup>$</sup>
+                        {currentStyle.original_price}
+                      </span>
                     </div>
-                    <div className="percent-discount">
-                      <strong>-{Math.abs(+currentStyle.percent_change)}%</strong>
+                    <div className='percent-discount'>
+                      <strong>
+                        -
+                        {Math.abs(+currentStyle.percent_change)}
+                        %
+                      </strong>
                     </div>
                   </div>
                 ) : (
                   <div>
                     <sup>$</sup>
-                    <span className="price">{money.dollar}</span>
+                    <span className='price'>{money.dollar}</span>
                     <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>
                   </div>
                 )
@@ -273,23 +270,23 @@ const Selector = (props) => {
             </div>
             {
               productStyles && (
-              <Sizeoptions
-                productStyles={productStyles}
-                setSelectedSize={setSelectedSize}
-                sizeArray={sizeArray}
-              />
+                <Sizeoptions
+                  productStyles={productStyles}
+                  setSelectedSize={setSelectedSize}
+                  sizeArray={sizeArray}
+                />
               )
             }
 
             {
               productStyles && (
-              <Styleoptions
-                productStyles={productStyles}
-                setImageTracker={setImageTracker}
-                imageTracker={imageTracker}
-                setCurrentStyle={setCurrentStyle}
-                currentStyle={currentStyle}
-              />
+                <Styleoptions
+                  productStyles={productStyles}
+                  setImageTracker={setImageTracker}
+                  imageTracker={imageTracker}
+                  setCurrentStyle={setCurrentStyle}
+                  currentStyle={currentStyle}
+                />
               )
             }
             <div className='information-section'>
