@@ -42,8 +42,6 @@ const Qa = () => {
           }
         })
         .catch((err) => console.log('error getting the full QNA: ', err));
-    } else {
-      console.log('waiting for productId to be set');
     }
   }, [productId]);
 
