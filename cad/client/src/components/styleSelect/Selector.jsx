@@ -173,7 +173,6 @@ const Selector = (props) => {
             <span>
               <strong style={{ fontSize: 'large' }}>{'EVENT ENDS SOON: '}</strong>
               {saleName}
-              {' '}
               originally priced at $
               {sale.original_price}
               <span className='sale-now'> NOW ONLY </span>
@@ -234,16 +233,13 @@ const Selector = (props) => {
                 <div className='total-rat'>
                   <Link to='#rating' className='total-rat'>
                     {reviewCount}
-                    {' '}
                     Ratings
                   </Link>
                 </div>
-                {' '}
                 |
                 <div className='sel-reviews'>
                   <Link to='#review' className='sel-reviews'>
                     {reviewCount}
-                    {' '}
                     Reviews
                   </Link>
                 </div>
@@ -316,9 +312,21 @@ const Selector = (props) => {
               </div>
               <hr className='hr-class' />
               <div className='icon-div'>
-                <a label='link-to-fb' target='_blank' rel='noopener noreferrer' href='https://www.facebook.com/'><div className='social-icons'><i className='fa-brands fa-facebook' /></div></a>
-                <a label='link-to-pinterest' target='_blank' rel='noopener noreferrer' href='https://www.pinterest.com/'><div className='social-icons red'><i className='fa-brands fa-pinterest' /></div></a>
-                <a label='link-to-x' target='_blank' rel='noopener noreferrer' href='https://x.com/?lang=en'><div className='social-icons black'><i className='fa-brands fa-x-twitter' /></div></a>
+                <a label='link-to-fb' target='_blank' rel='noopener noreferrer' href='https://www.facebook.com/'>
+                  <div className='social-icons'>
+                    <i className='fa-brands fa-facebook' />
+                  </div>
+                </a>
+                <a label='link-to-pinterest' target='_blank' rel='noopener noreferrer' href='https://www.pinterest.com/'>
+                  <div className='social-icons red'>
+                    <i className='fa-brands fa-pinterest' />
+                  </div>
+                </a>
+                <a label='link-to-x' target='_blank' rel='noopener noreferrer' href='https://x.com/?lang=en'>
+                  <div className='social-icons black'>
+                    <i className='fa-brands fa-x-twitter' />
+                  </div>
+                </a>
               </div>
             </div>
           </div>
