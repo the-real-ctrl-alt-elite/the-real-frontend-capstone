@@ -30,7 +30,9 @@ const Selector = (props) => {
   const [skus, setSkus] = useState({});
   const [selectedSku, setSelectedSku] = useState(null);
   const [availableQuantities, setAvailableQuantities] = useState(0);
+
   const [selectedQuantity, setSelectedQuantity] = useState(1);
+
   const handleSizeChange = (selectedSize) => {
     // Find the corresponding SKU for the selected size
     const selectedSku = Object.keys(skus).find((skuId) => skus[skuId].size === selectedSize);
@@ -40,9 +42,11 @@ const Selector = (props) => {
     // Also, update the available quantities for that SKU
     setAvailableQuantities(skus[selectedSku].quantity);
   };
+
   const handleQuantityChange = (quantity) => {
     setSelectedQuantity(quantity);
   };
+
 
 
   // advertisement related
@@ -302,6 +306,9 @@ const Selector = (props) => {
                 productStyles && (
                   <Sizeoptions
                     sizeArray={sizeArray}
+                    setSelectedSize={setSelectedSize}
+                    setSelectedSku={setSelectedSku}
+
                     handleSizeChange={handleSizeChange}
                     skus={skus}
                   />
