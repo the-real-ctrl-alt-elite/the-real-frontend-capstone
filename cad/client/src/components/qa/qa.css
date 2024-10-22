@@ -198,3 +198,43 @@
 .submit-answer {
   margin-top: 150px;
 }
+
+.image-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 700px;
+  border-radius: 10px;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.image-modal {
+  position: absolute;
+  width: auto;
+  height:auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: solid;
+  border-width: 10px;
+  display:flex;
+  justify-content: center;
+  background-color: white;
+  border-radius: 18px;
+}
+
+.close-button {
+  position: absolute;
+  padding-left: 94%;
+  padding-bottom:63%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 25px;
+  color: black;
+}
