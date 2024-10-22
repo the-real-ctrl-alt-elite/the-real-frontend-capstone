@@ -20,7 +20,15 @@
   --accent-two: rgb(245,245,255);
   --accent-three: rgb(235,255,235);
   --accent-four: rgb(235,235,255);
-  --accent-five: #000000;
+  --accent-five: rgb(149, 213, 178);
+  --accent-six:  rgb(64, 145, 108);
+  --accent-seven:  rgb(27, 67, 50);
+  --accent-eight: #000000;
+
+
+
+
+
   --transparent-bg: rgba(22,22,22,.5);
 }
 
@@ -34,9 +42,10 @@
   --accent-two: rgb(40,36,50);
   --accent-three: rgb(49,34,68);
   --accent-four: rgb(64,63,76);
-  --accent-five: #ffffff;
+  --accent-eight: #ffffff;
   --transparent-bg: rgba(222,222,222,.5);
 }
+
 
 .app {
   background-color: var(--bg);
