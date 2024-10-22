@@ -211,20 +211,13 @@ const Selector = (props) => {
 
               <div className='review-links'>
                 <div className='total-rat'>
-                  <Link to='#rating' className='total-rat'>
-                    {reviewCount}
-                    {' '}
-                    Ratings
-                  </Link>
-                </div>
-                {' '}
-                |
-                <div className='sel-reviews'>
-                  <Link to='#review' className='sel-reviews'>
-                    {reviewCount}
-                    {' '}
-                    Reviews
-                  </Link>
+                  <button
+                    type='button'
+                    className='button-link-top'
+                    onClick={() => document.querySelector('#ratings').scrollIntoView()}
+                  >
+                    {`Read All ${reviewCount} Reviews`}
+                  </button>
                 </div>
               </div>
             </div>
