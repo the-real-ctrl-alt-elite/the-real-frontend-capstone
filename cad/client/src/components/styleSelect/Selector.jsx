@@ -48,8 +48,6 @@ const Selector = (props) => {
     setSelectedQuantity(quantity);
   };
 
-
-
   // advertisement related
   const [sale, setSale] = useState(null);
   const [saleName, setSaleName] = useState('');
