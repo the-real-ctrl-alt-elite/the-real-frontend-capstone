@@ -33,7 +33,7 @@ i:before {
 }
 
 .star-front {
-  color: #f77f00;
+  color: rgb(227, 100, 20);
   position: absolute;
   top: 0;
   left: 0;
@@ -42,9 +42,38 @@ i:before {
   white-space: nowrap;
 }
 
+.reviewTile {
+  padding: 1rem;
+  border-bottom: 1px solid var(--text);
+  margin: .5rem;
+}
+
+.reviewTileHeader small {
+  color: var(--text);
+}
+
+.reviewBody {
+  color: var(--text);
+}
+
+.reviewRecommend {
+  color: var(--text);
+  padding: .25rem 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.reviewSummary {
+  font-weight: bold;
+  color: var(--text);
+}
+
 .reviewFooter {
   display: flex;
   gap: .25rem;
+  color: var(--text);
 }
 
 .reviewFooter>small {
@@ -55,7 +84,9 @@ i:before {
   width: 8rem;
   height: 4rem;
   background-color: transparent;
+  border: 2px solid var(--accent-eight);
   cursor: pointer;
+  color: var(--text);
 
 }
 
@@ -63,10 +94,6 @@ i:before {
   display: flex;
   justify-content: space-around;
   gap: 4rem;
-}
-
-a {
-  color: steelblue
 }
 
 .collapsedReviewBody, .expandedReviewBody {
@@ -80,18 +107,26 @@ a {
   font-weight: 700;
   display: flex;
   align-items: center;
+  color: var(--text);
+}
+
+#ratingsSelect {
+  color: var(--text);
 }
 
 .ratingBreakdown {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
+}
+
+.ratingBreakdown small {
+  color: var(--text);
 }
 
 .ratingBreakdownSummary {
   display: flex;
   gap: 1rem;
+  color: var(--text);
 }
 
 .ratingBreakdownSummary>div {
@@ -102,6 +137,10 @@ a {
 .ratingBreakdownSummary>h1 {
   font-size: 3rem;
   letter-spacing: 2px;
+}
+
+.ratingBreakdownSummary small {
+  color: var(--text);
 }
 
 .ratingBreakdownList {
@@ -120,8 +159,12 @@ a {
 
 .ratingRow>button {
   width: 25%;
-  color: black;
+  color: var(--text);
   cursor: pointer;
+}
+
+.ratingRow>button:hover {
+  outline: double 1px var(--accent-five);
 }
 
 .ratingsBar {
@@ -154,7 +197,8 @@ a {
 .button-link {
   border: none;
   background: none;
-  border-bottom: 1px solid black;
+  color: var(--text);
+  border-bottom: 1px solid var(--text);
   cursor: pointer;
   margin: 0 .25rem;
   z-index: 10;
@@ -187,18 +231,30 @@ a {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(22,22,22,0.5);
+  background-color: var(--transparent-bg);
 
 }
 
+[data-theme="dark"] .modelFrame {
+  background-color: black;
+}
+
+[data-theme="dark"] .neat-line {
+  border-color: var(--accent-six);
+}
+
+[data-theme="light"] .modelFrame {
+  background-color: black;
+}
+
 .modelPictureContainer {
-  background: rgba(22,22,22,1);
+  background: var(--accent-four);
   margin: auto;
   width: auto;
   z-index: 4;
   padding: .55rem;
   border: 1px solid rgba(255,255,255,.33);
-  box-shadow: 0 0 10px 10px rgba(0,0,0,.5);
+  box-shadow: var(--box-shadow);
   border-radius: 1rem;
   display: flex;
   justify-content: end;
@@ -221,7 +277,7 @@ a {
   margin: .25rem;
   background: rgba(0, 0, 0, 0.33);
   border: none;
-  color:white;
+  color:var(--transparent-bg);
   cursor: pointer;
 
 }
@@ -231,8 +287,13 @@ a {
   margin: .5rem 0;
 }
 
-.productBreakdownBlock>small {
+.productBreakdownBlock small {
   font-size: 13px;
+  color: var(--text);
+}
+
+.productBreakdownBlock i {
+  color: var(--accent-eight)
 }
 
 .productBreakdownRow {
@@ -261,7 +322,7 @@ a {
   grid-template-columns: 1;
   grid-template-rows: 7;
   padding: 1rem 0 .5rem 0;
-  background:rgb(235, 235, 245);
+  background: var(--accent-one);
   border-radius: 1rem;
   max-width: 50vw;
   min-width: 50vw;
@@ -294,13 +355,13 @@ a {
 }
 
 .add-review-section.active {
-  background: rgba(245,245,255);
+  background: var(--accent-two);
   height: auto;
   position: relative;
 }
 
 .add-review-header-box {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--text);
   height: 4.5rem;
 }
 
@@ -314,12 +375,13 @@ a {
 
 .add-review-section-bubble {
   z-index: 1;
-  border: 1px solid black;
+  border: 1px solid var(--text);
   border-radius: 1rem;
   width: 1.5rem;
   height: 1.5rem;
   text-align: center;
-  background: rgb(205, 205, 215)
+  background: var(--accent-four);
+  color: var(--accent-nine);
 }
 
 .add-review-section-title {
@@ -412,8 +474,14 @@ a {
 
 .document-uploader {
   border: 2px dotted gray;
-  background-color: rgb(205,205,215);
+  background-color: var(--accent-two);
   padding: 1rem;
+  margin: 0 .5rem .5rem .5rem;
+}
+
+.upload-box {
+  background: var(--accent-three);
+  color: var(--accent-eight)
 }
 
 .fa-check, .fa-x {
@@ -449,7 +517,7 @@ a {
 }
 
 .file-list-container>div>div>img {
-  box-shadow: 2px 3px 2px 2px rgba(0, 0, 0, 0.33);
+  box-shadow: var(--light-box-shadow)
 }
 
 .uploadImageRemoveBtn {
@@ -501,3 +569,4 @@ input[type=text]:focus, input[type=email]:focus {
 textarea:focus {
   background-color: rgb(235,235,245);
 }
+

@@ -5,7 +5,7 @@ const ReviewPictureModel = ({ pictureModelStatus }) => {
   const top = pictureModelStatus[1];
   return (
     <div
-      style={{ top: `${top}` }}
+      style={{ top: `${top}`, background: 'none' }}
 
     >
       <div
