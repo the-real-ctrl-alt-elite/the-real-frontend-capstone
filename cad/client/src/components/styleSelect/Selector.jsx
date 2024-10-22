@@ -4,6 +4,7 @@ import axios from 'axios';
 import ProductContext from '../../ProductContext';
 import Advertisement from './Advertisement';
 import Imagegallery from './Imagegallery';
+import Gallery from './Gallery';
 import Sizeoptions from './Sizeoptions';
 import Styleoptions from './Styleoptions';
 import Purchase from './Purchase';
@@ -192,13 +193,14 @@ const Selector = (props) => {
       </article>
 
       <div className='selector-components'>
-        <Imagegallery
+        {/* <Imagegallery
           id={productId}
           details={productStyles}
           item={item}
           setImageTracker={setImageTracker}
           imageTracker={imageTracker}
-        />
+        /> */}
+        <Gallery />
         <aside className='selector-functional-components'>
           <div className='info-choices-container'>
             <div className='category'>

@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
-
+/**
+ *
+    id={productId}
+          details={productStyles}
+          item={item}
+          setImageTracker={setImageTracker}
+          imageTracker={imageTracker}
+ */
 const Imagegallery = (props) => {
   const [enlarge, setEnlarge] = useState(false);
 
-  const photoSwap = (url, new_url, bool) => {
+  const photoSwap = (url) => {
     props.setImageTracker((prev) => ({
       ...prev,
       original_url: url,
     }));
   };
-  useEffect(() => {
-  }, [props.id]);
+
+  console.log('item @ product', item);
 
   if (props.details.length > 0) {
     return (
@@ -22,7 +29,7 @@ const Imagegallery = (props) => {
               return (
                 <div className={length < 3 ? 'thumbnail-col' : 'thumbnail-row'} key={photo.url}>
                   <img className='thumbnails' src={photo.thumbnail_url} onClick={() => photoSwap(photo.thumbnail_url)} />
-                  <img className='thumbnails' src={photo.url} onClick={() => photoSwap(photo.url)} />
+                  {/* <img className='thumbnails' src={photo.url} onClick={() => photoSwap(photo.url)} /> */}
                 </div>
               );
             })
