@@ -39,7 +39,7 @@
 
 .style-check {
   background-color: var(--bg);
-  color: black;
+  color: var(--text);
   font-size: .75rem;
   position: absolute;
   right: 2.75rem;

@@ -1,12 +1,13 @@
 .main-image-container {
-  max-width: 450px;
-  height: 700px;
   object-fit: cover;
   object-position: center;
   cursor: pointer;
   box-shadow:
     #000000 0px 20px 30px -10px,
     #80ff0086 0px 5px 15px -5px;
+    max-width: 30rem;
+    max-height: 45rem;
+
 }
 
 .image-container {
@@ -80,4 +81,13 @@
 
 .image-container {
   position: relative;
+}
+
+.main-image-div {
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30rem;
+  height: 45rem;
 }

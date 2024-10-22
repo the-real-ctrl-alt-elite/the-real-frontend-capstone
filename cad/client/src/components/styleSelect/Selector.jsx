@@ -190,7 +190,7 @@ const Selector = (props) => {
   // console.log(currentStyle, 'current style');
   return (
     <div className='selector-container-overlay'>
-      <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
+      {/* <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
         <a href='#' className='a-tag-ad'>
           {
             sale
@@ -212,7 +212,7 @@ const Selector = (props) => {
             )
           }
         </a>
-      </article>
+      </article> */}
 
       <div className='selector-components'>
         <Imagegallery

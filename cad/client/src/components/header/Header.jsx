@@ -16,6 +16,7 @@ const Header = () => {
           </button>
         </div>
       </div>
+      {/* <Advertisement newProduct={newProduct} saleName={saleName} sale={sale} /> */}
     </header>
   );
 };

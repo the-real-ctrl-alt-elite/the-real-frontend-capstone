@@ -1,3 +1,7 @@
+.related-comp-wrapper {
+  width: 100%;
+}
+
 .price-tag-container {
   display: inline-flex;
   gap: 0.75rem;
@@ -24,6 +28,7 @@
 
 .comparison-container {
   margin: 1rem;
+  background: black;
 }
 
 .action-item-btn {
@@ -33,13 +38,17 @@
   top: 2px;
   width: 1rem;
   height: 1rem;
-  background-color: darkgray;
+  background-color: var(--accent-three);
   display: flex;
   justify-content: center;
   border-radius: 100%;
   align-items: center;
   padding: 0.25rem;
   z-index: 7;
+}
+
+.fa-xs::before {
+  color: var(--accent-nine)
 }
 
 .action-item-btn:hover {
@@ -72,7 +81,7 @@
   display: flex;
   flex-direction: column;
   flex: 0 0 auto;
-  background-color: lightgray;
+  background-color: var(--accent-one);
   position: relative;
 }
 
@@ -93,17 +102,6 @@
   position: relative;
   width: 11rem;
   height: 15rem;
-}
-
-.overlay {
-  z-index: 9999;
-  position: fixed;
-  top: 0;
-  left:0;
-  bottom: 0;
-  right: 0;
-  z-index: 9999;
-  background-color: rgba(105, 105, 105, 0.565);
 }
 
 .product-card-img {
@@ -146,7 +144,7 @@
   bottom: 0;
   right: 0;
   z-index: 9999;
-  background-color: rgba(105, 105, 105, 0.565);
+  background-color: var(--transparent-bg);
   display: flex;
   justify-items: center;
   align-items: center;
@@ -199,6 +197,21 @@ tfoot {
   justify-content: center;
 }
 
+.comparsion-table h1 {
+color: var(--accent-four);
+text-shadow: 2px 2px var(--accent-nine);
+background-color: var(--accent-one);
+width: 99.5%;
+display: flex;
+align-items: center;
+justify-content: center;
+padding-top: .5rem;
+}
+
+.comparsion-table th {
+  height: 2.5rem;
+}
+
 .comparsion-table > th,
 td {
   border: 1px solid rgb(160 160 160);
@@ -212,7 +225,13 @@ td {
 }
 
 .comparsion-table tr:nth-of-type(even) {
-  background-color: rgb(237 238 242);
+  background-color: var(--accent-one);
+  color: var(--text);
+}
+
+.comparsion-table tr:nth-last-of-type(odd) {
+  background-color: var(--accent-four);
+  color: var(--text);
 }
 
 

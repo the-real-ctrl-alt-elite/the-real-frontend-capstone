@@ -19,6 +19,7 @@ const App = () => {
       <Header />
       <div className='innerApp'>
         <Selector />
+        <hr className='section-break' />
         <div className='related-comp-wrapper'>
           <RelatedSection />
           <OutfitSection />
