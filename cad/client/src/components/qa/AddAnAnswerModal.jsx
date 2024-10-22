@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import UploadedPhotoes from './UploadedPhotos';
+// import UploadedPhotoes from './UploadedPhotos';
+import DragAndDrop from '../reviewRating/components/DragAndDrop';
 
 const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
@@ -78,9 +79,13 @@ const AddAnAnswerModal = ({
       .catch((err) => console.log('failed to submit the answer', err));
   };
 
+  const handleFilesSelected = (test) => {
+    console.log('this is what is returned on file select', test);
+  };
+
   return (
     <div className='modal-background'>
-      <div className='modal-container'>
+      <div className='modal-container answer-container'>
         <button className='modal-close-button' onClick={handleCloseAnswerModal}>X</button>
         <div className='modal-title'>
           <h3>Submit your answer</h3>
@@ -111,10 +116,12 @@ const AddAnAnswerModal = ({
             <br />
             <small>For authentication reasons, you will not be emailed</small>
             <br />
-            {showUpload && <input type='file' onChange={handleUploadFile} />}
-            <br />
-            {showUpload && <small>(choose up to 5 photos)</small>}
-            <UploadedPhotoes urls={photoList} multiple />
+
+            {/* {showUpload && <input type='file' onChange={handleUploadFile} />}
+            <br /> */}
+            <DragAndDrop onFilesSelected={handleFilesSelected} height='200px' width='100%' />
+            {/* {showUpload && <small>(choose up to 5 photos)</small>}
+            <UploadedPhotoes urls={photoList} multiple /> */}
           </div>
           <div className='modal-footer'>
             <button>submit answer</button>
