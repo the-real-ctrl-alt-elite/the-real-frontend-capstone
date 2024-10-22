@@ -16,8 +16,6 @@ html {
   scroll-behavior: smooth;
 }
 
-
-
 .app {
   background-color: var(--bg-color);
   color: var(--text-color);

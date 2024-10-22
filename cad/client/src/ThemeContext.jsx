@@ -5,7 +5,11 @@ import React, {
 const ThemeContext = createContext();
 
 const useTheme = () => {
-  return useContext(ThemeContext);
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
 };
 
 const ThemeProvider = ({ children }) => {
