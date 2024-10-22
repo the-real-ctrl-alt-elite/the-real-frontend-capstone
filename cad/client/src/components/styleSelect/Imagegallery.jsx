@@ -30,7 +30,7 @@ const Imagegallery = (props) => {
         </div>
         <img
           className='main-image-container'
-          src={props.imageTracker.style_photo ? props.imageTracker.style_url : props.imageTracker.original_url}
+          src={!props.imageTracker.style_photo ?  props.imageTracker.original_url : props.imageTracker.style_url}
           alt={props.item.name}
           onClick={() => setEnlarge(!enlarge)}
         />
