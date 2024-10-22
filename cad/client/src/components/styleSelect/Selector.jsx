@@ -40,8 +40,8 @@ const Selector = (props) => {
     sale_price: 0,
     percent_change: '',
     color: '',
-    hasSale: false
-  })
+    hasSale: false,
+  });
   const [item, setItem] = useState({});
   const [isSale, setIsSale] = useState(null);
   const [currentStyle, setCurrentStyle] = useState(
@@ -172,7 +172,7 @@ const Selector = (props) => {
   //   console.log(currentStyle)
   //   console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
   // }
-  console.log(currentStyle)
+  console.log(currentStyle, 'current style');
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
