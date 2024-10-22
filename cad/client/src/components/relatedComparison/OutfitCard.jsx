@@ -7,7 +7,7 @@ const OutfitCard = ({
 }) => {
   return (
     <div className='product-card-container'>
-      <button onClick={() => handleRemoveClick(id)} type='button' label='remove-item' className='action-item-btn'>
+      <button onClick={() => handleRemoveClick(id)} aria-label='remove-item-btn' type='button' label='remove-item' className='action-item-btn'>
         <i className='fa-solid fa-xmark' style={{ color: '#ffffff', margin: 'auto' }} />
       </button>
       <img className='product-card-img' src={photos?.url} alt='product-item-img' />
