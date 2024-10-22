@@ -15,12 +15,10 @@ const ModalFrame = ({
   const usedButtonText = buttonText || 'X';
   const usedPadding = padding || '.55rem';
   const usedFontColor = fontColor || 'white';
-  const usedBackground = background || 'rgb(49,34,68)';
   return (
     <div
       className='modelFrame'
       style={{
-        background: `${usedBackground}`,
         position: 'relative',
         maxHeight: '100vh',
         padding: `${usedPadding}`,

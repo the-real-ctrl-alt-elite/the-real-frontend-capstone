@@ -13,11 +13,6 @@ const ReviewTile = ({ review, setPictureStatus, setModalStatus }) => {
 
   return (
     <div
-      style={{
-        padding: '1rem',
-        borderBottom: '1px solid black',
-        margin: '.5rem .5rem .5rem .5rem',
-      }}
       className='reviewTile'
     >
       <div
@@ -41,7 +36,7 @@ const ReviewTile = ({ review, setPictureStatus, setModalStatus }) => {
           </small>
         </div>
       </div>
-      <div style={{ fontWeight: 'bold', color: 'rgba(82,82,82)' }} className='reviewSummary'>
+      <div className='reviewSummary'>
         {review.summary.substring(0, 60)}
       </div>
       <div style={{ height: '55%' }} className='reviewBody'>
@@ -115,7 +110,7 @@ const Star = ({ percentage }) => {
 const CollapsedBody = ({ fn }) => {
   //
   return (
-    <div className='collapsedReviewBody' style={{ color: 'rgba(82,82,82)' }}>
+    <div className='reviewBody'>
       <div
         style={{ fontWeight: 'bold', color: 'rgba(82,82,82)' }}
       >
@@ -149,8 +144,7 @@ const ExpandedBody = ({ fn }) => {
   //
   return (
     <div
-      className='expandedReviewBody'
-      style={{ color: 'rgba(82,82,82)' }}
+      className='reviewBody'
     >
       <div
         style={{ fontWeight: 'bold', color: 'rgba(82,82,82)' }}
@@ -230,14 +224,7 @@ const Response = ({ response }) => {
 const Recommend = () => {
   //
   return (
-    <div style={{
-      padding: '.25rem 0',
-      fontSize: '14px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '.5rem',
-    }}
-    >
+    <div className='reviewRecommend'>
       <i className='fa-solid fa-check' />
       {' '}
       I recommend this product

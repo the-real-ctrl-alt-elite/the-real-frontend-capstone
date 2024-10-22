@@ -24,16 +24,12 @@
   --accent-six:  rgb(64, 145, 108);
   --accent-seven:  rgb(27, 67, 50);
   --accent-eight: #000000;
-
-
-
-
-
+  --accent-nine: rgb(0,0,0);
   --transparent-bg: rgba(22,22,22,.5);
 }
 
 [data-theme="dark"] {
-  --bg: black;
+  --bg: rgba(22,22,22);
   --text: white;
   --box-shadow:
     #ffffff 0px 20px 30px -10px,

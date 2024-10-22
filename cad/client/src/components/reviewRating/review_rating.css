@@ -42,9 +42,38 @@ i:before {
   white-space: nowrap;
 }
 
+.reviewTile {
+  padding: 1rem;
+  border-bottom: 1px solid var(--text);
+  margin: .5rem;
+}
+
+.reviewTileHeader small {
+  color: var(--text);
+}
+
+.reviewBody {
+  color: var(--text);
+}
+
+.reviewRecommend {
+  color: var(--text);
+  padding: .25rem 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.reviewSummary {
+  font-weight: bold;
+  color: var(--text);
+}
+
 .reviewFooter {
   display: flex;
   gap: .25rem;
+  color: var(--text);
 }
 
 .reviewFooter>small {
@@ -55,6 +84,7 @@ i:before {
   width: 8rem;
   height: 4rem;
   background-color: transparent;
+  border: 2px solid var(--accent-eight);
   cursor: pointer;
   color: var(--text);
 
@@ -77,18 +107,26 @@ i:before {
   font-weight: 700;
   display: flex;
   align-items: center;
+  color: var(--text);
+}
+
+#ratingsSelect {
+  color: var(--text);
 }
 
 .ratingBreakdown {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
+}
+
+.ratingBreakdown small {
+  color: var(--text);
 }
 
 .ratingBreakdownSummary {
   display: flex;
   gap: 1rem;
+  color: var(--text);
 }
 
 .ratingBreakdownSummary>div {
@@ -99,6 +137,10 @@ i:before {
 .ratingBreakdownSummary>h1 {
   font-size: 3rem;
   letter-spacing: 2px;
+}
+
+.ratingBreakdownSummary small {
+  color: var(--text);
 }
 
 .ratingBreakdownList {
@@ -193,6 +235,18 @@ i:before {
 
 }
 
+[data-theme="dark"] .modelFrame {
+  background-color: black;
+}
+
+[data-theme="dark"] .neat-line {
+  border-color: var(--accent-six);
+}
+
+[data-theme="light"] .modelFrame {
+  background-color: black;
+}
+
 .modelPictureContainer {
   background: var(--accent-four);
   margin: auto;
@@ -233,8 +287,9 @@ i:before {
   margin: .5rem 0;
 }
 
-.productBreakdownBlock>small {
+.productBreakdownBlock small {
   font-size: 13px;
+  color: var(--text);
 }
 
 .productBreakdownBlock i {
@@ -419,8 +474,14 @@ i:before {
 
 .document-uploader {
   border: 2px dotted gray;
-  background-color: rgb(205,205,215);
+  background-color: var(--accent-two);
   padding: 1rem;
+  margin: 0 .5rem .5rem .5rem;
+}
+
+.upload-box {
+  background: var(--accent-three);
+  color: var(--accent-eight)
 }
 
 .fa-check, .fa-x {
