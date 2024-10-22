@@ -10,12 +10,44 @@
 @import './components/styleSelect/purchase.css';
 @import './components/styleSelect/advertisement.css';
 
+[data-theme="light"] {
+  --bg: white;
+  --text: black;
+  --box-shadow:
+    #070707 0px 20px 30px -10px,
+    #80ff00b0 0px 5px 10px -5px;
+  --accent-one: rgb(235,235,245);
+  --accent-two: rgb(245,245,255);
+  --accent-three: rgb(235,255,235);
+  --accent-four: rgb(235,235,255);
+  --accent-five: #000000;
+  --transparent-bg: rgba(22,22,22,.5);
+}
 
-.innerApp {
+[data-theme="dark"] {
+  --bg: black;
+  --text: white;
+  --box-shadow:
+    #ffffff 0px 20px 30px -10px,
+    #80ff00b0 0px 5px 10px -5px;
+  --accent-one: rgba(25,20,32);
+  --accent-two: rgb(40,36,50);
+  --accent-three: rgb(49,34,68);
+  --accent-four: rgb(64,63,76);
+  --accent-five: #ffffff;
+  --transparent-bg: rgba(222,222,222,.5);
+}
+
+.app {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* .innerApp {
   display: flex;
   width: 80%;
   margin: auto;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-}
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+} */

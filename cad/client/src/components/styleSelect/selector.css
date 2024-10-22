@@ -140,5 +140,5 @@
 }
 
 .black {
-  color: black;
+  color: var(--accent-five)
 }
