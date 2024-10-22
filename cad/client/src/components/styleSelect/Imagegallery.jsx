@@ -12,9 +12,6 @@ const Imagegallery = ({
       original_url: url,
     }));
   };
-  useEffect(() => {
-  }, [id]);
-
   const galleryImages = item?.photos?.map((photo) => photo.url) ?? [];
 
   if (details.length > 0) {
@@ -26,13 +23,22 @@ const Imagegallery = ({
               const { length } = item.photos;
               return (
                 <div className={length < 3 ? 'thumbnail-col' : 'thumbnail-row'} key={photo.url}>
-                  <img className='thumbnails' src={photo.thumbnail_url} onClick={() => photoSwap(photo.thumbnail_url)} />
+                  {/* <img className='thumbnails' src={photo.thumbnail_url} onClick={() => photoSwap(photo.thumbnail_url)} /> */}
+                  <button type='button' onClick={() => photoSwap(photo.thumbnail_url)}>
+                    <img className='thumbnails' src={photo.thumbnail_url} alt='thumbnail-photo' />
+                  </button>
                 </div>
               );
             })
           }
         </div>
         <Gallery data={galleryImages} />
+        {/* <img
+          className='main-image-container'
+          src={!props.imageTracker.style_photo ?  props.imageTracker.original_url : props.imageTracker.style_url}
+          alt={props.item.name}
+          onClick={() => setEnlarge(!enlarge)}
+        /> */}
         {
           enlarge && (
             <div className='modal-overlay' onClick={() => setEnlarge(!enlarge)}>

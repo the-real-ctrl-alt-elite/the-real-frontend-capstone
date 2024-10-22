@@ -56,9 +56,11 @@ const Selector = (props) => {
       newColor: '',
       colorCheck: false,
       index: null,
+      id: -1,
     },
   );
 
+  console.log('currentStyle', currentStyle);
   const [hoverState, setHoverState] = useState(
     {
       active: false,
@@ -151,6 +153,7 @@ const Selector = (props) => {
             const salePrice = res[0].sale_price;
             const percentChange = salePrice !== null
               ? (((+salePrice - +res[0].original_price) / +salePrice) * 100).toFixed(0) : null;
+            console.log('res', res);
             setCurrentStyle((prev) => ({
               ...prev,
               original_price: res[0].original_price,
@@ -158,6 +161,7 @@ const Selector = (props) => {
               percent_change: percentChange,
               color: res[0].name,
               index: 0,
+              id: res[0].style_id,
             }));
             setShownStyle((prev) => ({
               ...prev,

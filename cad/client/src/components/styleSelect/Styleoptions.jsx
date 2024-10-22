@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Styleoptions = (props) => {
-  const newImage = (url, salePrice, price, colorPeek, index) => {
+  const newImage = (url, salePrice, price, colorPeek, index, id) => {
     console.log('newImage', url, salePrice, price, colorPeek);
     props.setImageTracker((prev) => ({
       ...prev,
@@ -19,6 +19,7 @@ const Styleoptions = (props) => {
         color: props.currentStyle.newColor,
         colorCheck: true,
         index,
+        id,
       }));
     } else {
       props.setCurrentStyle((prev) => ({
@@ -30,6 +31,7 @@ const Styleoptions = (props) => {
         color: props.currentStyle.newColor,
         colorCheck: true,
         index,
+        id,
       }));
     }
   };
@@ -74,9 +76,18 @@ const Styleoptions = (props) => {
 
     props.setShownStyle(props.currentStyle);
   };
-  useEffect(() => {
-
-  }, [props]);
+  const handleStyleClick = (image, i) => {
+    // TODO: not sure if this still necessary
+    console.log('image', image);
+    newImage(
+      image.photos[0].thumbnail_url,
+      image.sale_price,
+      image.original_price,
+      image.name,
+      image.index = i,
+      image.style_id,
+    );
+  };
 
   return (
     <div className='style-options-container'>
@@ -103,13 +114,7 @@ const Styleoptions = (props) => {
                   className='style-mini-pic'
                   key={image.style_id}
                   src={image.photos[0].thumbnail_url}
-                  onClick={() => newImage(
-                    image.photos[0].thumbnail_url,
-                    image.sale_price,
-                    image.original_price,
-                    image.name,
-                    image.index = i,
-                  )}
+                  onClick={() => handleStyleClick(image, i)}
                   onMouseEnter={
                 () => mouseHover(
                   image.photos[0].thumbnail_url,
