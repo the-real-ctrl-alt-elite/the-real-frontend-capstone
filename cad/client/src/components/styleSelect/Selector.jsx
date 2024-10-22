@@ -25,10 +25,21 @@ const Selector = (props) => {
   const [money, setMoney] = useState({ dollar: '', cent: '' });
 
   // used in size options
-  const [selectedSize, setSelectedSize] = useState('');
   const [sizeArray, setSizeArray] = useState([]);
+  const [selectedSize, setSelectedSize] = useState('');
   const [skus, setSkus] = useState({});
-  const [availableQuantity, setAvailableQuantity] = useState(0);
+  const [selectedSku, setSelectedSku] = useState(null);
+  const [availableQuantities, setAvailableQuantities] = useState(0);
+  const handleSizeChange = (selectedSize) => {
+    // Find the corresponding SKU for the selected size
+    const selectedSku = Object.keys(skus).find((skuId) => skus[skuId].size === selectedSize);
+    // Update the state with selected size and its SKU
+    setSelectedSize(selectedSize);
+    setSelectedSku(selectedSku);
+    // Also, update the available quantities for that SKU
+    setAvailableQuantities(skus[selectedSku].quantity);
+  };
+
 
   // advertisement related
   const [sale, setSale] = useState(null);
@@ -138,6 +149,7 @@ const Selector = (props) => {
             const res = response.data.results;
             Object.values(res[0].skus).forEach((item) => setSizeArray((prevArray) => prevArray.concat(item.size)));
             setSelectedSize(Object.values(res[0].skus)[0].size);
+            setSkus(res[0].skus);
             setProductStyles(res);
             res.map((item) => item['default?'] && setItem(item));
             res.map((item) => (item['default?'] & item.sale_price !== null) && setIsSale(true));
@@ -184,9 +196,9 @@ const Selector = (props) => {
     // fetchSaleItem();
   }, [productId]);
   // if (Object.keys(productStyles).length > 0) {
-      // console.log(currentStyle, 'current style');
-      // console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
-    //
+  // console.log(currentStyle, 'current style');
+  // console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+  //
   // }
   return (
     <div className='selector-container-overlay'>
@@ -230,23 +242,24 @@ const Selector = (props) => {
             </div>
             <h1 className='product-name'>{productInformation.name}</h1>
             {reviewCount && starCount
-                        && (
-                        <div className='ratings-container'>
-                          <ReviewStars rating={starCount} />
-
-                          <div className='review-links'>
-                            <div className='total-rat'>
-                              <button
-                                type='button'
-                                className='button-link-top'
-                                onClick={() => document.querySelector('#ratings').scrollIntoView()}
-                              >
-                                {`Read All ${reviewCount} Reviews`}
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                        )}
+              && (
+                <div className='ratings-container'>
+                  <span className='star-num'>{starCount.toFixed(1)}</span>
+                  <ReviewStars rating={starCount} />
+                  <div className='review-links'>
+                    <div className='total-rat'>
+                      <button
+                        type='button'
+                        // fix colors
+                        className='button-link-top'
+                        onClick={() => document.querySelector('#ratings').scrollIntoView()}
+                      >
+                        {`Read All ${reviewCount} Reviews`}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             <hr className='hr-class' />
             <div className='price-div'>
               {
@@ -285,10 +298,11 @@ const Selector = (props) => {
               {
                 productStyles && (
                   <Sizeoptions
-                    productStyles={productStyles}
-                    setSelectedSize={setSelectedSize}
                     sizeArray={sizeArray}
-
+                    setSelectedSize={setSelectedSize}
+                    setSelectedSku={setSelectedSku}
+                    handleSizeChange={handleSizeChange}
+                    skus={skus}
                   />
                 )
               }
