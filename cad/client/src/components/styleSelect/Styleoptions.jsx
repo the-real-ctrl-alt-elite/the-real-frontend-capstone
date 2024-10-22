@@ -105,13 +105,13 @@ const Styleoptions = (props) => {
                     image.index = i,
                   )}
                   onMouseEnter={
-                () => mouseHover(
-                  image.photos[0].thumbnail_url,
-                  image.sale_price,
-                  image.original_price,
-                  image.name,
-                )
-              }
+                    () => mouseHover(
+                      image.photos[0].thumbnail_url,
+                      image.sale_price,
+                      image.original_price,
+                      image.name,
+                    )
+                  }
                   onMouseLeave={mouseExit}
                 />
               </div>

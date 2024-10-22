@@ -7,7 +7,6 @@ import Imagegallery from './Imagegallery';
 import Sizeoptions from './Sizeoptions';
 import Quantity from './Quantity';
 import Styleoptions from './Styleoptions';
-import Purchase from './Purchase';
 import { ReviewStars } from '../reviewRating/components/ReviewTile';
 
 const TOKEN = process.env.GIT_TOKEN;
@@ -202,11 +201,7 @@ const Selector = (props) => {
     productId && getProduct();
     // fetchSaleItem();
   }, [productId]);
-  // if (Object.keys(productStyles).length > 0) {
-  // console.log(currentStyle, 'current style');
-  // console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
-  //
-  // }
+
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -257,7 +252,6 @@ const Selector = (props) => {
                     <div className='total-rat'>
                       <button
                         type='button'
-                        // fix colors
                         className='button-link-top'
                         onClick={() => document.querySelector('#ratings').scrollIntoView()}
                       >
@@ -293,7 +287,7 @@ const Selector = (props) => {
                     </div>
                   </div>
                 ) : (
-                  <div>
+                  <div className='price-nosale-div'>
                     <sup>$</sup>
                     <span className='price'>{money.dollar}</span>
                     <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>

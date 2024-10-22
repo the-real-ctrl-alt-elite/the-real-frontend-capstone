@@ -16,8 +16,7 @@
   text-align: center;
   margin: 5px 0;
   border: 2px solid transparent;
-  box-shadow:
-    0 2px 3px .2px rgba(0, 0, 0, .3);
+  box-shadow: 0 2px 3px .2px rgba(0, 0, 0, .3);
 }
 
 .selector-functional-components {
@@ -27,7 +26,6 @@
 
 .info-choices-container {
   width: 50%;
-
 }
 
 .product-name {
@@ -47,6 +45,7 @@
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  margin-bottom: 2px; /* Merged duplicate definitions */
 }
 
 .rate-star {
@@ -62,39 +61,6 @@
   margin-left: 4px;
 }
 
-.stars-solid-cont {
-  display: flex;
-}
-
-.stars-solid {
-  display: inline-block;
-  background: goldenrod;
-  background-clip: text;
-  color: transparent;
-}
-
-.star-part {
-  display: inline-block;
-  background-clip: text !important;
-  color: transparent !important;
-
-}
-
-.stars-hollow {
-  background-clip: text;
-  color: transparent;
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-weight: 100;
-  /* text-shadow:
-    0.005px 0 0 goldenrod,
-    -0.005px 0 0 goldenrod,
-    0 0.005px 0 goldenrod,
-    0 -0.005px 0 goldenrod; */
-
-}
-
 .review-links {
   display: flex;
   width: 100%;
@@ -102,11 +68,7 @@
   justify-content: space-between;
 }
 
-.total-rat {
-  text-decoration: none;
-}
-
-.sel-reviews {
+.total-rat, .sel-reviews {
   text-decoration: none;
 }
 
@@ -139,21 +101,52 @@
   color: red;
 }
 
+.button-link-top {
+  color: blue;
+}
+
+.star-num {
+  margin-right: 3px;
+  font-weight: 700;
+}
+
 .price-sale-div {
   display: flex;
   justify-content: space-between;
+  margin: 3px 0;
 }
-.sale-price {
+.price-nosale-div {
 
+  margin: 3px 0;
 }
 .percent-discount {
   color: red;
   font-size: 1.25rem;
   font-weight: bold;
 }
+
 .strikethrough {
   text-decoration: line-through;
 }
+
 .black {
-  color: var(--accent-eight)
+  color: var(--accent-eight);
+}
+
+.price-div {
+  font-weight: 600;
+}
+
+.price {
+  font-size: x-large;
+  margin-right: 2px;
+}
+.details-container {
+  margin: 4px 0;
+}
+.about-item-cont {
+  margin: 2px 0;
+}
+.slogan {
+  margin: 4px 0;
 }
