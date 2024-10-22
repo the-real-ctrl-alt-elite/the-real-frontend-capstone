@@ -27,10 +27,10 @@ const RelatedCard = ({
   return (
     <>
       <div className='product-card-container related-product-card' id={id}>
-        <button onClick={() => handleCompareClick()} type='button' label='compare-item' className='action-item-btn'>
+        <button onClick={() => handleCompareClick()} aria-label='compare-item-btn' type='button' label='compare-item' className='action-item-btn'>
           <i className='fa-solid fa-star-sharp fa-xs' style={{ color: '#ffffff', padding: '3px' }} />
         </button>
-        <div className='product-card-content' role='button' tabIndex={0} onKeyDown={handleItemClick} onClick={handleItemClick}>
+        <div className='product-card-content' role='button' aria-label='product-card-btn' tabIndex={0} onKeyDown={handleItemClick} onClick={handleItemClick}>
           <img className='product-card-img' src={photos?.url} alt='product-item-img' />
           <div className='product-card-details'>
             <h6>{category.toUpperCase()}</h6>
@@ -57,9 +57,6 @@ const RelatedCard = ({
     </>
   );
 };
-
-// TODO: Consider moving this to a different component
-// TODO: Star count is incorrect
 
 function ComparsionModalContent({ onClose, currentProduct, selectedProduct }) {
   function formatComparedFeatures(currentProductFeatures = [], selectedProductFeatures = []) {

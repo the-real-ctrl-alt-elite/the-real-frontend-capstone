@@ -154,3 +154,6 @@
 .strikethrough {
   text-decoration: line-through;
 }
+.black {
+  color: black;
+}
