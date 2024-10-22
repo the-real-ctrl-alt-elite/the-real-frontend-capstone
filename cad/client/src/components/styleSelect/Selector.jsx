@@ -42,8 +42,8 @@ const Selector = (props) => {
     sale_price: 0,
     percent_change: '',
     color: '',
-    hasSale: false
-  })
+    hasSale: false,
+  });
   const [item, setItem] = useState({});
   const [isSale, setIsSale] = useState(null);
   const [currentStyle, setCurrentStyle] = useState(
@@ -54,6 +54,7 @@ const Selector = (props) => {
       color: '',
       newColor: '',
       colorCheck: false,
+      index: null,
     },
   );
 
@@ -132,6 +133,7 @@ const Selector = (props) => {
               sale_price: salePrice,
               percent_change: percentChange,
               color: res[0].name,
+              index: 0,
             }));
           })
           .catch((err) => console.error('error on selector', err));
@@ -150,11 +152,11 @@ const Selector = (props) => {
     productId && getProduct();
     // fetchSaleItem();
   }, [productId]);
-  if (Object.keys(productStyles).length > 0) {
-    console.log(currentStyle)
-    console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
-  }
-  console.log(currentStyle)
+  // if (Object.keys(productStyles).length > 0) {
+  //   console.log(currentStyle)
+  //   console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+  // }
+  // console.log(currentStyle, 'current style');
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -196,28 +198,24 @@ const Selector = (props) => {
               <p>{productInformation.category}</p>
             </div>
             <h1 className='product-name'>{productInformation.name}</h1>
-            <div className='ratings-container'>
-              <ReviewStars rating={starCount} />
+            {reviewCount && starCount
+                        && (
+                        <div className='ratings-container'>
+                          <ReviewStars rating={starCount} />
 
-              <div className='review-links'>
-                <div className='total-rat'>
-                  <Link to='#rating' className='total-rat'>
-                    {reviewCount}
-                    {' '}
-                    Ratings
-                  </Link>
-                </div>
-                {' '}
-                |
-                <div className='sel-reviews'>
-                  <Link to='#review' className='sel-reviews'>
-                    {reviewCount}
-                    {' '}
-                    Reviews
-                  </Link>
-                </div>
-              </div>
-            </div>
+                          <div className='review-links'>
+                            <div className='total-rat'>
+                              <button
+                                type='button'
+                                className='button-link-top'
+                                onClick={() => document.querySelector('#ratings').scrollIntoView()}
+                              >
+                                {`Read All ${reviewCount} Reviews`}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        )}
             <hr className='hr-class' />
             <div className='price-div'>
               {
