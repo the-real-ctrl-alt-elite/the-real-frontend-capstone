@@ -15,3 +15,19 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+
+[data-theme="light"] {
+  --bg-color: white;
+  --text-color: black;
+}
+
+[data-theme="dark"] {
+  --bg-color: black;
+  --text-color: white;
+}
+
+.app {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}

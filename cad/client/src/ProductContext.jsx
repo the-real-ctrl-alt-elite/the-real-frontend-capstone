@@ -87,9 +87,9 @@ export const ProductProvider = ({ children }) => {
       fetchProductId();
       fetchProductStyles();
       getStarAndReviewCount();
-
     }
   }, [productId]);
+
   return (
     <ProductContext.Provider value={{
       productId, productData, productStyles, starCount, reviewCount, setProductId, newProduct, updateRRCount,

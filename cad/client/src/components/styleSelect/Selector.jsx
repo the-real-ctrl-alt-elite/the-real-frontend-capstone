@@ -10,10 +10,12 @@ import Purchase from './Purchase';
 
 const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
-const CAMPUS_CODE = process.env.CAMPUS_CODE;
+const { CAMPUS_CODE } = process.env;
 
 const Selector = (props) => {
-  const { productId, newProduct, starCount, reviewCount } = useContext(ProductContext);
+  const {
+    productId, newProduct, starCount, reviewCount,
+  } = useContext(ProductContext);
   const [productInformation, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState({});
 
@@ -21,7 +23,7 @@ const Selector = (props) => {
   const [money, setMoney] = useState({ dollar: '', cent: '' });
   const [star, setStar] = useState({ full: [], part: '', hollow: [] });
 
-  //used in size options
+  // used in size options
   const [selectedSize, setSelectedSize] = useState('');
   const [sizeArray, setSizeArray] = useState([]);
 
@@ -41,9 +43,9 @@ const Selector = (props) => {
       percent_change: '',
       color: '',
       newColor: '',
-      colorCheck: false
-    });
-
+      colorCheck: false,
+    },
+  );
 
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
@@ -55,17 +57,18 @@ const Selector = (props) => {
       const num = splits[0];
       const percent = splits[1];
 
-      let starArr = [], hollowArr = [];
+      const starArr = []; const
+        hollowArr = [];
       for (let i = 0; i < num; i++) {
-        starArr.push('★')
+        starArr.push('★');
       }
-      setStar(prev => ({
+      setStar((prev) => ({
         ...prev,
         full: starArr,
-        part: percent
+        part: percent,
       }));
     }
-  }
+  };
 
   const fetchSaleItem = () => {
     const randomId = generateRandomProductId();
@@ -79,7 +82,8 @@ const Selector = (props) => {
       })
       .then((response) => {
         const saleItem = response.data.results.find(
-          (item) => item.sale_price !== null);
+          (item) => item.sale_price !== null,
+        );
         if (saleItem) {
           axios
             .get(url_name, {
@@ -90,7 +94,7 @@ const Selector = (props) => {
             .then((response) => {
               setSaleId(response.data.id);
               setSaleName(response.data.name);
-            })
+            });
           setSale(saleItem);
         } else {
           fetchSaleItem();
@@ -116,23 +120,22 @@ const Selector = (props) => {
           })
           .then((response) => {
             const res = response.data.results;
-            Object.values(res[0].skus).forEach(item => setSizeArray(prevArray => prevArray.concat(item.size)));
+            Object.values(res[0].skus).forEach((item) => setSizeArray((prevArray) => prevArray.concat(item.size)));
             setSelectedSize(Object.values(res[0].skus)[0].size);
             setProductStyles(res);
             res.map((item) => item['default?'] && setItem(item));
-            res.map((item) =>
-              (item['default?'] & item.sale_price !== null) && setIsSale(true));
-            setImageTracker(prev => ({
+            res.map((item) => (item['default?'] & item.sale_price !== null) && setIsSale(true));
+            setImageTracker((prev) => ({
               ...prev,
               original_url: res[0].photos[0].url,
               style_url: '',
-              style_photo: false
+              style_photo: false,
             }));
-            const salePrice = res[0].sale_price !== null ?
-              res[0].sale_price : null;
-            const percentChange = salePrice !== null ?
-              (((+salePrice - +res[0].original_price) / +salePrice) * 100).toFixed(0) : null;
-            setCurrentStyle(prev => ({
+            const salePrice = res[0].sale_price !== null
+              ? res[0].sale_price : null;
+            const percentChange = salePrice !== null
+              ? (((+salePrice - +res[0].original_price) / +salePrice) * 100).toFixed(0) : null;
+            setCurrentStyle((prev) => ({
               ...prev,
               original_price: res[0].original_price,
               sale_price: salePrice,
@@ -142,11 +145,11 @@ const Selector = (props) => {
           })
           .catch((err) => console.error('error on selector', err));
         const [dollar, cent] = response.data.default_price.split('.');
-        setMoney(prevState => ({
+        setMoney((prevState) => ({
           ...prevState,
-          dollar: dollar,
-          cent: cent
-        }))
+          dollar,
+          cent,
+        }));
         setProduct(response.data);
       })
       .catch((err) => console.error('Error origin: selector getProduct', err));
@@ -158,20 +161,30 @@ const Selector = (props) => {
     makeStarParts();
   }, [productId, starCount]);
   if (Object.keys(productStyles).length > 0) {
-    console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+    console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles);
   }
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
-        <a href="#" className='a-tag-ad'>
+        <a href='#' className='a-tag-ad'>
           {
-            sale &&
+            sale
+            && (
             <span>
               <strong style={{ fontSize: 'large' }}>{'EVENT ENDS SOON: '}</strong>
-              {saleName} originally priced at ${sale.original_price}
+              {saleName}
+              {' '}
+              originally priced at $
+              {sale.original_price}
               <span className='sale-now'> NOW ONLY </span>
-              <strong><em style={{ textDecoration: 'underline' }}>{sale.sale_price}!</em></strong>
+              <strong>
+                <em style={{ textDecoration: 'underline' }}>
+                  {sale.sale_price}
+                  !
+                </em>
+              </strong>
             </span>
+            )
           }
         </a>
       </article>
@@ -199,26 +212,43 @@ const Selector = (props) => {
                   <div className='stars-solid-cont'>
                     {
                       star.full.map((solidStar, index) => {
-                        return <span className='stars-solid' key={index}>{solidStar}</span>
+                        return <span className='stars-solid' key={index}>{solidStar}</span>;
                       })
                     }
                     {
-                      starCount < 5 && <span
+                      starCount < 5 && (
+                      <span
                         className='star-part'
                         style={{
-                          background: `linear-gradient(to right, goldenrod ${star.part}%, transparent ${star.part}%)`
+                          background: `linear-gradient(to right, goldenrod ${star.part}%, transparent ${star.part}%)`,
                         }}
-                      >&#9733;</span>
+                      >
+                        &#9733;
+                      </span>
+                      )
                     }
                   </div>
                 </div>
               </div>
               <div className='review-links'>
-                <div className='total-rat'><Link to='#rating' className='total-rat'>{reviewCount} Ratings</Link></div> |
-                <div className='sel-reviews'><Link to='#review' className='sel-reviews'>{reviewCount} Reviews</Link></div>
+                <div className='total-rat'>
+                  <Link to='#rating' className='total-rat'>
+                    {reviewCount}
+                    {' '}
+                    Ratings
+                  </Link>
+                </div>
+                {' '}
+                |
+                <div className='sel-reviews'>
+                  <Link to='#review' className='sel-reviews'>
+                    {reviewCount}
+                    {' '}
+                    Reviews
+                  </Link>
+                </div>
               </div>
             </div>
-
 
             <hr className='hr-class' />
             {/* bring from styles for % change */}
@@ -228,41 +258,47 @@ const Selector = (props) => {
               <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>
             </div>
             {
-              productStyles && <Sizeoptions
+              productStyles && (
+              <Sizeoptions
                 productStyles={productStyles}
                 setSelectedSize={setSelectedSize}
                 sizeArray={sizeArray}
               />
+              )
             }
 
             {
-              productStyles && <Styleoptions
+              productStyles && (
+              <Styleoptions
                 productStyles={productStyles}
                 setImageTracker={setImageTracker}
                 imageTracker={imageTracker}
                 setCurrentStyle={setCurrentStyle}
                 currentStyle={currentStyle}
               />
+              )
             }
             <div className='information-section'>
               <div className='details-container'>
                 <h3 className='datails-title'>Product Details</h3>
                 <ul className='details-ul'>
                   {
-                    Object.keys(productInformation).length > 0 &&
-                    productInformation.features
+                    Object.keys(productInformation).length > 0
+                    && productInformation.features
                       .filter((item) => item.value !== null)
                       .reduce((uniqueFeatures, item) => {
-                        if (!uniqueFeatures.some(feature => feature.feature === item.feature)) {
+                        if (!uniqueFeatures.some((feature) => feature.feature === item.feature)) {
                           uniqueFeatures.push(item);
                         }
                         return uniqueFeatures;
                       }, [])
                       .map((item, key) => {
-                        return <li key={key + 99} className='details-li'>
-                          <div className='li-div1'>{item.feature}</div>
-                          <div className='li-div2'>{item.value}</div>
-                        </li>
+                        return (
+                          <li key={key + 99} className='details-li'>
+                            <div className='li-div1'>{item.feature}</div>
+                            <div className='li-div2'>{item.value}</div>
+                          </li>
+                        );
                       })
                   }
                 </ul>
@@ -280,16 +316,16 @@ const Selector = (props) => {
               </div>
               <hr className='hr-class' />
               <div className='icon-div'>
-                <div className='social-icons'><i className="fa-brands fa-facebook"></i></div>
-                <div className='social-icons red'><i className="fa-brands fa-pinterest"></i></div>
-                <div className='social-icons'><i className="fa-brands fa-twitter"></i></div>
+                <a label='link-to-fb' target='_blank' rel='noopener noreferrer' href='https://www.facebook.com/'><div className='social-icons'><i className='fa-brands fa-facebook' /></div></a>
+                <a label='link-to-pinterest' target='_blank' rel='noopener noreferrer' href='https://www.pinterest.com/'><div className='social-icons red'><i className='fa-brands fa-pinterest' /></div></a>
+                <a label='link-to-x' target='_blank' rel='noopener noreferrer' href='https://x.com/?lang=en'><div className='social-icons black'><i className='fa-brands fa-x-twitter' /></div></a>
               </div>
             </div>
           </div>
           <Purchase money={money} />
         </aside>
-      </div >
-    </div >
+      </div>
+    </div>
   );
 };
 
