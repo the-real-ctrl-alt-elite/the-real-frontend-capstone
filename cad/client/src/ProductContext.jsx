@@ -90,6 +90,8 @@ export const ProductProvider = ({ children }) => {
 
     }
   }, [productId]);
+
+
   return (
     <ProductContext.Provider value={{
       productId, productData, productStyles, starCount, reviewCount, setProductId, newProduct, updateRRCount,
