@@ -1,13 +1,31 @@
 import React, { useState, useEffect } from 'react';
 
 const Styleoptions = (props) => {
-  if (Object.keys(props.productStyles).length > 0) {
-    console.log('styles-Options:\n',
-      '\nimage-tracker:', props.imageTracker,
-      '\nproductStyles:', props.productStyles[0].name)
-  }
-  const newImage = () => {
-
+  const newImage = (url, salePrice, price, colorPeek) => {
+    console.log('newImage', url, salePrice, price, colorPeek)
+    props.setImageTracker(prev => ({
+      ...prev,
+      original_url: url,
+    }));
+    if (salePrice !== null) {
+      console.log('test', salePrice)
+      const percentChange = (((+salePrice - +price) / +salePrice) * 100).toFixed(0);
+      props.setCurrentStyle(prev => ({
+        ...prev,
+        original_price: price,
+        sale_price: salePrice,
+        percent_change: percentChange,
+        newColor: colorPeek,
+        colorCheck: true
+      }));
+    } else {
+      props.setCurrentStyle(prev => ({
+        ...prev,
+        original_price: price,
+        newColor: colorPeek,
+        colorCheck: true
+      }));
+    }
   }
   const mouseHover = (url, salePrice, price, colorPeek) => {
     props.setImageTracker(prev => ({
@@ -44,6 +62,9 @@ const Styleoptions = (props) => {
       ...prev,
       colorCheck: false,
       newColor: '',
+      percent_change: '',
+      sale_price: 0,
+
     }))
   }
   useEffect(() => {
@@ -71,7 +92,11 @@ const Styleoptions = (props) => {
               className='style-mini-pic'
               key={image.style_id}
               src={image.photos[0].thumbnail_url}
-              onClick={newImage}
+              onClick={() => newImage(
+                image.photos[0].thumbnail_url,
+                image.sale_price,
+                image.original_price,
+                image.name)}
               onMouseEnter={
                 () => mouseHover(
                   image.photos[0].thumbnail_url,
