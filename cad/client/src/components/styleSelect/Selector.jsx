@@ -20,7 +20,7 @@ const Selector = (props) => {
     productId, newProduct, starCount, reviewCount,
   } = useContext(ProductContext);
   const [productInformation, setProduct] = useState({});
-  const [productStyles, setProductStyles] = useState({});
+  const [productStyles, setProductStyles] = useState([]);
 
   // stores mutations for styles on current page
   const [money, setMoney] = useState({ dollar: '', cent: '' });
@@ -59,8 +59,6 @@ const Selector = (props) => {
       id: -1,
     },
   );
-
-  console.log('currentStyle', currentStyle);
   const [hoverState, setHoverState] = useState(
     {
       active: false,
@@ -137,7 +135,6 @@ const Selector = (props) => {
             },
           })
           .then((response) => {
-            console.log(response.data);
             const res = response.data.results;
             Object.values(res[0].skus).forEach((item) => setSizeArray((prevArray) => prevArray.concat(item.size)));
             setSelectedSize(Object.values(res[0].skus)[0].size);
@@ -153,7 +150,6 @@ const Selector = (props) => {
             const salePrice = res[0].sale_price;
             const percentChange = salePrice !== null
               ? (((+salePrice - +res[0].original_price) / +salePrice) * 100).toFixed(0) : null;
-            console.log('res', res);
             setCurrentStyle((prev) => ({
               ...prev,
               original_price: res[0].original_price,
@@ -186,13 +182,8 @@ const Selector = (props) => {
 
   useEffect(() => {
     productId && getProduct();
-    // fetchSaleItem();
   }, [productId]);
-  // if (Object.keys(productStyles).length > 0) {
-  //   console.log(currentStyle)
-  //   console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
-  // }
-  // console.log(currentStyle, 'current style');
+
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -218,16 +209,12 @@ const Selector = (props) => {
           }
         </a>
       </article>
-
       <div className='selector-components'>
         <Imagegallery
-          id={productId}
-          details={productStyles}
+          styleId={currentStyle?.id || 0}
+          details={productStyles.filter((style) => style?.style_id === currentStyle?.id)}
           item={item}
-          setImageTracker={setImageTracker}
-          imageTracker={imageTracker}
         />
-
         <aside className='selector-functional-components'>
           <div className='info-choices-container'>
             <div className='category'>

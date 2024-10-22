@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 const Styleoptions = (props) => {
   const newImage = (url, salePrice, price, colorPeek, index, id) => {
-    console.log('newImage', url, salePrice, price, colorPeek);
     props.setImageTracker((prev) => ({
       ...prev,
       original_url: url,
@@ -78,7 +77,6 @@ const Styleoptions = (props) => {
   };
   const handleStyleClick = (image, i) => {
     // TODO: not sure if this still necessary
-    console.log('image', image);
     newImage(
       image.photos[0].thumbnail_url,
       image.sale_price,

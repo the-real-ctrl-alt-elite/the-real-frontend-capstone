@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-const Gallery = ({ data }) => {
+const Gallery = ({ images, imgIdx }) => {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(true);
 
+  useEffect(() => {
+    setCurrentIdx(imgIdx);
+    if (imgIdx === 0) {
+      setShowRightButton(true);
+      setShowLeftButton(false);
+    } else if (imgIdx === images.length - 1) {
+      setShowRightButton(false);
+      setShowLeftButton(false);
+    } else {
+      setShowRightButton(true);
+      setShowLeftButton(true);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imgIdx]);
+
   const handleRightClick = () => {
     const nextIdx = currentIdx + 1;
-    if (nextIdx === data.length - 1) {
+    if (nextIdx === images.length - 1) {
       setShowRightButton(false);
     }
 
@@ -35,7 +51,7 @@ const Gallery = ({ data }) => {
       <button
         type='button'
         label='left-scroll-btn'
-        className='left-scroll-btn'
+        className='gallery-left-btn'
         onClick={handleLeftClick}
       >
         <svg
@@ -54,14 +70,13 @@ const Gallery = ({ data }) => {
         </svg>
       </button>
       )}
-      { data.map((item, idx) => {
+      { images.map((item) => {
         return (
           <button
             type='button'
             className='carousel-item'
             style={{ transform: `translate(-${currentIdx * 100}%)` }}
-            key={idx}
-            onClick={handleModalToggle}
+            key={item}
           >
             <img className='carousel-item-img' src={item} alt='product-image' />
           </button>
@@ -72,7 +87,7 @@ const Gallery = ({ data }) => {
       <button
         type='button'
         label='right-scroll-btn'
-        className='right-scroll-btn'
+        className='gallery-right-btn'
         onClick={handleRightClick}
       >
         <svg

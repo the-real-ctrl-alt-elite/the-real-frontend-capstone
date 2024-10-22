@@ -2,37 +2,36 @@ import React, { useState, useEffect } from 'react';
 import Gallery from './Gallery';
 
 const Imagegallery = ({
-  item, setImageTracker, id, details, imageTracker,
+  item, styleId, details,
 }) => {
   const [enlarge, setEnlarge] = useState(false);
+  const [imgIdx, setImgIdx] = useState(0);
 
-  const photoSwap = (url) => {
-    setImageTracker((prev) => ({
-      ...prev,
-      original_url: url,
-    }));
-  };
-  const galleryImages = item?.photos?.map((photo) => photo.url) ?? [];
+  useEffect(() => {
+    setImgIdx(0);
+  }, [styleId]);
+
+  const galleryImages = details[0]?.photos.map((photo) => photo.url);
+  const galleryThumbnails = details[0]?.photos.map((photo) => photo.thumbnail_url);
 
   if (details.length > 0) {
     return (
       <div className='image-container'>
         <div className='thumbnails-gallery'>
           {
-            item && item?.photos.map((photo, i) => {
-              const { length } = item.photos;
+            galleryThumbnails.map((thumbnail, idx) => {
+              const { length } = galleryThumbnails.length;
               return (
-                <div className={length < 3 ? 'thumbnail-col' : 'thumbnail-row'} key={photo.url}>
-                  {/* <img className='thumbnails' src={photo.thumbnail_url} onClick={() => photoSwap(photo.thumbnail_url)} /> */}
-                  <button type='button' onClick={() => photoSwap(photo.thumbnail_url)}>
-                    <img className='thumbnails' src={photo.thumbnail_url} alt='thumbnail-photo' />
+                <div className={length < 3 ? 'thumbnail-col' : 'thumbnail-row'} key={thumbnail}>
+                  <button type='button' onClick={() => setImgIdx(idx)}>
+                    <img className='thumbnails' src={thumbnail} alt='thumbnail-photo' />
                   </button>
                 </div>
               );
             })
           }
         </div>
-        <Gallery data={galleryImages} />
+        <Gallery images={galleryImages} imgIdx={imgIdx} />
         {/* <img
           className='main-image-container'
           src={!props.imageTracker.style_photo ?  props.imageTracker.original_url : props.imageTracker.style_url}
