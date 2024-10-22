@@ -1,54 +1,46 @@
 import React, { useState, useEffect } from 'react';
-/**
- *
-    id={productId}
-          details={productStyles}
-          item={item}
-          setImageTracker={setImageTracker}
-          imageTracker={imageTracker}
- */
-const Imagegallery = (props) => {
+import Gallery from './Gallery';
+
+const Imagegallery = ({
+  item, setImageTracker, id, details, imageTracker,
+}) => {
   const [enlarge, setEnlarge] = useState(false);
 
   const photoSwap = (url) => {
-    props.setImageTracker((prev) => ({
+    setImageTracker((prev) => ({
       ...prev,
       original_url: url,
     }));
   };
+  useEffect(() => {
+  }, [id]);
 
-  console.log('item @ product', item);
+  const galleryImages = item?.photos?.map((photo) => photo.url) ?? [];
 
-  if (props.details.length > 0) {
+  if (details.length > 0) {
     return (
       <div className='image-container'>
         <div className='thumbnails-gallery'>
           {
-            props.item && props.item?.photos.map((photo, i) => {
-              const { length } = props.item.photos;
+            item && item?.photos.map((photo, i) => {
+              const { length } = item.photos;
               return (
                 <div className={length < 3 ? 'thumbnail-col' : 'thumbnail-row'} key={photo.url}>
                   <img className='thumbnails' src={photo.thumbnail_url} onClick={() => photoSwap(photo.thumbnail_url)} />
-                  {/* <img className='thumbnails' src={photo.url} onClick={() => photoSwap(photo.url)} /> */}
                 </div>
               );
             })
           }
         </div>
-        <img
-          className='main-image-container'
-          src={!props.imageTracker.style_photo ?  props.imageTracker.original_url : props.imageTracker.style_url}
-          alt={props.item.name}
-          onClick={() => setEnlarge(!enlarge)}
-        />
+        <Gallery data={galleryImages} />
         {
           enlarge && (
             <div className='modal-overlay' onClick={() => setEnlarge(!enlarge)}>
               <div className='modal-content' onClick={(e) => e.stopPropagation()}>
                 <img
                   className='enlarged-image'
-                  src={props.imageTracker.style_photo ? props.imageTracker.style_url : props.imageTracker.original_url}
-                  alt={props.item.name}
+                  src={imageTracker.style_photo ? imageTracker.style_url : imageTracker.original_url}
+                  alt={item.name}
                 />
               </div>
             </div>

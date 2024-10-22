@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-const Gallery = () => {
-  const data = ['1', '2', '3', '4', '5'];
+const Gallery = ({ data }) => {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(true);
@@ -23,6 +22,10 @@ const Gallery = () => {
     }
     setCurrentIdx(nextIdx);
     setShowRightButton(true);
+  };
+
+  const handleModalToggle = () => {
+    console.log('clicked');
   };
 
   return (
@@ -52,7 +55,17 @@ const Gallery = () => {
       </button>
       )}
       { data.map((item, idx) => {
-        return <div className='carousel-item' style={{ transform: `translate(-${currentIdx * 100}%)` }} key={idx}>{item}</div>;
+        return (
+          <button
+            type='button'
+            className='carousel-item'
+            style={{ transform: `translate(-${currentIdx * 100}%)` }}
+            key={idx}
+            onClick={handleModalToggle}
+          >
+            <img className='carousel-item-img' src={item} alt='product-image' />
+          </button>
+        );
       })}
       {showRightButton
       && (

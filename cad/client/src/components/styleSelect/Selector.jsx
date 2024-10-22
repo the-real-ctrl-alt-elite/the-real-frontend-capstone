@@ -185,14 +185,14 @@ const Selector = (props) => {
       </article>
 
       <div className='selector-components'>
-        {/* <Imagegallery
+        <Imagegallery
           id={productId}
           details={productStyles}
           item={item}
           setImageTracker={setImageTracker}
           imageTracker={imageTracker}
-        /> */}
-        <Gallery />
+        />
+
         <aside className='selector-functional-components'>
           <div className='info-choices-container'>
             <div className='category'>
