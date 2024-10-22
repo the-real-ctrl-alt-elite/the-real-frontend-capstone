@@ -7,6 +7,7 @@ import Imagegallery from './Imagegallery';
 import Sizeoptions from './Sizeoptions';
 import Styleoptions from './Styleoptions';
 import Purchase from './Purchase';
+import { ReviewStars } from '../reviewRating/components/ReviewTile';
 
 const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
@@ -174,6 +175,7 @@ const Selector = (props) => {
             <span>
               <strong style={{ fontSize: 'large' }}>{'EVENT ENDS SOON: '}</strong>
               {saleName}
+              {' '}
               originally priced at $
               {sale.original_price}
               <span className='sale-now'> NOW ONLY </span>
@@ -205,42 +207,22 @@ const Selector = (props) => {
             </div>
             <h1 className='product-name'>{productInformation.name}</h1>
             <div className='ratings-container'>
-              <div className='rate-star'>
-                <div className='sel-rating'>{starCount && starCount.toFixed(1)}</div>
-                <div className='stars-div'>
-                  <div className='stars-hollow'>&#9734;&#9734;&#9734;&#9734;&#9734;</div>
-                  <div className='stars-solid-cont'>
-                    {
-                      star.full.map((solidStar, index) => {
-                        return <span className='stars-solid' key={index}>{solidStar}</span>;
-                      })
-                    }
-                    {
-                      starCount < 5 && (
-                      <span
-                        className='star-part'
-                        style={{
-                          background: `linear-gradient(to right, goldenrod ${star.part}%, transparent ${star.part}%)`,
-                        }}
-                      >
-                        &#9733;
-                      </span>
-                      )
-                    }
-                  </div>
-                </div>
-              </div>
+              <ReviewStars rating={starCount} />
+
               <div className='review-links'>
                 <div className='total-rat'>
                   <Link to='#rating' className='total-rat'>
                     {reviewCount}
+                    {' '}
                     Ratings
                   </Link>
                 </div>
+                {' '}
                 |
                 <div className='sel-reviews'>
                   <Link to='#review' className='sel-reviews'>
                     {reviewCount}
+                    {' '}
                     Reviews
                   </Link>
                 </div>
@@ -251,21 +233,30 @@ const Selector = (props) => {
               {
                 currentStyle.sale_price ? (
                   <div className='price-sale-div'>
-                    <div className="sale-price">
+                    <div className='sale-price'>
                       <sup>$</sup>
-                      <span className="price">{currentStyle.sale_price}</span>
+                      <span className='price'>{currentStyle.sale_price}</span>
                     </div>
-                    <div className="original-price">
-                      Originally: <span className="strikethrough"><sup>$</sup>{currentStyle.original_price}</span>
+                    <div className='original-price'>
+                      Originally:
+                      {' '}
+                      <span className='strikethrough'>
+                        <sup>$</sup>
+                        {currentStyle.original_price}
+                      </span>
                     </div>
-                    <div className="percent-discount">
-                      <strong>-{Math.abs(+currentStyle.percent_change)}%</strong>
+                    <div className='percent-discount'>
+                      <strong>
+                        -
+                        {Math.abs(+currentStyle.percent_change)}
+                        %
+                      </strong>
                     </div>
                   </div>
                 ) : (
                   <div>
                     <sup>$</sup>
-                    <span className="price">{money.dollar}</span>
+                    <span className='price'>{money.dollar}</span>
                     <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>
                   </div>
                 )
