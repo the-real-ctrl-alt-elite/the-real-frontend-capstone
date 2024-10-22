@@ -16,14 +16,17 @@ const Styleoptions = (props) => {
         sale_price: salePrice,
         percent_change: percentChange,
         newColor: colorPeek,
-        colorCheck: true
+        color: props.currentStyle.newColor,
+        colorCheck: false
       }));
     } else {
       props.setCurrentStyle(prev => ({
         ...prev,
         original_price: price,
+        sale_price: props.currentStyle.sale_price,
+        color: props.currentStyle.newColor,
         newColor: colorPeek,
-        colorCheck: true
+        colorCheck: false
       }));
     }
   }
@@ -41,7 +44,8 @@ const Styleoptions = (props) => {
         sale_price: salePrice,
         percent_change: percentChange,
         newColor: colorPeek,
-        colorCheck: true
+        colorCheck: true,
+        hasSale: true
       }));
     } else {
       props.setCurrentStyle(prev => ({
@@ -58,13 +62,13 @@ const Styleoptions = (props) => {
       style_url: '',
       style_photo: false
     }));
+
     props.setCurrentStyle(prev => ({
       ...prev,
       colorCheck: false,
       newColor: '',
-      percent_change: '',
-      sale_price: 0,
-
+      percent_change: props.currentStyle.percent_change,
+      sale_price: '',
     }))
   }
   useEffect(() => {
