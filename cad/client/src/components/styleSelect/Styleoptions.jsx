@@ -7,7 +7,7 @@ const Styleoptions = (props) => {
       ...prev,
       original_url: url,
     }));
-    if (salePrice !== null) {
+    if (salePrice !== '') {
       console.log('test', salePrice);
       const percentChange = (((+salePrice - +price) / +salePrice) * 100).toFixed(0);
       props.setCurrentStyle((prev) => ({
@@ -17,17 +17,18 @@ const Styleoptions = (props) => {
         percent_change: percentChange,
         newColor: colorPeek,
         color: props.currentStyle.newColor,
-        colorCheck: false,
+        colorCheck: true,
         index,
       }));
     } else {
       props.setCurrentStyle((prev) => ({
         ...prev,
         original_price: price,
-        sale_price: props.currentStyle.sale_price,
-        color: props.currentStyle.newColor,
+        sale_price: '',
+        percent_change: null,
         newColor: colorPeek,
-        colorCheck: false,
+        color: props.currentStyle.newColor,
+        colorCheck: true,
         index,
       }));
     }
@@ -40,7 +41,7 @@ const Styleoptions = (props) => {
     }));
     if (salePrice !== null) {
       const percentChange = (((+salePrice - +price) / +salePrice) * 100).toFixed(0);
-      props.setCurrentStyle((prev) => ({
+      props.setShownStyle((prev) => ({
         ...prev,
         original_price: price,
         sale_price: salePrice,
@@ -50,13 +51,17 @@ const Styleoptions = (props) => {
         hasSale: true,
       }));
     } else {
-      props.setCurrentStyle((prev) => ({
+      props.setShownStyle((prev) => ({
         ...prev,
         original_price: price,
+        sale_price: null,
+        percent_change: null,
         newColor: colorPeek,
         colorCheck: true,
+        hasSale: false,
       }));
     }
+    props.setHoverState(true);
   };
   const mouseExit = () => {
     props.setImageTracker((prev) => ({
@@ -65,13 +70,9 @@ const Styleoptions = (props) => {
       style_photo: false,
     }));
 
-    props.setCurrentStyle((prev) => ({
-      ...prev,
-      colorCheck: false,
-      newColor: '',
-      percent_change: props.currentStyle.percent_change,
-      sale_price: '',
-    }));
+    props.setHoverState(false);
+
+    props.setShownStyle(props.currentStyle);
   };
   useEffect(() => {
 
@@ -84,9 +85,9 @@ const Styleoptions = (props) => {
         <span className='style-name'>
           {
             (props.productStyles.length > 0)
-              && props.currentStyle.colorCheck
-              ? props.currentStyle.newColor
-              : props.currentStyle.color
+              && props.shownStyle.colorCheck
+              ? props.shownStyle.newColor
+              : props.shownStyle.color
           }
         </span>
       </div>

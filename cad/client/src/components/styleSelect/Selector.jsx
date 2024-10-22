@@ -59,6 +59,29 @@ const Selector = (props) => {
     },
   );
 
+  const [hoverState, setHoverState] = useState(
+    {
+      active: false,
+      original_price: 0,
+      sale_price: 0,
+      percent_change: '',
+      color: '',
+      newColor: '',
+      colorCheck: false,
+      index: null,
+    },
+  );
+
+  const [shownStyle, setShownStyle] = useState('');
+
+  useEffect(() => {
+    if (hoverState === false) {
+      setShownStyle({ ...currentStyle });
+    } else {
+      setShownStyle({ ...shownStyle });
+    }
+  }, [currentStyle, hoverState]);
+
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
   };
@@ -112,6 +135,7 @@ const Selector = (props) => {
             },
           })
           .then((response) => {
+            console.log(response.data);
             const res = response.data.results;
             Object.values(res[0].skus).forEach((item) => setSizeArray((prevArray) => prevArray.concat(item.size)));
             setSelectedSize(Object.values(res[0].skus)[0].size);
@@ -124,11 +148,18 @@ const Selector = (props) => {
               style_url: '',
               style_photo: false,
             }));
-            const salePrice = res[0].sale_price !== null
-              ? res[0].sale_price : null;
+            const salePrice = res[0].sale_price;
             const percentChange = salePrice !== null
               ? (((+salePrice - +res[0].original_price) / +salePrice) * 100).toFixed(0) : null;
             setCurrentStyle((prev) => ({
+              ...prev,
+              original_price: res[0].original_price,
+              sale_price: salePrice,
+              percent_change: percentChange,
+              color: res[0].name,
+              index: 0,
+            }));
+            setShownStyle((prev) => ({
               ...prev,
               original_price: res[0].original_price,
               sale_price: salePrice,
@@ -221,24 +252,24 @@ const Selector = (props) => {
             <hr className='hr-class' />
             <div className='price-div'>
               {
-                currentStyle.sale_price ? (
+                shownStyle.sale_price !== null ? (
                   <div className='price-sale-div'>
                     <div className='sale-price'>
                       <sup>$</sup>
-                      <span className='price'>{currentStyle.sale_price}</span>
+                      <span className='price'>{shownStyle.sale_price}</span>
                     </div>
                     <div className='original-price'>
                       Originally:
                       {' '}
                       <span className='strikethrough'>
                         <sup>$</sup>
-                        {currentStyle.original_price}
+                        {shownStyle.original_price}
                       </span>
                     </div>
                     <div className='percent-discount'>
                       <strong>
                         -
-                        {Math.abs(+currentStyle.percent_change)}
+                        {Math.abs(+shownStyle.percent_change)}
                         %
                       </strong>
                     </div>
@@ -279,6 +310,10 @@ const Selector = (props) => {
                   imageTracker={imageTracker}
                   setCurrentStyle={setCurrentStyle}
                   currentStyle={currentStyle}
+                  shownStyle={shownStyle}
+                  setShownStyle={setShownStyle}
+                  hoverState={hoverState}
+                  setHoverState={setHoverState}
                 />
               )
             }
