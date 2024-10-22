@@ -5,6 +5,7 @@ import ProductContext from '../../ProductContext';
 import Advertisement from './Advertisement';
 import Imagegallery from './Imagegallery';
 import Sizeoptions from './Sizeoptions';
+import Quantity from './Quantity';
 import Styleoptions from './Styleoptions';
 import Purchase from './Purchase';
 import { ReviewStars } from '../reviewRating/components/ReviewTile';
@@ -22,11 +23,12 @@ const Selector = (props) => {
 
   // stores mutations for styles on current page
   const [money, setMoney] = useState({ dollar: '', cent: '' });
-  const [star, setStar] = useState({ full: [], part: '', hollow: [] });
 
   // used in size options
   const [selectedSize, setSelectedSize] = useState('');
   const [sizeArray, setSizeArray] = useState([]);
+  const [skus, setSkus] = useState({});
+  const [availableQuantity, setAvailableQuantity] = useState(0);
 
   // advertisement related
   const [sale, setSale] = useState(null);
@@ -57,25 +59,6 @@ const Selector = (props) => {
 
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
-  };
-  const makeStarParts = () => {
-    if (starCount !== null) {
-      const starNumPercent = starCount.toFixed(2);
-      const splits = starNumPercent.split('.');
-      const num = splits[0];
-      const percent = splits[1];
-
-      const starArr = []; const
-        hollowArr = [];
-      for (let i = 0; i < num; i++) {
-        starArr.push('★');
-      }
-      setStar((prev) => ({
-        ...prev,
-        full: starArr,
-        part: percent,
-      }));
-    }
   };
 
   const fetchSaleItem = () => {
@@ -166,12 +149,11 @@ const Selector = (props) => {
   useEffect(() => {
     productId && getProduct();
     // fetchSaleItem();
-    makeStarParts();
-  }, [productId, starCount]);
-  // if (Object.keys(productStyles).length > 0) {
-  //   console.log(currentStyle)
-  //   console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
-  // }
+  }, [productId]);
+  if (Object.keys(productStyles).length > 0) {
+    console.log(currentStyle)
+    console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+  }
   console.log(currentStyle)
   return (
     <div className='selector-container-overlay'>
@@ -180,20 +162,20 @@ const Selector = (props) => {
           {
             sale
             && (
-            <span>
-              <strong style={{ fontSize: 'large' }}>{'EVENT ENDS SOON: '}</strong>
-              {saleName}
-              {' '}
-              originally priced at $
-              {sale.original_price}
-              <span className='sale-now'> NOW ONLY </span>
-              <strong>
-                <em style={{ textDecoration: 'underline' }}>
-                  {sale.sale_price}
-                  !
-                </em>
-              </strong>
-            </span>
+              <span>
+                <strong style={{ fontSize: 'large' }}>{'EVENT ENDS SOON: '}</strong>
+                {saleName}
+                {' '}
+                originally priced at $
+                {sale.original_price}
+                <span className='sale-now'> NOW ONLY </span>
+                <strong>
+                  <em style={{ textDecoration: 'underline' }}>
+                    {sale.sale_price}
+                    !
+                  </em>
+                </strong>
+              </span>
             )
           }
         </a>
@@ -270,16 +252,25 @@ const Selector = (props) => {
                 )
               }
             </div>
-            {
-              productStyles && (
-                <Sizeoptions
-                  productStyles={productStyles}
-                  setSelectedSize={setSelectedSize}
-                  sizeArray={sizeArray}
-                />
-              )
-            }
+            <div className='drop-down-menus'>
+              {
+                productStyles && (
+                  <Sizeoptions
+                    productStyles={productStyles}
+                    setSelectedSize={setSelectedSize}
+                    sizeArray={sizeArray}
 
+                  />
+                )
+              }
+              {
+                productStyles && (
+                  <Quantity
+                    productStyles={productStyles}
+                  />
+                )
+              }
+            </div>
             {
               productStyles && (
                 <Styleoptions
@@ -347,7 +338,6 @@ const Selector = (props) => {
               </div>
             </div>
           </div>
-          <Purchase money={money} currentStyle={currentStyle} />
         </aside>
       </div>
     </div>

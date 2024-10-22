@@ -9,6 +9,7 @@
 @import './components/styleSelect/sizeoptions.css';
 @import './components/styleSelect/purchase.css';
 @import './components/styleSelect/advertisement.css';
+@import './components//styleSelect//quantity.css';
 
 [data-theme="light"] {
   --bg: white;
