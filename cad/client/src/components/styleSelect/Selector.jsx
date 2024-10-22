@@ -184,10 +184,10 @@ const Selector = (props) => {
     // fetchSaleItem();
   }, [productId]);
   // if (Object.keys(productStyles).length > 0) {
-  //   console.log(currentStyle)
-  //   console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+      // console.log(currentStyle, 'current style');
+      // console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+    //
   // }
-  // console.log(currentStyle, 'current style');
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
