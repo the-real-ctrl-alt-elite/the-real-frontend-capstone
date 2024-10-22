@@ -34,6 +34,13 @@ const Selector = (props) => {
 
   // keep track of styles pics
   const [imageTracker, setImageTracker] = useState({ original_url: '', style_url: '', style_photo: false });
+  const [detailsTracker, setDetailsTracker] = useState({
+    original_price: 0,
+    sale_price: 0,
+    percent_change: '',
+    color: '',
+    hasSale: false
+  })
   const [item, setItem] = useState({});
   const [isSale, setIsSale] = useState(null);
   const [currentStyle, setCurrentStyle] = useState(
@@ -164,6 +171,7 @@ const Selector = (props) => {
   //   console.log(currentStyle)
   //   console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
   // }
+  console.log(currentStyle)
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -171,19 +179,19 @@ const Selector = (props) => {
           {
             sale
             && (
-            <span>
-              <strong style={{ fontSize: 'large' }}>{'EVENT ENDS SOON: '}</strong>
-              {saleName}
-              originally priced at $
-              {sale.original_price}
-              <span className='sale-now'> NOW ONLY </span>
-              <strong>
-                <em style={{ textDecoration: 'underline' }}>
-                  {sale.sale_price}
-                  !
-                </em>
-              </strong>
-            </span>
+              <span>
+                <strong style={{ fontSize: 'large' }}>{'EVENT ENDS SOON: '}</strong>
+                {saleName}
+                originally priced at $
+                {sale.original_price}
+                <span className='sale-now'> NOW ONLY </span>
+                <strong>
+                  <em style={{ textDecoration: 'underline' }}>
+                    {sale.sale_price}
+                    !
+                  </em>
+                </strong>
+              </span>
             )
           }
         </a>
@@ -217,14 +225,14 @@ const Selector = (props) => {
                     }
                     {
                       starCount < 5 && (
-                      <span
-                        className='star-part'
-                        style={{
-                          background: `linear-gradient(to right, goldenrod ${star.part}%, transparent ${star.part}%)`,
-                        }}
-                      >
-                        &#9733;
-                      </span>
+                        <span
+                          className='star-part'
+                          style={{
+                            background: `linear-gradient(to right, goldenrod ${star.part}%, transparent ${star.part}%)`,
+                          }}
+                        >
+                          &#9733;
+                        </span>
                       )
                     }
                   </div>
@@ -273,23 +281,23 @@ const Selector = (props) => {
             </div>
             {
               productStyles && (
-              <Sizeoptions
-                productStyles={productStyles}
-                setSelectedSize={setSelectedSize}
-                sizeArray={sizeArray}
-              />
+                <Sizeoptions
+                  productStyles={productStyles}
+                  setSelectedSize={setSelectedSize}
+                  sizeArray={sizeArray}
+                />
               )
             }
 
             {
               productStyles && (
-              <Styleoptions
-                productStyles={productStyles}
-                setImageTracker={setImageTracker}
-                imageTracker={imageTracker}
-                setCurrentStyle={setCurrentStyle}
-                currentStyle={currentStyle}
-              />
+                <Styleoptions
+                  productStyles={productStyles}
+                  setImageTracker={setImageTracker}
+                  imageTracker={imageTracker}
+                  setCurrentStyle={setCurrentStyle}
+                  currentStyle={currentStyle}
+                />
               )
             }
             <div className='information-section'>

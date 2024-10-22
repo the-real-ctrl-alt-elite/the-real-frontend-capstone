@@ -12,7 +12,7 @@ const Imagegallery = (props) => {
   }
   useEffect(() => {
   }, [props.id]);
-  console.log(enlarge)
+
   if (props.details.length > 0) {
     return (
       <div className='image-container'  >
