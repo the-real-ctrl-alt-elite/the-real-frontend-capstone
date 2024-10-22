@@ -138,3 +138,19 @@
 .red {
   color: red;
 }
+
+.price-sale-div {
+  display: flex;
+  justify-content: space-between;
+}
+.sale-price {
+
+}
+.percent-discount {
+  color: red;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.strikethrough {
+  text-decoration: line-through;
+}

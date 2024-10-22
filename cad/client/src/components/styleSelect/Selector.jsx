@@ -44,7 +44,6 @@ const Selector = (props) => {
       colorCheck: false
     });
 
-
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
   };
@@ -128,10 +127,10 @@ const Selector = (props) => {
               style_url: '',
               style_photo: false
             }));
-            const salePrice = res[0].sale_price !== null ?
-              res[0].sale_price : null;
+            const salePrice = res[0].sale_price !== null ? res[0].sale_price : null;
+            const originalPrice = res[0].original_price;
             const percentChange = salePrice !== null ?
-              (((+salePrice - +res[0].original_price) / +salePrice) * 100).toFixed(0) : null;
+              (((originalPrice - salePrice) / originalPrice) * 100).toFixed(0) : null;
             setCurrentStyle(prev => ({
               ...prev,
               original_price: res[0].original_price,
@@ -157,9 +156,10 @@ const Selector = (props) => {
     // fetchSaleItem();
     makeStarParts();
   }, [productId, starCount]);
-  if (Object.keys(productStyles).length > 0) {
-    console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
-  }
+  // if (Object.keys(productStyles).length > 0) {
+  //   console.log(currentStyle)
+  //   console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+  // }
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -218,14 +218,30 @@ const Selector = (props) => {
                 <div className='sel-reviews'><Link to='#review' className='sel-reviews'>{reviewCount} Reviews</Link></div>
               </div>
             </div>
-
-
             <hr className='hr-class' />
-            {/* bring from styles for % change */}
             <div className='price-div'>
-              <sup>$</sup>
-              <span className='price'>{money.dollar}</span>
-              <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>
+              {
+                currentStyle.sale_price ? (
+                  <div className='price-sale-div'>
+                    <div className="sale-price">
+                      <sup>$</sup>
+                      <span className="price">{currentStyle.sale_price}</span>
+                    </div>
+                    <div className="original-price">
+                      Originally: <span className="strikethrough"><sup>$</sup>{currentStyle.original_price}</span>
+                    </div>
+                    <div className="percent-discount">
+                      <strong>-{Math.abs(+currentStyle.percent_change)}%</strong>
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <sup>$</sup>
+                    <span className="price">{money.dollar}</span>
+                    <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>
+                  </div>
+                )
+              }
             </div>
             {
               productStyles && <Sizeoptions
@@ -286,7 +302,7 @@ const Selector = (props) => {
               </div>
             </div>
           </div>
-          <Purchase money={money} />
+          <Purchase money={money} currentStyle={currentStyle} />
         </aside>
       </div >
     </div >

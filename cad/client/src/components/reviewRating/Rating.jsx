@@ -106,7 +106,7 @@ const Rating = () => {
         })
         .then((response) => {
           setMetaData(response.data);
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch((err) => {
           // eslint-disable-next-line no-console
