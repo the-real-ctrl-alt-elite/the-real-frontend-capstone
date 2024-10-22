@@ -206,21 +206,24 @@ const Selector = (props) => {
               <p>{productInformation.category}</p>
             </div>
             <h1 className='product-name'>{productInformation.name}</h1>
-            <div className='ratings-container'>
-              <ReviewStars rating={starCount} />
+            {reviewCount && starCount
+                        && (
+                        <div className='ratings-container'>
+                          <ReviewStars rating={starCount} />
 
-              <div className='review-links'>
-                <div className='total-rat'>
-                  <button
-                    type='button'
-                    className='button-link-top'
-                    onClick={() => document.querySelector('#ratings').scrollIntoView()}
-                  >
-                    {`Read All ${reviewCount} Reviews`}
-                  </button>
-                </div>
-              </div>
-            </div>
+                          <div className='review-links'>
+                            <div className='total-rat'>
+                              <button
+                                type='button'
+                                className='button-link-top'
+                                onClick={() => document.querySelector('#ratings').scrollIntoView()}
+                              >
+                                {`Read All ${reviewCount} Reviews`}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        )}
             <hr className='hr-class' />
             <div className='price-div'>
               {
