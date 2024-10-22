@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Styleoptions = (props) => {
-  const newImage = (url, salePrice, price, colorPeek) => {
+  const newImage = (url, salePrice, price, colorPeek, index) => {
     console.log('newImage', url, salePrice, price, colorPeek);
     props.setImageTracker((prev) => ({
       ...prev,
@@ -18,6 +18,7 @@ const Styleoptions = (props) => {
         newColor: colorPeek,
         color: props.currentStyle.newColor,
         colorCheck: false,
+        index,
       }));
     } else {
       props.setCurrentStyle((prev) => ({
@@ -27,6 +28,7 @@ const Styleoptions = (props) => {
         color: props.currentStyle.newColor,
         newColor: colorPeek,
         colorCheck: false,
+        index,
       }));
     }
   };
@@ -93,9 +95,10 @@ const Styleoptions = (props) => {
           props.productStyles.length > 0 && props.productStyles.map((image, i) => {
             return (
               <div style={{ position: 'relative' }}>
-                {props.currentStyle.color === image.name
+                {props.currentStyle.index === i
                   && <i className='fa-regular fa-check style-check' />}
                 <img
+                  alt=''
                   className='style-mini-pic'
                   key={image.style_id}
                   src={image.photos[0].thumbnail_url}
@@ -104,6 +107,7 @@ const Styleoptions = (props) => {
                     image.sale_price,
                     image.original_price,
                     image.name,
+                    image.index = i,
                   )}
                   onMouseEnter={
                 () => mouseHover(

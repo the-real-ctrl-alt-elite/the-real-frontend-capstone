@@ -52,6 +52,7 @@ const Selector = (props) => {
       color: '',
       newColor: '',
       colorCheck: false,
+      index: null,
     },
   );
 
@@ -149,6 +150,7 @@ const Selector = (props) => {
               sale_price: salePrice,
               percent_change: percentChange,
               color: res[0].name,
+              index: 0,
             }));
           })
           .catch((err) => console.error('error on selector', err));
