@@ -30,6 +30,9 @@ const Selector = (props) => {
   const [skus, setSkus] = useState({});
   const [selectedSku, setSelectedSku] = useState(null);
   const [availableQuantities, setAvailableQuantities] = useState(0);
+
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
+
   const handleSizeChange = (selectedSize) => {
     // Find the corresponding SKU for the selected size
     const selectedSku = Object.keys(skus).find((skuId) => skus[skuId].size === selectedSize);
@@ -39,6 +42,11 @@ const Selector = (props) => {
     // Also, update the available quantities for that SKU
     setAvailableQuantities(skus[selectedSku].quantity);
   };
+
+  const handleQuantityChange = (quantity) => {
+    setSelectedQuantity(quantity);
+  };
+
 
 
   // advertisement related
@@ -145,7 +153,6 @@ const Selector = (props) => {
             },
           })
           .then((response) => {
-            console.log(response.data);
             const res = response.data.results;
             Object.values(res[0].skus).forEach((item) => setSizeArray((prevArray) => prevArray.concat(item.size)));
             setSelectedSize(Object.values(res[0].skus)[0].size);
@@ -301,6 +308,7 @@ const Selector = (props) => {
                     sizeArray={sizeArray}
                     setSelectedSize={setSelectedSize}
                     setSelectedSku={setSelectedSku}
+
                     handleSizeChange={handleSizeChange}
                     skus={skus}
                   />
@@ -309,7 +317,10 @@ const Selector = (props) => {
               {
                 productStyles && (
                   <Quantity
-                    productStyles={productStyles}
+                    availableQuantities={availableQuantities}
+                    selectedSku={selectedSku}
+                    selectedQuantity={selectedQuantity}
+                    onQuantityChange={handleQuantityChange}
                   />
                 )
               }
