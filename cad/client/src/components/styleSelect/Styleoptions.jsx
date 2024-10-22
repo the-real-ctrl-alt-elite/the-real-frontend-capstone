@@ -104,7 +104,7 @@ const Styleoptions = (props) => {
         {
           props.productStyles.length > 0 && props.productStyles.map((image, i) => {
             return (
-              <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }} key={i}>
                 {props.currentStyle.index === i
                   && <i className='fa-regular fa-check style-check' />}
                 <img

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 const Gallery = ({ images, imgIdx }) => {
   const [currentIdx, setCurrentIdx] = useState(0);

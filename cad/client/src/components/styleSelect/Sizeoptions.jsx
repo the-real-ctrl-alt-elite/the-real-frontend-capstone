@@ -5,7 +5,7 @@ const Sizeoptions = (props) => {
 
   const handleSizeChange = (e) => {
     const selectedSize = e.target.value;
-    props.setSelectedSize(selectedSize);
+    props.handleSizeChange(selectedSize);
   };
 
   return (
@@ -13,11 +13,13 @@ const Sizeoptions = (props) => {
       <span className='size-span'>Size:</span>
       <select className='size-select' onChange={handleSizeChange}>
         <option value="">SELECT</option>
-        {uniqueSizes.map((size, index) => (
-          <option key={index} value={size}>
-            {size}
-          </option>
-        ))}
+        {
+          uniqueSizes.map((size, index) => (
+            <option key={index + 7} value={size}>
+              {size}
+            </option>
+          ))
+        }
       </select>
     </div>
   );
