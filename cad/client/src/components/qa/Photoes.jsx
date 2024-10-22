@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Photos = ({ photos }) => {
-  console.log('photos array: ', photos);
+  // console.log('photos array: ', photos);
   return (
     <div>
       {

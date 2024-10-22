@@ -160,9 +160,10 @@ const Selector = (props) => {
     // fetchSaleItem();
     makeStarParts();
   }, [productId, starCount]);
-  if (Object.keys(productStyles).length > 0) {
-    console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles);
-  }
+  // if (Object.keys(productStyles).length > 0) {
+  //   console.log(currentStyle)
+  //   console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+  // }
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -245,13 +246,30 @@ const Selector = (props) => {
                 </div>
               </div>
             </div>
-
             <hr className='hr-class' />
-            {/* bring from styles for % change */}
             <div className='price-div'>
-              <sup>$</sup>
-              <span className='price'>{money.dollar}</span>
-              <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>
+              {
+                currentStyle.sale_price ? (
+                  <div className='price-sale-div'>
+                    <div className="sale-price">
+                      <sup>$</sup>
+                      <span className="price">{currentStyle.sale_price}</span>
+                    </div>
+                    <div className="original-price">
+                      Originally: <span className="strikethrough"><sup>$</sup>{currentStyle.original_price}</span>
+                    </div>
+                    <div className="percent-discount">
+                      <strong>-{Math.abs(+currentStyle.percent_change)}%</strong>
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <sup>$</sup>
+                    <span className="price">{money.dollar}</span>
+                    <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>
+                  </div>
+                )
+              }
             </div>
             {
               productStyles && (
@@ -330,7 +348,7 @@ const Selector = (props) => {
               </div>
             </div>
           </div>
-          <Purchase money={money} />
+          <Purchase money={money} currentStyle={currentStyle} />
         </aside>
       </div>
     </div>
