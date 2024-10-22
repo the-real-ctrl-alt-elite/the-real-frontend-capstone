@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 const Styleoptions = (props) => {
   const newImage = (url, salePrice, price, colorPeek, index) => {
-    console.log('newImage', url, salePrice, price, colorPeek);
     props.setImageTracker((prev) => ({
       ...prev,
       original_url: url,
     }));
     if (salePrice !== '') {
-      console.log('test', salePrice);
       const percentChange = (((+salePrice - +price) / +salePrice) * 100).toFixed(0);
       props.setCurrentStyle((prev) => ({
         ...prev,
@@ -74,10 +72,6 @@ const Styleoptions = (props) => {
 
     props.setShownStyle(props.currentStyle);
   };
-  useEffect(() => {
-
-  }, [props]);
-
   return (
     <div className='style-options-container'>
       <div className='style-title-container'>
