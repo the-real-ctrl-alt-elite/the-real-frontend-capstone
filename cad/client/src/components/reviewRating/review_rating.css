@@ -32,6 +32,10 @@ i:before {
   text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px rgba(82,82,82);
 }
 
+[data-theme="dark"]  .star-back {
+  color: var(--accent-five)
+}
+
 .star-front {
   color: rgb(227, 100, 20);
   position: absolute;
@@ -40,6 +44,10 @@ i:before {
   overflow: hidden;
   z-index: 2;
   white-space: nowrap;
+}
+
+[data-theme="dark"]  .star-front {
+  color: var(--accent-orange)
 }
 
 .reviewTile {
@@ -191,7 +199,7 @@ i:before {
 }
 
 .rating-review-wrapper {
-  min-width: 72.25rem;
+  /* min-width: 72.25rem; */
 }
 
 .button-link {
@@ -211,6 +219,7 @@ i:before {
   margin: 0 .25rem;
   z-index: 10;
   font-size: .75rem;
+  color: var(--text);
 }
 
 .button-link-top:hover {
@@ -223,6 +232,7 @@ i:before {
 
 .button-link.small {
   font-size: 0.625rem;
+  color: var(--text)
 }
 
 .picturesContainer>div {
@@ -248,8 +258,12 @@ i:before {
 
 }
 
+.modelFrame {
+  box-shadow: var(--box-shadow);
+}
+
 [data-theme="dark"] .modelFrame {
-  background-color: black;
+  background-color: var(--accent-one);
 }
 
 [data-theme="dark"] .neat-line {
@@ -257,7 +271,7 @@ i:before {
 }
 
 [data-theme="light"] .modelFrame {
-  background-color: black;
+  background-color: rgba(22,22,22,.5);
 }
 
 .modelPictureContainer {
@@ -266,7 +280,6 @@ i:before {
   width: auto;
   z-index: 4;
   padding: .55rem;
-  border: 1px solid rgba(255,255,255,.33);
   box-shadow: var(--box-shadow);
   border-radius: 1rem;
   display: flex;

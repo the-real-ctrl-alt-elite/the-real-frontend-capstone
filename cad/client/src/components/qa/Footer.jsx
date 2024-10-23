@@ -47,17 +47,17 @@ const Footer = ({
   };
 
   return (
-    <div>
+    <div className='answersFooter'>
       <span className='answer-footer' style={{ fontWeight: isSeller ? 'bold' : 'normal' }}>{`by ${userName},`}</span>
       <span className='answer-footer'>{`${formatDate}`}</span>
       <span className='answer-footer'>|</span>
       <span className='answer-footer'>Helpful?</span>
 
-      <a href='#/' onClick={handleClickYes}>Yes</a>
+      <button type='button' className='answerFooterBtn' onClick={handleClickYes}>Yes</button>
 
       <span className='answer-footer'>{`(${helpful})`}</span>
       <span className='answer-footer'>|</span>
-      <a href='#/' onClick={handleClickReport}>{reportState}</a>
+      <button type='button' className='answerFooterBtn' onClick={handleClickReport}>{reportState}</button>
 
     </div>
   );

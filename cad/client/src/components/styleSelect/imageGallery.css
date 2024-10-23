@@ -1,12 +1,13 @@
 .main-image-container {
-  max-width: 450px;
-  height: 700px;
   object-fit: cover;
   object-position: center;
   cursor: pointer;
   box-shadow:
     #000000 0px 20px 30px -10px,
     #80ff0086 0px 5px 15px -5px;
+    max-width: 30rem;
+    max-height: 45rem;
+
 }
 
 .image-container {
@@ -36,14 +37,14 @@
   object-position: center;
   border-radius: 10px;
   margin: 8px 8px;
-  border: black solid 1px;
+  border: 2px solid rgba(128, 128, 128, 0.551);
   box-shadow:
     #070707 0px 20px 30px -10px,
     #80ff00b0 0px 5px 10px -5px;
 }
 
 .thumbnails:hover {
-  outline: double 4px rgb(118, 200, 227);
+  outline: double 4px var(--accent-five)
 }
 
 
@@ -88,19 +89,21 @@
   overflow: hidden;
   position: relative;
   width: 30rem;
-  height: 35rem;
+  height: 40rem;
+  margin: 0 5%;
+  margin-top: 5%;
 }
 
 .carousel-item {
   all: unset;
-  height: 35rem;
+  height: 40rem;
   min-width: 100%;
   position: relative;
   transition: 1s cubic-bezier(0.39, 0.45, 0.565, 1);
 }
 
 .carousel-item-img {
-  height: 35rem;
+  height: 40rem;
   min-width: 100%;
   object-fit: cover;
 }
@@ -114,7 +117,7 @@
   top: 0;
   bottom: 0;
   width: 2rem;
-  z-index: 5;
+  z-index: 3;
   border: none;
   background: none;
   color: white;
@@ -128,7 +131,7 @@
   top: 0;
   bottom: 0;
   width: 2rem;
-  z-index: 5;
+  z-index: 3;
   border: none;
   color: white;
   background-color: #0000000d;

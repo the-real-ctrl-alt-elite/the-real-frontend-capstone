@@ -10,11 +10,15 @@
 @import './components/styleSelect/advertisement.css';
 @import './components//styleSelect//quantity.css';
 
+:root {
+  --accent-orange: rgb(201,108,91);
+}
+
 [data-theme="light"] {
   --bg: white;
   --text: black;
   --box-shadow:
-    #070707 0px 20px 30px -10px,
+    #070707 0px 0px 15px -1px,
     #80ff00b0 0px 5px 10px -5px;
   --accent-one: rgb(235, 235, 245);
   --accent-two: rgb(245, 245, 255);
@@ -38,7 +42,7 @@
   --bg: rgba(22, 22, 22);
   --text: white;
   --box-shadow:
-    #ffffff 0px 20px 30px -10px,
+    #ffffff 0px 0px 15px -1px,
     #80ff00b0 0px 5px 10px -5px;
   --accent-one: rgba(25, 20, 32);
   --accent-two: rgb(40, 36, 50);
@@ -49,6 +53,12 @@
   --accent-seven: rgb(27, 67, 50);
   --accent-eight: #ffffff;
   --accent-nine: rgb(64, 145, 108);
+  --transparent-bg: rgba(222,222,222,.5);
+
+}
+
+body {
+  min-width: 72.25rem;
   --accent-ten: rgb(127, 255, 0);
   --transparent-bg: rgba(222, 222, 222, .5);
   --appearance: none;
@@ -65,11 +75,38 @@
   color: var(--text);
 }
 
-/* .innerApp {
-  display: flex;
-  width: 80%;
+.section-break {
+  color: var(--text);
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 3px .2px var(--transparent-bg);
+  height: .25rem;
+  border: none;
+
+}
+
+.innerApp {
   margin: auto;
-  flex-direction: column;
+  max-width: 45%;
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] textarea {
+  background-color: rgb(44,44,44);
+  color: var(--text);
+}
+
+
+.theme-name-display {
+  color: var(--accent-orange);
+}
+
+[data-theme="light"] .theme-name-display {
+  color: white;
+}
+
+.theme-toggle-box {
+  display: flex;
   align-items: center;
-  justify-content: center;
-} */
+  justify-content: end;
+  gap: 1rem;
+}

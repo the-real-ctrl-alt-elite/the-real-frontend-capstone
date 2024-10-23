@@ -6,9 +6,10 @@
 }
 
 .selector-components {
-  padding: 20px 0;
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hr-class {
@@ -16,28 +17,35 @@
   text-align: center;
   margin: 5px 0;
   border: 2px solid transparent;
-  box-shadow: 0 2px 3px .2px rgba(0, 0, 0, .3);
+  box-shadow:
+    0 2px 3px .2px var(--transparent-bg)
 }
 
 .selector-functional-components {
-  width: 50%;
   display: flex;
 }
 
 .info-choices-container {
-  width: 50%;
+  /* width: 50%; */
 }
 
 .product-name {
   font-size: 2.5em;
 }
 
+[data-theme="dark"]  .product-name {
+  background: linear-gradient(to bottom, var(--accent-five) 40%, red 100%);
+  background-clip: text;
+  font-family: 'Creepster';
+  -webkit-text-fill-color: transparent;
+}
+
 .category {
   display: flex;
   width: 40%;
-  justify-content: space-between;
   font-weight: 800;
   margin-top: 5px;
+  gap: 1rem;
 }
 
 .ratings-container {
@@ -60,6 +68,49 @@
   position: relative;
   margin-left: 4px;
 }
+
+.stars-solid-cont {
+  display: flex;
+}
+
+.stars-solid {
+  display: inline-block;
+  background: goldenrod;
+  background-clip: text;
+  color: transparent;
+}
+
+.star-part {
+  display: inline-block;
+  background-clip: text !important;
+  color: transparent !important;
+
+}
+
+.stars-hollow {
+  background-clip: text;
+  color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-weight: 100;
+  /* text-shadow:
+    0.005px 0 0 goldenrod,
+    -0.005px 0 0 goldenrod,
+    0 0.005px 0 goldenrod,
+    0 -0.005px 0 goldenrod; */
+
+}
+
+[data-theme="dark"]  .details-title,
+[data-theme="dark"] .about-item,
+[data-theme="dark"] .category p {
+  background: linear-gradient(to bottom, var(--accent-five) 40%, red 100%);
+  background-clip: text;
+  font-family: 'Creepster';
+  -webkit-text-fill-color: transparent;
+}
+
 
 .review-links {
   display: flex;
@@ -88,9 +139,10 @@
   width: 100%;
   color: blue;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: start;
   font-size: xx-large;
-  margin-top: 10px;
+  gap: 2rem;
+  margin-top: 1.5rem;
 }
 
 .social-icons {
@@ -102,7 +154,8 @@
 }
 
 .button-link-top {
-  color: blue;
+  color: var(--text);
+  text-decoration: underline;
 }
 
 .star-num {
