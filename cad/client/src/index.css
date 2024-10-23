@@ -54,11 +54,6 @@
   --accent-eight: #ffffff;
   --accent-nine: rgb(64, 145, 108);
   --transparent-bg: rgba(222,222,222,.5);
-
-}
-
-body {
-  min-width: 72.25rem;
   --accent-ten: rgb(127, 255, 0);
   --transparent-bg: rgba(222, 222, 222, .5);
   --appearance: none;
@@ -68,6 +63,10 @@ body {
   --outline: none;
   --border: none;
   --border-btm: 2px solid chartreuse;
+}
+
+body {
+  min-width: 72.25rem;
 }
 
 .app {

@@ -3,10 +3,12 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
 .size-span {
   margin-right: 3px;
   font-size: larger;
 }
+
 .custom-select {
   appearance: var(--appearance);
   cursor: pointer;
@@ -21,7 +23,7 @@
 
   border: var(--border);
   border-bottom: var(--border-btm);
-  color:var(--accent-ten);
+  color: var(--accent-ten) ;
   background-color: var(--accent-four);
 }
 
@@ -31,9 +33,10 @@
 }
 
 .custom-select:focus {
-  outline:none;
+  outline: none;
   border-bottom-color: #73ff00;
 }
+
 .custom-select option {
   background-color: var(--accent-one);
 }
