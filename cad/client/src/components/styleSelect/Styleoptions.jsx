@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 const Styleoptions = (props) => {
+<<<<<<< Updated upstream
 
   const newImage = (url, salePrice, price, colorPeek, index, id) => {
 
+=======
+  const newImage = (url, salePrice, price, colorPeek, index, id) => {
+>>>>>>> Stashed changes
     props.setImageTracker((prev) => ({
       ...prev,
       original_url: url,
@@ -76,7 +80,10 @@ const Styleoptions = (props) => {
 
     props.setShownStyle(props.currentStyle);
   };
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   const handleStyleClick = (image, i) => {
     // TODO: not sure if this still necessary
     newImage(
@@ -89,7 +96,10 @@ const Styleoptions = (props) => {
     );
   };
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   return (
     <div className='style-options-container'>
       <div className='style-title-container'>
