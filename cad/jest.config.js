@@ -8,4 +8,7 @@ module.exports = {
       statements: -10,
     },
   },
+  collectCoverage: true,
+  coverageReporters: ['text', 'lcov'],
+  coverageDirectory: 'coverage',
 };
