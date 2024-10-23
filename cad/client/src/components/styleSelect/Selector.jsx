@@ -14,6 +14,8 @@ const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
 const { CAMPUS_CODE } = process.env;
 
+
+
 const Selector = (props) => {
   const {
     productId, newProduct, starCount, reviewCount,
@@ -32,6 +34,9 @@ const Selector = (props) => {
   const [availableQuantities, setAvailableQuantities] = useState(0);
 
   const [selectedQuantity, setSelectedQuantity] = useState(1);
+
+  // const theme = document.getElementById('theme-toggle-switch').checked;
+
 
   const handleSizeChange = (selectedSize) => {
 
@@ -58,6 +63,30 @@ const Selector = (props) => {
   const handleQuantityChange = (quantity) => {
     setSelectedQuantity(quantity);
   };
+
+
+
+
+
+
+
+
+  // button animations
+  const [click, setClick] = useState(false);
+  const handleClick = () => {
+    setClick(!click);
+  };
+  const handleMouseLeave = () => {
+    setClick(false);
+  };
+
+
+
+
+
+
+
+
 
   // advertisement related
   const [sale, setSale] = useState(null);
@@ -343,7 +372,6 @@ const Selector = (props) => {
                   setShownStyle={setShownStyle}
                   hoverState={hoverState}
                   setHoverState={setHoverState}
-
                   setSelectedSize={setSelectedSize}
                   setSelectedSku={setSelectedSku}
                   setAvailableQuantities={setAvailableQuantities}
@@ -351,8 +379,39 @@ const Selector = (props) => {
                 />
               )
             }
+
+
+
+
+            <div className='purchase-div'>
+              {
+                props.pumpkins ?
+                  <button
+                    style={!click ? { '--content': "'Add T👻 Cart!'" } : { '--content': "'Added ☠️ Cart'" }}
+                    className="styled-button"
+                    onClick={handleClick}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <div className="left"></div>
+                    {
+                      !click ? ' Add T👻 Cart!' : 'Added ☠️ Cart'
+                    }
+                    <div className="right"></div>
+                  </button>
+                  :
+                  <button
+                    className="btn-flip"
+                    onClick={handleClick}
+                    onMouseLeave={handleMouseLeave}
+                    data-front="Add to Cart"
+                    data-back="Added"
+                  >
+                  </button>
+              }
+            </div>
             <div className='information-section'>
               <div className='details-container'>
+                <hr className='hr-class' />
                 <h3 className='details-title'>Product Details</h3>
                 <ul className='details-ul'>
                   {
