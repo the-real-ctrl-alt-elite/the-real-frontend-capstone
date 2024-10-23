@@ -89,21 +89,19 @@
   overflow: hidden;
   position: relative;
   width: 30rem;
-  height: 40rem;
-  margin: 0 5%;
-  margin-top: 5%;
+  height: 35rem;
 }
 
 .carousel-item {
   all: unset;
-  height: 40rem;
+  height: 35rem;
   min-width: 100%;
   position: relative;
   transition: 1s cubic-bezier(0.39, 0.45, 0.565, 1);
 }
 
 .carousel-item-img {
-  height: 40rem;
+  height: 35rem;
   min-width: 100%;
   object-fit: cover;
 }
@@ -117,7 +115,7 @@
   top: 0;
   bottom: 0;
   width: 2rem;
-  z-index: 3;
+  z-index: 5;
   border: none;
   background: none;
   color: white;
@@ -131,7 +129,7 @@
   top: 0;
   bottom: 0;
   width: 2rem;
-  z-index: 3;
+  z-index: 5;
   border: none;
   color: white;
   background-color: #0000000d;

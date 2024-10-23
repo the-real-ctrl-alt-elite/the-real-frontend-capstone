@@ -3,12 +3,13 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
 .size-span {
   margin-right: 3px;
   font-size: larger;
 }
 
-[data-theme="dark"] .custom-select {
+.custom-select {
   appearance: var(--appearance);
   cursor: pointer;
   padding: var(--padding);
@@ -22,7 +23,7 @@
 
   border: var(--border);
   border-bottom: var(--border-btm);
-  color:var(--accent-ten);
+  color: var(--accent-ten) ;
   background-color: var(--accent-four);
 }
 
@@ -31,10 +32,11 @@
   border-bottom-color: rgba(65, 129, 0, 0.616);
 }
 
-[data-theme="dark"] .custom-select:focus {
-  outline:none;
+.custom-select:focus {
+  outline: none;
   border-bottom-color: #73ff00;
 }
-[data-theme="dark"] .custom-select option {
+
+.custom-select option {
   background-color: var(--accent-one);
 }

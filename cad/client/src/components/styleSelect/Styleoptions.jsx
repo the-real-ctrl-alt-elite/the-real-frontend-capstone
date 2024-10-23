@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Styleoptions = (props) => {
-
   const newImage = (url, salePrice, price, colorPeek, index, id) => {
-
     props.setImageTracker((prev) => ({
       ...prev,
       original_url: url,
@@ -76,7 +74,6 @@ const Styleoptions = (props) => {
 
     props.setShownStyle(props.currentStyle);
   };
-
   const handleStyleClick = (image, i) => {
     // TODO: not sure if this still necessary
     newImage(
@@ -88,7 +85,6 @@ const Styleoptions = (props) => {
       image.style_id,
     );
   };
-
 
   return (
     <div className='style-options-container'>
