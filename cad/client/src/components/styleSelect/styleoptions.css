@@ -17,6 +17,7 @@
   grid-template-rows: auto;
   gap: 5px;
   align-content: center;
+  width: 75%;
 }
 
 .style-thumbnails > div {
@@ -26,7 +27,6 @@
   margin: .5rem 0;
 }
 
-.style-name {}
 .style-mini-pic {
   height: 50px;
   width: 50px;

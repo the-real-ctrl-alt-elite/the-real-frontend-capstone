@@ -6,7 +6,8 @@ import ThemeToggle from './ThemeToggle';
 const Header = ({ pumpkins, setPumpkins }) => {
   return (
     <header className='header'>
-      <div className='logo'>LOGO</div>
+      <div className='logo'> </div>
+      <div className='siteTitle'>CreepStore</div>
       <div className='actions-container'>
         <ThemeToggle pumpkins={pumpkins} setPumpkins={setPumpkins} />
         <div className='input-container'>

@@ -7,7 +7,8 @@
   margin-right: 3px;
   font-size: larger;
 }
-.custom-select {
+
+[data-theme="dark"] .custom-select {
   appearance: var(--appearance);
   cursor: pointer;
   padding: var(--padding);
@@ -26,14 +27,14 @@
 }
 
 
-.custom-select:hover {
+[data-theme="dark"] .custom-select:hover {
   border-bottom-color: rgba(65, 129, 0, 0.616);
 }
 
-.custom-select:focus {
+[data-theme="dark"] .custom-select:focus {
   outline:none;
   border-bottom-color: #73ff00;
 }
-.custom-select option {
+[data-theme="dark"] .custom-select option {
   background-color: var(--accent-one);
 }

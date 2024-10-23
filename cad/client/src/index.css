@@ -10,6 +10,10 @@
 @import './components/styleSelect/advertisement.css';
 @import './components//styleSelect//quantity.css';
 
+* {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
 :root {
   --accent-orange: rgb(201,108,91);
 }
@@ -86,7 +90,7 @@ body {
 
 .innerApp {
   margin: auto;
-  max-width: 45%;
+  max-width: 55%;
 }
 
 [data-theme="dark"] input,
@@ -109,4 +113,17 @@ body {
   align-items: center;
   justify-content: end;
   gap: 1rem;
+}
+
+.siteTitle {
+  font-size: 4rem;
+  margin: 1rem;
+  font-family: 'Creepster';
+}
+
+.logo {
+  background-image: url('../assets/creepstore_logo.png');
+  background-size: contain;
+  height: 5rem;
+  width: 5rem;
 }
