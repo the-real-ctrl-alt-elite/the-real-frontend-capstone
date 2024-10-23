@@ -13,27 +13,32 @@ import Selector from './components/styleSelect/Selector';
 const App = () => {
   // example code do not uncomment in app
   // const { productId } = useContext(ProductContext); // this is how you access the id in your app
+  const [pumpkins, setPumpkins] = useState(false);
+  const [starAverage, setStarAverage] = useState(0);
 
   return (
     <div className='app'>
-      <Header />
+      <Header pumpkins={pumpkins} setPumpkins={setPumpkins} />
       <div className='innerApp'>
-        <Selector />
+        <Selector starAverage={starAverage} pumpkins={pumpkins}/>
+        <hr className='section-break' />
         <div className='related-comp-wrapper'>
           <RelatedSection />
           <OutfitSection />
         </div>
+        <hr className='section-break' />
         <div
           id='Qa'
           className='qa-wrapper'
         >
           <Qa />
         </div>
+        <hr className='section-break' />
         <div
           id='ratings'
           className='rating-review-wrapper'
         >
-          <Rating />
+          <Rating pumpkins={pumpkins} setPumpkins={setPumpkins} setStarAverage={setStarAverage} />
         </div>
       </div>
     </div>

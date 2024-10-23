@@ -69,7 +69,10 @@ const AddAQuestionModal = ({ setOpenQuestionModal, productName, productId }) => 
             <textarea className='question-input' onChange={handleQuestionInput} value={questionInput} required />
             <br />
             <br />
-            <label>What is your nickname* </label>
+            <label>
+              Nickname
+              <sup>*</sup>
+            </label>
             <small>(up to 60 characters)</small>
             <br />
             <input placeholder='Example:jackson11!' className='nickname-input' onChange={handleNickNameInput} value={nickNameInput} required />
@@ -77,16 +80,17 @@ const AddAQuestionModal = ({ setOpenQuestionModal, productName, productId }) => 
             <small>For privacy reasons, do not use your full name or email address</small>
             <br />
             <label>
-              Your email*
+              Email
+              <sup>*</sup>
             </label>
             <small>(up to 60 characters) </small>
             <br />
-            <input type='email' className='email-input' placeholder='Why did you like the product or not' onChange={handleEmailInput} value={emailInput} required />
+            <input type='email' className='email-input' placeholder='Example: jackson11@mail.net' onChange={handleEmailInput} value={emailInput} required />
             <br />
             <small>For authentication reasons, you will not be emailed</small>
           </div>
           <div className='modal-footer'>
-            <button type='submit'>submit question</button>
+            <button type='submit'>Submit Question</button>
           </div>
           {showConfirmation && (
           <div id='submitConfirmation' className='confirmation-popup'>

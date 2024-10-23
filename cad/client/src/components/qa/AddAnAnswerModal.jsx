@@ -88,11 +88,9 @@ const AddAnAnswerModal = ({
       <div className='modal-container answer-container'>
         <button className='modal-close-button' onClick={handleCloseAnswerModal}>X</button>
         <div className='modal-title'>
-          <h3>Submit your answer</h3>
+          <h3>Submit Your Answer</h3>
           <h4>
-            {productName}
-            :
-            {questionName}
+            {`${productName} : ${questionName}`}
           </h4>
         </div>
         <form onSubmit={handleFormSubmition}>
@@ -102,14 +100,20 @@ const AddAnAnswerModal = ({
             <br />
             <textarea className='answer-input' onChange={handleAnswerInput} value={answerInput} required />
             <br />
-            <label>What is your nickname *</label>
+            <label>
+              Nickname
+              <sup>*</sup>
+            </label>
             <small>(up to 60 characters)</small>
             <br />
             <input className='nickname-input' placeholder='Example: jack543!' onChange={handleNicknameInput} value={nicknameInput} required />
             <br />
             <small>For privacy reasons, do not use your full name or email address</small>
             <br />
-            <label>Your email *</label>
+            <label>
+              Email
+              <sup>*</sup>
+            </label>
             <small>(up to 60 characters)</small>
             <br />
             <input type='email' className='email-input' placeholder='Example: jack@email.com' onChange={handleEmailInput} value={emailInput} required />
@@ -124,7 +128,7 @@ const AddAnAnswerModal = ({
             <UploadedPhotoes urls={photoList} multiple /> */}
           </div>
           <div className='modal-footer'>
-            <button>submit answer</button>
+            <button>Submit Answer</button>
           </div>
           {showConfirmation && (
           <div id='submitConfirmation' className='confirmation-popup'>

@@ -2,8 +2,8 @@ import React from 'react';
 
 const MoreQuestions = () => {
   return (
-    <button>
-      More Answered Questions
+    <button className='qnaFnBtn' type='button'>
+      MORE ANSWERED QUESTIONS
     </button>
   );
 };

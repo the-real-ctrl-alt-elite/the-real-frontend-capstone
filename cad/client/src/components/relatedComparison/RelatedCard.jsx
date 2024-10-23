@@ -37,7 +37,11 @@ const RelatedCard = ({
             <h5>{name}</h5>
             <PriceTag defaultPrice={defaultPrice} salePrice={salePrice} />
             <span>
-              <ReviewStars rating={rating} />
+              <div
+                style={{ position: 'absolute', bottom: '0.75rem' }}
+              >
+                <ReviewStars rating={rating} />
+              </div>
             </span>
           </div>
         </div>
@@ -73,9 +77,11 @@ function ComparsionModalContent({ onClose, currentProduct, selectedProduct }) {
 
   return (
     <div className='overlay'>
-      <div className='modal-content'>
+      <div className='table-modal-content'>
         <table className='comparsion-table'>
-          <caption>
+          <caption
+            className='compareCaption'
+          >
             <h1>Comparing</h1>
           </caption>
           <thead>
@@ -108,14 +114,16 @@ function ComparsionModalContent({ onClose, currentProduct, selectedProduct }) {
             </tr>
             {formatComparedFeatures(currentProduct?.features, selectedProduct?.features).map((item) => (
               <tr key={uuidv4()}>
-                <td>{item.values?.curValue === 'true' ? '✅' : item.values?.curValue}</td>
+                <td>{item.values?.curValue === 'true' ? '✅' : item.values?.curValue || '-'}</td>
                 <td>{item.feature}</td>
-                <td>{item.values?.selectedValue === 'true' ? '✅' : item.values?.selectedValue}</td>
+                <td>{item.values?.selectedValue === 'true' ? '✅' : item.values?.selectedValue || '-'}</td>
               </tr>
             ))}
           </tbody>
         </table>
-        <button className='modal-close-btn' type='button' onClick={onClose}>x</button>
+        <button onClick={onClose} aria-label='modal-close-btn' type='button' label='modal-close-btn' className='modal-close-btn'>
+          <i className='fa-solid fa-xmark' style={{ color: '#ffffff', margin: 'auto' }} />
+        </button>
       </div>
     </div>
   );

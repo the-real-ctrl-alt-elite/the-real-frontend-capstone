@@ -7,56 +7,140 @@
 @import './components/styleSelect/imageGallery.css';
 @import './components/styleSelect/styleoptions.css';
 @import './components/styleSelect/sizeoptions.css';
-@import './components/styleSelect/purchase.css';
 @import './components/styleSelect/advertisement.css';
 @import './components//styleSelect//quantity.css';
+
+@font-face {
+  font-family: 'Creepster';
+  src: url('../assets/Creepster-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/Roboto-Black.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --accent-orange: rgb(201,108,91);
+}
 
 [data-theme="light"] {
   --bg: white;
   --text: black;
   --box-shadow:
-    #070707 0px 20px 30px -10px,
+    #070707 0px 0px 15px -1px,
     #80ff00b0 0px 5px 10px -5px;
-  --accent-one: rgb(235,235,245);
-  --accent-two: rgb(245,245,255);
-  --accent-three: rgb(235,255,235);
-  --accent-four: rgb(235,235,255);
+  --accent-one: rgb(235, 235, 245);
+  --accent-two: rgb(245, 245, 255);
+  --accent-three: rgb(235, 255, 235);
+
+  --accent-four: rgb(235, 235, 255);
   --accent-five: rgb(149, 213, 178);
-  --accent-six:  rgb(64, 145, 108);
-  --accent-seven:  rgb(27, 67, 50);
+  --accent-six: rgb(64, 145, 108);
+  --accent-seven: rgb(27, 67, 50);
   --accent-eight: #000000;
-  --accent-nine: rgb(0,0,0);
-  --transparent-bg: rgba(22,22,22,.5);
+  --accent-nine: rgb(0, 0, 0);
+  --accent-ten: rgb(0, 0, 0);
+  --transparent-bg: rgba(22, 22, 22, .5);
+  --appearance: auto;
+  --padding: 3px;
+  --bkgpos: none;
+  --bkimg: none;
+  --outline: auto;
 }
 
 [data-theme="dark"] {
-  --bg: rgba(22,22,22);
+  --bg: rgba(22, 22, 22);
   --text: white;
   --box-shadow:
-    #ffffff 0px 20px 30px -10px,
+    #ffffff 0px 0px 15px -1px,
     #80ff00b0 0px 5px 10px -5px;
-  --accent-one: rgba(25,20,32);
-  --accent-two: rgb(40,36,50);
-  --accent-three: rgb(49,34,68);
-  --accent-four: rgb(64,63,76);
+  --accent-one: rgba(25, 20, 32);
+  --accent-two: rgb(40, 36, 50);
+  --accent-three: rgb(49, 34, 68);
+  --accent-three-shade: rgb(34, 23, 53);
+  --accent-four: rgb(64, 63, 76);
   --accent-five: rgb(149, 213, 178);
-  --accent-six:  rgb(64, 145, 108);
-  --accent-seven:  rgb(27, 67, 50);
+  --accent-six: rgb(64, 145, 108);
+  --accent-seven: rgb(27, 67, 50);
   --accent-eight: #ffffff;
   --accent-nine: rgb(64, 145, 108);
   --transparent-bg: rgba(222,222,222,.5);
+  --accent-ten: rgb(127, 255, 0);
+  --transparent-bg: rgba(222, 222, 222, .5);
+  --appearance: none;
+  --padding: 4px 20px 2px 6px;
+  --bkgpos: right 4px;
+  --bkimg: url('data:image/svg+xml;utf8,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 4 5%22%3E%3Cpath fill%3D%22none%22 stroke%3D%22chartreuse%22 stroke-width%3D%22.5%22 d%3D%22M0 2 L2 4 L4 2%22/%3E%3C/svg%3E');
+  --outline: none;
+  --border: none;
+  --border-btm: 2px solid chartreuse;
+}
+
+body {
+  min-width: 72.25rem;
 }
 
 .app {
   background-color: var(--bg);
   color: var(--text);
+  overflow-x: clip
+
 }
 
-/* .innerApp {
-  display: flex;
-  width: 80%;
+.section-break {
+  color: var(--text);
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 3px .2px var(--transparent-bg);
+  height: .25rem;
+  border: none;
+
+}
+
+.innerApp {
   margin: auto;
-  flex-direction: column;
+  max-width: 55%;
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] textarea {
+  background-color: rgb(44,44,44);
+  color: var(--text);
+}
+
+
+.theme-name-display {
+  color: var(--accent-orange);
+}
+
+[data-theme="light"] .theme-name-display {
+  color: white;
+}
+
+.theme-toggle-box {
+  display: flex;
   align-items: center;
-  justify-content: center;
-} */
+  justify-content: end;
+  gap: 1rem;
+}
+
+.siteTitle {
+  font-size: 4rem;
+  margin: 1rem;
+  font-family: 'Creepster';
+  position: absolute;
+  top: 0;
+  z-index: 99;
+  background: linear-gradient(to bottom, var(--accent-five) 57%, red 57.1%, red 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo {
+  height: 5rem;
+  width: 5rem;
+}

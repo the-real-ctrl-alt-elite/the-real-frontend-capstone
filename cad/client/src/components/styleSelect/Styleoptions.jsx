@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
 const Styleoptions = (props) => {
-  const newImage = (url, salePrice, price, colorPeek, index, id) => {
+  const newImage = (url, salePrice, price, colorPeek, index, id, skus) => {
     props.setImageTracker((prev) => ({
       ...prev,
       original_url: url,
     }));
+    props.setSelectedSize("");
+    props.setSelectedSku(null);
+    props.setAvailableQuantities(0);
+    props.setSkus(skus);
+
     if (salePrice !== '') {
-      console.log('test', salePrice);
       const percentChange = (((+salePrice - +price) / +salePrice) * 100).toFixed(0);
       props.setCurrentStyle((prev) => ({
         ...prev,
@@ -84,6 +88,7 @@ const Styleoptions = (props) => {
       image.name,
       image.index = i,
       image.style_id,
+      image.skus
     );
   };
 
@@ -114,13 +119,13 @@ const Styleoptions = (props) => {
                   src={image.photos[0].thumbnail_url}
                   onClick={() => handleStyleClick(image, i)}
                   onMouseEnter={
-                () => mouseHover(
-                  image.photos[0].thumbnail_url,
-                  image.sale_price,
-                  image.original_price,
-                  image.name,
-                )
-              }
+                    () => mouseHover(
+                      image.photos[0].thumbnail_url,
+                      image.sale_price,
+                      image.original_price,
+                      image.name,
+                    )
+                  }
                   onMouseLeave={mouseExit}
                 />
               </div>

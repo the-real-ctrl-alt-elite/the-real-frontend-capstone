@@ -6,7 +6,6 @@ const BASE_URL = process.env.API_BASE_URL;
 const CAMPUS = process.env.CAMPUS_CODE;
 
 const Question = ({ qna, setOpenAnswerModal, questionId }) => {
-
   const URL = `${BASE_URL}${CAMPUS}/qa/questions/${questionId}/helpful`;
   const [helpfulPoint, setHelpfulPoint] = React.useState(qna.question_helpfulness);
   const [clickStatus, setClickStatus] = React.useState(false);
@@ -28,19 +27,17 @@ const Question = ({ qna, setOpenAnswerModal, questionId }) => {
     setOpenAnswerModal(true);
   };
   return (
-    <div>
+    <div className='questionHeader'>
       <div className='question-body'>
-        Q:
-        {qna.question_body}
+        <span className='Q'>Q: </span>
+        <span>{qna.question_body}</span>
       </div>
       <div className='question-property'>
         <span className='question-note'>Helpful?</span>
-        <a href='#/' onClick={handleClickYes}>Yes</a>
-        (
-        {helpfulPoint}
-        )
+        <button className='answerFooterBtn' type='button' onClick={handleClickYes}>Yes</button>
+        <span className='question-note'>{`(${helpfulPoint})`}</span>
         <span className='question-note'>|</span>
-        <a href='#/' onClick={handleAddAnAnswer}>Add Answer</a>
+        <button className='answerFooterBtn' type='button' onClick={handleAddAnAnswer}>Add Answer</button>
       </div>
     </div>
   );

@@ -62,6 +62,7 @@ const ReviewTile = ({ review, setPictureStatus, setModalStatus }) => {
       {review.recommend === true && <Recommend /> }
       {review.response !== null && <Response response={review.response} /> }
       <FeedbackFooter review={review} />
+      <hr className='reviewTileHR' />
     </div>
   );
 };
@@ -95,11 +96,12 @@ const Star = ({ percentage }) => {
   // this is used to double stars to the same absolute posiition, so that you can have these
   // partial fills with the clipPath css property
   const thisPercentage = percentage * 100;
+  const theme = document.getElementById('theme-toggle-switch').checked;
   return (
     <div className='star-wrapper'>
-      <i className='star-back fa-solid fa-star-sharp'> </i>
+      <i className={theme ? 'star-back fa-solid fa-jack-o-lantern' : 'star-back fa-solid fa-star-sharp'}> </i>
       <i
-        className='star-front fa-solid fa-star-sharp'
+        className={theme ? 'star-front fa-solid fa-jack-o-lantern' : 'star-front fa-solid fa-star-sharp'}
         style={{ clipPath: `inset(0 ${100 - (thisPercentage)}% 0 0)` }}
       />
       <i />
@@ -123,7 +125,6 @@ const CollapsedBody = ({ fn }) => {
         <small>
           ...
           <button
-            style={{ color: 'rgba(82,82,82)' }}
             type='button'
             className='button-link small'
             onClick={() => {
@@ -260,7 +261,9 @@ const FeedbackFooter = ({ review }) => {
         >
           Yes
         </button>
-        {`(${helpfulness})`}
+        <span className='button-link small' style={{ border: 'none' }}>
+          {`(${helpfulness})`}
+        </span>
         {' '}
       </small>
       <small>|</small>

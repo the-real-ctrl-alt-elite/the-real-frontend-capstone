@@ -11,7 +11,7 @@ import SortOptions from './components/SortOptions';
 import AddReview from './components/AddReview';
 import ProductContext from '../../ProductContext';
 
-const Rating = () => {
+const Rating = ({ setStarAverage }) => {
   const { productId } = useContext(ProductContext);
   const [reviews, setReviews] = useState([]);
   const [filteredReviews, setFilteredReviews] = useState(reviews.slice());
@@ -106,7 +106,6 @@ const Rating = () => {
         })
         .then((response) => {
           setMetaData(response.data);
-          // console.log(response.data);
         })
         .catch((err) => {
           // eslint-disable-next-line no-console
@@ -186,14 +185,14 @@ const Rating = () => {
           />
         )}
       <h3
-        style={{ color: 'rgba(82,82,82)' }}
+        className='ratingsHeader'
       >
         RATINGS & REVIEWS
       </h3>
       <div>
         <div className='rating-container'>
           <div className='reviewsLeft'>
-            {reviews.length && <RatingBreakdown reviewFilters={reviewFilters} setReviewFilters={setReviewFilters} metaData={metaData} />}
+            {reviews.length && <RatingBreakdown reviewFilters={reviewFilters} setReviewFilters={setReviewFilters} metaData={metaData} setStarAverage={setStarAverage} />}
             {reviews.length && <ProductBreakdown fn={fn} metaData={metaData} />}
           </div>
           <div className='reviewsRight'>

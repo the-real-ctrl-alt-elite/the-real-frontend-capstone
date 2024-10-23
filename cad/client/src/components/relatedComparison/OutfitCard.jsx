@@ -16,7 +16,11 @@ const OutfitCard = ({
         <h5>{name}</h5>
         <PriceTag defaultPrice={defaultPrice} salePrice={salePrice} />
         <span>
-          <ReviewStars rating={rating} />
+          <div
+            style={{ position: 'absolute', bottom: '0.75rem' }}
+          >
+            <ReviewStars rating={rating} />
+          </div>
         </span>
       </div>
     </div>

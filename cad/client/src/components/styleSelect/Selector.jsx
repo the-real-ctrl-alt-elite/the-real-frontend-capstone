@@ -8,12 +8,13 @@ import Gallery from './Gallery';
 import Sizeoptions from './Sizeoptions';
 import Quantity from './Quantity';
 import Styleoptions from './Styleoptions';
-import Purchase from './Purchase';
 import { ReviewStars } from '../reviewRating/components/ReviewTile';
 
 const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
 const { CAMPUS_CODE } = process.env;
+
+
 
 const Selector = (props) => {
   const {
@@ -34,19 +35,58 @@ const Selector = (props) => {
 
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
-  const handleSizeChange = (selectedSize) => {
-    // Find the corresponding SKU for the selected size
-    const selectedSku = Object.keys(skus).find((skuId) => skus[skuId].size === selectedSize);
-    // Update the state with selected size and its SKU
-    setSelectedSize(selectedSize);
-    setSelectedSku(selectedSku);
-    // Also, update the available quantities for that SKU
-    setAvailableQuantities(skus[selectedSku].quantity);
-  };
+  // const theme = document.getElementById('theme-toggle-switch').checked;
 
+
+  const handleSizeChange = (selectedSize) => {
+
+    if (selectedSize === '') {
+      // Reset everything when "SELECT" is chosen
+      setSelectedSize(''); // Reset selected size
+      setSelectedSku(null); // Clear SKU
+      setAvailableQuantities(0); // Reset available quantities
+      setSelectedQuantity(null); // Reset selected quantity (disabled state)
+      return; // Exit the function early to stop further processing
+
+    }
+    const selectedSku = Object.keys(skus).find((skuId) => skus[skuId].size === selectedSize);
+    if (selectedSku) {
+      setSelectedSize(selectedSize);
+      setSelectedSku(selectedSku);
+      setAvailableQuantities(skus[selectedSku].quantity);
+    } else {
+      setSelectedSku(null);
+      setAvailableQuantities(0);
+    }
+  };
+    
   const handleQuantityChange = (quantity) => {
     setSelectedQuantity(quantity);
   };
+
+
+
+
+
+
+
+
+  // button animations
+  const [click, setClick] = useState(false);
+  const handleClick = () => {
+    setClick(!click);
+  };
+  const handleMouseLeave = () => {
+    setClick(false);
+  };
+
+
+
+
+
+
+
+
 
   // advertisement related
   const [sale, setSale] = useState(null);
@@ -201,6 +241,11 @@ const Selector = (props) => {
   useEffect(() => {
     productId && getProduct();
   }, [productId]);
+  if (Object.keys(productStyles).length > 0) {
+    console.log(currentStyle, 'current style');
+    console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+
+  }
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -242,13 +287,12 @@ const Selector = (props) => {
             {reviewCount && starCount
               && (
                 <div className='ratings-container'>
-                  <span className='star-num'>{starCount.toFixed(1)}</span>
-                  <ReviewStars rating={starCount} />
+                  <span className='star-num'>{props.starAverage}</span>
+                  <ReviewStars rating={props.starAverage} />
                   <div className='review-links'>
                     <div className='total-rat'>
                       <button
                         type='button'
-                        // fix colors
                         className='button-link-top'
                         onClick={() => document.querySelector('#ratings').scrollIntoView()}
                       >
@@ -284,7 +328,7 @@ const Selector = (props) => {
                     </div>
                   </div>
                 ) : (
-                  <div>
+                  <div className='price-nosale-div'>
                     <sup>$</sup>
                     <span className='price'>{money.dollar}</span>
                     <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>
@@ -328,12 +372,47 @@ const Selector = (props) => {
                   setShownStyle={setShownStyle}
                   hoverState={hoverState}
                   setHoverState={setHoverState}
+                  setSelectedSize={setSelectedSize}
+                  setSelectedSku={setSelectedSku}
+                  setAvailableQuantities={setAvailableQuantities}
+                  setSkus={setSkus}
                 />
               )
             }
+
+
+
+
+            <div className='purchase-div'>
+              {
+                props.pumpkins ?
+                  <button
+                    style={!click ? { '--content': "'Add T👻 Cart!'" } : { '--content': "'Added ☠️ Cart'" }}
+                    className="styled-button"
+                    onClick={handleClick}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <div className="left"></div>
+                    {
+                      !click ? ' Add T👻 Cart!' : 'Added ☠️ Cart'
+                    }
+                    <div className="right"></div>
+                  </button>
+                  :
+                  <button
+                    className="btn-flip"
+                    onClick={handleClick}
+                    onMouseLeave={handleMouseLeave}
+                    data-front="Add to Cart"
+                    data-back="Added"
+                  >
+                  </button>
+              }
+            </div>
             <div className='information-section'>
               <div className='details-container'>
-                <h3 className='datails-title'>Product Details</h3>
+                <hr className='hr-class' />
+                <h3 className='details-title'>Product Details</h3>
                 <ul className='details-ul'>
                   {
                     Object.keys(productInformation).length > 0

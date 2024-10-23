@@ -9,9 +9,9 @@ const Sizeoptions = (props) => {
   };
 
   return (
-    <div className='sizing-container'>
-      <span className='size-span'>Size:</span>
-      <select className='size-select' onChange={handleSizeChange}>
+    <div className='custom-select-container'>
+      <span className='custom-span'>Size:</span>
+      <select className='custom-select' onChange={handleSizeChange}>
         <option value="">SELECT</option>
         {
           uniqueSizes.map((size, index) => (

@@ -2,7 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { ReviewStars } from './ReviewTile';
 import ProductContext from '../../../ProductContext';
 
-const RatingBreakdown = ({ metaData, reviewFilters, setReviewFilters }) => {
+const RatingBreakdown = ({
+  metaData, reviewFilters, setReviewFilters, setStarAverage,
+}) => {
   const { productId } = useContext(ProductContext);
   const [ratingAverage, setRatingAverage] = useState(0);
   const [fiveStar, setFiveStar] = useState(0);
@@ -67,7 +69,6 @@ const RatingBreakdown = ({ metaData, reviewFilters, setReviewFilters }) => {
         metaData.ratings['4'],
         metaData.ratings['5'],
       ];
-
       let totalStars = 0;
       starCounts.forEach((val, index) => {
         if (val) {
@@ -76,6 +77,7 @@ const RatingBreakdown = ({ metaData, reviewFilters, setReviewFilters }) => {
         }
       });
       const average = (totalStars / total).toFixed(1);
+      setStarAverage(average);
       setRatingAverage(average);
       setFiveStar(Number(five));
       setFourStar(Number(four));
