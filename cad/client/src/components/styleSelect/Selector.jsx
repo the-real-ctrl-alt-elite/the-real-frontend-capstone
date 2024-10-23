@@ -217,7 +217,11 @@ const Selector = (props) => {
   useEffect(() => {
     productId && getProduct();
   }, [productId]);
-
+  // if (Object.keys(productStyles).length > 0) {
+  // console.log(currentStyle, 'current style');
+  // console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+  //
+  // }
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
