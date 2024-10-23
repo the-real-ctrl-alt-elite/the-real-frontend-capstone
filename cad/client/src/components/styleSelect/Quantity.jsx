@@ -18,9 +18,9 @@ const Quantity = ({ availableQuantities, selectedSku, selectedQuantity, onQuanti
     <div className='quantity-container'>
       <span className='quantity-span'>Quantity:</span>
       <select
-        className='quantity-select'
+        className='custom-select'
         disabled={isDisabled}
-        value={selectedQuantity}
+        value={selectedQuantity || ""}
         onChange={handleQuantityChange}
       >
         <option value="">SELECT</option>

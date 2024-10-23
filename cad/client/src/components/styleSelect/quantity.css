@@ -6,6 +6,19 @@
   margin: 2px 0;
 }
 
+
+select:disabled {
+  background-color: #aaaaaa;
+  color: #ffffff;
+  cursor: not-allowed;
+  border-bottom: #aaaaaa;
+  padding: 4px 8px;
+  background-image: none;
+}
+
+select option[disabled] {
+  color: #999;
+
 .custom-select {
   outline: none;
   appearance: none;
@@ -37,4 +50,5 @@
 }
 .custom-select option {
   background-color: #222;
+
 }
