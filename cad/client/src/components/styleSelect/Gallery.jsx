@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ImageMagnifier from './ImageMagnifier';
 
 const Gallery = ({ images, imgIdx }) => {
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -87,7 +88,8 @@ const Gallery = ({ images, imgIdx }) => {
             style={{ transform: `translate(-${currentIdx * 100}%)` }}
             key={item}
           >
-            <img className='carousel-item-img' src={item} alt='product-image' />
+            {/* <img className='carousel-item-img' src={item} alt='product-image' /> */}
+            <ImageMagnifier src={item} />
           </button>
         );
       })}

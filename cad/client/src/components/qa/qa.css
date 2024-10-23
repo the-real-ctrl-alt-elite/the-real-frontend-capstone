@@ -160,8 +160,8 @@
 .buyer-photos {
   width: auto;
   height: 25%;
-  max-width: 150px;
-  max-height: 120px;
+  max-width: 100px;
+  max-height: 80px;
   padding: 10px 10px;
 }
 
