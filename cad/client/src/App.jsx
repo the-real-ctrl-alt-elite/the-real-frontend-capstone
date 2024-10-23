@@ -19,7 +19,7 @@ const App = () => {
     <div className='app'>
       <Header pumpkins={pumpkins} setPumpkins={setPumpkins} />
       <div className='innerApp'>
-        <Selector />
+        <Selector pumpkins={pumpkins}/>
         <hr className='section-break' />
         <div className='related-comp-wrapper'>
           <RelatedSection />
