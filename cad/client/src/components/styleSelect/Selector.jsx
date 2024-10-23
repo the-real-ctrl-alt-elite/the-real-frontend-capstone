@@ -333,7 +333,7 @@ const Selector = (props) => {
             }
             <div className='information-section'>
               <div className='details-container'>
-                <h3 className='datails-title'>Product Details</h3>
+                <h3 className='details-title'>Product Details</h3>
                 <ul className='details-ul'>
                   {
                     Object.keys(productInformation).length > 0

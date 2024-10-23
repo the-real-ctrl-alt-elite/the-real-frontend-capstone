@@ -25,11 +25,11 @@
 }
 
 .related-container {
-  margin: 2rem;
+  margin: 2rem 2rem 2rem 0;
 }
 
 .outfit-container {
-  margin: 2rem;
+  margin: 2rem 2rem 2rem 0;
 }
 .outfit-container > button {
   all: unset;
@@ -53,7 +53,7 @@
   border-radius: 100%;
   align-items: center;
   padding: 0.25rem;
-  z-index: 7;
+  z-index: 3;
 }
 
 .fa-xs::before {
@@ -255,7 +255,7 @@ td {
   color: var(--text);
 }
 
-.comparsion-table tr:nth-last-of-type(odd) {
+.comparsion-table tr:nth-of-type(odd) {
   background-color: var(--accent-four);
   color: var(--text);
 }

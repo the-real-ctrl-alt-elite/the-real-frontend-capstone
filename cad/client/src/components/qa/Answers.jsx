@@ -68,7 +68,7 @@ const Answers = ({ questionId }) => {
           <div className='answer-section' key={`${idx}id`}>
             <span className='answer-header'>A: </span>
             <span>{answer.body}</span>
-            <div>{answer.photos.length > 0 && <Photos photos={answer.photos} />}</div>
+            <div className='answersPhotos'>{answer.photos.length > 0 && <Photos photos={answer.photos} />}</div>
             <Footer userName={answer.answerer_name} dateData={answer.date} helpfulness={answer.helpfulness} answerList={answerList} setAnswerList={setAnswerList} idx={idx} answerId={answer.answer_id} />
             <hr className='break' />
           </div>
@@ -76,10 +76,10 @@ const Answers = ({ questionId }) => {
       })}
       {allAnswers.length > 2 && (
         <div id='scrollReminder' className='popup'>
-          <p>scroll down to view all answers!</p>
+          <p>Scroll down to view all answers!</p>
         </div>
       )}
-      <div>{allAnswers.length > 2 && <span onClick={handleClickMoreAnswers}>{extend ? 'COLLAPSE ANSWERS' : 'LOAD MORE ANSWERS'}</span>}</div>
+      <div>{allAnswers.length > 2 && <button className='moreAnswersBtn' type='button' onClick={handleClickMoreAnswers}>{extend ? 'COLLAPSE ANSWERS' : 'LOAD MORE ANSWERS'}</button>}</div>
     </div>
   );
 };

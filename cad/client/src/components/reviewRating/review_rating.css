@@ -199,7 +199,7 @@ i:before {
 }
 
 .rating-review-wrapper {
-  min-width: 72.25rem;
+  /* min-width: 72.25rem; */
 }
 
 .button-link {
@@ -232,6 +232,7 @@ i:before {
 
 .button-link.small {
   font-size: 0.625rem;
+  color: var(--text)
 }
 
 .picturesContainer>div {

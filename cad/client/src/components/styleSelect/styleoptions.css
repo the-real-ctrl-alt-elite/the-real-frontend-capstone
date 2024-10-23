@@ -34,7 +34,7 @@
   box-shadow: var(--box-shadow);
 }
 .style-mini-pic:hover {
-  outline: double 4px rgb(118, 200, 227);
+  outline: double 4px var(--accent-five)
 }
 
 .style-check {

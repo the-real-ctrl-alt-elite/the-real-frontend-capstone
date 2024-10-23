@@ -26,8 +26,7 @@
 }
 
 .info-choices-container {
-  /* display: flex;
-  flex-direction: column; */
+ margin-top: 2rem;
 }
 
 .product-name {
@@ -44,9 +43,9 @@
 .category {
   display: flex;
   width: 40%;
-  justify-content: space-between;
   font-weight: 800;
   margin-top: 5px;
+  gap: 1rem;
 }
 
 .ratings-container {
@@ -102,6 +101,16 @@
 
 }
 
+[data-theme="dark"]  .details-title,
+[data-theme="dark"] .about-item,
+[data-theme="dark"] .category p {
+  background: linear-gradient(to bottom, var(--accent-five) 40%, red 100%);
+  background-clip: text;
+  font-family: 'Creepster';
+  -webkit-text-fill-color: transparent;
+}
+
+
 .review-links {
   display: flex;
   width: 100%;
@@ -133,9 +142,10 @@
   width: 100%;
   color: blue;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: start;
   font-size: xx-large;
-  margin-top: 10px;
+  gap: 2rem;
+  margin-top: 1.5rem;
 }
 
 .social-icons {

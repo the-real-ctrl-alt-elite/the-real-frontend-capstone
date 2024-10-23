@@ -96,7 +96,6 @@ const Star = ({ percentage }) => {
   // partial fills with the clipPath css property
   const thisPercentage = percentage * 100;
   const theme = document.getElementById('theme-toggle-switch').checked;
-  console.log(theme);
   return (
     <div className='star-wrapper'>
       <i className={theme ? 'star-back fa-solid fa-jack-o-lantern' : 'star-back fa-solid fa-star-sharp'}> </i>
@@ -125,7 +124,6 @@ const CollapsedBody = ({ fn }) => {
         <small>
           ...
           <button
-            style={{ color: 'rgba(82,82,82)' }}
             type='button'
             className='button-link small'
             onClick={() => {

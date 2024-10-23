@@ -5,6 +5,7 @@ import QuestionsList from './QuestionsList';
 import MoreQuestions from './MoreQuestions';
 import AddAQuestionModal from './AddAQuestionModal';
 import ProductContext from '../../ProductContext';
+import ModalBackground from '../reviewRating/components/ModalBackground';
 
 const TOKEN = process.env.GIT_TOKEN;
 const BASE_URL = process.env.API_BASE_URL;
@@ -81,16 +82,20 @@ const Qa = () => {
 
   return (
     <div className='qa-container'>
-      {openQuestionModal && <AddAQuestionModal setOpenQuestionModal={setOpenQuestionModal} productName={productName} productId={productId} />}
+      {openQuestionModal && <ModalBackground component={AddAQuestionModal} componentProps={{ setOpenQuestionModal, productName, productId }} top={0} closeModal={() => setOpenQuestionModal(false)} backgroundClose={false} />}
 
       <h3 className='section-title'>QUESTIONS & ANSWERS</h3>
-      <input className='search-bar' placeholder='Have a questions? Search for answers...' onChange={handleOnChange} />
+      <input className='search-bar' placeholder='Have questions? Search for answers...' onChange={handleOnChange} />
       <div className='questions-list' data-testid='QuestionsList'>{qnas.length > 0 && <QuestionsList qnas={qnas} setOpenAnswerModal={setOpenAnswerModal} openAnswerModal={openAnswerModal} productName={productName} />}</div>
-      <span onClick={handleClickMoreQuestion}>{fullList.length > 2 && fullList.length !== qnas.length && <MoreQuestions />}</span>
-      <span><button type='button' onClick={handleAddAQuestion}>Add A Question</button></span>
+      <div className='qnaFnBtnBox'>
+        <span onClick={handleClickMoreQuestion}>{fullList.length > 2 && fullList.length !== qnas.length && <MoreQuestions />}</span>
+        <span><button className='qnaFnBtn' type='button' onClick={handleAddAQuestion}>ADD A QUESTION</button></span>
+      </div>
 
     </div>
   );
 };
 
 export default Qa;
+
+// <AddAQuestionModal setOpenQuestionModal={setOpenQuestionModal} productName={productName} productId={productId}
