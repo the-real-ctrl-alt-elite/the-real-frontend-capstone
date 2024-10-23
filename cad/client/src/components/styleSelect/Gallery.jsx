@@ -7,7 +7,10 @@ const Gallery = ({ images, imgIdx }) => {
 
   useEffect(() => {
     setCurrentIdx(imgIdx);
-    if (imgIdx === 0 && images.length) {
+    if (images.length === 0) {
+      setShowLeftButton(false);
+      setShowRightButton(false);
+    } else if (imgIdx === 0) {
       setShowRightButton(true);
       setShowLeftButton(false);
     } else if (imgIdx === images.length - 1) {
