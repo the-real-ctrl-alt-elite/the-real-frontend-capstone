@@ -32,7 +32,9 @@ export const ProductProvider = ({ children }) => {
 
   useEffect(() => {
     const randomId = generateRandomProductId();
-    setProductId(40344);
+    setProductId(randomId);
+    // setProductId(41126); // out of stock XS
+    // setProductId(40344);
   }, []);
 
   useEffect(() => {
