@@ -1,9 +1,14 @@
-.style-options-container {}
+.style-options-container {
+  margin: 4px 0;
+}
 
-.style-title-container {}
+.style-title-container {
+  margin: 2px 0;
+}
 
 .style-title {
   font-weight: 600;
+  margin-bottom: 2px;
 }
 
 .style-thumbnails {

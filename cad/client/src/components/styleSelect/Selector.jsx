@@ -8,7 +8,6 @@ import Gallery from './Gallery';
 import Sizeoptions from './Sizeoptions';
 import Quantity from './Quantity';
 import Styleoptions from './Styleoptions';
-import Purchase from './Purchase';
 import { ReviewStars } from '../reviewRating/components/ReviewTile';
 
 const TOKEN = process.env.GIT_TOKEN;
@@ -35,14 +34,31 @@ const Selector = (props) => {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   const handleSizeChange = (selectedSize) => {
+    if (selectedSize === "") {
+      // Reset everything when "SELECT" is chosen
+      setSelectedSize("");      // Reset selected size
+      setSelectedSku(null);     // Clear SKU
+      setAvailableQuantities(0); // Reset available quantities
+      setSelectedQuantity(null); // Reset selected quantity (disabled state)
+      return; // Exit the function early to stop further processing
+    }
+
     // Find the corresponding SKU for the selected size
     const selectedSku = Object.keys(skus).find((skuId) => skus[skuId].size === selectedSize);
-    // Update the state with selected size and its SKU
-    setSelectedSize(selectedSize);
-    setSelectedSku(selectedSku);
-    // Also, update the available quantities for that SKU
-    setAvailableQuantities(skus[selectedSku].quantity);
+
+    if (selectedSku) {
+      // Update the state with the selected size and its SKU
+      setSelectedSize(selectedSize);
+      setSelectedSku(selectedSku);
+      // Update available quantities for that SKU
+      setAvailableQuantities(skus[selectedSku].quantity);
+    } else {
+      // Handle the case where SKU is not found (fallback or error case)
+      setSelectedSku(null);
+      setAvailableQuantities(0);
+    }
   };
+
 
   const handleQuantityChange = (quantity) => {
     setSelectedQuantity(quantity);
@@ -201,6 +217,7 @@ const Selector = (props) => {
   useEffect(() => {
     productId && getProduct();
   }, [productId]);
+
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -248,7 +265,6 @@ const Selector = (props) => {
                     <div className='total-rat'>
                       <button
                         type='button'
-                        // fix colors
                         className='button-link-top'
                         onClick={() => document.querySelector('#ratings').scrollIntoView()}
                       >
@@ -284,7 +300,7 @@ const Selector = (props) => {
                     </div>
                   </div>
                 ) : (
-                  <div>
+                  <div className='price-nosale-div'>
                     <sup>$</sup>
                     <span className='price'>{money.dollar}</span>
                     <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>
