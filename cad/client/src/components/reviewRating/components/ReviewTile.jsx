@@ -62,6 +62,7 @@ const ReviewTile = ({ review, setPictureStatus, setModalStatus }) => {
       {review.recommend === true && <Recommend /> }
       {review.response !== null && <Response response={review.response} /> }
       <FeedbackFooter review={review} />
+      <hr className='reviewTileHR' />
     </div>
   );
 };
@@ -260,7 +261,9 @@ const FeedbackFooter = ({ review }) => {
         >
           Yes
         </button>
-        {`(${helpfulness})`}
+        <span className='button-link small' style={{ border: 'none' }}>
+          {`(${helpfulness})`}
+        </span>
         {' '}
       </small>
       <small>|</small>

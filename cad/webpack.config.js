@@ -35,12 +35,11 @@ module.exports = {
         ],
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)$/i,
+        test: /\.(woff(2)?|ttf|eot|svg)$/i, // Match common font formats
         use: [
           {
-            loader: 'url-loader',
+            loader: 'file-loader',
             options: {
-              limit: 8192, // Inline fonts smaller than 8kb as base64
               name: '[name].[hash].[ext]', // Font file name convention
               outputPath: 'fonts/', // Output directory for fonts
             },

@@ -10,7 +10,7 @@
 @import './components/styleSelect/advertisement.css';
 @import './components//styleSelect//quantity.css';
 
-/* @font-face {
+@font-face {
   font-family: 'Creepster';
   src: url('../assets/Creepster-Regular.ttf');
   font-weight: normal;
@@ -22,7 +22,7 @@
   src: url('../assets/Roboto-Black.ttf');
   font-weight: normal;
   font-style: normal;
-} */
+}
 
 :root {
   --accent-orange: rgb(201,108,91);

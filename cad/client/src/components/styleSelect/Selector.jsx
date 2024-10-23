@@ -34,10 +34,10 @@ const Selector = (props) => {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   const handleSizeChange = (selectedSize) => {
-    if (selectedSize === "") {
+    if (selectedSize === '') {
       // Reset everything when "SELECT" is chosen
-      setSelectedSize("");      // Reset selected size
-      setSelectedSku(null);     // Clear SKU
+      setSelectedSize(''); // Reset selected size
+      setSelectedSku(null); // Clear SKU
       setAvailableQuantities(0); // Reset available quantities
       setSelectedQuantity(null); // Reset selected quantity (disabled state)
       return; // Exit the function early to stop further processing
@@ -58,7 +58,6 @@ const Selector = (props) => {
       setAvailableQuantities(0);
     }
   };
-
 
   const handleQuantityChange = (quantity) => {
     setSelectedQuantity(quantity);
@@ -263,8 +262,8 @@ const Selector = (props) => {
             {reviewCount && starCount
               && (
                 <div className='ratings-container'>
-                  <span className='star-num'>{starCount.toFixed(1)}</span>
-                  <ReviewStars rating={starCount} />
+                  <span className='star-num'>{props.starAverage}</span>
+                  <ReviewStars rating={props.starAverage} />
                   <div className='review-links'>
                     <div className='total-rat'>
                       <button
