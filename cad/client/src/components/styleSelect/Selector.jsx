@@ -8,7 +8,6 @@ import Gallery from './Gallery';
 import Sizeoptions from './Sizeoptions';
 import Quantity from './Quantity';
 import Styleoptions from './Styleoptions';
-import Purchase from './Purchase';
 import { ReviewStars } from '../reviewRating/components/ReviewTile';
 
 const TOKEN = process.env.GIT_TOKEN;
@@ -201,6 +200,7 @@ const Selector = (props) => {
   useEffect(() => {
     productId && getProduct();
   }, [productId]);
+
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -248,7 +248,6 @@ const Selector = (props) => {
                     <div className='total-rat'>
                       <button
                         type='button'
-                        // fix colors
                         className='button-link-top'
                         onClick={() => document.querySelector('#ratings').scrollIntoView()}
                       >
@@ -284,7 +283,7 @@ const Selector = (props) => {
                     </div>
                   </div>
                 ) : (
-                  <div>
+                  <div className='price-nosale-div'>
                     <sup>$</sup>
                     <span className='price'>{money.dollar}</span>
                     <sup style={{ textDecoration: 'underline' }}>{money.cent}</sup>
