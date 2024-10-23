@@ -96,13 +96,15 @@
   height: 35rem;
   min-width: 100%;
   position: relative;
+  object-fit: cover;
+  overflow:hidden;
   transition: 1s cubic-bezier(0.39, 0.45, 0.565, 1);
 }
 
 .carousel-item-img {
   height: 35rem;
   min-width: 100%;
-  object-fit: cover;
+
 }
 
 /* TODO: these buttons sometimes 'disapear' in the background of the img */

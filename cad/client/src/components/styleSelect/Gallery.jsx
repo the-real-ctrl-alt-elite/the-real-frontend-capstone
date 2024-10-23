@@ -7,7 +7,7 @@ const Gallery = ({ images, imgIdx }) => {
 
   useEffect(() => {
     setCurrentIdx(imgIdx);
-    if (imgIdx === 0) {
+    if (imgIdx === 0 && images.length) {
       setShowRightButton(true);
       setShowLeftButton(false);
     } else if (imgIdx === images.length - 1) {
@@ -19,6 +19,13 @@ const Gallery = ({ images, imgIdx }) => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imgIdx]);
+
+  useEffect(() => {
+    if (images.length === 1) {
+      setShowLeftButton(false);
+      setShowRightButton(false);
+    }
+  }, [images]);
 
   const handleRightClick = () => {
     const nextIdx = currentIdx + 1;
