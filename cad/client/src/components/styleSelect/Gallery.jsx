@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
-const Gallery = ({ images, imgIdx }) => {
+const Gallery = ({ images, imgIdx, handleEnlargeClick }) => {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(true);
 
   useEffect(() => {
     setCurrentIdx(imgIdx);
-    if (images.length === 0) {
-      setShowLeftButton(false);
-      setShowRightButton(false);
-    } else if (imgIdx === 0) {
+    if (imgIdx === 0) {
       setShowRightButton(true);
       setShowLeftButton(false);
     } else if (imgIdx === images.length - 1) {
       setShowRightButton(false);
-      setShowLeftButton(false);
+      setShowLeftButton(true);
     } else {
       setShowRightButton(true);
       setShowLeftButton(true);
@@ -24,7 +21,7 @@ const Gallery = ({ images, imgIdx }) => {
   }, [imgIdx]);
 
   useEffect(() => {
-    if (images.length === 1) {
+    if (images.length === 1 || images.length === 0) {
       setShowLeftButton(false);
       setShowRightButton(false);
     }
@@ -50,7 +47,7 @@ const Gallery = ({ images, imgIdx }) => {
   };
 
   const handleModalToggle = () => {
-    console.log('clicked');
+    handleEnlargeClick(images[currentIdx]);
   };
 
   return (
@@ -85,6 +82,7 @@ const Gallery = ({ images, imgIdx }) => {
             type='button'
             className='carousel-item'
             style={{ transform: `translate(-${currentIdx * 100}%)` }}
+            onClick={handleModalToggle}
             key={item}
           >
             <img className='carousel-item-img' src={item} alt='product-image' />
