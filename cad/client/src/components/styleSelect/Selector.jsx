@@ -34,32 +34,27 @@ const Selector = (props) => {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   const handleSizeChange = (selectedSize) => {
-    if (selectedSize === "") {
+
+    if (selectedSize === '') {
       // Reset everything when "SELECT" is chosen
-      setSelectedSize("");      // Reset selected size
-      setSelectedSku(null);     // Clear SKU
+      setSelectedSize(''); // Reset selected size
+      setSelectedSku(null); // Clear SKU
       setAvailableQuantities(0); // Reset available quantities
       setSelectedQuantity(null); // Reset selected quantity (disabled state)
       return; // Exit the function early to stop further processing
+
     }
-
-    // Find the corresponding SKU for the selected size
     const selectedSku = Object.keys(skus).find((skuId) => skus[skuId].size === selectedSize);
-
     if (selectedSku) {
-      // Update the state with the selected size and its SKU
       setSelectedSize(selectedSize);
       setSelectedSku(selectedSku);
-      // Update available quantities for that SKU
       setAvailableQuantities(skus[selectedSku].quantity);
     } else {
-      // Handle the case where SKU is not found (fallback or error case)
       setSelectedSku(null);
       setAvailableQuantities(0);
     }
   };
-
-
+    
   const handleQuantityChange = (quantity) => {
     setSelectedQuantity(quantity);
   };
@@ -217,11 +212,11 @@ const Selector = (props) => {
   useEffect(() => {
     productId && getProduct();
   }, [productId]);
-  // if (Object.keys(productStyles).length > 0) {
-  // console.log(currentStyle, 'current style');
-  // console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
-  //
-  // }
+  if (Object.keys(productStyles).length > 0) {
+    console.log(currentStyle, 'current style');
+    console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
+
+  }
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
@@ -263,8 +258,8 @@ const Selector = (props) => {
             {reviewCount && starCount
               && (
                 <div className='ratings-container'>
-                  <span className='star-num'>{starCount.toFixed(1)}</span>
-                  <ReviewStars rating={starCount} />
+                  <span className='star-num'>{props.starAverage}</span>
+                  <ReviewStars rating={props.starAverage} />
                   <div className='review-links'>
                     <div className='total-rat'>
                       <button
@@ -348,6 +343,11 @@ const Selector = (props) => {
                   setShownStyle={setShownStyle}
                   hoverState={hoverState}
                   setHoverState={setHoverState}
+
+                  setSelectedSize={setSelectedSize}
+                  setSelectedSku={setSelectedSku}
+                  setAvailableQuantities={setAvailableQuantities}
+                  setSkus={setSkus}
                 />
               )
             }

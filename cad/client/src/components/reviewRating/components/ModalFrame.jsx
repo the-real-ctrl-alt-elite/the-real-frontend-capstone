@@ -23,7 +23,7 @@ const ModalFrame = ({
         maxHeight: '100vh',
         padding: `${usedPadding}`,
         border: `${usedBorder}`,
-        zIndex: '5',
+        zIndex: '20',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -36,6 +36,7 @@ const ModalFrame = ({
         onClick={() => closeModal()}
         style={{
           position: 'absolute',
+          zIndex: '21',
           top: `calc(${usedPadding} + 0.65rem)`,
           right: `calc(${usedPadding} + 0.65rem)`,
           borderRadius: '1rem',
