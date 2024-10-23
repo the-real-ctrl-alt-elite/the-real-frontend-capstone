@@ -64,13 +64,6 @@ const Selector = (props) => {
     setSelectedQuantity(quantity);
   };
 
-
-
-
-
-
-
-
   // button animations
   const [click, setClick] = useState(false);
   const handleClick = () => {
@@ -79,14 +72,6 @@ const Selector = (props) => {
   const handleMouseLeave = () => {
     setClick(false);
   };
-
-
-
-
-
-
-
-
 
   // advertisement related
   const [sale, setSale] = useState(null);
@@ -240,12 +225,9 @@ const Selector = (props) => {
 
   useEffect(() => {
     productId && getProduct();
+    fetchSaleItem()
   }, [productId]);
-  if (Object.keys(productStyles).length > 0) {
-    console.log(currentStyle, 'current style');
-    console.log('Selector:\n', 'productInformation:', productInformation, '\n', 'productStyle:', productStyles)
 
-  }
   return (
     <div className='selector-container-overlay'>
       <article className='selector-advertisement' onClick={() => newProduct(saleId)}>
