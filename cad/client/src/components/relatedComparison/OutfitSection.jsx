@@ -45,7 +45,7 @@ const OutfitSection = () => {
           onClick={() => addToOutfit(
             {
               ...productData,
-              photos: getDefaultStyle(productStyles)?.photos[0],
+              photos: getDefaultStyle(productStyles)?.photos[0] || [],
               sale_price: getDefaultStyle(productStyles)?.sale_price,
               rating: starCount,
             },
