@@ -16,34 +16,48 @@
   --box-shadow:
     #070707 0px 20px 30px -10px,
     #80ff00b0 0px 5px 10px -5px;
-  --accent-one: rgb(235,235,245);
-  --accent-two: rgb(245,245,255);
-  --accent-three: rgb(235,255,235);
-  --accent-four: rgb(235,235,255);
+  --accent-one: rgb(235, 235, 245);
+  --accent-two: rgb(245, 245, 255);
+  --accent-three: rgb(235, 255, 235);
+  --accent-four: rgb(235, 235, 255);
   --accent-five: rgb(149, 213, 178);
-  --accent-six:  rgb(64, 145, 108);
-  --accent-seven:  rgb(27, 67, 50);
+  --accent-six: rgb(64, 145, 108);
+  --accent-seven: rgb(27, 67, 50);
   --accent-eight: #000000;
-  --accent-nine: rgb(0,0,0);
-  --transparent-bg: rgba(22,22,22,.5);
+  --accent-nine: rgb(0, 0, 0);
+  --accent-ten: rgb(0, 0, 0);
+  --transparent-bg: rgba(22, 22, 22, .5);
+  --appearance: auto;
+  --padding: 3px;
+  --bkgpos: none;
+  --bkimg: none;
+  --outline: auto;
 }
 
 [data-theme="dark"] {
-  --bg: rgba(22,22,22);
+  --bg: rgba(22, 22, 22);
   --text: white;
   --box-shadow:
     #ffffff 0px 20px 30px -10px,
     #80ff00b0 0px 5px 10px -5px;
-  --accent-one: rgba(25,20,32);
-  --accent-two: rgb(40,36,50);
-  --accent-three: rgb(49,34,68);
-  --accent-four: rgb(64,63,76);
+  --accent-one: rgba(25, 20, 32);
+  --accent-two: rgb(40, 36, 50);
+  --accent-three: rgb(49, 34, 68);
+  --accent-four: rgb(64, 63, 76);
   --accent-five: rgb(149, 213, 178);
-  --accent-six:  rgb(64, 145, 108);
-  --accent-seven:  rgb(27, 67, 50);
+  --accent-six: rgb(64, 145, 108);
+  --accent-seven: rgb(27, 67, 50);
   --accent-eight: #ffffff;
   --accent-nine: rgb(64, 145, 108);
-  --transparent-bg: rgba(222,222,222,.5);
+  --accent-ten: rgb(127, 255, 0);
+  --transparent-bg: rgba(222, 222, 222, .5);
+  --appearance: none;
+  --padding: 4px 20px 2px 6px;
+  --bkgpos: right 4px;
+  --bkimg: url('data:image/svg+xml;utf8,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 4 5%22%3E%3Cpath fill%3D%22none%22 stroke%3D%22chartreuse%22 stroke-width%3D%22.5%22 d%3D%22M0 2 L2 4 L4 2%22/%3E%3C/svg%3E');
+  --outline: none;
+  --border: none;
+  --border-btm: 2px solid chartreuse;
 }
 
 .app {
