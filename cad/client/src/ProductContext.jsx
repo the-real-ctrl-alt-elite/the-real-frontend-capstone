@@ -34,6 +34,7 @@ export const ProductProvider = ({ children }) => {
     const randomId = generateRandomProductId();
     setProductId(randomId);
     // setProductId(41126); // out of stock XS
+    // setProductId(40344);
   }, []);
 
   useEffect(() => {
@@ -49,6 +50,7 @@ export const ProductProvider = ({ children }) => {
           },
         })
         .then((response) => {
+          console.log('product id', response.data.id);
           setProductId(response.data.id);
           setProductData(response.data);
         })

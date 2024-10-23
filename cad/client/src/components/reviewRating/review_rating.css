@@ -11,8 +11,17 @@ i:before {
   /* gap: 1rem; */
 }
 
-.rating-container>* {
-  color: rgba(82,82,82);
+.ratingsHeader {
+  color: var(--text);
+  margin: .5rem .5rem .5rem -.5rem;
+}
+
+[data-theme="dark"] .ratingsHeader {
+  font-size: 2.25rem;
+  background: linear-gradient(to bottom, var(--accent-five) 40%, red 100%);
+  background-clip: text;
+  font-family: 'Creepster';
+  -webkit-text-fill-color: transparent;
 }
 
 .star-wrapper {
@@ -51,8 +60,7 @@ i:before {
 }
 
 .reviewTile {
-  padding: 1rem;
-  border-bottom: 1px solid var(--text);
+  padding: 1rem 1rem 0 1rem;
   margin: .5rem;
 }
 
@@ -62,6 +70,13 @@ i:before {
 
 .reviewBody {
   color: var(--text);
+}
+
+.reviewTileHR {
+  margin: 1rem 0;
+  box-shadow: 0 2px 3px .2px var(--transparent-bg);
+  height: .125rem;
+  border: none;
 }
 
 .reviewRecommend {
@@ -145,6 +160,15 @@ i:before {
 .ratingBreakdownSummary>h1 {
   font-size: 3rem;
   letter-spacing: 2px;
+}
+
+[data-theme="dark"] .ratingBreakdownSummary>h1 {
+  font-size: 4rem;
+  background: linear-gradient(to bottom, var(--accent-five) 40%, red 100%);
+  background-clip: text;
+  font-family: 'Creepster';
+  -webkit-text-fill-color: transparent;
+  letter-spacing: .5rem;
 }
 
 .ratingBreakdownSummary small {
@@ -235,6 +259,11 @@ i:before {
   color: var(--text)
 }
 
+[data-theme="dark"] .button-link.small {
+  color: var(--accent-orange);
+  border-color: var(--accent-orange);
+}
+
 .picturesContainer>div {
   /* box-shadow: 0 0 5px 2px black; */
   box-sizing: border-box;
@@ -250,7 +279,7 @@ i:before {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3;
+  z-index: 9;
   left: 0;
   width: 100vw;
   height: 100vh;
@@ -260,6 +289,8 @@ i:before {
 
 .modelFrame {
   box-shadow: var(--box-shadow);
+  position: relative;
+  z-index: 99;
 }
 
 [data-theme="dark"] .modelFrame {
@@ -275,10 +306,11 @@ i:before {
 }
 
 .modelPictureContainer {
+  position: relative;
   background: var(--accent-four);
   margin: auto;
   width: auto;
-  z-index: 4;
+  z-index: 20;
   padding: .55rem;
   box-shadow: var(--box-shadow);
   border-radius: 1rem;
@@ -288,6 +320,7 @@ i:before {
 }
 
 .innerModelPicture {
+  position: relative;
   max-width: 50vw;
   max-height: 75vh;
   object-fit: contain;
@@ -524,6 +557,10 @@ i:before {
 .fa-check {
   color: white;
   background-color: green;
+}
+
+[data-theme="dark"] .fa-check {
+  background-color: var(--accent-seven);
 }
 
 .fa-x {

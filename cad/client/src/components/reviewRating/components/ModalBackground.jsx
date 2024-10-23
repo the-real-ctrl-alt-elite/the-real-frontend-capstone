@@ -59,7 +59,7 @@ const ModalBackground = ({
         justifyContent: 'center',
         alignItems: 'center',
         padding: `${usedPadding}`,
-        zIndex: '3',
+        zIndex: '15',
 
       }}
     >

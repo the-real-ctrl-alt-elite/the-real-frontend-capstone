@@ -22,6 +22,30 @@ module.exports = {
           'css-loader', // Interprets @import and url() in CSS files, allowing Webpack to bundle CSS
         ],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i, // Regular expression to match image files
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash].[ext]', // Output file naming convention
+              outputPath: 'images', // Output folder for images
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)$/i, // Match common font formats
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash].[ext]', // Font file name convention
+              outputPath: 'fonts/', // Output directory for fonts
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [ // plugins in Webpack allow you to extend functionality by performing tasks that loaders can’t handle
