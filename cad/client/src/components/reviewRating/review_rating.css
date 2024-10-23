@@ -32,11 +32,6 @@ i:before {
   margin: 0 .125rem
 }
 
-.fa-solid {
-  min-height: 1rem;
-  min-width: 1rem;
-}
-
 .star-back {
   color: white;
   position: absolute;
