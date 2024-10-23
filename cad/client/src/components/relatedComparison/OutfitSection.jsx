@@ -51,8 +51,8 @@ const OutfitSection = () => {
             },
           )}
         >
-          <div className='product-card-container'>
-            +
+          <div className='add-outfit-card-container'>
+            <i className='fa-solid fa-plus fa-2xl' />
           </div>
         </button>
         {outfitItems.map(({

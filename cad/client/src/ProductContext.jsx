@@ -48,6 +48,7 @@ export const ProductProvider = ({ children }) => {
           },
         })
         .then((response) => {
+          console.log('product id', response.data.id);
           setProductId(response.data.id);
           setProductData(response.data);
         })
