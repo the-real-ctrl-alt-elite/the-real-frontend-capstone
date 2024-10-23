@@ -28,7 +28,7 @@
 }
 
 
-.custom-select:hover {
+[data-theme="dark"] .custom-select:hover {
   border-bottom-color: rgba(65, 129, 0, 0.616);
 }
 

@@ -10,6 +10,20 @@
 @import './components/styleSelect/advertisement.css';
 @import './components//styleSelect//quantity.css';
 
+@font-face {
+  font-family: 'Creepster';
+  src: url('../assets/Creepster-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/Roboto-Black.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --accent-orange: rgb(201,108,91);
 }
@@ -85,7 +99,7 @@ body {
 
 .innerApp {
   margin: auto;
-  max-width: 45%;
+  max-width: 55%;
 }
 
 [data-theme="dark"] input,
@@ -108,4 +122,21 @@ body {
   align-items: center;
   justify-content: end;
   gap: 1rem;
+}
+
+.siteTitle {
+  font-size: 4rem;
+  margin: 1rem;
+  font-family: 'Creepster';
+  position: absolute;
+  top: 0;
+  z-index: 99;
+  background: linear-gradient(to bottom, var(--accent-five) 57%, red 57.1%, red 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo {
+  height: 5rem;
+  width: 5rem;
 }
