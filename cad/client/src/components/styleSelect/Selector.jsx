@@ -4,6 +4,7 @@ import axios from 'axios';
 import ProductContext from '../../ProductContext';
 import Advertisement from './Advertisement';
 import Imagegallery from './Imagegallery';
+import Gallery from './Gallery';
 import Sizeoptions from './Sizeoptions';
 import Quantity from './Quantity';
 import Styleoptions from './Styleoptions';
@@ -18,7 +19,7 @@ const Selector = (props) => {
     productId, newProduct, starCount, reviewCount,
   } = useContext(ProductContext);
   const [productInformation, setProduct] = useState({});
-  const [productStyles, setProductStyles] = useState({});
+  const [productStyles, setProductStyles] = useState([]);
 
   // stores mutations for styles on current page
   const [money, setMoney] = useState({ dollar: '', cent: '' });
@@ -63,8 +64,6 @@ const Selector = (props) => {
     setSelectedQuantity(quantity);
   };
 
-
-
   // advertisement related
   const [sale, setSale] = useState(null);
   const [saleName, setSaleName] = useState('');
@@ -90,9 +89,9 @@ const Selector = (props) => {
       newColor: '',
       colorCheck: false,
       index: null,
+      id: -1,
     },
   );
-
   const [hoverState, setHoverState] = useState(
     {
       active: false,
@@ -192,6 +191,7 @@ const Selector = (props) => {
               percent_change: percentChange,
               color: res[0].name,
               index: 0,
+              id: res[0].style_id,
             }));
             setShownStyle((prev) => ({
               ...prev,
@@ -216,7 +216,6 @@ const Selector = (props) => {
 
   useEffect(() => {
     productId && getProduct();
-    // fetchSaleItem();
   }, [productId]);
 
   return (
@@ -244,14 +243,11 @@ const Selector = (props) => {
           }
         </a>
       </article>
-
       <div className='selector-components'>
         <Imagegallery
-          id={productId}
-          details={productStyles}
+          styleId={currentStyle?.id || 0}
+          details={productStyles.filter((style) => style?.style_id === currentStyle?.id)}
           item={item}
-          setImageTracker={setImageTracker}
-          imageTracker={imageTracker}
         />
         <aside className='selector-functional-components'>
           <div className='info-choices-container'>

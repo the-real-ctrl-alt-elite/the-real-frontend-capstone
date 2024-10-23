@@ -72,7 +72,7 @@ const RelatedSection = ({ handleProductClick }) => {
             salePrice={sale_price}
             description={description}
             features={features}
-            photos={photos[0]}
+            photos={photos ? photos[0] : []}
             rating={rating}
           />
         ))}
