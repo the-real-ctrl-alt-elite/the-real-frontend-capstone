@@ -23,6 +23,7 @@
   --accent-one: rgb(235, 235, 245);
   --accent-two: rgb(245, 245, 255);
   --accent-three: rgb(235, 255, 235);
+
   --accent-four: rgb(235, 235, 255);
   --accent-five: rgb(149, 213, 178);
   --accent-six: rgb(64, 145, 108);
@@ -47,6 +48,7 @@
   --accent-one: rgba(25, 20, 32);
   --accent-two: rgb(40, 36, 50);
   --accent-three: rgb(49, 34, 68);
+  --accent-three-shade: rgb(34, 23, 53);
   --accent-four: rgb(64, 63, 76);
   --accent-five: rgb(149, 213, 178);
   --accent-six: rgb(64, 145, 108);
@@ -72,6 +74,8 @@ body {
 .app {
   background-color: var(--bg);
   color: var(--text);
+  overflow-x: clip
+
 }
 
 .section-break {
@@ -86,6 +90,7 @@ body {
 .innerApp {
   margin: auto;
   max-width: 45%;
+
 }
 
 [data-theme="dark"] input,

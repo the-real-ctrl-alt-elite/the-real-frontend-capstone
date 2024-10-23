@@ -14,7 +14,7 @@ const HorizontalScroller = ({ children }) => {
 
   const scrollToLeft = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -250, behavior: 'smooth' });
+      scrollContainerRef.current.scrollBy({ left: -240, behavior: 'smooth' });
       scrollContainerRef.current.addEventListener('scrollend', () => {
         handleScroll();
       });
@@ -23,7 +23,7 @@ const HorizontalScroller = ({ children }) => {
 
   const scrollToRight = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 250, behavior: 'smooth' });
+      scrollContainerRef.current.scrollBy({ left: 240, behavior: 'smooth' });
       scrollContainerRef.current.addEventListener('scrollend', () => {
         handleScroll();
       });
