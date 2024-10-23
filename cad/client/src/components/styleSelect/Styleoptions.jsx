@@ -89,6 +89,7 @@ const Styleoptions = (props) => {
     );
   };
 
+
   return (
     <div className='style-options-container'>
       <div className='style-title-container'>
