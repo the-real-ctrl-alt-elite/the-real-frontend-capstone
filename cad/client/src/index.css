@@ -53,14 +53,12 @@
   --accent-seven: rgb(27, 67, 50);
   --accent-eight: #ffffff;
   --accent-nine: rgb(64, 145, 108);
-<<<<<<< HEAD
   --transparent-bg: rgba(222,222,222,.5);
 
 }
 
 body {
   min-width: 72.25rem;
-=======
   --accent-ten: rgb(127, 255, 0);
   --transparent-bg: rgba(222, 222, 222, .5);
   --appearance: none;
@@ -70,7 +68,6 @@ body {
   --outline: none;
   --border: none;
   --border-btm: 2px solid chartreuse;
->>>>>>> 097466fdf276dcabbb9356104c0659097bed7829
 }
 
 .app {
@@ -89,7 +86,7 @@ body {
 
 .innerApp {
   margin: auto;
-  max-width: 60%;
+  max-width: 45%;
 }
 
 [data-theme="dark"] input,

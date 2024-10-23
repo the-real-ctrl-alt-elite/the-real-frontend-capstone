@@ -26,7 +26,7 @@
 }
 
 .info-choices-container {
-  width: 50%;
+  /* width: 50%; */
 }
 
 .product-name {
@@ -154,7 +154,8 @@
 }
 
 .button-link-top {
-  color: blue;
+  color: var(--text);
+  text-decoration: underline;
 }
 
 .star-num {

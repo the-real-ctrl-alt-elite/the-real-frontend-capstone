@@ -25,12 +25,14 @@ const App = () => {
           <RelatedSection />
           <OutfitSection />
         </div>
+        <hr className='section-break' />
         <div
           id='Qa'
           className='qa-wrapper'
         >
           <Qa />
         </div>
+        <hr className='section-break' />
         <div
           id='ratings'
           className='rating-review-wrapper'

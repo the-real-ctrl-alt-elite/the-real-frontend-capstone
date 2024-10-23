@@ -18,6 +18,7 @@ select:disabled {
 
 select option[disabled] {
   color: #999;
+}
 
 .custom-select {
   outline: none;

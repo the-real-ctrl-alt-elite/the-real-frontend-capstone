@@ -258,8 +258,12 @@ i:before {
 
 }
 
+.modelFrame {
+  box-shadow: var(--box-shadow);
+}
+
 [data-theme="dark"] .modelFrame {
-  background-color: transparent;
+  background-color: var(--accent-one);
 }
 
 [data-theme="dark"] .neat-line {
@@ -267,7 +271,7 @@ i:before {
 }
 
 [data-theme="light"] .modelFrame {
-  background-color: transparent;
+  background-color: rgba(22,22,22,.5);
 }
 
 .modelPictureContainer {
