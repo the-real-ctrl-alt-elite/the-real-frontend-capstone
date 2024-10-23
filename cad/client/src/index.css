@@ -11,6 +11,10 @@
 @import './components/styleSelect/advertisement.css';
 @import './components//styleSelect//quantity.css';
 
+:root {
+  --accent-orange: rgb(201,108,91);
+}
+
 [data-theme="light"] {
   --bg: white;
   --text: black;

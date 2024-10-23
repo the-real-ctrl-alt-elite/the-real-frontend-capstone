@@ -83,11 +83,58 @@
   position: relative;
 }
 
-.main-image-div {
-  margin-right: 1rem;
+.carousel-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  position: relative;
   width: 30rem;
-  height: 45rem;
+  height: 35rem;
+}
+
+.carousel-item {
+  all: unset;
+  height: 35rem;
+  min-width: 100%;
+  position: relative;
+  transition: 1s cubic-bezier(0.39, 0.45, 0.565, 1);
+}
+
+.carousel-item-img {
+  height: 35rem;
+  min-width: 100%;
+  object-fit: cover;
+}
+
+/* TODO: these buttons sometimes 'disapear' in the background of the img */
+
+.gallery-right-btn {
+  position: absolute;
+  height: 100%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 2rem;
+  z-index: 5;
+  border: none;
+  background: none;
+  color: white;
+  background-color: #0000000d;
+}
+
+.gallery-left-btn {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2rem;
+  z-index: 5;
+  border: none;
+  color: white;
+  background-color: #0000000d;
+}
+
+.thumbnails-gallery button {
+  all: unset;
 }

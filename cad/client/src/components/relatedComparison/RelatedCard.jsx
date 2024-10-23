@@ -79,7 +79,9 @@ function ComparsionModalContent({ onClose, currentProduct, selectedProduct }) {
     <div className='overlay'>
       <div className='modal-content'>
         <table className='comparsion-table'>
-          <caption>
+          <caption
+            className='compareCaption'
+          >
             <h1>Comparing</h1>
           </caption>
           <thead>

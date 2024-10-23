@@ -34,6 +34,13 @@
   font-size: 2.5em;
 }
 
+[data-theme="dark"]  .product-name {
+  background: linear-gradient(to bottom, var(--accent-five) 40%, red 100%);
+  background-clip: text;
+  font-family: 'Creepster';
+  -webkit-text-fill-color: transparent;
+}
+
 .category {
   display: flex;
   width: 40%;

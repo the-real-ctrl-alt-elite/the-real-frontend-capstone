@@ -1,3 +1,12 @@
+[data-theme="dark"] .related-container h3, [data-theme="dark"] .outfit-container h3 {
+    font-size: 36px;
+    background: linear-gradient(to bottom, var(--accent-five) 40%, red 100%);
+    background-clip: text;
+    font-family: 'Creepster';
+    -webkit-text-fill-color: transparent;
+      /* text-shadow: 2px 2px var(--accent-nine); */
+}
+
 .related-comp-wrapper {
   width: 100%;
 }
@@ -48,7 +57,11 @@
 }
 
 .fa-xs::before {
-  color: var(--accent-nine)
+  color: var(--accent-nine);
+}
+
+.fa-xmark::before {
+  color: var(--accent-nine);
 }
 
 .action-item-btn:hover {
@@ -156,7 +169,7 @@
   margin-left: auto;
   margin-right: auto;
   background-color: white;
-  height: 75dvh;
+  height: 85dvh;
   min-width: 60dvw;
   position: relative;
   overflow-y: auto;
@@ -198,14 +211,27 @@ tfoot {
 }
 
 .comparsion-table h1 {
-color: var(--accent-four);
-text-shadow: 2px 2px var(--accent-nine);
+letter-spacing: 1rem;
+color: var(--text);
 background-color: var(--accent-one);
 width: 99.5%;
 display: flex;
 align-items: center;
 justify-content: center;
 padding-top: .5rem;
+}
+
+.compareCaption {
+  background-color: var(--accent-one);
+}
+
+[data-theme="dark"]  .comparsion-table h1 {
+  font-size: 72px;
+  background: linear-gradient(to bottom, var(--accent-five) 15%, red 100%);
+  background-clip: text;
+  font-family: 'Creepster';
+  -webkit-text-fill-color: transparent;
+    /* text-shadow: 2px 2px var(--accent-nine); */
 }
 
 .comparsion-table th {

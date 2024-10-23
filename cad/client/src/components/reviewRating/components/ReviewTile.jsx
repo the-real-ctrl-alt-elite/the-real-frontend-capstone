@@ -95,11 +95,13 @@ const Star = ({ percentage }) => {
   // this is used to double stars to the same absolute posiition, so that you can have these
   // partial fills with the clipPath css property
   const thisPercentage = percentage * 100;
+  const theme = document.getElementById('theme-toggle-switch').checked;
+  console.log(theme);
   return (
     <div className='star-wrapper'>
-      <i className='star-back fa-solid fa-star-sharp'> </i>
+      <i className={theme ? 'star-back fa-solid fa-jack-o-lantern' : 'star-back fa-solid fa-star-sharp'}> </i>
       <i
-        className='star-front fa-solid fa-star-sharp'
+        className={theme ? 'star-front fa-solid fa-jack-o-lantern' : 'star-front fa-solid fa-star-sharp'}
         style={{ clipPath: `inset(0 ${100 - (thisPercentage)}% 0 0)` }}
       />
       <i />

@@ -13,10 +13,11 @@ import Selector from './components/styleSelect/Selector';
 const App = () => {
   // example code do not uncomment in app
   // const { productId } = useContext(ProductContext); // this is how you access the id in your app
+  const [pumpkins, setPumpkins] = useState(false);
 
   return (
     <div className='app'>
-      <Header />
+      <Header pumpkins={pumpkins} setPumpkins={setPumpkins} />
       <div className='innerApp'>
         <Selector />
         <hr className='section-break' />
@@ -34,7 +35,7 @@ const App = () => {
           id='ratings'
           className='rating-review-wrapper'
         >
-          <Rating />
+          <Rating pumpkins={pumpkins} setPumpkins={setPumpkins} />
         </div>
       </div>
     </div>

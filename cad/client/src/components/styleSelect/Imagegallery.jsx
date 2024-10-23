@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import Gallery from './Gallery';
 
-const Imagegallery = (props) => {
+const Imagegallery = ({
+  item, styleId, details,
+}) => {
   const [enlarge, setEnlarge] = useState(false);
+  const [imgIdx, setImgIdx] = useState(0);
 
-  const photoSwap = (url, new_url, bool) => {
-    props.setImageTracker((prev) => ({
-      ...prev,
-      original_url: url,
-    }));
-  };
   useEffect(() => {
-  }, [props.id]);
+    setImgIdx(0);
+  }, [styleId]);
 
-  if (props.details.length > 0) {
+  const galleryImages = details[0]?.photos.map((photo) => photo.url);
+  const galleryThumbnails = details[0]?.photos.map((photo) => photo.thumbnail_url);
+
+  if (details.length > 0) {
     return (
       <div className='image-container'>
         <div className='thumbnails-gallery'>
           {
-            props.item && props.item?.photos.map((photo, i) => {
-              const { length } = props.item.photos;
+            galleryThumbnails.map((thumbnail, idx) => {
+              const { length } = galleryThumbnails.length;
               return (
-                <div className={length < 3 ? 'thumbnail-col' : 'thumbnail-row'} key={photo.url}>
-                  <img className='thumbnails' src={photo.thumbnail_url} onClick={() => photoSwap(photo.thumbnail_url)} />
-                  <img className='thumbnails' src={photo.url} onClick={() => photoSwap(photo.url)} />
+                <div className={length < 3 ? 'thumbnail-col' : 'thumbnail-row'} key={thumbnail}>
+                  <button type='button' onClick={() => setImgIdx(idx)}>
+                    <img className='thumbnails' src={thumbnail} alt='thumbnail-photo' />
+                  </button>
                 </div>
               );
             })
@@ -44,8 +47,8 @@ const Imagegallery = (props) => {
               <div className='modal-content' onClick={(e) => e.stopPropagation()}>
                 <img
                   className='enlarged-image'
-                  src={props.imageTracker.style_photo ? props.imageTracker.style_url : props.imageTracker.original_url}
-                  alt={props.item.name}
+                  src={imageTracker.style_photo ? imageTracker.style_url : imageTracker.original_url}
+                  alt={item.name}
                 />
               </div>
             </div>
