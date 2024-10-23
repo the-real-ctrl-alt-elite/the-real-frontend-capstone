@@ -31,16 +31,13 @@ const Imagegallery = ({
             })
           }
         </div>
-        <div
-          className='main-image-div'
-        >
-          <img
-            className='main-image-container'
-            src={!props.imageTracker.style_photo ? props.imageTracker.original_url : props.imageTracker.style_url}
-            alt={props.item.name}
-            onClick={() => setEnlarge(!enlarge)}
-          />
-        </div>
+        <Gallery images={galleryImages} imgIdx={imgIdx} />
+        {/* <img
+          className='main-image-container'
+          src={!props.imageTracker.style_photo ?  props.imageTracker.original_url : props.imageTracker.style_url}
+          alt={props.item.name}
+          onClick={() => setEnlarge(!enlarge)}
+        /> */}
         {
           enlarge && (
             <div className='modal-overlay' onClick={() => setEnlarge(!enlarge)}>

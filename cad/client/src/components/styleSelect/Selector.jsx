@@ -226,7 +226,6 @@ const Selector = (props) => {
           }
         </a>
       </article>
-
       <div className='selector-components'>
         <Imagegallery
           styleId={currentStyle?.id || 0}
