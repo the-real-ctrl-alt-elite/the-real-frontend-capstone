@@ -119,9 +119,9 @@ const ComparsionModalContent = ({ onClose, currentProduct, selectedProduct }) =>
             </tr>
             {formatComparedFeatures(currentProduct?.features, selectedProduct?.features).map((item) => (
               <tr key={uuidv4()}>
-                <td>{item.values?.curValue === 'true' ? '✅' : item.values?.curValue || '-'}</td>
+                <td>{item.values?.curValue === null ? '✅' : item.values?.curValue || '-'}</td>
                 <td>{item.feature}</td>
-                <td>{item.values?.selectedValue === 'true' ? '✅' : item.values?.selectedValue || '-'}</td>
+                <td>{item.values?.selectedValue === null ? '✅' : item.values?.selectedValue || '-'}</td>
               </tr>
             ))}
           </tbody>
