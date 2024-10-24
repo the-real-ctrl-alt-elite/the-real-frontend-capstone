@@ -44,15 +44,29 @@ const Imagegallery = ({
           handleEnlargeClick={handleEnlargeClick}
         />
         {enlarge && (
-        <div className='modal-overlay' onClick={() => setEnlarge(!enlarge)}>
-          <div className='modal-content' onClick={(e) => e.stopPropagation()}>
-            <img
-              className='enlarged-image'
-              src={img}
-              alt={item.name}
-            />
+          <div className='modal-overlay' onClick={() => setEnlarge(!enlarge)}>
+            <div className='modal-content' onClick={(e) => e.stopPropagation()}>
+              <div className='thumnail-expand-div'>
+                {
+                  galleryThumbnails.map((thumbnail, idx) => {
+                    const { length } = galleryThumbnails.length;
+                    return (
+                        <button className='thumbnail-button-expand' type='button' onClick={() => setImgIdx(idx)}>
+                          <img className={`thumbnails ${imgIdx === idx && 'thumbnails-selected-expand'}`} src={thumbnail} alt='thumbnail-photo' />
+                        </button>
+                    );
+                  })
+                }
+              </div >
+              <Gallery
+                images={galleryImages}
+                imgIdx={imgIdx}
+                handleImgIdx={setImgIdx}
+                handleEnlargeClick={handleEnlargeClick}
+                enlarge={enlarge}
+              />
+            </div>
           </div>
-        </div>
         )}
       </div>
     );
