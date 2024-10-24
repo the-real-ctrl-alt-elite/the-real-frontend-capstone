@@ -4,13 +4,60 @@ const ImageMagnifier = ({
   src,
   width = '100%',
   height = '100%',
-  magnifierHeight = 400,
-  magnifierWidth = 400,
-  zoomLevel = 1.75,
+  zoomLevel = 2.5,
+  enlarge
 }) => {
   const [[x, y], setXY] = useState([0, 0]);
   const [[imgWidth, imgHeight], setSize] = useState([0, 0]);
   const [showMagnifier, setShowMagnifier] = useState(false);
+
+
+  const magnifierHeight = enlarge ? 3000 : 400;
+  const magnifierWidth = enlarge ? 3000 : 400;
+
+  const handleMouseEnter = (e) => {
+    if (!enlarge) {
+      const elem = e.currentTarget;
+      const { width, height } = elem.getBoundingClientRect();
+      setSize([width, height]);
+      setShowMagnifier(true);
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (!enlarge) {
+      const elem = e.currentTarget;
+      const { top, left } = elem.getBoundingClientRect();
+      const x = e.pageX - left - window.pageXOffset;
+      const y = e.pageY - top - window.pageYOffset;
+      setXY([x, y]);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (!enlarge) {
+      setShowMagnifier(false);
+    }
+  };
+
+  const handleImageClick = (e) => {
+    if (enlarge) {
+      if (showMagnifier) {
+        setShowMagnifier(false);
+      } else {
+        const elem = e.currentTarget;
+        const { width, height } = elem.getBoundingClientRect();
+        setSize([width, height]);
+
+        const { top, left } = elem.getBoundingClientRect();
+        const x = e.pageX - left - window.pageXOffset;
+        const y = e.pageY - top - window.pageYOffset;
+        setXY([x, y]);
+
+        setShowMagnifier(true);
+      }
+    }
+  };
 
   return (
     <div
@@ -20,65 +67,46 @@ const ImageMagnifier = ({
         width,
         overflow: 'hidden',
         objectFit: 'cover',
+        cursor: enlarge ? 'crosshair' : showMagnifier ? 'zoom-in' : 'default',
       }}
       className='carousel-item-img'
+      onClick={enlarge ? handleImageClick : null}
+      onMouseEnter={enlarge ? null : handleMouseEnter}
+      onMouseMove={enlarge ? null : handleMouseMove}
+      onMouseLeave={enlarge ? null : handleMouseLeave}
     >
       <img
         src={src}
-        style={{ height, width, overflow: 'hidden', objectFit: 'cover', }}
-        onMouseEnter={(e) => {
-          // update image size and turn-on magnifier
-          const elem = e.currentTarget;
-          const { width, height } = elem.getBoundingClientRect();
-          setSize([width, height]);
-          setShowMagnifier(true);
-        }}
-        onMouseMove={(e) => {
-          // update cursor position
-          const elem = e.currentTarget;
-          const { top, left } = elem.getBoundingClientRect();
-
-          // calculate cursor position on the image
-          const x = e.pageX - left - window.pageXOffset;
-          const y = e.pageY - top - window.pageYOffset;
-          setXY([x, y]);
-        }}
-        onMouseLeave={() => {
-          // close magnifier
-          setShowMagnifier(false);
+        style={{
+          height,
+          width,
+          overflow: 'hidden',
+          objectFit: 'cover',
         }}
         alt='img'
       />
 
-      <div
-        style={{
-          display: showMagnifier ? '' : 'none',
-          position: 'absolute',
-
-          // prevent magnifier blocks the mousemove event of img
-          pointerEvents: 'none',
-          // set size of magnifier
-          height: `${magnifierHeight}px`,
-          width: `${magnifierWidth}px`,
-          // move element center to cursor pos
-          top: `${y - magnifierHeight / 2}px`,
-          left: `${x - magnifierWidth / 2}px`,
-          opacity: '1', // reduce opacity so you can verify position
-          border: '1px solid lightgray',
-          backgroundColor: 'white',
-          backgroundImage: `url('${src}')`,
-          backgroundRepeat: 'no-repeat',
-          // borderRadius: '100%',
-
-          // calculate zoomed image size
-          backgroundSize: `${imgWidth * zoomLevel}px ${imgHeight * zoomLevel
-            }px`,
-
-          // calculate position of zoomed image.
-          backgroundPositionX: `${-x * zoomLevel + magnifierWidth / 2}px`,
-          backgroundPositionY: `${-y * zoomLevel + magnifierHeight / 2}px`,
-        }}
-      />
+      {showMagnifier && (
+        <div
+          style={{
+            display: '',
+            position: 'absolute',
+            pointerEvents: 'none',
+            height: `${magnifierHeight}px`,
+            width: `${magnifierWidth}px`,
+            top: `${y - magnifierHeight / 2}px`,
+            left: `${x - magnifierWidth / 2}px`,
+            opacity: '1',
+            border: '1px solid lightgray',
+            backgroundColor: 'white',
+            backgroundImage: `url('${src}')`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: `${imgWidth * zoomLevel}px ${imgHeight * zoomLevel}px`,
+            backgroundPositionX: `${-x * zoomLevel + magnifierWidth / 2}px`,
+            backgroundPositionY: `${-y * zoomLevel + magnifierHeight / 2}px`,
+          }}
+        />
+      )}
     </div>
   );
 };
