@@ -1,0 +1,87 @@
+.app-footer {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  align-items: center;
+  background-color: black;
+  font-family: var(--font);
+}
+.footer-copyright {
+  color: var(--accent-eleven);
+  margin-left: 10px;
+}
+.scene {
+  width: 5em;
+  transition: all 2s ease-out;
+  margin-right: 70px;
+  height: 1.5em;
+  perspective: 10em;
+  cursor: pointer;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: spinning 10s infinite linear reverse;
+}
+
+.cube-side {
+  transform-style: preserve-3d;
+  position: absolute;
+  width: 70%;
+  background-image:
+    linear-gradient(
+      var(--grad-top) 5%,
+      #00000080 35%,
+       var(--grad-bot) 95%);
+  text-shadow:
+    1px 1px 2px rgb(0, 0, 0),
+    0 0 20px rgb(0, 0, 0),
+    0 0 5px rgb(0, 0, 0);
+  color: var(--color);
+  text-align: center;
+  border-radius: 50%;
+  box-shadow:
+    0 0 .5em .1em var(--box);
+  font-size: larger;
+}
+
+.cube-front {
+  transform: rotateY(0deg)translateZ(2em);
+  transform-style: preserve-3d;
+  transition: all 2s ease-out;
+  right: 0%;
+}
+
+.cube-right {
+  transform: rotateY(90deg)translateZ(2em);
+  transform-style: preserve-3d;
+  transition: all 2s ease-out;
+  right: 0%;
+}
+
+.cube-left {
+  transform: rotateY(-90deg)translateZ(2em);
+  transform-style: preserve-3d;
+  transition: all 2s ease-out;
+  right: 0%;
+}
+
+.cube-back {
+  transform: rotateY(180deg)translateZ(2em);
+  transform-style: preserve-3d;
+  transition: all 2s ease-out;
+  right: 0%;
+}
+
+@keyframes spinning {
+  from {
+    transform: translateZ(-2em)rotateY(0deg);
+  }
+
+  to {
+    transform: translateZ(-2em)rotateY(360deg);
+  }
+}

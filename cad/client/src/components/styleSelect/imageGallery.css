@@ -5,16 +5,15 @@
   box-shadow:
     #000000 0px 20px 30px -10px,
     #80ff0086 0px 5px 15px -5px;
-    max-width: 30rem;
-    max-height: 45rem;
-
+  max-width: 30rem;
+  max-height: 45rem;
 }
 
 .image-container {
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
   width: 50%;
+  margin-top: 10px;
 }
 
 .thumbnails-gallery {
@@ -45,7 +44,7 @@
 }
 
 .thumbnails:hover {
-  outline: double 4px var(--accent-five)
+  outline: double 4px var(--accent-five);
 }
 
 

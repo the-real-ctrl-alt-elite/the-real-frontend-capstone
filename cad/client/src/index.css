@@ -1,4 +1,5 @@
 @import './reset.css';
+@import './app.css';
 @import './components/header/header.css';
 @import './components/qa/qa.css';
 @import './components/relatedComparison/related_comp.css';
@@ -25,7 +26,7 @@
 }
 
 :root {
-  --accent-orange: rgb(201,108,91);
+  --accent-orange: rgb(201, 108, 91);
 }
 
 [data-theme="light"] {
@@ -37,7 +38,6 @@
   --accent-one: rgb(235, 235, 245);
   --accent-two: rgb(245, 245, 255);
   --accent-three: rgb(235, 255, 235);
-
   --accent-four: rgb(235, 235, 255);
   --accent-five: rgb(149, 213, 178);
   --accent-six: rgb(64, 145, 108);
@@ -45,12 +45,18 @@
   --accent-eight: #000000;
   --accent-nine: rgb(0, 0, 0);
   --accent-ten: rgb(0, 0, 0);
+  --accent-eleven: chartreuse;
   --transparent-bg: rgba(22, 22, 22, .5);
   --appearance: auto;
   --padding: 3px;
   --bkgpos: none;
   --bkimg: none;
   --outline: auto;
+  --grad-top: #80ff0099;
+  --grad-bot: #80ff0099;
+  --color: white;
+  --box: #ffffff7a;
+  --font:'Roboto';
 }
 
 [data-theme="dark"] {
@@ -69,8 +75,8 @@
   --accent-seven: rgb(27, 67, 50);
   --accent-eight: #ffffff;
   --accent-nine: rgb(64, 145, 108);
-  --transparent-bg: rgba(222,222,222,.5);
   --accent-ten: rgb(127, 255, 0);
+  --accent-eleven: orange;
   --transparent-bg: rgba(222, 222, 222, .5);
   --appearance: none;
   --padding: 4px 20px 2px 6px;
@@ -79,6 +85,12 @@
   --outline: none;
   --border: none;
   --border-btm: 2px solid chartreuse;
+
+  --grad-top: #ffbb00c0;
+  --grad-bot: #ff0800ce;
+  --color: #ff00008a;
+  --box: #3ab401b0;
+  --font:'Creepster';
 }
 
 body {
@@ -89,7 +101,6 @@ body {
   background-color: var(--bg);
   color: var(--text);
   overflow-x: clip
-
 }
 
 .section-break {
@@ -103,12 +114,12 @@ body {
 
 .innerApp {
   margin: auto;
-  max-width: 55%;
+  max-width: 1100px;
 }
 
 [data-theme="dark"] input,
 [data-theme="dark"] textarea {
-  background-color: rgb(44,44,44);
+  background-color: rgb(44, 44, 44);
   color: var(--text);
 }
 

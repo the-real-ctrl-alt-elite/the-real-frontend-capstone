@@ -1,15 +1,7 @@
-.selector-container-overlay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
 .selector-components {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .hr-class {
@@ -17,12 +9,7 @@
   text-align: center;
   margin: 5px 0;
   border: 2px solid transparent;
-  box-shadow:
-    0 2px 3px .2px var(--transparent-bg)
-}
-
-.selector-functional-components {
-  display: flex;
+  box-shadow: 0 2px 3px .2px var(--transparent-bg);
 }
 
 .purchase-div {
@@ -62,53 +49,12 @@
   width: 100%;
   align-items: center;
   margin-bottom: 2px;
-  /* Merged duplicate definitions */
 }
 
 .rate-star {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.stars-div {
-  font-size: larger;
-  display: inline-block;
-  position: relative;
-  margin-left: 4px;
-}
-
-.stars-solid-cont {
-  display: flex;
-}
-
-.stars-solid {
-  display: inline-block;
-  background: goldenrod;
-  background-clip: text;
-  color: transparent;
-}
-
-.star-part {
-  display: inline-block;
-  background-clip: text !important;
-  color: transparent !important;
-
-}
-
-.stars-hollow {
-  background-clip: text;
-  color: transparent;
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-weight: 100;
-  /* text-shadow:
-    0.005px 0 0 goldenrod,
-    -0.005px 0 0 goldenrod,
-    0 0.005px 0 goldenrod,
-    0 -0.005px 0 goldenrod; */
-
 }
 
 [data-theme="dark"] .details-title,
@@ -119,7 +65,6 @@
   font-family: 'Creepster';
   -webkit-text-fill-color: transparent;
 }
-
 
 .review-links {
   display: flex;
@@ -180,7 +125,6 @@
 }
 
 .price-nosale-div {
-
   margin: 3px 0;
 }
 
@@ -226,235 +170,17 @@
   flex-direction: column;
 }
 
-.selector-components {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hr-class {
-  background-color: transparent;
-  text-align: center;
-  margin: 5px 0;
-  border: 2px solid transparent;
-  box-shadow:
-    0 2px 3px .2px var(--transparent-bg)
-}
-
 .selector-functional-components {
   display: flex;
 }
 
-.purchase-div {
-  display: flex;
-  justify-content: center;
-  margin: 2px 0;
-  padding: 4px;
-  align-items: center;
-}
-
-.purchase {}
-
-.purchase {}
-
-.info-choices-container {
-  /* width: 50%; */
-}
-
-.product-name {
-  font-size: 2.5em;
-}
-
-[data-theme="dark"] .product-name {
-  background: linear-gradient(to bottom, var(--accent-five) 40%, red 100%);
-  background-clip: text;
-  font-family: 'Creepster';
-  -webkit-text-fill-color: transparent;
-}
-
-.category {
-  display: flex;
-  width: 40%;
-  font-weight: 800;
-  margin-top: 5px;
-  gap: 1rem;
-}
-
-.ratings-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
-  margin-bottom: 2px;
-  /* Merged duplicate definitions */
-}
-
-.rate-star {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.stars-div {
-  font-size: larger;
-  display: inline-block;
-  position: relative;
-  margin-left: 4px;
-}
-
-.stars-solid-cont {
-  display: flex;
-}
-
-.stars-solid {
-  display: inline-block;
-  background: goldenrod;
-  background-clip: text;
-  color: transparent;
-}
-
-.star-part {
-  display: inline-block;
-  background-clip: text !important;
-  color: transparent !important;
-
-}
-
-.stars-hollow {
-  background-clip: text;
-  color: transparent;
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-weight: 100;
-  /* text-shadow:
-    0.005px 0 0 goldenrod,
-    -0.005px 0 0 goldenrod,
-    0 0.005px 0 goldenrod,
-    0 -0.005px 0 goldenrod; */
-
-}
-
-[data-theme="dark"] .details-title,
-[data-theme="dark"] .about-item,
-[data-theme="dark"] .category p {
-  background: linear-gradient(to bottom, var(--accent-five) 40%, red 100%);
-  background-clip: text;
-  font-family: 'Creepster';
-  -webkit-text-fill-color: transparent;
-}
-
-
-.review-links {
-  display: flex;
-  width: 100%;
-  margin-left: 20px;
-  justify-content: space-between;
-}
-
-.total-rat,
-.sel-reviews {
-  text-decoration: none;
-}
-
-.details-li {
-  display: flex;
-}
-
-.li-div1 {
-  width: 40%;
-}
-
-.li-div2 {
-  width: 60%;
-}
-
-.icon-div {
-  width: 100%;
-  color: blue;
-  display: flex;
-  justify-content: start;
-  font-size: xx-large;
-  gap: 2rem;
-  margin-top: 1.5rem;
-}
-
-.social-icons {
-  cursor: pointer;
-}
-
-.red {
-  color: red;
-}
-
-.button-link-top {
-  color: var(--text);
-  text-decoration: underline;
-}
-
-.star-num {
-  margin-right: 3px;
-  font-weight: 700;
-}
-
-.price-sale-div {
-  display: flex;
-  justify-content: space-between;
-  margin: 3px 0;
-}
-
-.price-nosale-div {
-
-  margin: 3px 0;
-}
-
-.percent-discount {
-  color: red;
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.strikethrough {
-  text-decoration: line-through;
-}
-
-.black {
-  color: var(--accent-eight);
-}
-
-.price-div {
-  font-weight: 600;
-}
-
-.price {
-  font-size: x-large;
-  margin-right: 2px;
-}
-
-.details-container {
-  margin: 4px 0;
-}
-
-.about-item-cont {
-  margin: 2px 0;
-}
-
-.slogan {
-  margin: 4px 0;
-}
-
-
-
 :root {
-  /* --text-color: orange; */
   --text-color-start: orange;
   --text-color-end: rgb(114, 0, 0);
   --bubbles: red;
   --shadow-color: hsla(210, 40%, 52%, .4);
   --btn-color: black;
   --bg-color: orange;
-
   --speed: 0.15s;
 }
 
@@ -468,22 +194,18 @@
   font-weight: 900;
   text-transform: uppercase;
   font-size: 30px;
-  /* color: var(--text-color); */
-  background-image: linear-gradient(
-    to bottom,
-    var(--text-color-start),
-    var(--text-color-end) 70%
-  );
+  background-image: linear-gradient(to bottom, var(--text-color-start), var(--text-color-end) 70%);
   background-color: var(--btn-color);
   box-shadow: var(--shadow-color) 2px 2px 22px;
   border-radius: 4px;
   z-index: 0;
   overflow: hidden;
 }
-.styled-button:active {
-color: red;
 
+.styled-button:active {
+  color: red;
 }
+
 .styled-button:focus {
   outline-color: transparent;
   box-shadow: var(--btn-color) 2px 2px 22px;
@@ -524,26 +246,24 @@ color: red;
 .right::after {
   top: -30px;
   left: calc(-66% - 20px);
-
   background-color: var(--bg-color);
   color: transparent;
   transition: transform .4s ease-out;
-  transform: translate(0, -90%) rotate(0deg)
+  transform: translate(0, -90%) rotate(0deg);
 }
 
 .styled-button:hover .right::after {
-  transform: translate(0, -47%) rotate(0deg)
+  transform: translate(0, -47%) rotate(0deg);
 }
 
 .styled-button .right:hover::after {
-  transform: translate(0, -50%) rotate(-7deg)
+  transform: translate(0, -50%) rotate(-7deg);
 }
 
 .styled-button .left:hover~.right::after {
-  transform: translate(0, -50%) rotate(7deg)
+  transform: translate(0, -50%) rotate(7deg);
 }
 
-/* bubbles */
 .styled-button::before {
   content: '';
   pointer-events: none;
@@ -570,7 +290,6 @@ color: red;
   }
 }
 
-
 .btn-flip {
   opacity: 1;
   outline: 0;
@@ -594,7 +313,6 @@ color: red;
 .btn-flip:active::after {
   opacity: 1;
   transform: translateY(0) rotateX(0);
-
 }
 
 .btn-flip:active::before {
