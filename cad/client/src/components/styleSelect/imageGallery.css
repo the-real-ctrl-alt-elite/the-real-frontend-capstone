@@ -46,9 +46,11 @@
 
 .thumbnails:hover {
   outline: double 4px var(--accent-five);
+}
 
 .thumbnails-selected{
   outline: double 4px var(--accent-five)
+}
 
 .modal-overlay {
   position: fixed;
