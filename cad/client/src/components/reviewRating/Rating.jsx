@@ -161,7 +161,6 @@ const Rating = ({ setStarAverage }) => {
   return (
     <div style={{
       padding: '1rem',
-      margin: 'auto',
     }}
     >
       {modalStatus === true
