@@ -140,6 +140,13 @@ body {
 }
 
 
+[data-theme="dark"] input:focus {
+  background-color: rgb(44,44,44);
+  color: var(--text);
+  outline: 1px double var(--accent-five);
+}
+
+
 .theme-name-display {
   color: var(--accent-orange);
 }
