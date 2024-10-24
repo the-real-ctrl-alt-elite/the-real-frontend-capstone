@@ -90,7 +90,7 @@ const Rating = ({ setStarAverage }) => {
         })
         .catch((err) => {
           // eslint-disable-next-line no-console
-          console.error(err);
+          console.log(err);
         });
     }
   }, [BASE_URL, CAMPUS, TOKEN, productId]);
@@ -109,7 +109,7 @@ const Rating = ({ setStarAverage }) => {
         })
         .catch((err) => {
           // eslint-disable-next-line no-console
-          console.error(err);
+          console.log(err);
         });
     }
   }, [BASE_URL, CAMPUS, TOKEN, productId]);
@@ -161,7 +161,6 @@ const Rating = ({ setStarAverage }) => {
   return (
     <div style={{
       padding: '1rem',
-      // width: '66%',
       margin: 'auto',
     }}
     >
@@ -207,11 +206,3 @@ const Rating = ({ setStarAverage }) => {
 };
 
 export default Rating;
-
-// if less than 2 reviews, the 'more reviews' button should be hidden => {reviews.length > 2 {button} : ''};
-// if activeReviews.length < reviews.length, then <button> needs to be appended;
-// max height = 100vh; overflow-y: scroll;
-// the order of reviews should change;
-// date (oldest, newest);
-// ratings (highest, lowest);
-// if no reviews, collapse reviewsList section and just show submit a new review near top of module;
