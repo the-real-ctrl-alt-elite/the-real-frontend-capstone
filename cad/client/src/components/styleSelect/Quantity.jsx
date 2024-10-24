@@ -1,8 +1,7 @@
 import React from 'react';
 
 const Quantity = ({ availableQuantities, selectedSku, selectedQuantity, onQuantityChange }) => {
-  // console log shows 0 in stock
-  console.log(availableQuantities)
+
   const quantityOptions = availableQuantities > 0
     ? Array.from({ length: availableQuantities }, (_, i) => i + 1)
     : [];

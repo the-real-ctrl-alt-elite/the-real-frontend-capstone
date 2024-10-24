@@ -35,9 +35,6 @@ const Selector = (props) => {
 
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
-  // const theme = document.getElementById('theme-toggle-switch').checked;
-
-
   const handleSizeChange = (selectedSize) => {
 
     if (selectedSize === '') {
@@ -59,7 +56,7 @@ const Selector = (props) => {
       setAvailableQuantities(0);
     }
   };
-    
+
   const handleQuantityChange = (quantity) => {
     setSelectedQuantity(quantity);
   };
