@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 const ImageMagnifier = ({
   src,
-  width = 'auto',
+  width = '100%',
   height = '100%',
-  magnifierHeight = 100,
-  magnifierWidth = 100,
-  zoomLevel = 1.5,
+  magnifierHeight = 400,
+  magnifierWidth = 400,
+  zoomLevel = 1.75,
 }) => {
   const [[x, y], setXY] = useState([0, 0]);
   const [[imgWidth, imgHeight], setSize] = useState([0, 0]);
@@ -18,11 +18,14 @@ const ImageMagnifier = ({
         position: 'relative',
         height,
         width,
+        overflow: 'hidden',
+        objectFit: 'cover',
       }}
+      className='carousel-item-img'
     >
       <img
         src={src}
-        style={{ height, width }}
+        style={{ height, width, overflow: 'hidden', objectFit: 'cover', }}
         onMouseEnter={(e) => {
           // update image size and turn-on magnifier
           const elem = e.currentTarget;
@@ -65,12 +68,11 @@ const ImageMagnifier = ({
           backgroundColor: 'white',
           backgroundImage: `url('${src}')`,
           backgroundRepeat: 'no-repeat',
-          borderRadius: '100%',
+          // borderRadius: '100%',
 
           // calculate zoomed image size
-          backgroundSize: `${imgWidth * zoomLevel}px ${
-            imgHeight * zoomLevel
-          }px`,
+          backgroundSize: `${imgWidth * zoomLevel}px ${imgHeight * zoomLevel
+            }px`,
 
           // calculate position of zoomed image.
           backgroundPositionX: `${-x * zoomLevel + magnifierWidth / 2}px`,
