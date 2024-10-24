@@ -62,6 +62,7 @@
   --box: #ffffff7a;
   --font:'Roboto';
   --logo-color:chartreuse;
+  --accent-twelve: white;
 }
 
 [data-theme="dark"] {
@@ -82,6 +83,7 @@
   --accent-nine: rgb(64, 145, 108);
    --accent-ten: rgb(127, 255, 0);
   --accent-eleven: rgb(130, 84, 191);
+  --accent-twelve: chartreuse;
   --transparent-bg: rgba(222,222,222,.5);
   --accent-eleven: orange;
   --transparent-bg: rgba(222, 222, 222, .5);
@@ -93,6 +95,7 @@
   --border: none;
   --border-btm: 2px solid chartreuse;
 
+
   --grad-top: #ffbb00c0;
   --grad-bot: #ff0800ce;
   --color: #ff00008a;
@@ -103,12 +106,12 @@
 
 body {
   min-width: 72.25rem;
+  overflow-x: clip;
 }
 
 .app {
   background-color: var(--bg);
   color: var(--text);
-  overflow-x: clip
 }
 
 .section-break {
@@ -122,13 +125,26 @@ body {
 
 .innerApp {
   margin: auto;
-  max-width: 1100px;
+  max-width: 55%;
 }
 
 [data-theme="dark"] input,
 [data-theme="dark"] textarea {
   background-color: rgb(44, 44, 44);
   color: var(--text);
+}
+
+[data-theme="dark"] input:focus {
+  background-color: rgb(44,44,44);
+  color: var(--accent-five);
+  outline: 1px double var(--accent-six);
+}
+
+
+[data-theme="dark"] input:focus {
+  background-color: rgb(44,44,44);
+  color: var(--text);
+  outline: 1px double var(--accent-five);
 }
 
 
