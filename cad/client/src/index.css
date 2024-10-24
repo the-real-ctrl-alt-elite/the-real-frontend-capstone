@@ -25,6 +25,10 @@
   font-style: normal;
 }
 
+* {
+  font-family: 'Roboto'
+}
+
 :root {
   --accent-orange: rgb(201, 108, 91);
 }
@@ -57,6 +61,7 @@
   --color: white;
   --box: #ffffff7a;
   --font:'Roboto';
+  --logo-color:chartreuse;
 }
 
 [data-theme="dark"] {
@@ -93,6 +98,7 @@
   --color: #ff00008a;
   --box: #3ab401b0;
   --font:'Creepster';
+  --logo-color:red;
 }
 
 body {
