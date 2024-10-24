@@ -17,8 +17,8 @@
 }
 
 .thumbnails-gallery {
-  margin: 30px 6px 0 0;
-  cursor: pointer;
+  margin: 0px 6px 0 0;
+
 }
 
 .thumbnail-col {
@@ -46,6 +46,7 @@
 
 .thumbnails:hover {
   outline: double 4px var(--accent-five);
+  cursor: pointer;
 }
 
 .thumbnails-selected{
@@ -95,6 +96,7 @@
   width: 30rem;
   height: 35rem;
   cursor: zoom-in;
+  /* align-items: center; */
 }
 
 .carousel-item {
@@ -110,13 +112,16 @@
   min-width: 100%;
   object-fit: cover;
 }
-
-/* TODO: these buttons sometimes 'disapear' in the background of the img */
-
 .gallery-right-btn {
-  position: absolute;
-  height: 100%;
   right: 0;
+  border-radius: 0px 40px 40px 0px;
+}
+.gallery-left-btn {
+  left: 0;
+}
+.gallery-right-btn, .gallery-left-btn {
+  position: absolute;
+  height: 30%;
   top: 0;
   bottom: 0;
   width: 2rem;
@@ -124,20 +129,19 @@
   border: none;
   background: none;
   color: white;
-  background-color: #0000000d;
+  background-color: transparent;
+  margin: auto 0;
 }
 
-.gallery-left-btn {
-  position: absolute;
-  height: 100%;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2rem;
-  z-index: 5;
-  border: none;
-  color: white;
-  background-color: #0000000d;
+.gallery-right-btn:hover, .gallery-left-btn:hover {
+  cursor: pointer;
+  background-color: #00000050;
+}
+.gallery-left-btn:hover {
+  border-radius: 0px 40px 40px 0px;
+}
+.gallery-right-btn:hover {
+  border-radius: 40px 0px 0px 40px;
 }
 
 .thumbnails-gallery button {

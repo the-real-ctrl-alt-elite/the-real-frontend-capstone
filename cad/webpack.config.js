@@ -1,6 +1,7 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './client/src/index.jsx', // Entry point for app to start building dependency tree
@@ -53,6 +54,11 @@ module.exports = {
       template: './client/src/index.html', // Use this HTML file as the template to copy and place in to the dist folder with the bundle
     }), // The plugin will automatically inject a <script> tag into the dist/index.html file that links to the bundled bundle.js
     new Dotenv(),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'client/assets', to: 'assets' }, // Copy assets folder to dist/assets
+      ],
+    }),
   ],
   devServer: { // watches for changes in your files, and automatically refreshes the browser
     static: path.join(__dirname, 'client', 'dist'), // serve content from dist - bundled folder
