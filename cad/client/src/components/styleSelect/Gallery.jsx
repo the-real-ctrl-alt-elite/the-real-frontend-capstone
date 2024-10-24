@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ImageMagnifier from './ImageMagnifier';
 
 const Gallery = ({
-  images, imgIdx, handleImgIdx, handleEnlargeClick,
+  images, imgIdx, handleImgIdx, handleEnlargeClick, enlarge
 }) => {
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(true);
@@ -18,7 +18,7 @@ const Gallery = ({
       setShowRightButton(true);
       setShowLeftButton(true);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imgIdx]);
 
   useEffect(() => {
@@ -51,32 +51,32 @@ const Gallery = ({
   };
 
   return (
-    <div className='carousel-container'>
+    <div className={enlarge ? 'carousel-container-expand' : 'carousel-container'}>
       {showLeftButton
-      && (
-      <button
-        type='button'
-        label='left-scroll-btn'
-        className='gallery-left-btn'
-        onClick={handleLeftClick}
-      >
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          className='h-6 w-6'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
-        >
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='2'
-            d='M15 19l-7-7 7-7'
-          />
-        </svg>
-      </button>
-      )}
-      { images.map((item) => {
+        && (
+          <button
+            type='button'
+            label='left-scroll-btn'
+            className='gallery-left-btn'
+            onClick={handleLeftClick}
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-6 w-6'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M15 19l-7-7 7-7'
+              />
+            </svg>
+          </button>
+        )}
+      {images.map((item) => {
         return (
           <button
             type='button'
@@ -85,35 +85,34 @@ const Gallery = ({
             onClick={handleModalToggle}
             key={item}
           >
-            {/* <img className='carousel-item-img' src={item} alt='product-image' /> */}
             <ImageMagnifier src={item} />
           </button>
         );
       })}
       {showRightButton
-      && (
-      <button
-        type='button'
-        label='right-scroll-btn'
-        className='gallery-right-btn'
-        onClick={handleRightClick}
-      >
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          className='h-6 w-6'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
-        >
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='2'
-            d='M9 5l7 7-7 7'
-          />
-        </svg>
-      </button>
-      )}
+        && (
+          <button
+            type='button'
+            label='right-scroll-btn'
+            className='gallery-right-btn'
+            onClick={handleRightClick}
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-6 w-6'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M9 5l7 7-7 7'
+              />
+            </svg>
+          </button>
+        )}
     </div>
   );
 };
