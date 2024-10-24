@@ -42,6 +42,7 @@ const Imagegallery = ({
           imgIdx={imgIdx}
           handleImgIdx={setImgIdx}
           handleEnlargeClick={handleEnlargeClick}
+          enlarge={enlarge}
         />
         {enlarge && (
           <div className='modal-overlay' onClick={() => setEnlarge(!enlarge)}>

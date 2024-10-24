@@ -85,7 +85,7 @@ const Gallery = ({
             onClick={handleModalToggle}
             key={item}
           >
-            <ImageMagnifier src={item} />
+            <ImageMagnifier src={item} enlarge={enlarge}/>
           </button>
         );
       })}
