@@ -27,6 +27,7 @@ const UserReviewStars = ({ userRating, setUserRating }) => {
 
 const UserStar = ({ percentage, setUserRating, value }) => {
   const thisPercentage = percentage * 100;
+  const theme = document.getElementById('theme-toggle-switch').checked;
   const handleClick = () => {
     setUserRating(value);
   };
@@ -38,10 +39,10 @@ const UserStar = ({ percentage, setUserRating, value }) => {
       style={{ cursor: 'pointer' }}
     >
       <i
-        className='star-back fa-solid fa-star-sharp userReviewStar'
+        className={theme ? 'star-back fa-solid fa-jack-o-lantern userReviewStar' : 'star-back fa-solid fa-star-sharp userReviewStar'}
       />
       <i
-        className='star-front fa-solid fa-star-sharp'
+        className={theme ? 'star-front fa-solid fa-jack-o-lantern' : 'star-front fa-solid fa-star-sharp'}
         style={{ clipPath: `inset(0 ${100 - (thisPercentage)}% 0 0)`, zIndex: '6' }}
       />
     </div>
