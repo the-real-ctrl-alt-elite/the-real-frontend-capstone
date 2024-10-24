@@ -191,8 +191,8 @@ const Rating = ({ setStarAverage }) => {
       <div>
         <div className='rating-container'>
           <div className='reviewsLeft'>
-            {reviews.length && <RatingBreakdown reviewFilters={reviewFilters} setReviewFilters={setReviewFilters} metaData={metaData} setStarAverage={setStarAverage} />}
-            {reviews.length && <ProductBreakdown fn={fn} metaData={metaData} />}
+            {reviews.length ? <RatingBreakdown reviewFilters={reviewFilters} setReviewFilters={setReviewFilters} metaData={metaData} setStarAverage={setStarAverage} /> : <h3>No Reviews For This Product!</h3>}
+            {!!reviews.length && <ProductBreakdown fn={fn} metaData={metaData} />}
           </div>
           <div className='reviewsRight'>
             <SortOptions fn={fn} />

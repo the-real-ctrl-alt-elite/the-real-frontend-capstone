@@ -216,13 +216,11 @@ const Response = ({ response }) => {
       style={{
         margin: '.25rem 0',
         padding: '.5rem',
-        backgroundColor: 'rgba(125,155,155,.33',
         borderRadius: '1em',
-        fontSize: '14px',
-        color: 'rgba(82,82,82)',
+        fontSize: '.875rem',
       }}
     >
-      <div style={{ fontWeight: '1000', fontSize: '12px', color: 'rgba(82,82,82)' }}>RESPONSE FROM SELLER </div>
+      <div className='responseFromSeller' style={{ fontWeight: '1000', fontSize: '.75rem' }}>RESPONSE FROM SELLER </div>
       {response}
     </div>
   );
