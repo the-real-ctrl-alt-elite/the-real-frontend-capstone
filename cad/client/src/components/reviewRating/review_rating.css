@@ -137,6 +137,13 @@ i:before {
   color: var(--text);
 }
 
+[data-theme="dark"] #ratingsSelect {
+  background: linear-gradient(to bottom, var(--accent-five) 40%, red 100%);
+  background-clip: text;
+  font-family: 'Creepster';
+  -webkit-text-fill-color: transparent;
+}
+
 .ratingBreakdown {
   display: flex;
   flex-direction: column;
@@ -646,4 +653,22 @@ textarea:focus {
 
 .modelFrame img {
   border-radius: 1rem;
+}
+
+[data-theme="light"] .sellerResponse {
+  color: rgb(82,82,82);
+  background-color: rgba(125,155,155,.33);
+}
+
+[data-theme="light"] .responseFromSeller {
+  color: rgb(82,82,82);
+}
+
+[data-theme="dark"] .sellerResponse {
+  color: var(--accent-five);
+  background-color: var(--accent-two);
+}
+
+[data-theme="dark"] .responseFromSeller {
+  color: var(--accent-five);
 }
