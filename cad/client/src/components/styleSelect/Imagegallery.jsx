@@ -30,14 +30,19 @@ const Imagegallery = ({
               return (
                 <div className={length < 3 ? 'thumbnail-col' : 'thumbnail-row'} key={thumbnail}>
                   <button type='button' onClick={() => setImgIdx(idx)}>
-                    <img className='thumbnails' src={thumbnail} alt='thumbnail-photo' />
+                    <img className={`thumbnails ${imgIdx === idx && 'thumbnails-selected'}`} src={thumbnail} alt='thumbnail-photo' />
                   </button>
                 </div>
               );
             })
           }
         </div>
-        <Gallery images={galleryImages} imgIdx={imgIdx} handleEnlargeClick={handleEnlargeClick} />
+        <Gallery
+          images={galleryImages}
+          imgIdx={imgIdx}
+          handleImgIdx={setImgIdx}
+          handleEnlargeClick={handleEnlargeClick}
+        />
         {enlarge && (
         <div className='modal-overlay' onClick={() => setEnlarge(!enlarge)}>
           <div className='modal-content' onClick={(e) => e.stopPropagation()}>

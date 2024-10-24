@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const Gallery = ({ images, imgIdx, handleEnlargeClick }) => {
-  const [currentIdx, setCurrentIdx] = useState(0);
+const Gallery = ({
+  images, imgIdx, handleImgIdx, handleEnlargeClick,
+}) => {
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(true);
 
   useEffect(() => {
-    setCurrentIdx(imgIdx);
     if (imgIdx === 0) {
       setShowRightButton(true);
       setShowLeftButton(false);
@@ -28,26 +28,25 @@ const Gallery = ({ images, imgIdx, handleEnlargeClick }) => {
   }, [images]);
 
   const handleRightClick = () => {
-    const nextIdx = currentIdx + 1;
+    const nextIdx = imgIdx + 1;
     if (nextIdx === images.length - 1) {
       setShowRightButton(false);
     }
-
-    setCurrentIdx(nextIdx);
+    handleImgIdx(nextIdx);
     setShowLeftButton(true);
   };
 
   const handleLeftClick = () => {
-    const nextIdx = currentIdx - 1;
+    const nextIdx = imgIdx - 1;
     if (nextIdx === 0) {
       setShowLeftButton(false);
     }
-    setCurrentIdx(nextIdx);
+    handleImgIdx(nextIdx);
     setShowRightButton(true);
   };
 
   const handleModalToggle = () => {
-    handleEnlargeClick(images[currentIdx]);
+    handleEnlargeClick(images[imgIdx]);
   };
 
   return (
@@ -81,7 +80,7 @@ const Gallery = ({ images, imgIdx, handleEnlargeClick }) => {
           <button
             type='button'
             className='carousel-item'
-            style={{ transform: `translate(-${currentIdx * 100}%)` }}
+            style={{ transform: `translate(-${imgIdx * 100}%)` }}
             onClick={handleModalToggle}
             key={item}
           >
