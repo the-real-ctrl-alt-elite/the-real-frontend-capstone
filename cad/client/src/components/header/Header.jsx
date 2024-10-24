@@ -16,6 +16,9 @@ const Header = ({ pumpkins, setPumpkins }) => {
     if (searchQuery.toLowerCase() === 'infinity') {
       setProductId(40353);
     }
+    if (searchQuery.toLowerCase() === 'default') {
+      setProductId(40344);
+    }
     setSearchQuery('');
   };
   const handleKeyDown = (e) => {
