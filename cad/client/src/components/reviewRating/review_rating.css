@@ -220,7 +220,7 @@ i:before {
 }
 
 .reviewList {
-  max-height: 95vh;
+  max-height: calc(95vh - 60px);
   overflow-y: scroll;
 }
 
