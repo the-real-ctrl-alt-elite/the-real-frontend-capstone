@@ -101,7 +101,11 @@ const UserCharacteristics = ({
     }
   };
 
-  const handleRadioChange = (category, index) => {
+  const handleRadioChange = (category, index, i) => {
+    const temp = characteristicVotes.slice();
+    temp[i] = (index + 1);
+    console.log(temp);
+    setCharacteristicVotes(temp);
     switch (category) {
       case 'Size':
         setSizeState(index);
@@ -149,10 +153,7 @@ const UserCharacteristics = ({
   };
 
   const findNearestNull = (index) => {
-    const temp = characteristicVotes.slice();
-    temp[index] = true;
-    setCharacteristicVotes(temp);
-    const i = temp.indexOf(null);
+    const i = characteristicVotes.indexOf(null);
     if (i === -1) {
       return;
     }
@@ -243,7 +244,7 @@ const UserCharacteristics = ({
                       value={index}
                       checked={checkDefaultValue(category, index)}
                       onChange={() => {
-                        handleRadioChange(category, index);
+                        handleRadioChange(category, index, i);
                         findNearestNull(characteristicStep);
                       }}
                     />

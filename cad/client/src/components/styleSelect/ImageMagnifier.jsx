@@ -16,7 +16,6 @@ const ImageMagnifier = ({ src }) => {
     setPosition({ x, y });
     setCursorPosition({ x: e.pageX - left, y: e.pageY - top });
   };
-  console.log('showMagnifier: ', showMagnifier);
   return (
     <div className='img-magnifier-container' onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave} onMouseMove={handleMouseMove}>
       <img className='magnifier-img' src={src} alt='image' />
