@@ -21,7 +21,9 @@ const Photos = ({ photos }) => {
             alt='buyer pictures'
             className='buyer-photos'
             onClick={() => handleImageClick(photo.url)}
-
+            style={{
+              cursor: 'pointer', width: '100px', height: '100px', margin: '5px',
+            }}
           />
         ))
       ) : (

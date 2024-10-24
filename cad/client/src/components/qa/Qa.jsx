@@ -85,7 +85,10 @@ const Qa = () => {
       {openQuestionModal && <ModalBackground component={AddAQuestionModal} componentProps={{ setOpenQuestionModal, productName, productId }} top={0} closeModal={() => setOpenQuestionModal(false)} backgroundClose={false} />}
 
       <h3 className='section-title'>QUESTIONS & ANSWERS</h3>
-      <input className='search-bar' placeholder='Have questions? Search for answers...' onChange={handleOnChange} />
+      <div className='search-bar-container'>
+        <input type='text' className='search-bar' placeholder='Have questions? Search for answers...' onChange={handleOnChange} />
+        <i className='fa-solid fa-magnifying-glass fa-2xl search-bar-icon' />
+      </div>
       <div className='questions-list' data-testid='QuestionsList'>{qnas.length > 0 && <QuestionsList qnas={qnas} setOpenAnswerModal={setOpenAnswerModal} openAnswerModal={openAnswerModal} productName={productName} />}</div>
       <div className='qnaFnBtnBox'>
         <span onClick={handleClickMoreQuestion}>{fullList.length > 2 && fullList.length !== qnas.length && <MoreQuestions />}</span>

@@ -106,13 +106,28 @@
   max-width: 100%;
 }
 
+.search-bar-container {
+  position: relative;
+  width: 100%;
+}
+
 .search-bar {
   width: 100%;
-  height: 3.75rem;
-  border: 3px solid var(--text);
-  padding-left: .5rem;
-  margin-bottom: 10px;
-  font-size: 1rem;
+  padding: 20px 60px 20px 20px;
+  font-size: larger;
+}
+
+[data-theme="dark"] .search-bar-icon {
+  color: var(--accent-eleven);
+}
+.search-bar-icon {
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 36px 15px;
+  z-index: 2;
 }
 
 .questions-list {
@@ -175,7 +190,7 @@
 }
 
 .modal-footer {
-  margin: 0 10px;
+  margin-top: 40px;
 }
 
 .modal-footer button{
@@ -221,6 +236,7 @@
   box-shadow: rgba(218, 161, 161, 0.35) 0px 5px 15px;
   z-index: 1000;
   display: none;
+  transform: translate(150%, 10%);
 }
 
 .confirmation-popup {
@@ -243,6 +259,7 @@
   max-width: 100px;
   max-height: 80px;
   padding: 10px 10px;
+
 }
 
 .break {
@@ -314,6 +331,7 @@
   justify-content: center;
   background-color: white;
   border-radius: 18px;
+  transform: translate(75%, 0%);
 }
 
 .close-button {
@@ -349,4 +367,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.dragAndDrop {
+  margin-top: 20px;
+}
+
+.search-icon {
+  display: inline-block;
 }
