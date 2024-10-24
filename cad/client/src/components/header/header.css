@@ -3,14 +3,14 @@
   height: 70px;
   background-color: rgba(0, 0, 0);
   display: flex;
-  color: chartreuse;
+  color: var(--accent-twelve);
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
   margin-left: 15px;
-  box-shadow: 0 0 7em .1em var(--logo-color);
+  box-shadow: 0 0 9.5em .0001em var(--logo-color);
   border-radius: 50%;
 }
 
@@ -32,10 +32,10 @@
   outline: none;
   background-color: rgba(221, 221, 221, 0.2);
   border: none;
-  border-bottom: 2px solid chartreuse;
+  border-bottom: 2px solid var(--accent-twelve);
   border-radius: 5px;
   padding: 3px 8px;
-  color: chartreuse;
+  color: var(--accent-twelve);
 }
 
 .search-btn {
@@ -46,7 +46,7 @@
   width: 30px;
   height: 20px;
   cursor: pointer;
-  color: chartreuse;
+  color: var(--accent-twelve);
   font-size: large;
 }
 
@@ -55,7 +55,7 @@
 }
 
 .custom-input:focus {
-  border-bottom-color: #73ff00;
+  border-bottom-color: var(--accent-twelve);
 
 }
 
