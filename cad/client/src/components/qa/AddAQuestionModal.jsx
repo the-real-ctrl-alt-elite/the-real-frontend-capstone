@@ -56,7 +56,6 @@ const AddAQuestionModal = ({ setOpenQuestionModal, productName, productId }) => 
   return (
     <div className='modal-background'>
       <div className='modal-container'>
-        <button className='modal-close-button' onClick={handleCloseQuestionModal}>X</button>
         <div className='modal-title'>
           <h3>Ask Your Question</h3>
           <h4>{`About the ${productName}`}</h4>

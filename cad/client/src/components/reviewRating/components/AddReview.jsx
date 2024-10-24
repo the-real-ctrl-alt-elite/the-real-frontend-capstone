@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import ProductContext from '../../../ProductContext';
 import UserRating from './UserRating';
 import UserRecommend from './UserRecommend';
 import UserCharacteristics from './UserCharacteristics';
 import UserReview from './UserReview';
 import UserReviewContactInfo from './UserReviewContactInfo';
+import axios from '../../../AxiosInstance';
 
 const AddReview = ({ metaData, setReviewStatus }) => {
   const { productId } = useContext(ProductContext);
@@ -35,16 +35,38 @@ const AddReview = ({ metaData, setReviewStatus }) => {
     setReviewStep(reviewStep - 1);
   };
 
+  const submitReview = () => {
+    const convertedImages = [];
+    userImages.forEach((img) => {
+      convertedImages.push(img.url);
+    });
+    const userCharacteristicsVotes = {};
+    characteristicVotes.forEach((vote, index) => {
+      userCharacteristicsVotes[Number(metaData.characteristics[characteristics[index]].id)] = vote;
+    });
+    const data = {
+      product_id: productId,
+      rating: userRating,
+      summary: userSummary,
+      body: bodyContent,
+      recommend,
+      name: username,
+      email: userEmail,
+      photos: convertedImages,
+      characteristics: userCharacteristicsVotes,
+    };
+
+    axios.post('/reviews', data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
-    const TOKEN = process.env.GIT_TOKEN;
-    const BASE_URL = process.env.API_BASE_URL;
-    const CAMPUS = process.env.CAMPUS_CODE;
-    const URL = `${BASE_URL}${CAMPUS}/products/${productId}`;
-    axios.get(URL, {
-      headers: {
-        Authorization: TOKEN,
-      },
-    })
+    axios.get(`/products/${productId}`)
       .then((response) => {
         setProductInfo(response.data);
       })
@@ -100,6 +122,7 @@ const AddReview = ({ metaData, setReviewStatus }) => {
         reviewStep={reviewStep}
         backStep={backStep}
         nextStep={nextStep}
+        submitReview={submitReview}
       />
     </div>
   );

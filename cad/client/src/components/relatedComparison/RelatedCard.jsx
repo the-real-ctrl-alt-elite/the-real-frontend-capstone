@@ -7,6 +7,7 @@ import { ReviewStars } from '../reviewRating/components/ReviewTile';
 import PriceTag from './PriceTag';
 import ProductContext from '../../ProductContext';
 import { getDefaultStyle } from './helpers/styleHelpers';
+import ModalBackground from '../reviewRating/components/ModalBackground';
 
 const RelatedCard = ({
   name, id, category, defaultPrice, salePrice, description, features, photos, rating,
@@ -47,14 +48,18 @@ const RelatedCard = ({
         </div>
       </div>
       {showModal && createPortal(
-        <ComparsionModalContent
-          currentProduct={{
-            ...productData, rating: starCount, defaultPrice: productData.default_price, salePrice: getDefaultStyle(productStyles)?.sale_price,
+        <ModalBackground
+          component={ComparsionModalContent}
+          componentProps={{
+            currentProduct: {
+              ...productData, rating: starCount, defaultPrice: productData.default_price, salePrice: getDefaultStyle(productStyles)?.sale_price,
+            },
+            selectedProduct: {
+              name, category, defaultPrice, salePrice, rating, description, features,
+            },
+            onClose: () => setShowModal(false),
           }}
-          selectedProduct={{
-            name, category, defaultPrice, salePrice, rating, description, features,
-          }}
-          onClose={() => setShowModal(false)}
+          closeModal={() => setShowModal(false)}
         />,
         document.body,
       )}
@@ -62,7 +67,7 @@ const RelatedCard = ({
   );
 };
 
-function ComparsionModalContent({ onClose, currentProduct, selectedProduct }) {
+const ComparsionModalContent = ({ onClose, currentProduct, selectedProduct }) => {
   function formatComparedFeatures(currentProductFeatures = [], selectedProductFeatures = []) {
     const map = new Map();
     currentProductFeatures.forEach((item) => map.set(item.feature, { feature: item.feature, values: { curValue: item.value } }));
@@ -121,12 +126,12 @@ function ComparsionModalContent({ onClose, currentProduct, selectedProduct }) {
             ))}
           </tbody>
         </table>
-        <button onClick={onClose} aria-label='modal-close-btn' type='button' label='modal-close-btn' className='modal-close-btn'>
+        {/* <button onClick={onClose} aria-label='modal-close-btn' type='button' label='modal-close-btn' className='modal-close-btn'>
           <i className='fa-solid fa-xmark' style={{ color: '#ffffff', margin: 'auto' }} />
-        </button>
+        </button> */}
       </div>
     </div>
   );
-}
+};
 
 export default RelatedCard;

@@ -75,7 +75,9 @@
   --accent-seven: rgb(27, 67, 50);
   --accent-eight: #ffffff;
   --accent-nine: rgb(64, 145, 108);
-  --accent-ten: rgb(127, 255, 0);
+   --accent-ten: rgb(127, 255, 0);
+  --accent-eleven: rgb(130, 84, 191);
+  --transparent-bg: rgba(222,222,222,.5);
   --accent-eleven: orange;
   --transparent-bg: rgba(222, 222, 222, .5);
   --appearance: none;

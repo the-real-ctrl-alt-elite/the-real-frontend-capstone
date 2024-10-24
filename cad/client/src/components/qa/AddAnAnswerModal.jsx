@@ -86,7 +86,7 @@ const AddAnAnswerModal = ({
   return (
     <div className='modal-background'>
       <div className='modal-container answer-container'>
-        <button className='modal-close-button' onClick={handleCloseAnswerModal}>X</button>
+        {/* <button className='modal-close-button' onClick={handleCloseAnswerModal}>X</button> */}
         <div className='modal-title'>
           <h3>Submit Your Answer</h3>
           <h4>
@@ -123,7 +123,9 @@ const AddAnAnswerModal = ({
 
             {/* {showUpload && <input type='file' onChange={handleUploadFile} />}
             <br /> */}
-            <DragAndDrop onFilesSelected={handleFilesSelected} height='200px' width='100%' />
+            <div className='dragAndDrop'>
+              <DragAndDrop onFilesSelected={handleFilesSelected} height='200px' width='100%' />
+            </div>
             {/* {showUpload && <small>(choose up to 5 photos)</small>}
             <UploadedPhotoes urls={photoList} multiple /> */}
           </div>

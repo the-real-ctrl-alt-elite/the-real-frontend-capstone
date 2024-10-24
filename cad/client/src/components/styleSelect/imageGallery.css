@@ -43,10 +43,12 @@
     #80ff00b0 0px 5px 10px -5px;
 }
 
+
 .thumbnails:hover {
   outline: double 4px var(--accent-five);
-}
 
+.thumbnails-selected{
+  outline: double 4px var(--accent-five)
 
 .modal-overlay {
   position: fixed;
