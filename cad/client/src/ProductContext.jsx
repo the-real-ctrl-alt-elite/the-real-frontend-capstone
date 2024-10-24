@@ -25,7 +25,6 @@ export const ProductProvider = ({ children }) => {
   const [saleName, setSaleName] = useState('');
   const [money, setMoney] = useState({ dollar: '', cent: '' });
 
-
   const [imageTracker, setImageTracker] = useState({ original_url: '', style_url: '', style_photo: false });
   const [currentStyle, setCurrentStyle] = useState(
     {
@@ -75,6 +74,9 @@ export const ProductProvider = ({ children }) => {
             .then((response) => {
               setSaleId(response.data.id);
               setSaleName(response.data.name);
+            })
+            .catch((err) => {
+              console.log(err);
             });
           setSale(saleItem);
         } else {
@@ -88,7 +90,7 @@ export const ProductProvider = ({ children }) => {
     axios
       .get(url, {
         headers: {
-          Authorization: TOKEN
+          Authorization: TOKEN,
         },
         params: { count: 1 },
       })
@@ -96,7 +98,7 @@ export const ProductProvider = ({ children }) => {
         axios
           .get(`${url}/styles`, {
             headers: {
-              Authorization: TOKEN
+              Authorization: TOKEN,
             },
           })
           .then((response) => {
@@ -157,7 +159,7 @@ export const ProductProvider = ({ children }) => {
         if (response.data?.results) {
           const totalStars = response.data.results.reduce(
             (acc, review) => (review?.rating ? acc + review.rating : acc),
-            0
+            0,
           );
           setStarCount(totalStars / response.data.results.length);
           setReviewCount(response.data.results.length);
