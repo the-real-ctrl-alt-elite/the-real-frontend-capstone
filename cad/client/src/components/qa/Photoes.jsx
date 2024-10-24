@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ModalBackground from '../reviewRating/components/ModalBackground';
 
 const Photos = ({ photos }) => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -13,7 +14,7 @@ const Photos = ({ photos }) => {
 
   return (
     <div>
-      {photos && photos.length > 0 ? (
+      {photos && photos.length > 0 && (
         photos.map((photo, key) => (
           <img
             key={`${key}id`}
@@ -22,21 +23,19 @@ const Photos = ({ photos }) => {
             className='buyer-photos'
             onClick={() => handleImageClick(photo.url)}
             style={{
-              cursor: 'pointer', width: '100px', height: '100px', margin: '5px',
+              cursor: 'pointer', width: 'auto', height: '100px', margin: '5px', objectFit: 'cover',
             }}
           />
-        ))
-      ) : (
-        <p>this supposed to have some pictures</p>
-      )}
-
-      {selectedPhoto && (
-        <div className='image-modal-overlay' onClick={handleCloseModal}>
-          <div className='image-modal' onClick={(e) => e.stopPropagation()}>
-            <img src={selectedPhoto} alt='Selected' style={{ maxWidth: '90%', maxHeight: '90%' }} />
-            <button className='close-button' onClick={handleCloseModal}>X</button>
-          </div>
-        </div>
+        )))}
+      {selectedPhoto
+      && (
+      <ModalBackground
+        component={ModalPhotoContent}
+        componentProps={{
+          selectedPhoto,
+        }}
+        closeModal={handleCloseModal}
+      />
       )}
     </div>
   );
@@ -44,22 +43,8 @@ const Photos = ({ photos }) => {
 
 export default Photos;
 
-// import React from 'react';
-
-// const Photos = ({ photos }) => {
-//   // console.log('photos array: ', photos);
-//   return (
-//     <div>
-//       {
-//         photos ? photos.map((photo, key) => {
-//           return (
-//             <img key={`${key}id`} src={photo.url} alt='buyer pictures' className='buyer-photos' />
-//           );
-//         })
-//           : <p key={`${key}id`}>this supposed to have some pictures</p>
-//       }
-//     </div>
-//   );
-// };
-
-// export default Photos;
+const ModalPhotoContent = ({ selectedPhoto }) => {
+  return (
+    <img src={selectedPhoto} alt='Selected' style={{ maxWidth: '50dvw', maxHeight: '50dvh' }} />
+  );
+};

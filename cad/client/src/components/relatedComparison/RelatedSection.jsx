@@ -41,7 +41,6 @@ const RelatedSection = ({ handleProductClick }) => {
                 ...product.data, sale_price: defaultStyle?.sale_price, photos: defaultStyle?.photos, rating: starCount,
               };
             }
-            throw new Error('Missing Data for related rroducts');
           }));
           setRelatedProducts(allRelatedProducts);
         } catch (err) {
