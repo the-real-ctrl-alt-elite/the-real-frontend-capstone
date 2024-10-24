@@ -9,6 +9,7 @@ const UserReviewContactInfo = ({
   reviewStep,
   backStep,
   nextStep,
+  submitReview,
 }) => {
   const [validEmail, setValidEmail] = useState(false);
   const [emailWarning, setEmailWarning] = useState('Please enter a valid email address');
@@ -117,7 +118,10 @@ const UserReviewContactInfo = ({
       backFn={backStep}
       nextFlag={username.length && validEmail}
       nextText='Submit'
-      nextFn={nextStep}
+      nextFn={() => {
+        submitReview();
+        nextStep();
+      }}
     />
   </div>
   )}

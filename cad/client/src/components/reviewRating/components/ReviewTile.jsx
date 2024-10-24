@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { format } from 'date-fns';
+import axios from '../../../AxiosInstance';
+import ProductContext from '../../../ProductContext';
 
 const ReviewTile = ({ review, setPictureStatus, setModalStatus }) => {
   const [expanded, setExpanded] = useState(false);
+  const { productId } = useContext(ProductContext);
 
   // single object to pass multiple props with as needed
   const fn = {
@@ -61,7 +64,10 @@ const ReviewTile = ({ review, setPictureStatus, setModalStatus }) => {
       </div>
       {review.recommend === true && <Recommend /> }
       {review.response !== null && <Response response={review.response} /> }
-      <FeedbackFooter review={review} />
+      <FeedbackFooter
+        id={productId}
+        review={review}
+      />
       <hr className='reviewTileHR' />
     </div>
   );
@@ -233,20 +239,52 @@ const Recommend = () => {
   );
 };
 
-const FeedbackFooter = ({ review }) => {
+const FeedbackFooter = ({
+  review, id,
+}) => {
   const [helpfulness, setHelpfulness] = useState(review.helpfulness);
   const [clicked, setClicked] = useState(false);
   const [reported, setReported] = useState('Report');
 
+  const handleHelpful = (id) => {
+    axios.put(`/reviews/${id}/helpful`, {
+      params: {
+        review_id: id,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const handleReport = (id) => {
+    axios.put(`/reviews/${id}/report`, {
+      params: {
+        review_id: id,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.err(err);
+      });
+  };
+
   const handleClick = () => {
     if (clicked === false) {
       setHelpfulness(helpfulness + 1);
+      handleHelpful(id);
       setClicked(true);
     }
   };
 
   const handleNoClick = () => {
     setReported('Reported');
+    handleReport(id);
   };
 
   return (
