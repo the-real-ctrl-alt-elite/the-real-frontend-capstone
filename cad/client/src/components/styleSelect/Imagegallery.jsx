@@ -6,6 +6,7 @@ const Imagegallery = ({
 }) => {
   const [enlarge, setEnlarge] = useState(false);
   const [imgIdx, setImgIdx] = useState(0);
+  const [img, setImg] = useState('');
 
   useEffect(() => {
     setImgIdx(0);
@@ -13,6 +14,11 @@ const Imagegallery = ({
 
   const galleryImages = details[0]?.photos.map((photo) => photo.url);
   const galleryThumbnails = details[0]?.photos.map((photo) => photo.thumbnail_url);
+
+  const handleEnlargeClick = (image) => {
+    setImg(image);
+    setEnlarge(true);
+  };
 
   if (details.length > 0) {
     return (
@@ -22,29 +28,32 @@ const Imagegallery = ({
             galleryThumbnails.map((thumbnail, idx) => {
               const { length } = galleryThumbnails.length;
               return (
-                <div className={length < 3 ? 'thumbnail-col' : 'thumbnail-row'} key={thumbnail}>
+                <div className='thumbnail-row' key={thumbnail}>
                   <button type='button' onClick={() => setImgIdx(idx)}>
-                    <img className='thumbnails' src={thumbnail} alt='thumbnail-photo' />
+                    <img className={`thumbnails ${imgIdx === idx && 'thumbnails-selected'}`} src={thumbnail} alt='thumbnail-photo' />
                   </button>
                 </div>
               );
             })
           }
         </div>
-        <Gallery images={galleryImages} imgIdx={imgIdx} />
-        {
-          enlarge && (
-            <div className='modal-overlay' onClick={() => setEnlarge(!enlarge)}>
-              <div className='modal-content' onClick={(e) => e.stopPropagation()}>
-                <img
-                  className='enlarged-image'
-                  src={imageTracker.style_photo ? imageTracker.style_url : imageTracker.original_url}
-                  alt={item.name}
-                />
-              </div>
-            </div>
-          )
-        }
+        <Gallery
+          images={galleryImages}
+          imgIdx={imgIdx}
+          handleImgIdx={setImgIdx}
+          handleEnlargeClick={handleEnlargeClick}
+        />
+        {enlarge && (
+        <div className='modal-overlay' onClick={() => setEnlarge(!enlarge)}>
+          <div className='modal-content' onClick={(e) => e.stopPropagation()}>
+            <img
+              className='enlarged-image'
+              src={img}
+              alt={item.name}
+            />
+          </div>
+        </div>
+        )}
       </div>
     );
   }

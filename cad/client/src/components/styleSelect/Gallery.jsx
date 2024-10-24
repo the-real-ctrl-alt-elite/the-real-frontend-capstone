@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import ImageMagnifier from './ImageMagnifier';
 
-const Gallery = ({ images, imgIdx }) => {
-  const [currentIdx, setCurrentIdx] = useState(0);
+const Gallery = ({
+  images, imgIdx, handleImgIdx, handleEnlargeClick,
+}) => {
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(true);
 
   useEffect(() => {
-    setCurrentIdx(imgIdx);
-    if (images.length === 0) {
-      setShowLeftButton(false);
-      setShowRightButton(false);
-    } else if (imgIdx === 0) {
+    if (imgIdx === 0) {
       setShowRightButton(true);
       setShowLeftButton(false);
     } else if (imgIdx === images.length - 1) {
       setShowRightButton(false);
-      setShowLeftButton(false);
+      setShowLeftButton(true);
     } else {
       setShowRightButton(true);
       setShowLeftButton(true);
@@ -25,33 +22,32 @@ const Gallery = ({ images, imgIdx }) => {
   }, [imgIdx]);
 
   useEffect(() => {
-    if (images.length === 1) {
+    if (images.length === 1 || images.length === 0) {
       setShowLeftButton(false);
       setShowRightButton(false);
     }
   }, [images]);
 
   const handleRightClick = () => {
-    const nextIdx = currentIdx + 1;
+    const nextIdx = imgIdx + 1;
     if (nextIdx === images.length - 1) {
       setShowRightButton(false);
     }
-
-    setCurrentIdx(nextIdx);
+    handleImgIdx(nextIdx);
     setShowLeftButton(true);
   };
 
   const handleLeftClick = () => {
-    const nextIdx = currentIdx - 1;
+    const nextIdx = imgIdx - 1;
     if (nextIdx === 0) {
       setShowLeftButton(false);
     }
-    setCurrentIdx(nextIdx);
+    handleImgIdx(nextIdx);
     setShowRightButton(true);
   };
 
   const handleModalToggle = () => {
-    console.log('clicked');
+    handleEnlargeClick(images[imgIdx]);
   };
 
   return (
@@ -85,7 +81,8 @@ const Gallery = ({ images, imgIdx }) => {
           <button
             type='button'
             className='carousel-item'
-            style={{ transform: `translate(-${currentIdx * 100}%)` }}
+            style={{ transform: `translate(-${imgIdx * 100}%)` }}
+            onClick={handleModalToggle}
             key={item}
           >
             {/* <img className='carousel-item-img' src={item} alt='product-image' /> */}
