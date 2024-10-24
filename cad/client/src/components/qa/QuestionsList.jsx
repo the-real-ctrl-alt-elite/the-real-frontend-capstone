@@ -21,6 +21,7 @@ const QuestionsList = ({
                 setOpenAnswerModal, questionName: qna.question_body, productName, questionId: qna.question_id,
               }}
               backgroundClose={false}
+              closeModal={() => setOpenAnswerModal(false)}
             />
             )}
           </div>
