@@ -12,7 +12,7 @@ const ModalFrame = ({
 }) => {
   // provide inline css or use these defaults
   const usedBorder = border || 'none';
-  const usedButtonText = buttonText || 'X';
+  const usedButtonText = buttonText;
   const usedPadding = padding || '.55rem';
   const usedFontColor = fontColor || 'white';
   return (
@@ -43,14 +43,14 @@ const ModalFrame = ({
           height: '2rem',
           width: '2rem',
           background: 'rgba(22,22,22,0.5)',
-          boxShadow: '0 0 2px 2px rgba(22,22,22,0.5)',
+          // boxShadow: '0 0 2px 2px rgba(22,22,22,0.5)',
           color: `${usedFontColor}`,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
         }}
       >
-        {usedButtonText}
+        <i className='fa-regular fa-x modal-close' />
       </button>
     </div>
   );

@@ -275,9 +275,10 @@ const FeedbackFooter = ({
   };
 
   const handleClick = () => {
+    console.log(review);
     if (clicked === false) {
       setHelpfulness(helpfulness + 1);
-      handleHelpful(id);
+      handleHelpful(review.review_id);
       setClicked(true);
     }
   };
