@@ -633,3 +633,11 @@ textarea:focus {
   background-color: rgb(235,235,245);
 }
 
+.modal-close {
+  width: 2rem;
+  height: 2rem;
+  background: var(--accent-two);
+  color: var(--text);
+  font-size: 1rem;
+  border-radius: 100%;
+}
