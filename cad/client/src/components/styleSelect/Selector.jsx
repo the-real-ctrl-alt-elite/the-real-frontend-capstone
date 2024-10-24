@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ProductContext from '../../ProductContext';
-import Advertisement from './Advertisement';
 import Imagegallery from './Imagegallery';
 import Gallery from './Gallery';
 import Sizeoptions from './Sizeoptions';
@@ -17,65 +16,24 @@ const { CAMPUS_CODE } = process.env;
 
 
 const Selector = (props) => {
-  const {
-    productId, newProduct, starCount, reviewCount,
-  } = useContext(ProductContext);
+  const { productId, newProduct, starCount, reviewCount } = useContext(ProductContext);
+
   const [productInformation, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState([]);
-
-  // stores mutations for styles on current page
   const [money, setMoney] = useState({ dollar: '', cent: '' });
-
-  // used in size options
   const [sizeArray, setSizeArray] = useState([]);
   const [selectedSize, setSelectedSize] = useState('');
   const [skus, setSkus] = useState({});
   const [selectedSku, setSelectedSku] = useState(null);
   const [availableQuantities, setAvailableQuantities] = useState(0);
-
   const [selectedQuantity, setSelectedQuantity] = useState(1);
-
-  const handleSizeChange = (selectedSize) => {
-
-    if (selectedSize === '') {
-      // Reset everything when "SELECT" is chosen
-      setSelectedSize(''); // Reset selected size
-      setSelectedSku(null); // Clear SKU
-      setAvailableQuantities(0); // Reset available quantities
-      setSelectedQuantity(null); // Reset selected quantity (disabled state)
-      return; // Exit the function early to stop further processing
-
-    }
-    const selectedSku = Object.keys(skus).find((skuId) => skus[skuId].size === selectedSize);
-    if (selectedSku) {
-      setSelectedSize(selectedSize);
-      setSelectedSku(selectedSku);
-      setAvailableQuantities(skus[selectedSku].quantity);
-    } else {
-      setSelectedSku(null);
-      setAvailableQuantities(0);
-    }
-  };
-
-  const handleQuantityChange = (quantity) => {
-    setSelectedQuantity(quantity);
-  };
-
-  // button animations
   const [click, setClick] = useState(false);
-  const handleClick = () => {
-    setClick(!click);
-  };
-  const handleMouseLeave = () => {
-    setClick(false);
-  };
-
-  // advertisement related
   const [sale, setSale] = useState(null);
   const [saleName, setSaleName] = useState('');
   const [saleId, setSaleId] = useState('');
-
-  // keep track of styles pics
+  const [item, setItem] = useState({});
+  const [isSale, setIsSale] = useState(null);
+  const [shownStyle, setShownStyle] = useState('');
   const [imageTracker, setImageTracker] = useState({ original_url: '', style_url: '', style_photo: false });
   const [detailsTracker, setDetailsTracker] = useState({
     original_price: 0,
@@ -84,8 +42,6 @@ const Selector = (props) => {
     color: '',
     hasSale: false,
   });
-  const [item, setItem] = useState({});
-  const [isSale, setIsSale] = useState(null);
   const [currentStyle, setCurrentStyle] = useState(
     {
       original_price: 0,
@@ -111,15 +67,34 @@ const Selector = (props) => {
     },
   );
 
-  const [shownStyle, setShownStyle] = useState('');
-
-  useEffect(() => {
-    if (hoverState === false) {
-      setShownStyle({ ...currentStyle });
-    } else {
-      setShownStyle({ ...shownStyle });
+  const handleSizeChange = (selectedSize) => {
+    if (selectedSize === '') {
+      setSelectedSize('');
+      setSelectedSku(null);
+      setAvailableQuantities(0);
+      setSelectedQuantity(null);
+      return;
     }
-  }, [currentStyle, hoverState]);
+    const selectedSku = Object.keys(skus).find((skuId) => skus[skuId].size === selectedSize);
+    if (selectedSku) {
+      setSelectedSize(selectedSize);
+      setSelectedSku(selectedSku);
+      setAvailableQuantities(skus[selectedSku].quantity);
+    } else {
+      setSelectedSku(null);
+      setAvailableQuantities(0);
+    }
+  };
+  const handleQuantityChange = (quantity) => {
+    setSelectedQuantity(quantity);
+  };
+  // button animations
+  const handleClick = () => {
+    setClick(!click);
+  };
+  const handleMouseLeave = () => {
+    setClick(false);
+  };
 
   const generateRandomProductId = () => {
     return Math.floor(Math.random() * (41354 - 40344 + 1)) + 40344;
@@ -219,10 +194,18 @@ const Selector = (props) => {
       })
       .catch((err) => console.error('Error origin: selector getProduct', err));
   };
+  
+  useEffect(() => {
+    if (hoverState === false) {
+      setShownStyle({ ...currentStyle });
+    } else {
+      setShownStyle({ ...shownStyle });
+    }
+  }, [currentStyle, hoverState]);
 
   useEffect(() => {
     productId && getProduct();
-    fetchSaleItem()
+    fetchSaleItem();
   }, [productId]);
 
   return (
@@ -322,7 +305,7 @@ const Selector = (props) => {
                     sizeArray={sizeArray}
                     setSelectedSize={setSelectedSize}
                     setSelectedSku={setSelectedSku}
-
+                    selectedSize={selectedSize}
                     handleSizeChange={handleSizeChange}
                     skus={skus}
                   />
