@@ -25,6 +25,10 @@
   font-style: normal;
 }
 
+* {
+  font-family: 'Roboto'
+}
+
 :root {
   --accent-orange: rgb(201, 108, 91);
 }
