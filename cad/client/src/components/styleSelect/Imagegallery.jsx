@@ -28,7 +28,7 @@ const Imagegallery = ({
             galleryThumbnails.map((thumbnail, idx) => {
               const { length } = galleryThumbnails.length;
               return (
-                <div className={length < 3 ? 'thumbnail-col' : 'thumbnail-row'} key={thumbnail}>
+                <div className='thumbnail-row' key={thumbnail}>
                   <button type='button' onClick={() => setImgIdx(idx)}>
                     <img className={`thumbnails ${imgIdx === idx && 'thumbnails-selected'}`} src={thumbnail} alt='thumbnail-photo' />
                   </button>
